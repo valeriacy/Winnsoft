@@ -1,0 +1,27 @@
+body{
+    background-image: linear-gradient(to bottom right, gray, blue);
+    background-size: cover;
+}
+.tituloPrincipal{
+    font-size: 3em;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+
+}
+
+.contenedor{
+    width: 100vw;
+    text-align: center;
+}
+.contenedorGris{
+    color: aliceblue;
+    background-image: linear-gradient(to bottom right, gray, rgb(77, 74, 74));
+}
+.divSeguido{
+    display: inline-block;   
+    width: 40vw;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+    

@@ -1,0 +1,33 @@
+<div class="contenedor">
+    <div class="contenedorGris">
+        <label class="tituloPrincipal">
+            LABORATORIO DE COMPUTO INFORMATICA - SISTEMAS
+        </label>
+    </div>
+    <div >
+        <div class="contenedorGris divSeguido">
+            <select>
+                <option ng-repeat="materia in lista">
+                    {{materia}}
+                </option>
+            </select>
+        </div>
+        <div class="contenedorGris divSeguido">
+            <div>
+                <label>
+                    Usuario
+                </label>
+                <input id="usuario" type="text"/>
+            </div>
+            <div>
+                <label>
+                    Contraseña
+                </label>
+                <input id="contra" type="password"/>
+            </div>
+            <div>
+                <button ng-click="entrar()">Acceder</button>
+            </div>
+        </div>
+    </div>
+</div>
