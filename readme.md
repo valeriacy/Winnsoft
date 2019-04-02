@@ -13,7 +13,7 @@ PARA EMPEZAR A USAR
 2. cd winnsoft
 3. composer install
 4. copy .env.example .env
-4.1. En el nuevo archivo creado .env configurar la conexion con mysql (nombre de la BD, usuario y contraseña)
+	4.1. En el nuevo archivo creado .env configurar la conexion con mysql (nombre de la BD, usuario y contraseña)
 5. php artisan migrate
 6. php artisan key:generate
 7. **Para levantar el servidor:** php artisan serve
