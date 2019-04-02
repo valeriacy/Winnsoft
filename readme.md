@@ -13,10 +13,10 @@ PARA EMPEZAR A USAR
 2. cd winnsoft
 3. composer install
 4. copy .env.example .env
-	4.1. En el nuevo archivo creado .env configurar la conexion con mysql (nombre de la BD, usuario y contraseña)
-5. php artisan migrate
-6. php artisan key:generate
-7. **Para levantar el servidor:** php artisan serve
+5. En el nuevo archivo creado .env configurar la conexion con mysql (nombre de la BD, usuario y contraseña)
+6. php artisan migrate
+7. php artisan key:generate
+8. **Para levantar el servidor:** php artisan serve
 
 PASOS y COMANDOS PARA EMPEZAR EL PROYECTO DE 0 (FINES DEMOSTRATIVOS NO EJECUTARLOS)
 ==================
@@ -36,5 +36,5 @@ PASOS y COMANDOS PARA EMPEZAR EL PROYECTO DE 0 (FINES DEMOSTRATIVOS NO EJECUTARL
 
 ENLACES DE UTILIDAD
 =============
-**Ejemplo de Api Rest:**https://medium.com/@david.quezada.m/tutorial-api-restful-con-laravel-5-6-en-menos-de-1000-palabras-e14249fef9a9
-**Codigo ejemplo para las migraciones:**https://laravel.com/docs/5.8/migrations#creating-tables
+- Ejemplo de Api Rest:https://medium.com/@david.quezada.m/tutorial-api-restful-con-laravel-5-6-en-menos-de-1000-palabras-e14249fef9a9
+- Codigo ejemplo para las migraciones:https://laravel.com/docs/5.8/migrations#creating-tables
