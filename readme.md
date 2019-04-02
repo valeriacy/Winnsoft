@@ -4,11 +4,11 @@
 - composer
 - visual code
 - git
-- git extensions*
+- git extensions* (* opcional)
 - cuenta en Github
-- *opcional
-#PASOS y COMANDOS
-=========================
+ 
+PASOS y COMANDOS
+==================
 1. Creacion Proyecto.- composer create-project laravel/laravel NombreProyecto 5.4
 2. Configurar .env en el nuevo proyecto, para las credenciales de MySql
 3. Migracion, para el modelo, 'php artisan make:migration NombreMigracion'
@@ -26,6 +26,7 @@
 ##Para levantar el servidor: 'php artisan serve'
 
 
-#ENLACES DE UTILIDAD
+ENLACES DE UTILIDAD
+=============
 **Ejemplo de Api Rest:**https://medium.com/@david.quezada.m/tutorial-api-restful-con-laravel-5-6-en-menos-de-1000-palabras-e14249fef9a9
 **Codigo ejemplo para las migraciones:**https://laravel.com/docs/5.8/migrations#creating-tables
