@@ -7,7 +7,6 @@ REQUISITOS
 - [git extensions*](https://sourceforge.net/projects/gitextensions/)
 - [Cuenta en Github](https://github.com/join?source=header-home)
 
-* opcional
 PARA EMPEZAR A USAR
 ==================
 1. git clone https://github.com/valeriacy/Winnsoft.git
@@ -39,3 +38,5 @@ ENLACES DE UTILIDAD
 =============
 - Ejemplo de Api Rest:https://medium.com/@david.quezada.m/tutorial-api-restful-con-laravel-5-6-en-menos-de-1000-palabras-e14249fef9a9
 - Codigo ejemplo para las migraciones:https://laravel.com/docs/5.8/migrations#creating-tables
+
+* opcional
