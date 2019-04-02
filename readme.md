@@ -1,12 +1,13 @@
 REQUISITOS
 ==============
-- xampp
-- composer
-- visual code
-- git
-- git extensions* (* opcional)
-- cuenta en Github
- 
+- xampp 
+- [composer](https://getcomposer.org/download/)
+- [visual code](https://code.visualstudio.com/download)
+- [git](https://git-scm.com/downloads)
+- [git extensions*](https://sourceforge.net/projects/gitextensions/)
+- [Cuenta en Github](https://github.com/join?source=header-home)
+
+* opcional
 PARA EMPEZAR A USAR
 ==================
 1. git clone https://github.com/valeriacy/Winnsoft.git
