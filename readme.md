@@ -1,4 +1,4 @@
-#REQUISITOS
+REQUISITOS
 ==============
 - xampp
 - composer
@@ -7,7 +7,18 @@
 - git extensions* (* opcional)
 - cuenta en Github
  
-PASOS y COMANDOS
+PARA EMPEZAR A USAR
+==================
+1. git clone https://github.com/valeriacy/Winnsoft.git
+2. cd winnsoft
+3. composer install
+4. copy .env.example .env
+4.1. En el nuevo archivo creado .env configurar la conexion con mysql (nombre de la BD, usuario y contraseña)
+5. php artisan migrate
+6. php artisan key:generate
+7. **Para levantar el servidor:** php artisan serve
+
+PASOS y COMANDOS PARA EMPEZAR EL PROYECTO DE 0 (FINES DEMOSTRATIVOS NO EJECUTARLOS)
 ==================
 1. Creacion Proyecto.- composer create-project laravel/laravel NombreProyecto 5.4
 2. Configurar .env en el nuevo proyecto, para las credenciales de MySql
@@ -22,9 +33,6 @@ PASOS y COMANDOS
 	Route::resource('NombreModelo', 'NombreControlador');
 9. Ejecutar php artisan route:list y revisar si se agregaron correctamente las rutas
 10. Codificar el controlador.
-
-##Para levantar el servidor: 'php artisan serve'
-
 
 ENLACES DE UTILIDAD
 =============
