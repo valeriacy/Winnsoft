@@ -4,7 +4,8 @@
             LABORATORIO DE COMPUTO INFORMATICA - SISTEMAS
         </label>
     </div>
-    <div >
+</div>
+
         <div class="contenedorGris divSeguido">
             <select>
                 <option ng-repeat="materia in lista">
@@ -12,22 +13,31 @@
                 </option>
             </select>
         </div>
-        <div class="contenedorGris divSeguido">
-            <div>
-                <label>
-                    Usuario
-                </label>
-                <input id="usuario" type="text"/>
+        
+<div>
+
+                    <div class="login__container">
+                            <div class="login__top">
+                               <img  class="login__img" src="./assets/images.png" alt="">
+                               <h2 class="login__title"> form<span>LOGIN</span></h2>
+                            </div>
+                              
+                             <div class="login__form">
+                                 <input type="text" placeholder="&#128100; username" required autofocus>
+                                 <input type="password" placeholder="&#x1F512; password" required>
+                                 <form class="button_form" action="">
+                                    <input class="btn__submit" type="submit" value="ENTRAR">
+                                 </form>
+                                 <form class="button_form" action="#!registrar">
+                                    <input class="btn__submit" type="submit" value="REGISTRARSE">    
+                                 </form>
+                                 <a class="form__recover" href="">Olvidaste la contraseña?</a>
+                             </div>
+                         </div>
             </div>
-            <div>
-                <label>
-                    Contraseña
-                </label>
-                <input id="contra" type="password"/>
-            </div>
-            <div>
-                <button ng-click="entrar()">Acceder</button>
-            </div>
+            <ul>
+                <li><a href="#">Ver Grilla de Horarios</a></li>
+            </ul>
         </div>
     </div>
-</div>
+        <div >

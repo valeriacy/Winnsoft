@@ -1,6 +1,11 @@
 body{
-    background-image: linear-gradient(to bottom right, gray, blue);
+    background-image: linear-gradient(to bottom right, gray, white);
     background-size: cover;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ /*background-color: #9AD1ED;*/
 }
 .tituloPrincipal{
     font-size: 3em;
@@ -13,15 +18,125 @@ body{
     width: 100vw;
     text-align: center;
 }
-.contenedorGris{
-    color: aliceblue;
-    background-image: linear-gradient(to bottom right, gray, rgb(77, 74, 74));
+* {
+    margin: 0;
+    padding: 0;
 }
+
+html {
+    font-size: 16px;
+	font-family: 'Lato', sans-serif;
+}
+
+
+.login__container {
+	background-color: #EFEFEF;
+	width: 35vw;
+    height: auto;
+    margin-left: 30vw;
+}
+
+@media only screen and (max-width: 768px) {
+    .login__container {
+        width: 90vw;
+        margin-left: 5vw;
+    }
+}
+
+.login__top {
+	background-color: #EFEFEF;
+	border-top: solid .5rem #F39B53;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.2rem 0;
+}
+
+.login__img {
+	width: 4rem;
+	margin-right: 1rem;
+}
+
+.login__title {
+	color: #C8C8C8;
+}
+
+.login__title span {
+	color: #F39B53;
+}
+
+.login__form {
+	background: #EFEFEF;
+	display: flex;
+	flex-direction: column;
+	padding: .5rem 2rem 2rem;
+	text-align: center;
+}
+
+input[type=text], [type=password] {
+	margin: .4rem 0;
+	padding: .5rem;
+	border: none;
+	border-bottom: solid 0.2rem #C8C8C8;
+	background: #EFEFEF;
+	transition: all .4s
+}
+
+input[type=text]:focus, [type=password]:focus {
+	outline: none;
+	border-bottom: solid 0.2rem #E67E22;
+	
+}
+
+.btn__submit {
+	border: none;
+	padding: .5rem 0;
+	margin: 1rem 0 .3rem;
+	background-color: #31B1E5;
+    color: white;
+    width: 90%;
+}
+
+.form__recover {
+	color: #F39B53;
+	font-size: 13px;
+	text-decoration: none;
+}
+
+.form__recover:hover {
+	color: #E67E22;
+}
+
+
 .divSeguido{
     display: inline-block;   
-    width: 40vw;
+    width: 60vw;
     margin-left: 10%;
     margin-right: 10%;
 }
+.contenedorCuadrado{
+    display: inline-block; 
+width: 30vw;
+text-align: left;
+background:rgb(255, 255, 255);
+height: 10vw;
+padding:40px;
+border:10px solid rgb(0,128,128);
+
+}
+.register_container {
+    background-color: #EFEFEF;
+	border-top: solid .5rem #F39B53;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.2rem 0;
+}
+
+.button_form{
+    width: 100%;
+}
+
+
 
     

@@ -7,9 +7,14 @@ app.config(function($routeProvider) {
         templateUrl : "/inicio.html",
         controller : "mainCtrl"
     })
+    .when("/registrar", {
+        templateUrl : "/registro.html",
+        controller : "registroCtrl"
+    })
 });
 
 app.controller("mainCtrl", mainCtrl);
+app.controller("registroCtrl", registerCtrl);
 
 function mainCtrl($scope, $http){
     obtenerMaterias($scope, $http);
@@ -59,4 +64,46 @@ function obtenerMaterias(scope, httpService){
     .catch((error)=>{
         console.error(error);
     });
+}
+
+function registerCtrl($scope, $http){
+    $scope.send=()=>{
+        let name=document.querySelector("#nombre");
+        let lastname=document.querySelector("#apellido");
+        let rol=document.querySelector("#rol");
+        let username=document.querySelector("#usuario");
+        let pass=document.querySelector("#pass");
+    
+        let user={
+            name:name.value,
+            lastname:lastname.value,
+            rol:rol.value,
+            username:username.value,
+            password:pass.value
+        }//este es el objeto JSON
+        
+        let req = {
+            method: 'POST',
+            url: "/api/user",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data : user
+        }//obeto de configuracion para comunicacion con el servidor
+    
+        $http(req)
+        .then((response)=>{
+            console.log(response.status);
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+        
+        //console.log(user);
+        /*console.log(name.value);
+        console.log(lastname.value);
+        console.log(rol.value);
+        console.log(username.value);
+        console.log(pass.value);*/
+    };
 }
