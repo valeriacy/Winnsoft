@@ -36,8 +36,11 @@ class usuariocontroller extends Controller
     public function store(Request $request)
     {
         $usuario = new usuario;
-        $usuario->nombre = $request->nombre;
-        $usuario->contra = $request->contra;
+        $usuario->nombre = $request->name;
+        $usuario->contra = $request->password;
+        $usuario->nombre_usuario = $request->username;
+        $usuario->apellido = $request->lastname;
+        $usuario->rol = $request->rol;
         $usuario->save();
     }
 

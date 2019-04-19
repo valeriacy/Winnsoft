@@ -84,11 +84,11 @@ function registerCtrl($scope, $http){
         
         let req = {
             method: 'POST',
-            url: "/api/user",
+            url: "api/usuario",
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : user
+            data : JSON.stringify(user)
         }//obeto de configuracion para comunicacion con el servidor
     
         $http(req)
@@ -99,11 +99,12 @@ function registerCtrl($scope, $http){
             console.error(error);
         });
         
-        //console.log(user);
-        /*console.log(name.value);
-        console.log(lastname.value);
-        console.log(rol.value);
-        console.log(username.value);
-        console.log(pass.value);*/
+        console.log(user);
+        //console.log(name.value);
+        //console.log(lastname.value);
+        //console.log(rol.value);
+        //console.log(username.value);
+        //console.log(pass.value);
     };
 }
+
