@@ -17,4 +17,9 @@ class Oferta extends Model
     {
     	return $this->belongsTo('App\Docente');
     }
+
+    public function inscripciones()
+    {
+    	return $this->hasMany('App\Inscripcion');
+    }
 }

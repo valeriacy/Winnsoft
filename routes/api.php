@@ -21,3 +21,4 @@ Route::post('/login','usuariocontroller@validar');
 Route::resource('Materia', 'Materiacontroller');
 Route::resource('Docente', 'Docentecontroller');
 Route::resource('Oferta', 'Ofertacontroller');
+Route::resource('Inscripcion', 'InscripcionController');
