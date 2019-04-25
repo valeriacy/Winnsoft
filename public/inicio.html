@@ -11,11 +11,11 @@
 </div>
 
         <div class="divSeguido">
-            <select>
+           <!-- <select>
                 <option ng-repeat="materia in lista">
                     {{materia}}
                 </option>
-            </select>
+            </select> -->
         </div>
         
 
@@ -29,11 +29,11 @@
                             </div>
                               
                              <div class="login__form">
-                                 <input type="text" placeholder="&#128100; username" required autofocus>
-                                 <input type="password" placeholder="&#x1F512; password" required>
-                                 <form class="button_form" action="">
-                                    <input class="btn__submit" type="submit" value="ENTRAR">
-                                 </form>
+                                 <input type="text" id="usuario" placeholder="&#128100; username" required autofocus>
+                                 <input type="password" id="contra" placeholder="&#x1F512; password" required>
+                                 <div class="button_form" >
+                                    <input class="btn__submit" type="submit" ng-click="entrar()" value="ENTRAR">
+                                 </div>
                                  <form class="button_form" action="#!registrar">
                                     <input class="btn__submit" type="submit" value="REGISTRARSE">    
                                  </form>

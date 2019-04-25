@@ -1,4 +1,5 @@
 const API_URL="/";
+let usuario;
 
 let app = angular.module("myApp", ["ngRoute", "ngAnimate"]);
 app.config(function($routeProvider) {
@@ -11,12 +12,24 @@ app.config(function($routeProvider) {
         templateUrl : "/registro.html",
         controller : "registroCtrl"
     })
+    .when ("/principal",{
+        templateUrl :"/principal.html",
+        controller : "principalCtrl"
+     })
 });
 
 app.controller("mainCtrl", mainCtrl);
 app.controller("registroCtrl", registerCtrl);
+app.controller("principalCtrl",principalCtrl);
 
-function mainCtrl($scope, $http){
+function principalCtrl($scope, $location){
+    if(usuario)
+        $scope.user = usuario;
+    else
+        $location.path("/");
+}
+
+function mainCtrl($scope, $http, $location){
     obtenerMaterias($scope, $http);
     $scope.entrar = () => {
         let usuario = document.querySelector("#usuario");
@@ -27,26 +40,18 @@ function mainCtrl($scope, $http){
             contra:contra.value
         };
 
+        console.log(credenciales);
+
         let req = {
             method: 'POST',
             url: "/api/login",
             headers: {
                 'Content-Type': 'application/json'
             },
-            data : credenciales
+            data : JSON.stringify(credenciales)
         }
-        logIn($http, req);
+        logIn($http, req, contra.value, $location);
     };
-}
-
-function logIn(httpService, req){
-    httpService(req)
-    .then((response)=>{
-        console.log(response.data);
-    })
-    .catch((error)=>{
-        console.error(error);
-    });
 }
 
 function obtenerMaterias(scope, httpService){
@@ -66,7 +71,8 @@ function obtenerMaterias(scope, httpService){
     });
 }
 
-function registerCtrl($scope, $http){
+function registerCtrl($scope, $http, $location){
+    eventosRegistro();
     $scope.send=()=>{
         let name=document.querySelector("#nombre");
         let lastname=document.querySelector("#apellido");
@@ -93,7 +99,10 @@ function registerCtrl($scope, $http){
     
         $http(req)
         .then((response)=>{
-            console.log(response.status);
+            if (response.status==200){
+                alert("Se ha guardado el usuario exitosamente");
+                $location.path('/')
+            }
         })
         .catch((error)=>{
             console.error(error);

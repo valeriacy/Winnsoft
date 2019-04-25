@@ -96,9 +96,9 @@ class usuariocontroller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function validar(Request $request){//revisar
-        $nombre = $request->nombre;
-        $verificado = usuario::where('nombre', $nombre)->get();
+    public function validar(Request $request){
+        $nombreUS = $request->nombre;
+        $verificado = usuario::where("nombre_usuario", $nombreUS)->get();
         return $verificado;
     }
 }
