@@ -18,3 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::resource('usuario', 'usuariocontroller');
 Route::post('/login','usuariocontroller@validar');
+Route::resource('Materia', 'Materiacontroller');
+Route::resource('Docente', 'Docentecontroller');
+Route::resource('Oferta', 'Ofertacontroller');
