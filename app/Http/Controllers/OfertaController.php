@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Oferta;
+use App\Docente;
+use App\Materia;
 
 class OfertaController extends Controller
 {
@@ -34,7 +37,11 @@ class OfertaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $oferta = new Oferta;
+        $oferta->grupo = $request->grupo;
+        $oferta->materia_id = $request->materiaId;
+        $oferta->docente_id = $request->docenteId;
+        $oferta->save();
     }
 
     /**
@@ -45,7 +52,18 @@ class OfertaController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this.getOferta($id);
+    }
+
+    public function getOferta($id){
+        $oferta = Oferta::find($id);
+        $attributes = $oferta->getAttributes();
+        $docenteId = $attributes['docente_id'];
+        $materiaId = $attributes['materia_id'];
+
+        $docente = Docente::find($docenteId);
+        $materia = Materia::find($materiaId);
+        return [$oferta, $docente, $materia];
     }
 
     /**

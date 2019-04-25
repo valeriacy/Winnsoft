@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Oferta extends Model
 {
-    protected $fillable = ['grupo'];
+    protected $fillable = ['grupo', 'materia_id', 'docente_id'];
 
     public function materia()
     {
