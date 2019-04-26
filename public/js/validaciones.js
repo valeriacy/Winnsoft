@@ -47,3 +47,95 @@ function todoLleno(){
 
     return nombre.value!=="" && apellido.value!=="" && usuario.value!=="";
 }
+
+function mostrarGifLoading(){
+    let boton = document.querySelector("#guardar");
+    let gif = document.querySelector("#loading");
+
+    boton.style.display="none";
+    gif.style.display="block";
+}
+
+function ocultarGifLoading(){
+    let boton = document.querySelector("#guardar");
+    let gif = document.querySelector("#loading");
+
+    boton.style.display="block";
+    gif.style.display="none";
+}
+
+function construirObjetoUsuario(){
+    let name=document.querySelector("#nombre");
+        let lastname=document.querySelector("#apellido");
+        let rol=document.querySelector("#rol");
+        let username=document.querySelector("#usuario");
+        let pass=document.querySelector("#pass");
+    
+        return {
+            name:name.value,
+            lastname:lastname.value,
+            rol:rol.value,
+            username:username.value,
+            password:pass.value
+        }//este es el objeto JSON
+}
+
+function validarNombreUsuarioYGuardar(httpService, location){
+    let username=document.querySelector("#usuario").value;
+    let req = {
+        method: 'GET',
+        url: "api/verificarnombreusuario/"+username
+    }
+
+    httpService(req)
+        .then(async (response)=>{
+            data = response.data;
+            let advertencia = document.querySelector("#advertencia-usuario");
+            await sleep(1000);
+            if(data.length>0){
+                advertencia.style.display="block";
+            }else{
+                advertencia.style.display="none";
+                guardarUsuario(httpService, location);
+            }
+            ocultarGifLoading();
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+function guardarUsuario(httpService, location){
+    deshabilitarGuardar();
+    let user = construirObjetoUsuario();
+        let req = {
+            method: 'POST',
+            url: "api/usuario",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data : JSON.stringify(user)
+        }//objeto de configuracion para comunicacion con el servidor
+    
+        httpService(req)
+        .then((response)=>{
+            if (response.status==200){
+                alert("Se ha guardado el usuario exitosamente");
+                location.path('/')
+            }
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+        
+        console.log(user);
+        //console.log(name.value);
+        //console.log(lastname.value);
+        //console.log(rol.value);
+        //console.log(username.value);
+        //console.log(pass.value);
+}

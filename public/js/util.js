@@ -24,8 +24,7 @@ function eventosRegistro(){
 
    for (let campo of campos) {
         campo.addEventListener("keyup", maestroRegistro)   
-   }
-    
+   }    
 }
 function mostrarContenido (event){
     console.log (event.target.value)

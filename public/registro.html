@@ -22,6 +22,7 @@
             <div>
                 <label>Nombre Usuario</label>
                 <input type="text" placeholder="Nombre Usuario" id="usuario" >
+                <label class="advertencia" id="advertencia-usuario">Ese nombre de usuario ya esta en uso.</label>
             </div>
             <div>
                 <label>Contraseña:</label>
@@ -35,6 +36,9 @@
         </form>
         <div>    
             <button class="btn__submit" ng-click="send()" id="guardar">GUARDAR</button>
+            <div class="loading-div" id="loading">
+                <img src="./assets/loading.gif" class="loading-image"/>
+            </div>
             <form class="button_form" action="#!">
                 <input class="btn__submit" type="submit" value="CANCELAR">
             </form>   
