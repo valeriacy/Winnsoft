@@ -52,7 +52,7 @@ class OfertaController extends Controller
      */
     public function show($id)
     {
-        return $this.getOferta($id);
+        return $this->getOferta($id);
     }
 
     public function getOferta($id){
@@ -98,5 +98,20 @@ class OfertaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAll()
+    {
+        $ids = Oferta::where('id' ,'>' ,0)->pluck('id')->toArray();
+        $response = array();
+        foreach ($ids as $id) {
+            array_push($response, $this->getOferta($id));
+        }
+        return $response;
     }
 }
