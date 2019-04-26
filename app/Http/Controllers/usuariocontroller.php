@@ -101,4 +101,16 @@ class usuariocontroller extends Controller
         $verificado = usuario::where("nombre_usuario", $nombreUS)->get();
         return $verificado;
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  string  $nombreUsuario
+     * @return \Illuminate\Http\Response
+     */
+    public function verificarNombreUsuario($nombreUsuario)
+    {
+        $usuario = usuario::where("nombre_usuario", $nombreUsuario)->get();
+        return $usuario;
+    }
 }
