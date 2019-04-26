@@ -8,6 +8,14 @@ body{
 	font-family: 'Reboto',sans-serif; 
  /*background-color: #9AD1ED;*/
 }
+
+.advertencia{
+	color: red;
+	background: #cccccc;
+	padding: 0.1em;
+	display: none;
+}
+
 /*.principal{
 	display: flex;
     justify-content: left;
@@ -144,6 +152,13 @@ input[type=text]:focus, [type=password]:focus {
 	background-color: #31B1E5;
     color: white;
     width: 90%;
+}
+
+.btn__submit:disabled,
+.btn__submit[disabled]{
+  
+  background-color: #cccccc;
+  color: #666666;
 }
 
 .form__recover {

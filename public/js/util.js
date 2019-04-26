@@ -14,8 +14,17 @@ function logIn(httpService, req, contra, location){
 }
 
 function eventosRegistro(){
-    let username = document.querySelector("#usuario");
-    username.addEventListener("keypress", mostrarContenido)
+    maestroRegistro();
+    let campos = [];
+    campos.push(document.querySelector("#nombre"));
+    campos.push(document.querySelector("#apellido"));
+    campos.push(document.querySelector("#usuario"));
+    campos.push(document.querySelector("#pass"));
+    campos.push(document.querySelector("#confirmar"));
+
+   for (let campo of campos) {
+        campo.addEventListener("keyup", maestroRegistro)   
+   }
     
 }
 function mostrarContenido (event){
