@@ -1,41 +1,48 @@
 <div>
     <div class="contenedor_oficial">
-            <div class="register_container">
-                    <h1>Formulario de Registro</h1> <img class="titulo_img" src="./assets/inf_sis.png" alt="" style="float: right;"><br>
+        <div class="register_container">
+                <h1>Formulario de Registro</h1> <img class="titulo_img" src="./assets/inf_sis.png" alt="" style="float: right;"><br>
+        </div>
+        <form autocomplete="off">
+            <div> 
+                <label > Nombre:</label>
+                <input type="text" placeholder="Nombre" id="nombre"/>
             </div>
-            <div> <label > Nombre:</label>
-                <input type="text" placeholder="Nombre" id="nombre"/></div>
-                 
-                    <div>
-                        <label>Apellidos:</label>
-                        <input type="text" placeholder="apellidos" id="apellido"/>
-                    </div>
-                <div>  <select id="rol">
-                        <option value="auxiliar">Auxiliar</option>
-                        <option value="docente">Docente</option>
-                        <option value="estudiante">Estudiante</option> </select>
-                    </div>
-                        <div>
-                            <label>Nombre Usuario</label> <input type="text" placeholder="apellidos" id="usuario" >
-                        </div>
-                     <div>
-                            <label>Contraseña:</label><input type="password" placeholder="password"id="pass">
-                     </div>
-        
-                    
-                    <label>Confirmar contraseña:</label><input type="password" name="pwd">
-                    <div>
-                            
-                                    <button class="btn__submit" ng-click="send()">GUARDAR</button>
-                                    
-                            
-                                <form class="button_form" action="#!">
-                                    <input class="btn__submit" type="submit" value="CANCELAR">
-                                </form>
-                            
-                    </div>
-           
-                
+                        
+            <div>
+                <label>Apellidos:</label>
+                <input type="text" placeholder="Apellidos" id="apellido"/>
+            </div>
+            <div> 
+                <select id="rol">
+                <option value="auxiliar">Auxiliar</option>
+                <option value="docente">Docente</option>
+                <option value="estudiante">Estudiante</option> </select>
+            </div>
+            <div>
+                <label>Nombre Usuario</label>
+                <input type="text" placeholder="Nombre Usuario" id="usuario" >
+                <label class="advertencia" id="advertencia-usuario">Ese nombre de usuario ya esta en uso.</label>
+            </div>
+            <div>
+                <label>Contraseña:</label>
+                <input type="password" placeholder="Contraseña" id="pass">
+            </div>
+            <div>
+                <label>Confirmar contraseña:</label>
+                <input type="password" name="pwd" placeholder="Confirmar Contraseña" id="confirmar">
+                <label class="advertencia" id="advertencia">Contraseñas no coinciden</label>
+            </div>            
+        </form>
+        <div>    
+            <button class="btn__submit" ng-click="send()" id="guardar">GUARDAR</button>
+            <div class="loading-div" id="loading">
+                <img src="./assets/loading.gif" class="loading-image"/>
+            </div>
+            <form class="button_form" action="#!">
+                <input class="btn__submit" type="submit" value="CANCELAR">
+            </form>   
+        </div>
         </div>
     </div>
     

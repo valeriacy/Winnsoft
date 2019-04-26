@@ -40,3 +40,9 @@ ENLACES DE UTILIDAD
 - Codigo ejemplo para las migraciones:https://laravel.com/docs/5.8/migrations#creating-tables
 
 * opcional
+
+COMANDOS PARA EJECUTAR *SEEDS*
+=============
+
+- composer dump-autoload
+- php artisan db:seed

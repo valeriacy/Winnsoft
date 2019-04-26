@@ -73,47 +73,9 @@ function obtenerMaterias(scope, httpService){
 
 function registerCtrl($scope, $http, $location){
     eventosRegistro();
-    $scope.send=()=>{
-        let name=document.querySelector("#nombre");
-        let lastname=document.querySelector("#apellido");
-        let rol=document.querySelector("#rol");
-        let username=document.querySelector("#usuario");
-        let pass=document.querySelector("#pass");
-    
-        let user={
-            name:name.value,
-            lastname:lastname.value,
-            rol:rol.value,
-            username:username.value,
-            password:pass.value
-        }//este es el objeto JSON
-        
-        let req = {
-            method: 'POST',
-            url: "api/usuario",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data : JSON.stringify(user)
-        }//obeto de configuracion para comunicacion con el servidor
-    
-        $http(req)
-        .then((response)=>{
-            if (response.status==200){
-                alert("Se ha guardado el usuario exitosamente");
-                $location.path('/')
-            }
-        })
-        .catch((error)=>{
-            console.error(error);
-        });
-        
-        console.log(user);
-        //console.log(name.value);
-        //console.log(lastname.value);
-        //console.log(rol.value);
-        //console.log(username.value);
-        //console.log(pass.value);
+    $scope.send=()=>{    
+        mostrarGifLoading();
+        validarNombreUsuarioYGuardar($http, $location);
     };
 }
 

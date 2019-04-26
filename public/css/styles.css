@@ -8,6 +8,19 @@ body{
 	font-family: 'Reboto',sans-serif; 
  /*background-color: #9AD1ED;*/
 }
+
+.advertencia{
+	color: red;
+	background: #cccccc;
+	padding: 0.1em;
+	display: none;
+}
+
+.loading-image{
+	width: 10vw;
+	
+}
+
 /*.principal{
 	display: flex;
     justify-content: left;
@@ -143,7 +156,23 @@ input[type=text]:focus, [type=password]:focus {
 	margin: 1rem 0 .3rem;
 	background-color: #31B1E5;
     color: white;
-    width: 90%;
+	width: 90%;
+	text-align: center;
+	margin-bottom: 0.35em;
+}
+
+.loading-div{
+	background-color: white;
+	width: 90%;
+	text-align: center;
+	display: none;
+}
+
+.btn__submit:disabled,
+.btn__submit[disabled]{
+  
+  background-color: #cccccc;
+  color: #666666;
 }
 
 .form__recover {

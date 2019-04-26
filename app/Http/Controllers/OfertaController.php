@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\usuario;
+use App\Oferta;
+use App\Docente;
+use App\Materia;
 
-class usuariocontroller extends Controller
+class OfertaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,13 +37,11 @@ class usuariocontroller extends Controller
      */
     public function store(Request $request)
     {
-        $usuario = new usuario;
-        $usuario->nombre = $request->name;
-        $usuario->contra = $request->password;
-        $usuario->nombre_usuario = $request->username;
-        $usuario->apellido = $request->lastname;
-        $usuario->rol = $request->rol;
-        $usuario->save();
+        $oferta = new Oferta;
+        $oferta->grupo = $request->grupo;
+        $oferta->materia_id = $request->materiaId;
+        $oferta->docente_id = $request->docenteId;
+        $oferta->save();
     }
 
     /**
@@ -52,8 +52,18 @@ class usuariocontroller extends Controller
      */
     public function show($id)
     {
-        //return usuario::where('id', $id)->get();
-        return ["elementos", "intro", "tis", "aso"];
+        return $this.getOferta($id);
+    }
+
+    public function getOferta($id){
+        $oferta = Oferta::find($id);
+        $attributes = $oferta->getAttributes();
+        $docenteId = $attributes['docente_id'];
+        $materiaId = $attributes['materia_id'];
+
+        $docente = Docente::find($docenteId);
+        $materia = Materia::find($materiaId);
+        return [$oferta, $docente, $materia];
     }
 
     /**
@@ -88,29 +98,5 @@ class usuariocontroller extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function validar(Request $request){
-        $nombreUS = $request->nombre;
-        $verificado = usuario::where("nombre_usuario", $nombreUS)->get();
-        return $verificado;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  string  $nombreUsuario
-     * @return \Illuminate\Http\Response
-     */
-    public function verificarNombreUsuario($nombreUsuario)
-    {
-        $usuario = usuario::where("nombre_usuario", $nombreUsuario)->get();
-        return $usuario;
     }
 }
