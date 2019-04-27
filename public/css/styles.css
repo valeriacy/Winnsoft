@@ -232,103 +232,12 @@ border:10px solid rgb(0,128,128);
 
 }
 
-/** {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: sans-serif;
-  }*/ 
-	/*#header
-       {
-        margin:auto;
-  
-        font-family:Arial, Helvetica, sans-serif;
-       }*/
-  /*    ul, ol {
-         list-style:none;
-		}
-		
-		
-      .content li a {
-         background:rgb(228, 112, 4);
-         color :#fff;
-        text-decoration:none;
-         padding:20px 15px;
-         display:block;
-       }
-      .content li a :hover{
-        background-color:#434343;
-        }
-       
-        .content li ul{
-         display:none;
-         position:absolute;
-         min-width:140px;
-        }
-        .content li:hover > ul {
-          display:block;
-        }
-        .content li ul li {
-          position:relative;
-        }
-       /* .content li ul li ul {
-          right:-140px;
-          top:0px;
-				}*/
-		/*	.content a:hover {
-				background: #2C3E50;
-			}
-	.btn_menu {
-				display:none;
-				padding:2vw;
-				background: rgb(27, 67, 105)
-				#EFEFEF;
-				margin-top: 10%;
-			}  
-	.btn_menu .icono{
-		float: right;
-	}
- .contenedor_menu {
-	width:20%;
-	 min-width:300px;
-	 margin: 50px;
-	 display:inline-block;
-	 font-family: 'Reboto',sans-serif;  
-	 line-height: 18px;
-	 
- }
- .contenedor_menu .content{
-	 width: 100%;
- }
-.contenedor_menu .content .icono{
-	font-size:12px;
-	line-height:18px;
-} 
-.contenedor_menu .content .icono.izquierda {
-	 float:left;
-	 margin-right:10px;
-}
-.contenedor_menu .content .icono.derecha {
-	float: right;
-	margin-left: 10px;
-}
-.contenedor_menu .content ul li a {
-background: #434343;
-}
-.contenedor_menu .content .submenu > a:hover{
- background: #31B1E5; 
-
-}
-.contenedor_menu .content ul li a:hover {
-	background:black;
-	}*/
- 
 	.collapsible {
 		background-color: #F39B53;
 		color: white;
 		cursor: pointer;
 		padding: 18px;
-		width: 100%;
+		width: 20%;
 		height: 5vw;
 		border: none;
 		text-align: left;
@@ -339,8 +248,6 @@ background: #434343;
 	  .active, .collapsible:hover {
 		background-color: #555;
 	  }
-
-	
 
 	  .content  {
 		  padding:0%;

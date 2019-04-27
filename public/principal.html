@@ -4,23 +4,9 @@
                       
 </div>
  
-     <div class="contenedor_menu">
-         <a href="" class="btn_menu">Menu<i class="icono fas fa-bars"></i></a>
-         <ul class="nav">
-        <div class="div_inicio"><li><a href="#"><i class="icono izquierda fas fa-home"></i>Inicio</a></li></div> 
-        <div class="div_grilla"><li><a href =""><i class="icono izquierda fas fa-table"></i>Ver Grilla de Horarios</a></div> 
-        <div class="div_mate"><li><a href =""><i class="icono izquierda fas fa-book-reader"></i>Mis Materias</a></li>  </div>                                                       
-      <div clas="ins"> <li><a href =""><i class="icono izquerda fas fa-sign-in-alt"></i>Inscribirme</a>  </div> 
-       <div class="div_porta"><li class="submenu"><a href=""><i class="icono izquierda fas fa-star"></i> Mi Portafolio<i class="icono derecha fas fa-chevron-down"></i>
-            <span class=""></span></a>                                   
-             <ul>
-             <li><a href="">Agregar a Portafolio</a></li>
-             <li><a href="">Ver Portafolio</a></li>
-            </ul>
-         </li>
-        </ul>
-    </div> 
-        </div>
+     <div  ng-include="'/shared/header_estudiante.html'" style="width: 100vw;">
+
+     </div>
 <div class="contenedor_grilla">
     <div="titulo1">
             Grilla de Horarios
@@ -28,24 +14,21 @@
     <table >
         <tr>
           <th>Materia</th>
+          <th>Grupo</th>
            <th>Docente</th>
             <th>Hora</th>
             <th>Dia</th>
-            <th>Auxiliar</th>
+        <!--    <th>Auxiliar</th>-->
+            
            </tr>
     
-           <tr>
-         <td></td>
-         <td></td>
-         <td></td>
-         <td></td>
-         <td></td>
+        <tr ng-repeat="oferta in ofertas">
+            <td>{{oferta[2].nombre}}</td>
+            <td>{{oferta[0].grupo}}</td>
+            <td>{{oferta[1].nombre}}</td>
+            <td>{{oferta[0].hora}}</td>
+            <td>{{oferta[0].dia}}</td>
         </tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
     </table>
                  
         

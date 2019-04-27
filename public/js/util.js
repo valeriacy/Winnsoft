@@ -13,6 +13,21 @@ function logIn(httpService, req, contra, location){
     });
 }
 
+function obtener_ofertas(httpService, scope){
+    let req={
+        method: 'GET',
+        url: "/api/Ofertas",
+    };
+
+    httpService(req)
+    .then((response)=>{
+        scope.ofertas = response.data;
+    })
+    .catch((error)=>{
+        console.error(error);
+    });
+}
+
 function eventosRegistro(){
     maestroRegistro();
     let campos = [];
@@ -29,18 +44,19 @@ function eventosRegistro(){
 function mostrarContenido (event){
     console.log (event.target.value)
 }
+function inicial_menu(){
+    let coll = document.getElementsByClassName("collapsible");
+    let i;
 
-let coll = document.getElementsByClassName("collapsible");
-let i;
+    return (event) => {
+       let element=event.target;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    let content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
+        element.classList.toggle("active");
+        let content = element.nextElementSibling;
+        if (content.style.display === "block") {
+        content.style.display = "none";
+        } else {
+        content.style.display = "block";
+        }
     }
-  });
-  }
+}

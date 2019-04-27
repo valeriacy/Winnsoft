@@ -22,9 +22,13 @@ app.controller("mainCtrl", mainCtrl);
 app.controller("registroCtrl", registerCtrl);
 app.controller("principalCtrl",principalCtrl);
 
-function principalCtrl($scope, $location){
-    if(usuario)
+function principalCtrl($scope, $location, $http){
+    if(usuario){
         $scope.user = usuario;
+        menu=inicial_menu();
+        $scope.mostrar_menu=menu;
+        obtener_ofertas($http, $scope);
+    }
     else
         $location.path("/");
 }
