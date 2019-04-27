@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Inscripcion;
 
 class InscripcionController extends Controller
 {
@@ -34,7 +35,23 @@ class InscripcionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inscripcion = new Inscripcion;
+        $inscripcion->oferta_id = $request->ofertaId;
+        $inscripcion->usuario_id = $request->usuarioId;
+        $inscripcion->save();
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function obtenerInscripciones($id){
+        $usuarioId = $request->usuarioId;
+        $ofertaId = $request->ofertaId;
+        $verificado = Inscripcion::where("oferta_id", $ofertaId)->where("usuario_id", $usuarioId)->get();
+        return $verificado;
     }
 
     /**

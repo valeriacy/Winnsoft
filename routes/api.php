@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('usuario', 'usuariocontroller');
 Route::post('/login','usuariocontroller@validar');
 Route::get('/verificarnombreusuario/{nombreUsuario}','usuariocontroller@verificarNombreUsuario');
+Route::get('/Ofertas','OfertaController@showAll');
+Route::get('/obtenerInscripciones/{idUsuario}','InscripcionController@obtenerInscripciones');
 Route::resource('Materia', 'Materiacontroller');
 Route::resource('Docente', 'Docentecontroller');
 Route::resource('Oferta', 'Ofertacontroller');

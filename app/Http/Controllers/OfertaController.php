@@ -41,7 +41,22 @@ class OfertaController extends Controller
         $oferta->grupo = $request->grupo;
         $oferta->materia_id = $request->materiaId;
         $oferta->docente_id = $request->docenteId;
+        $oferta->hora = $request->hora;
+        $oferta->dia = $request->dia;
+        $oferta->codigo = $this->generarCodigo();
         $oferta->save();
+    }
+
+    public function generarCodigo(){
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
+        $randomString = ''; 
+    
+        for ($i = 0; $i < 6; $i++) { 
+            $index = rand(0, strlen($characters) - 1); 
+            $randomString .= $characters[$index]; 
+        } 
+    
+        return $randomString; 
     }
 
     /**
@@ -52,7 +67,7 @@ class OfertaController extends Controller
      */
     public function show($id)
     {
-        return $this.getOferta($id);
+        return $this->getOferta($id);
     }
 
     public function getOferta($id){
@@ -98,5 +113,20 @@ class OfertaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAll()
+    {
+        $ids = Oferta::where('id' ,'>' ,0)->pluck('id')->toArray();
+        $response = array();
+        foreach ($ids as $id) {
+            array_push($response, $this->getOferta($id));
+        }
+        return $response;
     }
 }

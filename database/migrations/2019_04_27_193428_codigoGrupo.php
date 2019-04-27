@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class OfertaHoras extends Migration
+class CodigoGrupo extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class OfertaHoras extends Migration
     public function up()
     {
         Schema::table('ofertas', function($table) {
-            $table->string('hora');
-            $table->integer('dia');
+            $table->string('codigo');
         });
     }
 
@@ -27,8 +26,7 @@ class OfertaHoras extends Migration
     public function down()
     {
         Schema::table('ofertas', function($table) {
-            $table->dropColumn('hora');
-            $table->dropColumn('dia');
+            $table->dropColumn('codigo');
         });
     }
 }
