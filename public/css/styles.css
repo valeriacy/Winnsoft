@@ -363,5 +363,23 @@ background: #434343;
 		background-color: rgb(24, 203, 248);
 
 	  }
+	  table {     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+		font-size: 12px;    
+		margin: 45px;     
+		width: 480px;
+		 text-align: left;   
+		 border-collapse: collapse; 
+		}
+	th {     font-size: 17px;     font-weight: normal;     padding: 8px;     
+		background: #2C3E50;
+			border-top: 4px solid #aabcfe;   
+			 border-bottom: 1px solid #fff;
+              color: #e8edff;
+              border: 1px solid; }
+            td {
+                 padding: 12px;     background: #e8edff;     border-bottom: 1px solid #fff;
+    color: #669;   border-top: 1px solid transparent;
+                border: 1px solid;
+            }
 	  
 	 
