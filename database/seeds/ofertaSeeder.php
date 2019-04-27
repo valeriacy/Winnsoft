@@ -30,7 +30,8 @@ class ofertaSeeder extends Seeder
         ]);
 
         \DB::table('ofertas')->insert([
-        	'grupo' => "1",
+            'grupo' => "1",
+            'codigo' => "abc123",
             'materia_id' => 1,
             'docente_id' => 1,
             'hora' => "18:30",
