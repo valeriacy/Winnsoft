@@ -45,6 +45,9 @@ function principalCtrl($scope, $location, $http){
         menu=inicial_menu();
         $scope.mostrar_menu=menu;
         obtener_ofertas($http, $scope);
+        $scope.inscribir = () => {
+            $location.path("/inscripcion");
+        };
     }
     else
         $location.path("/");
