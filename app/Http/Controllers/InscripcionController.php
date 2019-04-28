@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Inscripcion;
+use App\Materia;
+use App\Oferta;
 
 class InscripcionController extends Controller
 {
@@ -47,11 +49,17 @@ class InscripcionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function obtenerInscripciones($id){
-        $usuarioId = $request->usuarioId;
-        $ofertaId = $request->ofertaId;
-        $verificado = Inscripcion::where("oferta_id", $ofertaId)->where("usuario_id", $usuarioId)->get();
-        return $verificado;
+    public function obtenerInscripciones($idUsuario){
+        $idOfertas = Inscripcion::where('usuario_id' ,'=' ,$idUsuario)->pluck('oferta_id')->toArray();
+
+        $response = array();
+        foreach ($idOfertas as $idOferta) {
+            $oferta = Oferta::find($idOferta);
+            $attributes = $oferta->getAttributes();
+            $idMateria = $attributes["materia_id"];
+            array_push($response, $idMateria);
+        }
+        return $response;
     }
 
     /**
