@@ -16,11 +16,28 @@ app.config(function($routeProvider) {
         templateUrl :"/principal.html",
         controller : "principalCtrl"
      })
+     .when("/inscripcion",{
+         templateUrl : "/inscripcion.html",
+         controller : "inscripcionCtrl"
+     })
 });
 
 app.controller("mainCtrl", mainCtrl);
 app.controller("registroCtrl", registerCtrl);
 app.controller("principalCtrl",principalCtrl);
+app.controller("inscripcionCtrl",inscripcionCtrl);
+
+function inscripcionCtrl($scope,$location,$http)
+{
+    if(usuario){
+        $scope.user = usuario;
+        menu=inicial_menu();
+        $scope.mostrar_menu=menu;
+        obtener_ofertas($http, $scope);
+    }
+    else
+        $location.path("/");
+}
 
 function principalCtrl($scope, $location, $http){
     if(usuario){
