@@ -88,10 +88,9 @@ function validarNombreUsuarioYGuardar(httpService, location){
     }
 
     httpService(req)
-        .then(async (response)=>{
+        .then( (response)=>{
             data = response.data;
             let advertencia = document.querySelector("#advertencia-usuario");
-            await sleep(1000);
             if(data.length>0){
                 advertencia.style.display="block";
             }else{

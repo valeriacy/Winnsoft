@@ -34,6 +34,27 @@ function inscripcionCtrl($scope,$location,$http)
         menu=inicial_menu();
         $scope.mostrar_menu=menu;
         obtener_ofertas($http, $scope);
+        $scope.inscribir = (idOferta) => {
+            let inscripcion = {
+                ofertaId: idOferta,
+                usuarioId: usuario.id
+            }
+
+            let req={
+                method: 'POST',
+                url: "/api/Inscripcion",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data : JSON.stringify(inscripcion)
+            };
+
+            $http(req)
+            .then((response)=>{
+                alert("Te inscribiste bien papu")
+                $location.path("/principal");    
+            });
+        }
     }
     else
         $location.path("/");
@@ -45,9 +66,11 @@ function principalCtrl($scope, $location, $http){
         menu=inicial_menu();
         $scope.mostrar_menu=menu;
         obtener_ofertas($http, $scope);
+        
         $scope.inscribir = () => {
             $location.path("/inscripcion");
         };
+
     }
     else
         $location.path("/");

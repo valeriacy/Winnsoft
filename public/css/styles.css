@@ -37,7 +37,7 @@ body{
 
 }
 .titulo1{
-	font-size: 5em;
+	font-size: 2em;
 	
 	font-weight: bold;
 	font-family: 'Lato', Times, serif;
@@ -255,6 +255,7 @@ border:10px solid rgb(0,128,128);
 		overflow: hidden;
 		background-color: #2d89a0;
 		color: #EFEFEF;
+		width: 20%;
 	  }
 	  .active,.content :hover > ul {
 		display:block;}
@@ -262,6 +263,7 @@ border:10px solid rgb(0,128,128);
 		.active,.content li a {
 			background-color: #2C3E50;
 			color :#fff;
+
 		   text-decoration:none;
 			padding:20px 15px;
 			display:block;}
