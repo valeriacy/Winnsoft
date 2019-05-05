@@ -25,3 +25,6 @@ Route::resource('Materia', 'Materiacontroller');
 Route::resource('Docente', 'Docentecontroller');
 Route::resource('Oferta', 'Ofertacontroller');
 Route::resource('Inscripcion', 'InscripcionController');
+Route::resource('Sesion', 'SesionController');
+Route::resource('Producto', 'ProductoController');
+Route::resource('Entrega', 'EntregaController');
