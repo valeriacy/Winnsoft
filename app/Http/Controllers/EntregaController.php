@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Entrega;
 
 class EntregaController extends Controller
 {
@@ -45,7 +46,12 @@ class EntregaController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->getEntregaById($id);
+    }
+
+    public function getEntregaById($id)
+    {
+        return Entrega::find($id);
     }
 
     /**

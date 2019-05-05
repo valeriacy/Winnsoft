@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Sesion;
+use App\Producto;
+use App\Entrega;
+use App\Http\Controllers\ProductoController;
 
 class SesionController extends Controller
 {
@@ -34,7 +38,7 @@ class SesionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +49,28 @@ class SesionController extends Controller
      */
     public function show($id)
     {
-        //
+        return $this->getSesionById($id);
+    }
+
+    public function showByGrupoId($idGrupo)
+    {
+        
+    }
+
+    public function getSesionById($id)
+    {
+        $sesion = Sesion::find($id);
+        $attributes = $sesion->getAttributes();
+        $sesionId = $attributes['id'];
+        $productosIds = Producto::where('sesion_id' ,'=' ,$sesionId)->pluck('id')->toArray();
+
+        $productoController = new ProductoController();
+        $productos = array();
+        foreach ($productosIds as $id) {
+            array_push($productos, $productoController->getProductoById($id));
+        }
+        return [$sesion, $productos];
+
     }
 
     /**
