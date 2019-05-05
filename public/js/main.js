@@ -20,20 +20,32 @@ app.config(function($routeProvider) {
          templateUrl : "/inscripcion.html",
          controller : "inscripcionCtrl"
      })
+     .when("/verMaterias",
+    {
+      templateUrl:"/verMaterias.html",
+      controller: "misMateriasCtrl" 
+    })
+    .when("/agregarPortafolio",
+    {
+        templateUrl:"/agregarPortafolio.html",
+        controller: "agregarPortafolioCtrl",
+    })
 });
 
 app.controller("mainCtrl", mainCtrl);
 app.controller("registroCtrl", registerCtrl);
 app.controller("principalCtrl",principalCtrl);
 app.controller("inscripcionCtrl",inscripcionCtrl);
+app.controller("misMateriasCtrl",misMateriasCtrl);
+app.controller("agregarPortafolioCtrl",agregarPortafolioCtrl);
 
-function inscripcionCtrl($scope,$location,$http)
-{
+function inscripcionCtrl($scope,$location,$http){
     if(usuario){
         $scope.user = usuario;
-        menu=inicial_menu();
-        $scope.mostrar_menu=menu;
+        cargarMenuEstudiante($location, $scope)
         obtener_ofertas($http, $scope);
+        obtenerInscripciones($http,$scope,usuario.id);
+        $scope.estaEnLista=estaEnLista;
         $scope.inscribir = (idOferta) => {
             let inscripcion = {
                 ofertaId: idOferta,
@@ -51,7 +63,7 @@ function inscripcionCtrl($scope,$location,$http)
 
             $http(req)
             .then((response)=>{
-                alert("Te inscribiste bien papu")
+                alert("Inscripcion correcta")
                 $location.path("/principal");    
             });
         }
@@ -63,13 +75,8 @@ function inscripcionCtrl($scope,$location,$http)
 function principalCtrl($scope, $location, $http){
     if(usuario){
         $scope.user = usuario;
-        menu=inicial_menu();
-        $scope.mostrar_menu=menu;
         obtener_ofertas($http, $scope);
-        
-        $scope.inscribir = () => {
-            $location.path("/inscripcion");
-        };
+        cargarMenuEstudiante($location, $scope)
 
     }
     else
@@ -125,4 +132,38 @@ function registerCtrl($scope, $http, $location){
         validarNombreUsuarioYGuardar($http, $location);
     };
 }
+function misMateriasCtrl($http,$scope,$location){
+    if(usuario){
+        $scope.user = usuario;
+        obtenerInscripciones($http,$scope,usuario.id);
+        cargarMenuEstudiante($location, $scope);//carga el menu de estudiante
+    }
+    else
+    $location.path("/");
+}
+function agregarPortafolioCtrl($http,$scope,$location){
+    if(usuario){
+        $scope.user = usuario;
+        obtenerInscripciones($http,$scope,usuario.id);
+        cargarMenuEstudiante($location, $scope);//carga el menu de estudiante
+    }
+    else
+    $location.path("/");
+}
 
+function cargarMenuEstudiante(location, scope){
+    menu=inicial_menu();
+    scope.mostrar_menu=menu;
+    scope.inscribir = () => {
+        location.path("/inscripcion");
+    };
+    scope.irMaterias = () => {
+        location.path("/verMaterias");
+    };
+    scope.irPrincipal = () => {
+        location.path("/principal");
+    };
+    scope.irAgregarPortafolio = () => {
+        location.path("/agregarPortafolio");
+    }
+}

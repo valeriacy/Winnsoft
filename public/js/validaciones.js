@@ -74,7 +74,7 @@ function construirObjetoUsuario(){
         return {
             name:name.value,
             lastname:lastname.value,
-            rol:rol.value,
+            rol:"Estudiante",
             username:username.value,
             password:pass.value
         }//este es el objeto JSON

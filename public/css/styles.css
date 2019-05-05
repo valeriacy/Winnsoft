@@ -260,7 +260,7 @@ border:10px solid rgb(0,128,128);
 	  .active,.content :hover > ul {
 		display:block;}
 	 
-		.active,.content li a {
+		.active,.content  button {
 			background-color: #2C3E50;
 			color :#fff;
 
@@ -289,6 +289,47 @@ border:10px solid rgb(0,128,128);
                  padding: 12px;     background: #e8edff;     border-bottom: 1px solid #fff;
     color: #669;   border-top: 1px solid transparent;
                 border: 1px solid;
-            }
-	  
+			}
+		.materiasDiv{
+			width:  45vw;
+	
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-left: auto;
+			margin-right: auto;
+			border:solid 2px;
+
+			}
+	.mainContainer{
+		height: 100%;
+        padding: 20px;
+		border: dashed 2px rgb(47, 47, 68);
+		background: #2d89a0;
+		color:white;
+		font-size: 30px;
+	}
+	label{
+		text-align: left;
+		font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+		
+	}
+	.sesionDiv{
+		border:solid 2px white;
+		padding: 1vw;
+		background-image: linear-gradient(to bottom right, rgb(146, 211, 255), white);
+		color:black;
+		font-size: 18px;
+		margin-bottom: 3vw;
+	}
+	.productDiv{
+		border:solid 2px rgb(104, 104, 103);
+		padding: 1vw;
+		background:linear-gradient(to bottom right, rgb(170, 199, 219), white);
+		color: black;
+		font-size: 15px;
+		margin-bottom: 1vw;
+
+	}
+	
 	 

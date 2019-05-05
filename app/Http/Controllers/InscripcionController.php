@@ -57,7 +57,8 @@ class InscripcionController extends Controller
             $oferta = Oferta::find($idOferta);
             $attributes = $oferta->getAttributes();
             $idMateria = $attributes["materia_id"];
-            array_push($response, $idMateria);
+            $materia = Materia::find($idMateria);
+            array_push($response, $materia);
         }
         return $response;
     }
