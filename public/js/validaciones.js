@@ -74,7 +74,7 @@ function construirObjetoUsuario(){
         return {
             name:name.value,
             lastname:lastname.value,
-            rol:rol.value,
+            rol:"Estudiante",
             username:username.value,
             password:pass.value
         }//este es el objeto JSON
@@ -88,10 +88,9 @@ function validarNombreUsuarioYGuardar(httpService, location){
     }
 
     httpService(req)
-        .then(async (response)=>{
+        .then( (response)=>{
             data = response.data;
             let advertencia = document.querySelector("#advertencia-usuario");
-            await sleep(1000);
             if(data.length>0){
                 advertencia.style.display="block";
             }else{

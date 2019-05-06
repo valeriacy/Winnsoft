@@ -22,7 +22,12 @@
             <td>{{oferta[1].nombre}}</td>
             <td>{{oferta[0].hora}}</td>
             <td>{{oferta[0].dia}}</td>
-        <td><button>Inscribir</button></td>  
-    </tr>
+            <td ng-if="estaEnLista(oferta[2].id, inscripciones)">
+                <label>Ya esta inscrito</label>
+            </td>  
+            <td ng-if="!estaEnLista(oferta[2].id, inscripciones)">
+                    <button ng-click="inscribir(oferta[0].id)">Inscribir</button>
+            </td>  
+        </tr>
     </table>
                  

@@ -28,6 +28,32 @@ function obtener_ofertas(httpService, scope){
     });
 }
 
+function estaEnLista(idMateria, array){
+    encontrado=false;
+    for(let i=0; i<array.length;i++){
+        if(idMateria===array[i].id){
+            encontrado=true;
+            break;
+        }
+    }
+    return encontrado;
+}
+
+function obtenerInscripciones(httpService, scope, idUsuario){
+    let req={
+        method: 'GET',
+        url: "api/obtenerInscripciones/"+idUsuario,
+    };
+
+    httpService(req)
+    .then((response)=>{
+        scope.inscripciones = response.data;
+        console.log(response.data);
+    })
+    .catch((error)=>{
+        console.error(error);
+    });
+}
 function eventosRegistro(){
     maestroRegistro();
     let campos = [];
@@ -46,7 +72,7 @@ function mostrarContenido (event){
 }
 function inicial_menu(){
     let coll = document.getElementsByClassName("collapsible");
-    let i;
+    let i; 
 
     return (event) => {
        let element=event.target;
