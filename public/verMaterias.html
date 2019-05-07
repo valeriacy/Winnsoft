@@ -1,51 +1,15 @@
-<div  ng-include="'/shared/header_estudiante.html'" style="width: 100vw;">
-
+<div  ng-include="'/shared/header_estudiante.html'" style="width: 100vw;"></div>
+<div class="centered-div">
+    <h1>
+        Mis Materias
+    </h1>
 </div>
 <div class="materiasDiv">
-   
-<div class="mainContainer">
-<label style="text-align: center;">Introduccion a la Programacion</label>
-<div class="sesionDiv"><label>Sesion:1</label>
-    <div class="productDiv">
-        <div class=""><label><strong>Producto:1</strong></label></div>
-        <div class="" style="margin-top: 1vw;">
-            <div><label>Cargar Archivo:</label>
-            <input type="file">
-            <label>Descripción:</label> 
-                <textarea>   </textarea>
-            </div>
-        </div>
-
+    <div>
+        <ul>
+            <li ng-repeat="inscripcion in inscripciones">
+                <a href="#!sesiones/{{inscripcion[0].id}}">{{inscripcion[2].nombre}}</a>
+            </li>
+        </ul>
     </div>
-</div>
-<div class="sesionDiv"><label>Sesion:1</label>
-    <div class="productDiv">
-        <div class=""><label><strong>Producto:1</strong></label></div>
-        <div class="" style="margin-top: 1vw;">
-            <div><label>Cargar Archivo:</label>
-            <input type="file">
-            <label>Descripción:</label> 
-                <textarea>   </textarea>
-            </div>
-            <div><button type="submit">Completado</button></div>
-        </div>
-
-    </div>
-</div>
-<div class="sesionDiv"><label>Sesion:1</label>
-    <div class="productDiv">
-        <div class=""><label><strong>Producto:1</strong></label></div>
-        <div class="" style="margin-top: 1vw;">
-            <div><label>Cargar Archivo:</label>
-            <label>Tarea1.zip</label>
-            <label>Descripción:</label> 
-                <label>Descripcion de ejemplo</label>
-            </div>
-            <div><label>Cerrado</label></div>
-        </div>
-
-    </div>
-</div>
-
-</div>
 </div>
