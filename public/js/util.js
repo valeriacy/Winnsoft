@@ -38,6 +38,58 @@ function estaEnLista(idMateria, array){
     }
     return encontrado;
 }
+function obtenerOfertaPorId(httpService, scope, idOferta){
+    let req={
+        method: 'GET',
+        url: "api/Oferta/"+idOferta,
+    };
+
+    httpService(req)
+    .then((response)=>{
+        scope.oferta = response.data;
+        console.log(response.data);
+    })
+    .catch((error)=>{
+        console.error(error);
+    });
+}
+
+function obtenerSesionesDeGrupo(httpService, scope, idOferta, idUsuario){
+    let req={
+        method: 'GET',
+        url: "api/sesiones/"+idOferta,
+    };
+
+    httpService(req)
+    .then((response)=>{
+        let data=response.data;
+        filtrarEntregaUsuario(data, idUsuario);
+        scope.sesiones = data;
+        console.log(data);
+    })
+    .catch((error)=>{
+        console.error(error);
+    });
+}
+
+function filtrarEntregaUsuario(sesiones, id){
+    if(sesiones)
+        sesiones.reverse();
+    for(let sesion of sesiones){
+        filtrarEntregaUsuarioEnSesion(sesion, id);
+    }
+}
+
+function filtrarEntregaUsuarioEnSesion(sesion, id){
+    let productos = sesion.productos;
+    if(productos)
+        productos.reverse()
+    for(let producto of productos){
+        let entregasGlobales=producto.entregas;
+        let entregasUsuario = entregasGlobales.filter(entrega => entrega.usuario_id===id);
+        producto.entregas=entregasUsuario;
+    }
+}
 
 function obtenerInscripciones(httpService, scope, idUsuario){
     let req={
