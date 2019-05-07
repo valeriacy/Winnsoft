@@ -1,0 +1,73 @@
+<div  ng-include="'/shared/header_estudiante.html'" style="width: 100vw;">
+
+</div>
+<div class="materiasDiv">
+   
+    <div class="mainContainer">
+        <label style="text-align: center;">{{oferta[2].nombre}}</label>
+        <div ng-repeat="sesion in sesiones" class="sesionDiv">
+            <label>Sesion:{{sesion.numero}}</label>
+            <label ng-if="sesion.cerrado===1" style="color:red;">Cerrado</label>
+            <div ng-repeat="producto in sesion.productos" class="productDiv">
+                <div class="">
+                    <label><strong>Producto:{{producto.numero}}</strong></label>
+                </div>
+                <div ng-if="producto.entregas.length === 0" class="" style="margin-top: 1vw;">
+                    <div ng-if="producto.cerrado===1">
+                        <div>
+                            <label>¡SIN ENTREGAS! EL PRODUCTO YA ESTA CERRADO</label>
+                        </div>
+                        <label style="color:red;">Cerrado</label>
+                    </div>
+                    <div ng-if="producto.cerrado===0">
+                            <div><label>Cargar Archivo:</label>
+                                <input type="file">
+                                <label>Descripción:</label> 
+                                    <textarea>   </textarea>
+                            </div>
+                        </div>
+                </div>
+                <div ng-if="producto.entregas.length > 0" class="" style="margin-top: 1vw;">
+                    <div><label>Cargar Archivo:</label>
+                        <label>{{producto.entregas[0].nombre_archivo}}.{{producto.entregas[0].tipo}}</label>
+                        <label>Descripción:</label> 
+                            <label>{{producto.entregas[0].descripcion}}</label>
+                        </div>
+                    <div ng-if="producto.cerrado===1">
+                        <label style="color:red;">Cerrado</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--<div class="sesionDiv"><label>Sesion:1</label>
+            <div class="productDiv">
+                <div class=""><label><strong>Producto:1</strong></label></div>
+                <div class="" style="margin-top: 1vw;">
+                    <div><label>Cargar Archivo:</label>
+                    <input type="file">
+                    <label>Descripción:</label> 
+                        <textarea>   </textarea>
+                    </div>
+                    <div><button type="submit">Completado</button></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="sesionDiv"><label>Sesion:1</label>
+            <div class="productDiv">
+                <div class=""><label><strong>Producto:1</strong></label></div>
+                <div class="" style="margin-top: 1vw;">
+                    <div><label>Cargar Archivo:</label>
+                    <label>Tarea1.zip</label>
+                    <label>Descripción:</label> 
+                        <label>Descripcion de ejemplo</label>
+                    </div>
+                    <div><label>Cerrado</label></div>
+                </div>
+
+            </div>
+        </div>-->
+
+    </div>
+</div>
