@@ -16,14 +16,19 @@ app.config(function($routeProvider) {
         templateUrl :"/principal.html",
         controller : "principalCtrl"
      })
-     .when("/inscripcion",{
+    .when("/inscripcion",{
          templateUrl : "/inscripcion.html",
          controller : "inscripcionCtrl"
      })
-     .when("/verMaterias",
+    .when("/verMaterias",
     {
       templateUrl:"/verMaterias.html",
       controller: "misMateriasCtrl" 
+    })
+    .when("/sesiones/:id",
+    {
+      templateUrl:"/verSesiones.html",
+      controller: "sesionesCtrl" 
     })
     .when("/agregarPortafolio",
     {
@@ -38,6 +43,7 @@ app.controller("principalCtrl",principalCtrl);
 app.controller("inscripcionCtrl",inscripcionCtrl);
 app.controller("misMateriasCtrl",misMateriasCtrl);
 app.controller("agregarPortafolioCtrl",agregarPortafolioCtrl);
+app.controller("sesionesCtrl",sesionesCtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
@@ -145,6 +151,16 @@ function agregarPortafolioCtrl($http,$scope,$location){
     if(usuario){
         $scope.user = usuario;
         obtenerInscripciones($http,$scope,usuario.id);
+        cargarMenuEstudiante($location, $scope);//carga el menu de estudiante
+    }
+    else
+    $location.path("/");
+}
+function sesionesCtrl($http,$scope,$location, $routeParams){
+    if(usuario){
+        $scope.user = usuario;
+        obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
+        obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuEstudiante($location, $scope);//carga el menu de estudiante
     }
     else
