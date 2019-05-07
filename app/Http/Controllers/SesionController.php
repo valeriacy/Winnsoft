@@ -54,7 +54,12 @@ class SesionController extends Controller
 
     public function showByGrupoId($idGrupo)
     {
-        
+        $sesionIds = Sesion::where('grupo_id' ,'=' ,$idGrupo)->pluck('id')->toArray();
+        $sesions = [];
+        foreach ($sesionIds as $sesionId) {
+            array_push($sesions, $this->getSesionById($sesionId));
+        }
+        return $sesions;
     }
 
     public function getSesionById($id)
@@ -69,7 +74,14 @@ class SesionController extends Controller
         foreach ($productosIds as $id) {
             array_push($productos, $productoController->getProductoById($id));
         }
-        return [$sesion, $productos];
+
+        $response = new \stdClass();
+        $response->id=$attributes['id'];
+        $response->numero=$attributes['numero'];
+        $response->cerrado=$attributes['cerrado'];
+        $response->productos = $productos;
+
+        return $response;
 
     }
 

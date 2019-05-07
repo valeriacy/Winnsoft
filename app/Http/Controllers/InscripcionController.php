@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Inscripcion;
 use App\Materia;
 use App\Oferta;
+use App\Http\Controllers\OfertaController;
 
 class InscripcionController extends Controller
 {
@@ -51,14 +52,12 @@ class InscripcionController extends Controller
      */
     public function obtenerInscripciones($idUsuario){
         $idOfertas = Inscripcion::where('usuario_id' ,'=' ,$idUsuario)->pluck('oferta_id')->toArray();
+        $ofertaController = new OfertaController();
 
         $response = array();
         foreach ($idOfertas as $idOferta) {
-            $oferta = Oferta::find($idOferta);
-            $attributes = $oferta->getAttributes();
-            $idMateria = $attributes["materia_id"];
-            $materia = Materia::find($idMateria);
-            array_push($response, $materia);
+            $oferta = $ofertaController->getOferta($idOferta);
+            array_push($response, $oferta);
         }
         return $response;
     }

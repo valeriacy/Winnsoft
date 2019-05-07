@@ -62,7 +62,14 @@ class ProductoController extends Controller
         foreach ($entregaIds as $id) {
             array_push($entregas, $entregaController->getEntregaById($id));
         }
-        return [$producto, $entregas];
+
+        $response = new \stdClass();
+        $response->id=$attributes['id'];
+        $response->numero=$attributes['numero'];
+        $response->cerrado=$attributes['cerrado'];
+        $response->entregas=$entregas;
+
+        return $response;
     }
 
     /**
