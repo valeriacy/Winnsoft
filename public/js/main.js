@@ -168,7 +168,7 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
 }
 
 function cargarMenuEstudiante(location, scope){
-    menu=inicial_menu();
+    menu=funcionColapsable();
     scope.mostrar_menu=menu;
     scope.inscribir = () => {
         location.path("/inscripcion");

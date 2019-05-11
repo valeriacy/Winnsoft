@@ -122,10 +122,7 @@ function eventosRegistro(){
 function mostrarContenido (event){
     console.log (event.target.value)
 }
-function inicial_menu(){
-    let coll = document.getElementsByClassName("collapsible");
-    let i; 
-
+function funcionColapsable(){
     return (event) => {
        let element=event.target;
 
