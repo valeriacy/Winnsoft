@@ -23,19 +23,18 @@
                             </div>
                         </div>
                         <div ng-if="producto.cerrado===0">
-                                <div><label>Cargar Archivo:</label>
-                                    <input type="file">
-                                    <label>Descripción:</label> 
-                                        <textarea>   </textarea>
-                                </div>
+                            <div><label>Cargar Archivo:</label>
+                                <input type="file">
+                                <label>Descripción:</label> 
+                                    <textarea>   </textarea>
                             </div>
+                        </div>
                     </div>
                     <div ng-if="producto.entregas.length > 0" style="display:none" class="" style="margin-top: 1vw;">
-                        <div><label>Cargar Archivo:</label>
-                            <label>{{producto.entregas[0].nombre_archivo}}.{{producto.entregas[0].tipo}}</label>
-                            <label>Descripción:</label> 
-                                <label>{{producto.entregas[0].descripcion}}</label>
-                            </div>
+                        <label>Cargar Archivo:</label>
+                        <label>{{producto.entregas[0].nombre_archivo}}.{{producto.entregas[0].tipo}}</label>
+                        <label>Descripción:</label> 
+                        <label>{{producto.entregas[0].descripcion}}</label>
                     </div>
                 </div>
             </div>
