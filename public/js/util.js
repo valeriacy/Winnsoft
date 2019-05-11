@@ -124,9 +124,7 @@ function mostrarContenido (event){
 }
 function funcionColapsable(){
     return (event) => {
-       let element=event.target;
-
-        element.classList.toggle("active");
+        let element=event.target;
         let content = element.nextElementSibling;
         if (content.style.display === "block") {
         content.style.display = "none";
@@ -134,4 +132,36 @@ function funcionColapsable(){
         content.style.display = "block";
         }
     }
+}
+function cargarMenuEstudiante(location, scope){
+    menu=funcionColapsable();
+    scope.mostrar_menu=menu;
+    scope.inscribir = () => {
+        location.path("/inscripcion");
+    };
+    scope.irMaterias = () => {
+        location.path("/verMaterias");
+    };
+    scope.irPrincipal = () => {
+        location.path("/principal");
+    };
+    scope.irAgregarPortafolio = () => {
+        location.path("/agregarPortafolio");
+    }
+}
+function obtenerMaterias(scope, httpService){
+    let req = {
+        method: 'GET',
+        url: "/api/usuario/121221",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    httpService(req)
+    .then((response)=>{
+        scope.lista=response.data;
+    })
+    .catch((error)=>{
+        console.error(error);
+    });
 }
