@@ -265,11 +265,11 @@ border:10px solid rgb(0,128,128);
 			color :#fff;
 
 		   text-decoration:none;
-			padding:20px 15px;
+			padding:0.1em;
 			display:block;}
 	
 	  .active,.content :hover {
-		background-color: rgb(24, 203, 248);
+		background-color: rgb(248, 188, 24);
 
 	  }
 	  table {     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;

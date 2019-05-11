@@ -10,9 +10,9 @@
                 <label>Sesion:{{sesion.numero}}</label>
                 <label ng-if="sesion.cerrado===1" style="color:red;">Cerrado</label>
             </div>
-            <div ng-click="colapsable($event)" style="display:none">
+            <div style="display:none">
                 <div ng-repeat="producto in sesion.productos" class="productDiv">
-                    <div class="">
+                    <div ng-click="colapsable($event)" class="">
                         <label><strong>Producto:{{producto.numero}}</strong></label>
                         <label ng-if="sesion.cerrado===1 || producto.cerrado===1" style="color:red;">Cerrado</label>
                     </div>
@@ -39,34 +39,5 @@
                 </div>
             </div>
         </div>
-        <!--<div class="sesionDiv"><label>Sesion:1</label>
-            <div class="productDiv">
-                <div class=""><label><strong>Producto:1</strong></label></div>
-                <div class="" style="margin-top: 1vw;">
-                    <div><label>Cargar Archivo:</label>
-                    <input type="file">
-                    <label>Descripción:</label> 
-                        <textarea>   </textarea>
-                    </div>
-                    <div><button type="submit">Completado</button></div>
-                </div>
-
-            </div>
-        </div>
-        <div class="sesionDiv"><label>Sesion:1</label>
-            <div class="productDiv">
-                <div class=""><label><strong>Producto:1</strong></label></div>
-                <div class="" style="margin-top: 1vw;">
-                    <div><label>Cargar Archivo:</label>
-                    <label>Tarea1.zip</label>
-                    <label>Descripción:</label> 
-                        <label>Descripcion de ejemplo</label>
-                    </div>
-                    <div><label>Cerrado</label></div>
-                </div>
-
-            </div>
-        </div>-->
-
     </div>
 </div>
