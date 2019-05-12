@@ -6,16 +6,16 @@
     <div class="mainContainer">
         <label style="text-align: center;">{{oferta[2].nombre}}</label>
         <div ng-repeat="sesion in sesiones" class="sesionDiv">
-            <div ng-click="colapsable($event)">
+            <button ng-click="colapsable($event)">
                 <label>Sesion:{{sesion.numero}}</label>
                 <label ng-if="sesion.cerrado===1" style="color:red;">Cerrado</label>
-            </div>
+            </button>
             <div style="display:none">
                 <div ng-repeat="producto in sesion.productos" class="productDiv">
-                    <div ng-click="colapsable($event)" class="">
-                        <label><strong>Producto:{{producto.numero}}</strong></label>
+                    <button ng-click="colapsable($event)" class="">
+                        <label>Producto:{{producto.numero}}</label>
                         <label ng-if="sesion.cerrado===1 || producto.cerrado===1" style="color:red;">Cerrado</label>
-                    </div>
+                    </button>
                     <div ng-if="producto.entregas.length === 0" style="display:none" class="" style="margin-top: 1vw;">
                         <div ng-if="producto.cerrado===1">
                             <div>

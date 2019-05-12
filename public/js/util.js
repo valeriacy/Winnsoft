@@ -124,7 +124,8 @@ function mostrarContenido (event){
 }
 function funcionColapsable(){
     return (event) => {
-        let element=event.target;
+        let element=event.target.parentElement;
+
         element.classList.toggle("active");
         let content = element.nextElementSibling;
         if (content.style.display === "block") {
