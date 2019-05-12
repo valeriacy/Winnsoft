@@ -4,13 +4,14 @@
 <div class="materiasDiv">
    
     <div class="mainContainer">
+
         <label style="text-align: center;">{{oferta[2].nombre}}</label>
         <div ng-repeat="sesion in sesiones" class="sesionDiv">
-            <label>Sesion:{{sesion.numero}}</label>
+            <label>Sesion:{{sesion.numero}} Documento o archivo publicado por el docente </label>
             <label ng-if="sesion.cerrado===1" style="color:red;">Cerrado</label>
             <div ng-repeat="producto in sesion.productos" class="productDiv">
                 <div class="">
-                    <label><strong>Producto:{{producto.numero}}</strong></label>
+                    <label><strong>Producto:{{producto.numero}} El Estudiante puede ver la descripcion de la tarea asignada objetivamente</strong></label>
                 </div>
                 <div ng-if="producto.entregas.length === 0" class="" style="margin-top: 1vw;">
                     <div ng-if="producto.cerrado===1">

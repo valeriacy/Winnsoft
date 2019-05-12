@@ -35,6 +35,7 @@ app.config(function($routeProvider) {
         templateUrl:"/agregarPortafolio.html",
         controller: "agregarPortafolioCtrl",
     })
+    
 });
 
 app.controller("mainCtrl", mainCtrl);
