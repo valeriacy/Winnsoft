@@ -334,5 +334,8 @@ border:10px solid rgb(0,128,128);
 .centered-div{
 	margin-left: 40vw;
 }
-	
+
+.logOutButton{
+	background-color: rgb(238, 10, 29);
+}
 	 

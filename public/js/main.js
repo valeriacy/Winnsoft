@@ -88,7 +88,9 @@ function principalCtrl($scope, $location, $http){
         $location.path("/");
 }
 function mainCtrl($scope, $http, $location){
-    obtenerMaterias($scope, $http);
+    comprobarSesion();
+    if(usuario)
+        $location.path("/principal")
     $scope.entrar = () => {
         let usuario = document.querySelector("#usuario");
         let contra = document.querySelector("#contra");

@@ -6,7 +6,10 @@ function logIn(httpService, req, contra, location){
         let coinciden = usuario.contra === contra;
         mensaje = coinciden ? "Datos ingresados correctamente":"Usuario o Contraseña incorrecto";
         alert(mensaje);
-        if(coinciden) location.path("/principal")
+        if(coinciden) {
+            guardarUsuarioEnLS(usuario);
+            location.path("/principal")
+        }
     })
     .catch((error)=>{
         console.error(error);
@@ -150,6 +153,9 @@ function cargarMenuEstudiante(location, scope){
     scope.irAgregarPortafolio = () => {
         location.path("/agregarPortafolio");
     }
+    scope.logOut = () => {
+        logOut(location);
+    }
 }
 function obtenerMaterias(scope, httpService){
     let req = {
@@ -166,4 +172,30 @@ function obtenerMaterias(scope, httpService){
     .catch((error)=>{
         console.error(error);
     });
+}
+function guardarEnlocalStorage(key, value){
+    window.localStorage.setItem(key,value);
+}
+function obtenerDelocalStorage(key){
+    return window.localStorage.getItem(key);
+}
+function borrarDelocalStorage(key){
+    window.localStorage.removeItem(key)
+}
+function guardarUsuarioEnLS(usuario){
+    let key="usuario";
+    let value=JSON.stringify(usuario);
+    guardarEnlocalStorage(key, value);
+}
+function comprobarSesion(){
+    let key="usuario";
+    let jsonUsuario = obtenerDelocalStorage(key);
+    if(jsonUsuario)
+        usuario = JSON.parse(jsonUsuario);
+}
+function logOut(location){
+    let key = "usuario";
+    usuario = null;
+    borrarDelocalStorage(key);
+    location.path("/")
 }
