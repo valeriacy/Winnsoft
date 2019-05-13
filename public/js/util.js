@@ -6,7 +6,10 @@ function logIn(httpService, req, contra, location){
         let coinciden = usuario.contra === contra;
         mensaje = coinciden ? "Datos ingresados correctamente":"Usuario o Contraseña incorrecto";
         alert(mensaje);
-        if(coinciden) location.path("/principal")
+        if(coinciden) {
+            guardarUsuarioEnLS(usuario);
+            location.path("/principal")
+        }
     })
     .catch((error)=>{
         console.error(error);
@@ -122,12 +125,9 @@ function eventosRegistro(){
 function mostrarContenido (event){
     console.log (event.target.value)
 }
-function inicial_menu(){
-    let coll = document.getElementsByClassName("collapsible");
-    let i; 
-
+function funcionColapsable(){
     return (event) => {
-       let element=event.target;
+        let element=event.target.parentElement;
 
         element.classList.toggle("active");
         let content = element.nextElementSibling;
@@ -137,4 +137,65 @@ function inicial_menu(){
         content.style.display = "block";
         }
     }
+}
+function cargarMenuEstudiante(location, scope){
+    menu=funcionColapsable();
+    scope.mostrar_menu=menu;
+    scope.inscribir = () => {
+        location.path("/inscripcion");
+    };
+    scope.irMaterias = () => {
+        location.path("/verMaterias");
+    };
+    scope.irPrincipal = () => {
+        location.path("/principal");
+    };
+    scope.irAgregarPortafolio = () => {
+        location.path("/agregarPortafolio");
+    }
+    scope.logOut = () => {
+        logOut(location);
+    }
+}
+function obtenerMaterias(scope, httpService){
+    let req = {
+        method: 'GET',
+        url: "/api/usuario/121221",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+    httpService(req)
+    .then((response)=>{
+        scope.lista=response.data;
+    })
+    .catch((error)=>{
+        console.error(error);
+    });
+}
+function guardarEnlocalStorage(key, value){
+    window.localStorage.setItem(key,value);
+}
+function obtenerDelocalStorage(key){
+    return window.localStorage.getItem(key);
+}
+function borrarDelocalStorage(key){
+    window.localStorage.removeItem(key)
+}
+function guardarUsuarioEnLS(usuario){
+    let key="usuario";
+    let value=JSON.stringify(usuario);
+    guardarEnlocalStorage(key, value);
+}
+function comprobarSesion(){
+    let key="usuario";
+    let jsonUsuario = obtenerDelocalStorage(key);
+    if(jsonUsuario)
+        usuario = JSON.parse(jsonUsuario);
+}
+function logOut(location){
+    let key = "usuario";
+    usuario = null;
+    borrarDelocalStorage(key);
+    location.path("/")
 }

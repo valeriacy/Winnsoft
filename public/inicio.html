@@ -26,13 +26,13 @@
                 <img class="titulo_img" src="./assets/inf_sis.png" alt="" style="float: right;">
             </div>           
                 <div class="login__form">
-                    <form autocomplete="off" class="login__form">
+                    <form autocomplete="off" class="login__form" ng-submit="entrar()">
                         <input type="text" id="usuario" placeholder="&#128100; username" required autofocus>
                         <input type="password" id="contra" placeholder="&#x1F512; password" required>
+                        <div class="button_form" >
+                            <input class="btn__submit" type="submit" value="ENTRAR">
+                        </div>
                     </form>
-                    <div class="button_form" >
-                        <input class="btn__submit" type="submit" ng-click="entrar()" value="ENTRAR">
-                    </div>
                     <form class="button_form" action="#!registrar">
                         <input class="btn__submit" type="submit" value="REGISTRARSE">    
                     </form>

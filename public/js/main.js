@@ -78,7 +78,6 @@ function inscripcionCtrl($scope,$location,$http){
     else
         $location.path("/");
 }
-
 function principalCtrl($scope, $location, $http){
     if(usuario){
         $scope.user = usuario;
@@ -89,9 +88,10 @@ function principalCtrl($scope, $location, $http){
     else
         $location.path("/");
 }
-
 function mainCtrl($scope, $http, $location){
-    obtenerMaterias($scope, $http);
+    comprobarSesion();
+    if(usuario)
+        $location.path("/principal")
     $scope.entrar = () => {
         let usuario = document.querySelector("#usuario");
         let contra = document.querySelector("#contra");
@@ -114,24 +114,6 @@ function mainCtrl($scope, $http, $location){
         logIn($http, req, contra.value, $location);
     };
 }
-
-function obtenerMaterias(scope, httpService){
-    let req = {
-        method: 'GET',
-        url: "/api/usuario/121221",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }
-    httpService(req)
-    .then((response)=>{
-        scope.lista=response.data;
-    })
-    .catch((error)=>{
-        console.error(error);
-    });
-}
-
 function registerCtrl($scope, $http, $location){
     eventosRegistro();
     $scope.send=()=>{    
@@ -160,27 +142,11 @@ function agregarPortafolioCtrl($http,$scope,$location){
 function sesionesCtrl($http,$scope,$location, $routeParams){
     if(usuario){
         $scope.user = usuario;
+        $scope.colapsable=funcionColapsable();
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
-        cargarMenuEstudiante($location, $scope);//carga el menu de estudiante
+        cargarMenuEstudiante($location, $scope);
     }
     else
     $location.path("/");
-}
-
-function cargarMenuEstudiante(location, scope){
-    menu=inicial_menu();
-    scope.mostrar_menu=menu;
-    scope.inscribir = () => {
-        location.path("/inscripcion");
-    };
-    scope.irMaterias = () => {
-        location.path("/verMaterias");
-    };
-    scope.irPrincipal = () => {
-        location.path("/principal");
-    };
-    scope.irAgregarPortafolio = () => {
-        location.path("/agregarPortafolio");
-    }
 }

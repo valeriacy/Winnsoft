@@ -133,7 +133,7 @@ class ofertaSeeder extends Seeder
 
         \DB::table('productos')->insert([
             'id' => 2,
-            'numero' => 2,
+            'numero' => 1,
             'cerrado' => 1,
             'sesion_id' => 2,
         	'created_at' => $date,
