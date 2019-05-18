@@ -15,6 +15,7 @@ class Correcciones extends Migration
     {
         Schema::table('productos', function($table) {
             $table->date('fecha_caducidad');
+            $table->string('descripcion');
         });
     }
 
@@ -27,6 +28,7 @@ class Correcciones extends Migration
     {
         Schema::table('productos', function($table) {
             $table->dropColumn('fecha_caducidad');
+            $table->dropColumn('descripcion');
         });
     }
 }

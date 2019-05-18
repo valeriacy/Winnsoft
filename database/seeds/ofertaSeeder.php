@@ -128,6 +128,7 @@ class ofertaSeeder extends Seeder
             'cerrado' => 1,
             'sesion_id' => 1,
             'fecha_caducidad' => $date,
+            'descripcion' => "ejemplo",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -138,6 +139,7 @@ class ofertaSeeder extends Seeder
             'cerrado' => 1,
             'sesion_id' => 2,
             'fecha_caducidad' => $date,
+            'descripcion' => "ejemplo",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -148,6 +150,7 @@ class ofertaSeeder extends Seeder
             'cerrado' => 0,
             'sesion_id' => 2,
             'fecha_caducidad' => $date,
+            'descripcion' => "ejemplo",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -158,6 +161,7 @@ class ofertaSeeder extends Seeder
             'cerrado' => 0,
             'sesion_id' => 3,
             'fecha_caducidad' => $date,
+            'descripcion' => "ejemplo",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
