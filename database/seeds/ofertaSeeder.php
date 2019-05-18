@@ -11,7 +11,7 @@ class ofertaSeeder extends Seeder
      */
     public function run()
     {
-        date_default_timezone_set('Australia/Melbourne');
+        date_default_timezone_set('America/Caracas');
         $date = date('Y/m/d h:i:s', time());
 
         \DB::table('usuarios')->insert([
