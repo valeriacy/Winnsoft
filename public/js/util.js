@@ -199,3 +199,29 @@ function logOut(location){
     borrarDelocalStorage(key);
     location.path("/")
 }
+
+function crearEntrega(entrega, httpService){
+    let req = {
+        method: 'POST',
+        url: "/api/Entrega",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data : JSON.stringify(entrega)
+    }
+    consumirApi(httpService,
+                req, 
+                (response)=>{
+                    console.log(response.status);
+                },
+                (error)=>{
+                    console.error(error);
+                }
+                )
+}
+
+function consumirApi(httpService, req, successCallBack, errorCallBack){
+    httpService(req)
+    .then(successCallBack)
+    .catch(errorCallBack);
+}

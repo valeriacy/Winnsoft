@@ -32,10 +32,11 @@
                                 <div>Descripcion: {{producto.descripcion}}</div>
                             </div>
                             <div><label>Cargar Archivo:</label>
-                                <input type="file">
+                                <input id="file-{{producto.id}}" type="file">
                                 <label>Descripción:</label> 
-                                    <textarea>   </textarea>
+                                    <textarea id="descripcion-{{producto.id}}">   </textarea>
                             </div>
+                            <button id="enviar" ng-click="enviar(producto.id)">Enviar</button>
                         </div>
                     </div>
                     <div ng-if="producto.entregas.length > 0" style="display:none" class="" style="margin-top: 1vw;">
