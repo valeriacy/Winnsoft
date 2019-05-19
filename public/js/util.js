@@ -210,14 +210,41 @@ function crearEntrega(entrega, httpService){
         data : JSON.stringify(entrega)
     }
     consumirApi(httpService,
-                req, 
-                (response)=>{
-                    console.log(response.status);
-                },
-                (error)=>{
-                    console.error(error);
-                }
+                    req, 
+                    (response)=>{
+                        reemplazarDivEntrega(entrega);
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
                 )
+}
+
+function reemplazarDivEntrega(entrega){
+    let productoId = entrega.productoId;
+    let entregaDiv = document.querySelector("#div-crear-entrega-"+productoId);
+    let newEntregaDiv = crearElementoHTMLEntrega(entrega);
+    entregaDiv.innerHTML = newEntregaDiv.innerHTML;
+}
+
+function crearElementoHTMLEntrega(entrega){
+    let containerDiv = document.createElement("div");
+    let lbArchivo = document.createElement("label");
+    let lbDescripcion = document.createElement("label");
+    let lbContenidoArchivo = document.createElement("label");
+    let pContenidoDescripcion = document.createElement("p");
+
+    lbArchivo.innerText="Cargar Archivo:";
+    lbContenidoArchivo.innerText=entrega.nombreArchivo;
+    lbDescripcion.innerText="Descripción:";
+    pContenidoDescripcion.innerText=entrega.descripcion;
+
+    containerDiv.appendChild(lbArchivo);
+    containerDiv.appendChild(lbContenidoArchivo);
+    containerDiv.appendChild(lbDescripcion);
+    containerDiv.appendChild(pContenidoDescripcion);
+
+    return containerDiv;
 }
 
 function consumirApi(httpService, req, successCallBack, errorCallBack){
