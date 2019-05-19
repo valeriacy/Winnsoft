@@ -1,12 +1,15 @@
-const API_URL="/";
 let usuario;
 
 let app = angular.module("myApp", ["ngRoute", "ngAnimate"]);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
-        templateUrl : "/inicio.html",
+        templateUrl : "/publica.html",
         controller : "mainCtrl"
+    })
+    .when("/login", {
+        templateUrl : "/inicio.html",
+        controller : "loginCtrl"
     })
     .when("/registrar", {
         templateUrl : "/registro.html",
@@ -39,6 +42,7 @@ app.config(function($routeProvider) {
 });
 
 app.controller("mainCtrl", mainCtrl);
+app.controller("loginCtrl", loginCtrl);
 app.controller("registroCtrl", registerCtrl);
 app.controller("principalCtrl",principalCtrl);
 app.controller("inscripcionCtrl",inscripcionCtrl);
@@ -76,7 +80,7 @@ function inscripcionCtrl($scope,$location,$http){
         }
     }
     else
-        $location.path("/");
+        $location.path(RAIZ);
 }
 function principalCtrl($scope, $location, $http){
     if(usuario){
@@ -86,9 +90,12 @@ function principalCtrl($scope, $location, $http){
 
     }
     else
-        $location.path("/");
+        $location.path(RAIZ);
 }
 function mainCtrl($scope, $http, $location){
+    
+}
+function loginCtrl($scope, $http, $location){
     comprobarSesion();
     if(usuario)
         $location.path("/principal")
@@ -128,7 +135,7 @@ function misMateriasCtrl($http,$scope,$location){
         cargarMenuEstudiante($location, $scope);//carga el menu de estudiante
     }
     else
-    $location.path("/");
+    $location.path(RAIZ);
 }
 function agregarPortafolioCtrl($http,$scope,$location){
     if(usuario){
@@ -137,7 +144,7 @@ function agregarPortafolioCtrl($http,$scope,$location){
         cargarMenuEstudiante($location, $scope);//carga el menu de estudiante
     }
     else
-    $location.path("/");
+    $location.path(RAIZ);
 }
 function sesionesCtrl($http,$scope,$location, $routeParams){
     if(usuario){
@@ -148,5 +155,5 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
         cargarMenuEstudiante($location, $scope);
     }
     else
-    $location.path("/");
+    $location.path(RAIZ);
 }

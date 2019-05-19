@@ -1,3 +1,6 @@
+const RAIZ="/login";
+const PUBLICA="/";
+
 function logIn(httpService, req, contra, location){
     httpService(req)
     .then((response)=>{
@@ -197,5 +200,5 @@ function logOut(location){
     let key = "usuario";
     usuario = null;
     borrarDelocalStorage(key);
-    location.path("/")
+    location.path(PUBLICA)
 }
