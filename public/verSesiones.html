@@ -19,22 +19,38 @@
                     <div ng-if="producto.entregas.length === 0" style="display:none" class="" style="margin-top: 1vw;">
                         <div ng-if="producto.cerrado===1">
                             <div>
+                                <label>Vencimiento:{{producto.fechaCaducidad}}</label>
+                                <div>Descripcion: {{producto.descripcion}}</div>
+                            </div>
+                            <div>
                                 <label>¡SIN ENTREGAS! EL PRODUCTO YA ESTA CERRADO</label>
                             </div>
                         </div>
-                        <div ng-if="producto.cerrado===0">
-                            <div><label>Cargar Archivo:</label>
-                                <input type="file">
+                        <div ng-if="producto.cerrado===0" >
+                            <div>
+                                <label>Vencimiento:{{producto.fechaCaducidad}}</label>
+                                <div>Descripcion: {{producto.descripcion}}</div>
+                            </div>
+                            <div id="div-crear-entrega-{{producto.id}}">
+                                <label>Cargar Archivo:</label>
+                                <input id="file-{{producto.id}}" type="file">
                                 <label>Descripción:</label> 
-                                    <textarea>   </textarea>
+                                <textarea id="descripcion-{{producto.id}}">   </textarea>
+                                <button id="enviar" ng-click="enviar(producto.id)">Enviar</button>
                             </div>
                         </div>
                     </div>
                     <div ng-if="producto.entregas.length > 0" style="display:none" class="" style="margin-top: 1vw;">
-                        <label>Cargar Archivo:</label>
-                        <label>{{producto.entregas[0].nombre_archivo}}.{{producto.entregas[0].tipo}}</label>
-                        <label>Descripción:</label> 
-                        <label>{{producto.entregas[0].descripcion}}</label>
+                        <div>
+                            <label>Vencimiento:{{producto.fechaCaducidad}}</label>
+                            <div>Descripcion: {{producto.descripcion}}</div>
+                        </div>
+                        <div>
+                            <label>Cargar Archivo:</label>
+                            <label>{{producto.entregas[0].nombre_archivo}}.{{producto.entregas[0].tipo}}</label>
+                            <label>Descripción:</label> 
+                            <p>{{producto.entregas[0].descripcion}}</p>
+                        </div>                        
                     </div>
                 </div>
             </div>

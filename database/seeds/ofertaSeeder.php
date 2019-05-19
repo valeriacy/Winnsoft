@@ -11,7 +11,7 @@ class ofertaSeeder extends Seeder
      */
     public function run()
     {
-        date_default_timezone_set('Australia/Melbourne');
+        date_default_timezone_set('America/Caracas');
         $date = date('Y/m/d h:i:s', time());
 
         \DB::table('usuarios')->insert([
@@ -127,6 +127,8 @@ class ofertaSeeder extends Seeder
             'numero' => 1,
             'cerrado' => 1,
             'sesion_id' => 1,
+            'fecha_caducidad' => $date,
+            'descripcion' => "ejemplo",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -136,6 +138,8 @@ class ofertaSeeder extends Seeder
             'numero' => 1,
             'cerrado' => 1,
             'sesion_id' => 2,
+            'fecha_caducidad' => $date,
+            'descripcion' => "ejemplo",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -145,6 +149,8 @@ class ofertaSeeder extends Seeder
             'numero' => 2,
             'cerrado' => 0,
             'sesion_id' => 2,
+            'fecha_caducidad' => $date,
+            'descripcion' => "ejemplo",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -154,6 +160,8 @@ class ofertaSeeder extends Seeder
             'numero' => 1,
             'cerrado' => 0,
             'sesion_id' => 3,
+            'fecha_caducidad' => $date,
+            'descripcion' => "ejemplo",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);

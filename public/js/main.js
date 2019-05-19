@@ -150,6 +150,26 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
     if(usuario){
         $scope.user = usuario;
         $scope.colapsable=funcionColapsable();
+        $scope.enviar=(productoId)=>{
+            let textArea=document.querySelector("#descripcion-"+productoId);
+            let fileInput=document.querySelector("#file-"+productoId);
+            
+            let text=textArea.value;
+            let file=fileInput.value;
+            let size=0;
+            let tipo="nan";
+
+            let entrega = {
+                descripcion:text,
+                nombreArchivo:file,
+                tamanho:size,
+                tipo:tipo,
+                usuarioId:usuario.id,
+                productoId:productoId
+            }
+            crearEntrega(entrega, $http);
+
+        };
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuEstudiante($location, $scope);
