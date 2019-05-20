@@ -1,0 +1,15 @@
+<<<<<<< HEAD
+
+<div class="">
+      <img  class="cabecera" src="./assets/cabcera.jpg" alt="">
+</div>
+=======
+>>>>>>> f0fc27dd3335db6e495dfe1ad60ea8c8402c4dc3
+<button class="collapsible" ng-click="irPrincipal()">Inicio</button>
+
+<button class="collapsible" ng-click="inscribir()">Inscribirse</button>
+
+<button class="collapsible" ng-click="irMaterias()">Mi Portafolio</button>
+
+<button class="collapsible logOutButton" ng-click="logOut()">Cerrar Sesion</button>
+
