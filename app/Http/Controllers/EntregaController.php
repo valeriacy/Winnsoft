@@ -35,7 +35,18 @@ class EntregaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set('America/Caracas');
+        $date = date('Y/m/d h:i:s', time());
+
+        $entrega = new Entrega;
+        $entrega->fecha = $date;
+        $entrega->descripcion = $request->descripcion;
+        $entrega->nombre_archivo = $request->nombreArchivo;
+        $entrega->tamanho = $request->tamanho;
+        $entrega->tipo = $request->tipo;
+        $entrega->usuario_id = $request->usuarioId;
+        $entrega->producto_id = $request->productoId;
+        $entrega ->save();
     }
 
     /**

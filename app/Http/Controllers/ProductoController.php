@@ -67,6 +67,8 @@ class ProductoController extends Controller
         $response->id=$attributes['id'];
         $response->numero=$attributes['numero'];
         $response->cerrado=$attributes['cerrado'];
+        $response->fechaCaducidad=$attributes['fecha_caducidad'];
+        $response->descripcion=$attributes['descripcion'];
         $response->entregas=$entregas;
 
         return $response;
