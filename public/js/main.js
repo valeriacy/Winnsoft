@@ -38,7 +38,16 @@ app.config(function($routeProvider) {
         templateUrl:"/agregarPortafolio.html",
         controller: "agregarPortafolioCtrl",
     })
-    
+    .when("/datosD",
+    {
+    templateUrl:"/datosD.html",
+    controller:"datosDCtrl",
+    })
+    .when("/materiasD",
+    {
+    templateUrl:"/materiasD.html",
+    controller:"materiasDCtrl",
+    })
 });
 
 app.controller("mainCtrl", mainCtrl);
@@ -93,6 +102,9 @@ function principalCtrl($scope, $location, $http){
         $location.path(RAIZ);
 }
 function mainCtrl($scope, $http, $location){
+    $scope.iniciarS = () =>{
+        $location.path("/login")
+    }
     
 }
 function loginCtrl($scope, $http, $location){
@@ -136,6 +148,12 @@ function misMateriasCtrl($http,$scope,$location){
     }
     else
     $location.path(RAIZ);
+}
+function datosDCtrl($http,$scope,$location){
+
+} 
+function materiasDCtrl ($http,$scope,$location){
+
 }
 function agregarPortafolioCtrl($http,$scope,$location){
     if(usuario){

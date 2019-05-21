@@ -255,3 +255,14 @@ function consumirApi(httpService, req, successCallBack, errorCallBack){
     .then(successCallBack)
     .catch(errorCallBack);
 }
+function cargarMenuDocente(location, scope){
+    menu=funcionColapsable();
+    scope.mostrar_menu=menu;
+    scope.datosD= () => {
+        location.path("/datosD");
+    };
+    scope.materiasD = () => {
+        location.path("/materiasD");
+    };
+    
+}

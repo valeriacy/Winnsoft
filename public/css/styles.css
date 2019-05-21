@@ -342,23 +342,27 @@ border:10px solid rgb(0,128,128);
 		margin-left: 10vw;
 	}
 	 
-.menu{ 
-	
-	margin-top: 3vw; font-size: 20px; 
-	width: 50%; height:40%; 
-	align-items: center;
 
-}	
-.menu li a {
-	background:rgb(28, 28, 88);
-	color :#fff;
-   text-decoration:none;
-	padding:20px 15px;
-	display:block;
-  }
- .menu li a :hover{
-   background-color:#434343;
-   }
-   .menu > li{
-	 float:left;
-   }
+  
+.tituloP{
+	font-size: 2em;
+ background-color: #2C3E50;
+	font-weight: bold;
+	font-family: 'Lato', Times, serif;
+	color: aliceblue;
+	width: 100vw;
+	height: 10%;
+	margin-bottom: 3vw;
+	
+}
+.imagenPublica{
+	display: inline-block;
+	width: 62%;
+	height: 38%;
+}
+.parrafo{
+	font-size: 20px;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	float:center;
+
+}
