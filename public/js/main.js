@@ -48,6 +48,11 @@ app.config(function($routeProvider) {
     templateUrl:"/materiasD.html",
     controller:"materiasDCtrl",
     })
+    .when ("/tareasD",
+{
+    templateUrl:"tareasD.html",
+    controller:"tareasDCtrl",
+})
 });
 
 app.controller("mainCtrl", mainCtrl);

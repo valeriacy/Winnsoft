@@ -258,11 +258,13 @@ function consumirApi(httpService, req, successCallBack, errorCallBack){
 function cargarMenuDocente(location, scope){
     menu=funcionColapsable();
     scope.mostrar_menu=menu;
-    scope.datosD= () => {
+    scope.datosD = () => {
         location.path("/datosD");
     };
     scope.materiasD = () => {
         location.path("/materiasD");
+    }; 
+    scope.tareasD = () =>{
+        location.path ("/tareasD");
     };
-    
 }
