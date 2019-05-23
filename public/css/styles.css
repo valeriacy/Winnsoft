@@ -1,5 +1,5 @@
 body{
-    background-image: linear-gradient(to bottom right, rgb(146, 211, 255), white);
+    background-image: linear-gradient(to bottom right, rgb(203, 227, 243), white);
     background-size: cover;
     height:100vh;
     display: flex;
@@ -72,6 +72,7 @@ html {
 	justify-content: center;
 	align-items: center;
 	margin-top: 2vw;
+	border:solid rgb(255, 94, 36) 2px ;
 
 }
 
@@ -217,11 +218,12 @@ border:10px solid rgb(0,128,128);
 }
 .contenedor_grilla
 {
-	
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	padding: 1.2rem 0;	
+	
+	width: 70%;
 }
 .contenedor_oficial{
     background-color: rgb(255, 255, 255);
@@ -236,13 +238,13 @@ border:10px solid rgb(0,128,128);
 		background-color: rgb(34, 37, 71);
 		color: white;
 		cursor: pointer;
-		padding: 18px;
-		width: 20%;
-		height: 5vw;
-		border: none;
+		padding: 8px;
+		width: 17%;
+		height: 3vw;
+		border:none;
 		text-align: left;
 		outline: none;
-		font-size: 15px;
+		font-size: 18px;
 	  }
 	  
 	  .active, .collapsible:hover {
@@ -292,21 +294,19 @@ border:10px solid rgb(0,128,128);
 			}
 		.materiasDiv{
 			width:  45vw;
-	
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			margin-left: auto;
 			margin-right: auto;
 			border:solid 2px;
+			margin-top: 1vw;
 
 			}
 	.mainContainer{
 		height: 100%;
         padding: 20px;
-		border: dashed 2px rgb(47, 47, 68);
-		background: #2d89a0;
-		color:white;
+		color:#2C3E50;
 		font-size: 30px;
 	}
 	label{
@@ -315,9 +315,9 @@ border:10px solid rgb(0,128,128);
 		
 	}
 	.sesionDiv{
-		border:solid 2px white;
+		border:solid 2px black;
 		padding: 1vw;
-		background-image: linear-gradient(to bottom right, rgb(146, 211, 255), white);
+		background-color: white;
 		color:black;
 		font-size: 18px;
 		margin-bottom: 3vw;
@@ -335,9 +335,8 @@ border:10px solid rgb(0,128,128);
 	margin-left: 40vw;
 }
 	.cabecera{
-		width: 80%;
-		margin-bottom: 1vw;
-		height:7vw;
+		width: 75%;
+		height:6.5vw;
 		margin-right: 10vw;
 		margin-left: 10vw;
 	}
@@ -346,18 +345,18 @@ border:10px solid rgb(0,128,128);
   
 .tituloP{
 	font-size: 2em;
- background-color: #2C3E50;
+ background-color: rgb(251, 252, 253);
 	font-weight: bold;
 	font-family: 'Lato', Times, serif;
-	color: aliceblue;
+	color: #2C3E50;
 	width: 100vw;
 	height: 10%;
-	margin-bottom: 3vw;
+	margin-bottom: 2vw;
 	
 }
 .imagenPublica{
 	display: inline-block;
-	width: 62%;
+	width: 50%;
 	height: 38%;
 }
 .parrafo{
@@ -365,4 +364,20 @@ border:10px solid rgb(0,128,128);
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	float:center;
 
+}
+.publicaContenedor{
+	margin-top: 1vw;
+	 width: 70%;
+	 background-color:#e9e7e7; 
+	 margin-left: 15vw;
+}
+.parrafo{
+	margin-left: 15vw; 
+	width: 70%;
+	background-color:#e9e7e7;
+	 margin-bottom: 2vw;
+}
+.fondoP{
+	width: 100%;
+	
 }

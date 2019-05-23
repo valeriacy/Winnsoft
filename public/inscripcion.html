@@ -1,33 +1,35 @@
 <div  ng-include="'/shared/header_estudiante.html'" style="width: 100vw;">
 
 </div>
-<div class="titulo1">
+<div class="titulo1" style="margin-left: 20vw;">
     Inscripcion 
-</div>
-<table >
-        <tr>
-          <th>Materia</th>
-          <th>Grupo</th>
-           <th>Docente</th>
-            <th>Hora</th>
-            <th>Dia</th>
-            <th></th>
-        <!--    <th>Auxiliar</th>-->
+</div> 
+<div class="" style="margin-left: 20vw;">
+        <table >
+                <tr>
+                  <th>Materia</th>
+                  <th>Grupo</th>
+                   <th>Docente</th>
+                    <th>Hora</th>
+                    <th>Dia</th>
+                    <th></th>
+                <!--    <th>Auxiliar</th>-->
+                    
+                   </tr>
             
-           </tr>
-    
-        <tr ng-repeat="oferta in ofertas">
-            <td>{{oferta[2].nombre}}</td>
-            <td>{{oferta[0].grupo}}</td>
-            <td>{{oferta[1].nombre}}</td>
-            <td>{{oferta[0].hora}}</td>
-            <td>{{oferta[0].dia}}</td>
-            <td ng-if="estaEnLista(oferta[2].id, inscripciones)">
-                <label>Ya esta inscrito</label>
-            </td>  
-            <td ng-if="!estaEnLista(oferta[2].id, inscripciones)">
-                    <button ng-click="inscribir(oferta[0].id)">Inscribir</button>
-            </td>  
-        </tr>
-    </table>
-                 
+                <tr ng-repeat="oferta in ofertas">
+                    <td>{{oferta[2].nombre}}</td>
+                    <td>{{oferta[0].grupo}}</td>
+                    <td>{{oferta[1].nombre}}</td>
+                    <td>{{oferta[0].hora}}</td>
+                    <td>{{oferta[0].dia}}</td>
+                    <td ng-if="estaEnLista(oferta[2].id, inscripciones)">
+                        <label>Ya esta inscrito</label>
+                    </td>  
+                    <td ng-if="!estaEnLista(oferta[2].id, inscripciones)">
+                            <button ng-click="inscribir(oferta[0].id)">Inscribir</button>
+                    </td>  
+                </tr>
+            </table>
+                         
+</div>
