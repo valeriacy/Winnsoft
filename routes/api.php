@@ -23,9 +23,9 @@ Route::get('/Ofertas','OfertaController@showAll');
 Route::get('/obtenerInscripciones/{idUsuario}','InscripcionController@obtenerInscripciones');
 Route::get('/sesiones/{idGrupo}','SesionController@showByGrupoId');
 
-Route::resource('Materia', 'Materiacontroller');
-Route::resource('Docente', 'Docentecontroller');
-Route::resource('Oferta', 'Ofertacontroller');
+Route::resource('Materia', 'MateriaController');
+Route::resource('Docente', 'DocenteController');
+Route::resource('Oferta', 'OfertaController');
 Route::resource('Inscripcion', 'InscripcionController');
 Route::resource('Sesion', 'SesionController');
 Route::resource('Producto', 'ProductoController');
