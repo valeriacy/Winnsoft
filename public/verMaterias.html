@@ -1,4 +1,5 @@
-<div  ng-include="'/shared/header_estudiante.html'" style="width: 100vw;"></div>
+<div ng-if="user.rol === 'estudiante'" ng-include="'/shared/header_estudiante.html'" style="width: 100vw;"></div>
+<div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
 <div class="centered-div">
     <h1>
         Mis Materias
