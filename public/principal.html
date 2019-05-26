@@ -1,13 +1,16 @@
 <div class="principal"> 
-     <div  ng-include="'/shared/header_estudiante.html'" style="width: 100vw;"></div>
-     <div class="titulo1" style="margin-left: 15vw;">
-        Sesion Estudiante :{{user.nombre}}              
+    <div  ng-include="'/shared/header_estudiante.html'" style="width: 100vw;"></div>
+    <div ng-if="user.rol === 'estudiante'" class="titulo1" style="margin-left: 15vw;">
+        Sesion Estudiante :{{user.nombre}} {{user.apellido}}              
     </div>
-<div class="contenedor_grilla">
+    <div ng-if="user.rol === 'docente'" class="titulo1" style="margin-left: 15vw;">
+        Sesion Docente :{{user.nombre}} {{user.apellido}}            
+    </div>
+<div ng-if="user.rol === 'estudiante'" class="contenedor_grilla">
     <div="titulo1" style="font-size: 25px;">
              <strong>Grilla de Horarios</strong>
     </div>
-    <div class="" style="margin-left: 20vw;">
+    <div ng-if="user.rol === 'estudiante'" class="" style="margin-left: 20vw;">
             <table >
                     <tr>
                       <th>Materia</th>
