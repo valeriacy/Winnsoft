@@ -1,6 +1,5 @@
 const RAIZ="/login";
 const PUBLICA="/";
-let sesiones;
 
 function logIn(httpService, req, contra, location){
     httpService(req)
@@ -72,46 +71,11 @@ function obtenerSesionesDeGrupo(httpService, scope, idOferta, idUsuario){
         let data=response.data;
         filtrarEntregaUsuario(data, idUsuario);
         scope.sesiones = data;
-        sesiones=data;
-        scope.mostrarOcultar=mostrarOcultarProducto;
         console.log(data);
     })
     .catch((error)=>{
         console.error(error);
     });
-}
-
-function mostrarOcultarProducto(){
-    let lbCerrado = "cerrado";
-    let divCerrado = "divCerrado";
-    let divAbierto = "divAbierto";
-    let elemento;
-    let identifier;
-    for(let sesion of sesiones){
-        for(let producto of sesion.productos){
-            if(sesion.cerrado=="1" || producto.cerrado=="1"){
-                identifier = lbCerrado+sesion.id+""+producto.id;
-                console.log(identifier);
-                elemento = document.querySelector("#"+identifier);
-                if(elemento)
-                    elemento.classList.remove("hidden");
-            }
-            if(producto.cerrado=="1"){
-                identifier = divCerrado+sesion.id+""+producto.id;
-                console.log(identifier);
-                elemento = document.querySelector("#"+identifier);
-                if(elemento)
-                    elemento.classList.remove("hidden");
-            }
-            if(producto.cerrado=="0"){
-                identifier = divAbierto+sesion.id+""+producto.id;
-                console.log(identifier);
-                elemento = document.querySelector("#"+identifier);
-                if(elemento)
-                    elemento.classList.remove("hidden");
-            }
-        }
-    }
 }
 
 function filtrarEntregaUsuario(sesiones, id){
@@ -128,8 +92,7 @@ function filtrarEntregaUsuarioEnSesion(sesion, id){
         productos.reverse()
     for(let producto of productos){
         let entregasGlobales=producto.entregas;
-        console.log(id);
-        let entregasUsuario = entregasGlobales.filter(entrega => entrega.usuario_id==id);
+        let entregasUsuario = entregasGlobales.filter(entrega => entrega.usuario_id===id);
         producto.entregas=entregasUsuario;
     }
 }
@@ -305,3 +268,4 @@ function cargarMenuDocente(location, scope){
         location.path ("/tareasD");
     };
 }
+s
