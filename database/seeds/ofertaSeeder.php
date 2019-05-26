@@ -25,6 +25,28 @@ class ofertaSeeder extends Seeder
         	'updated_at' => $date
         ]);
 
+        \DB::table('usuarios')->insert([
+            'id' => 2,
+            'nombre' => "Corina",
+            'Apellido' => "Flores",
+            'rol' => "docente",
+            'nombre_usuario' => "cf",
+            'contra' => "cf123",
+        	'created_at' => $date,
+        	'updated_at' => $date
+        ]);
+
+        \DB::table('usuarios')->insert([
+            'id' => 3,
+            'nombre' => "Leticia",
+            'Apellido' => "Blanco",
+            'rol' => "docente",
+            'nombre_usuario' => "lb123",
+            'contra' => "lb123",
+        	'created_at' => $date,
+        	'updated_at' => $date
+        ]);
+
         \DB::table('materias')->insert([
             'id' => 1,
         	'nombre' => "Introduccion a la Programacion",
@@ -60,7 +82,7 @@ class ofertaSeeder extends Seeder
             'grupo' => "1",
             'codigo' => "abc123",
             'materia_id' => 1,
-            'docente_id' => 1,
+            'docente_id' => 2,
             'hora' => "18:30",
             'dia' => 2,
         	'created_at' => $date,
@@ -72,7 +94,7 @@ class ofertaSeeder extends Seeder
             'grupo' => "1",
             'codigo' => "abc123",
             'materia_id' => 2,
-            'docente_id' => 2,
+            'docente_id' => 3,
             'hora' => "16:30",
             'dia' => 5,
         	'created_at' => $date,

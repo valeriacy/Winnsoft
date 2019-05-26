@@ -15,7 +15,7 @@ class Oferta extends Model
 
     public function docente()
     {
-    	return $this->belongsTo('App\Docente');
+    	return $this->belongsTo('App\usuario');
     }
 
     public function inscripciones()

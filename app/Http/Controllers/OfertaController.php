@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Oferta;
 use App\Docente;
 use App\Materia;
+use App\usuario;
 
 class OfertaController extends Controller
 {
@@ -76,7 +77,7 @@ class OfertaController extends Controller
         $docenteId = $attributes['docente_id'];
         $materiaId = $attributes['materia_id'];
 
-        $docente = Docente::find($docenteId);
+        $docente = usuario::find($docenteId);
         $materia = Materia::find($materiaId);
         return [$oferta, $docente, $materia];
     }
