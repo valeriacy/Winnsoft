@@ -208,6 +208,11 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
             console.log(productoId);
             //$location.path('/verEntregas/'+productoId);
         }
+        $scope.crearSesion=() => {
+            let respuesta = confirm("¿Desea crear una nueva sesion?");
+            if(respuesta)
+                nuevaSesion($routeParams.id, $http, $scope, usuario.id);
+        }
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);

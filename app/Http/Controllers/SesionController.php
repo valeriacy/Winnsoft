@@ -38,7 +38,14 @@ class SesionController extends Controller
      */
     public function store(Request $request)
     {
+        $sesion = new Sesion();
         
+        $sesion->grupo_id = $request->grupoId;
+        $sesion->cerrado = false;
+        $maxValue = Sesion::where("grupo_Id", $request->grupoId)->max('numero');
+        $sesion->numero = $maxValue+1;
+
+        $sesion->save();
     }
 
     /**

@@ -304,3 +304,27 @@ function cargarMenuPara(rol, location, scope){
           console.log('Lo lamentamos, por el momento no disponemos de ' + rol + '.');
       }
 }
+
+function nuevaSesion(grupoId, httpService, scope, usuarioId){
+    let grupo={
+        grupoId:grupoId
+    }
+
+    let req = {
+        method: 'POST',
+        url: "/api/Sesion",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data : JSON.stringify(grupo)
+    }
+    consumirApi(httpService,
+                    req, 
+                    (response)=>{
+                        obtenerSesionesDeGrupo(httpService,scope,grupoId, usuarioId);
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
+                )
+}
