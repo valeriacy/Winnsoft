@@ -67,9 +67,9 @@ app.controller("sesionesCtrl",sesionesCtrl);
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
         $scope.user = usuario;
-        cargarMenuEstudiante($location, $scope)
+        cargarMenuPara(usuario.rol, $location, $scope)
         obtener_ofertas($http, $scope);
-        obtenerInscripciones($http,$scope,usuario.id);
+        obtenerInscripciones($http,$scope,usuario);
         $scope.estaEnLista=estaEnLista;
         $scope.inscribir = (idOferta) => {
             let inscripcion = {
@@ -100,7 +100,7 @@ function principalCtrl($scope, $location, $http){
     if(usuario){
         $scope.user = usuario;
         obtener_ofertas($http, $scope);
-        cargarMenuEstudiante($location, $scope)
+        cargarMenuPara(usuario.rol, $location, $scope)
 
     }
     else
@@ -148,38 +148,38 @@ function registerCtrl($scope, $http, $location){
 function misMateriasCtrl($http,$scope,$location){
     if(usuario){
         $scope.user = usuario;
-        obtenerInscripciones($http,$scope,usuario.id);
-        cargarMenuEstudiante($location, $scope);//carga el menu de estudiante
+        obtenerInscripciones($http,$scope,usuario);
+        cargarMenuPara(usuario.rol, $location, $scope);//carga el menu de estudiante
     }
     else
-    $location.path(RAIZ);
+        $location.path(RAIZ);
 }
 function InicioDCtrl($http,$scope,$location){
-    if(usuario & usuario.rol === "docente"){
+    if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
-        cargarMenuDocente($location, $scope);
+        cargarMenuPara(usuario.rol, $location, $scope);
     }
     else
-    $location.path(RAIZ);
+        $location.path(RAIZ);
 
 } 
 function materiasDCtrl ($http,$scope,$location){
-    if(usuario & usuario.rol === "docente"){
+    if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
-        cargarMenuDocente($location, $scope);
+        cargarMenuPara(usuario.rol, $location, $scope);
     }
     else
-    $location.path(RAIZ);
+        $location.path(RAIZ);
 
 }
 function agregarPortafolioCtrl($http,$scope,$location){
     if(usuario){
         $scope.user = usuario;
-        obtenerInscripciones($http,$scope,usuario.id);
-        cargarMenuEstudiante($location, $scope);//carga el menu de estudiante
+        obtenerInscripciones($http,$scope,usuario);
+        cargarMenuPara(usuario.rol, $location, $scope);//carga el menu de estudiante
     }
     else
-    $location.path(RAIZ);
+        $location.path(RAIZ);
 }
 function sesionesCtrl($http,$scope,$location, $routeParams){
     if(usuario){
@@ -207,8 +207,8 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
         };
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
-        cargarMenuEstudiante($location, $scope);
+        cargarMenuPara(usuario.rol, $location, $scope);
     }
     else
-    $location.path(RAIZ);
+        $location.path(RAIZ);
 }

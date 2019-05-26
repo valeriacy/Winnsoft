@@ -97,7 +97,29 @@ function filtrarEntregaUsuarioEnSesion(sesion, id){
     }
 }
 
-function obtenerInscripciones(httpService, scope, idUsuario){
+function obtenerInscripciones(httpService, scope, usuario){
+    if(usuario.rol === "estudiante")
+        obtenerMateriasPorInscripcion(httpService, scope, usuario.id);
+    else if(usuario.rol === "docente")
+        obtenerMateriasDictadas(httpService, scope, usuario.id);    
+}
+
+function obtenerMateriasDictadas(httpService, scope, idUsuario){
+    let req={
+        method: 'GET',
+        url: "/api/obtenerDictadas/"+idUsuario,
+    };
+
+    httpService(req)
+    .then((response)=>{
+        scope.dictadas = response.data;
+    })
+    .catch((error)=>{
+        console.error(error);
+    });
+}
+
+function obtenerMateriasPorInscripcion(httpService, scope, idUsuario){
     let req={
         method: 'GET',
         url: "/api/obtenerInscripciones/"+idUsuario,
@@ -106,12 +128,12 @@ function obtenerInscripciones(httpService, scope, idUsuario){
     httpService(req)
     .then((response)=>{
         scope.inscripciones = response.data;
-        console.log(response.data);
     })
     .catch((error)=>{
         console.error(error);
     });
 }
+
 function eventosRegistro(){
     maestroRegistro();
     let campos = [];
@@ -262,10 +284,23 @@ function cargarMenuDocente(location, scope){
         location.path("/inicioD");
     };
     scope.materiasD = () => {
-        location.path("/materiasD");
+        location.path("/verMaterias");
     }; 
     scope.logOut = () => {
         logOut(location);
     }
     
+}
+
+function cargarMenuPara(rol, location, scope){
+    switch (rol) {
+        case 'estudiante':
+          cargarMenuEstudiante(location, scope);
+          break;
+        case 'docente':
+          cargarMenuDocente(location, scope);
+          break;
+        default:
+          console.log('Lo lamentamos, por el momento no disponemos de ' + rol + '.');
+      }
 }
