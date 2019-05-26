@@ -38,10 +38,10 @@ app.config(function($routeProvider) {
         templateUrl:"/agregarPortafolio.html",
         controller: "agregarPortafolioCtrl",
     })
-    .when("/datosD",
+    .when("/inicioD",
     {
-    templateUrl:"/datosD.html",
-    controller:"datosDCtrl",
+    templateUrl:"/inicioD.html",
+    controller:"inicioDCtrl",
     })
     .when("/materiasD",
     {
@@ -154,10 +154,22 @@ function misMateriasCtrl($http,$scope,$location){
     else
     $location.path(RAIZ);
 }
-function datosDCtrl($http,$scope,$location){
+function InicioDCtrl($http,$scope,$location){
+    if(usuario & usuario.rol === "docente"){
+        $scope.user = usuario;
+        cargarMenuDocente($location, $scope);
+    }
+    else
+    $location.path(RAIZ);
 
 } 
 function materiasDCtrl ($http,$scope,$location){
+    if(usuario & usuario.rol === "docente"){
+        $scope.user = usuario;
+        cargarMenuDocente($location, $scope);
+    }
+    else
+    $location.path(RAIZ);
 
 }
 function agregarPortafolioCtrl($http,$scope,$location){
