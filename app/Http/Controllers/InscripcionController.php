@@ -62,6 +62,18 @@ class InscripcionController extends Controller
         return $response;
     }
 
+    public function obtenerDictadas($idUsuario){
+        $idOfertas = Oferta::where('docente_id' ,'=' ,$idUsuario)->pluck('id')->toArray();
+        $ofertaController = new OfertaController();
+
+        $response = array();
+        foreach ($idOfertas as $idOferta) {
+            $oferta = $ofertaController->getOferta($idOferta);
+            array_push($response, $oferta);
+        }
+        return $response;
+    }
+
     /**
      * Display the specified resource.
      *

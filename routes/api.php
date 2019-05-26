@@ -21,6 +21,7 @@ Route::post('/login','usuariocontroller@validar');
 Route::get('/verificarnombreusuario/{nombreUsuario}','usuariocontroller@verificarNombreUsuario');
 Route::get('/Ofertas','OfertaController@showAll');
 Route::get('/obtenerInscripciones/{idUsuario}','InscripcionController@obtenerInscripciones');
+Route::get('/obtenerDictadas/{idUsuario}','InscripcionController@obtenerDictadas');
 Route::get('/sesiones/{idGrupo}','SesionController@showByGrupoId');
 Route::get('/entregas/{productoId}','EntregaController@getAllByProducto');
 
