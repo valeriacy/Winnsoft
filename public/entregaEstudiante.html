@@ -2,16 +2,16 @@
         <form>
                 <div>
                         <label align="right">Nombre(s):</label>
-                        <input type="text" disabled value="kha">
+                        <input type="text" disabled value="{{estudiante.nombre}}">
                 </div>
                <div>
                     <label align="right">Apellidos:</label>
-                    <input type="text" disabled>
+                    <input type="text" disabled value="{{estudiante.apellido}}">
                </div>
 
                 <div>
                    <label align="right">Grupo:</label>
-                    <input type="number" disabled>
+                    <input type="number" disabled >
                 </div>
                 <div>
                         <label align="right">Sesion:</label>
@@ -19,15 +19,15 @@
                 </div>
                 <div>
                         <label align="right">Producto:</label>
-                        <input type="number" disabled>
+                        <input type="number" disabled value="{{entrega.producto_id}}">
                 </div>
                <div>
                     <label align="right">Fecha:</label>
-                    <input type="date" disabled>
+                    <input type="date" disabled value="{{entrega.fecha}}">
                </div>
                 <div>
                         <label align="right">Descripcion:</label>
-                        <input type="text" disabled>
+                        <input type="text" disabled value="{{entrega.descripcion}}">
                 </div>
                 <div>
                         <button> Aceptar</button>

@@ -52,8 +52,18 @@ class usuariocontroller extends Controller
      */
     public function show($id)
     {
-        //return usuario::where('id', $id)->get();
-        return ["elementos", "intro", "tis", "aso"];
+        return usuario::find($id);
+    }
+
+    public function getNames($id)
+    {
+        $usuario=usuario::find($id);
+        $attributes = $usuario->getAttributes();
+
+        return response()->json([
+            'nombre' => $attributes['nombre'],
+            'apellido' => $attributes['apellido']
+        ]);;
     }
 
     /**

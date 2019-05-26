@@ -330,7 +330,23 @@ function cargarEntregaPorId(httpService, scope, entregaId){
                     req, 
                     (response)=>{
                         scope.entrega = response.data;
-                        console.log(response.data);
+                        obtenerNombresPorId(httpService, scope, response.data.usuario_id);
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
+                )
+}
+
+function obtenerNombresPorId(httpService, scope, usuarioId){
+    let req = {
+        method: 'GET',
+        url: "/api/usuarioNombres/"+usuarioId
+    }
+    consumirApi(httpService,
+                    req, 
+                    (response)=>{
+                        scope.estudiante = response.data;
                     },
                     (error)=>{
                         console.error(error);
