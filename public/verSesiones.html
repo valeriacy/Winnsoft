@@ -14,10 +14,10 @@
                 <div ng-repeat="producto in sesion.productos" class="productDiv">
                     <button ng-click="colapsable($event)" class="">
                         <label>Producto:{{producto.numero}}</label>
-                        <label ng-if="sesion.cerrado===1 || producto.cerrado===1" style="color:red;">Cerrado</label>
+                        <label style="color:red;" id="cerrado{{sesion.id}}{{producto.id}}" class="hidden">Cerrado</label>
                     </button>
                     <div ng-if="producto.entregas.length === 0" style="display:none" class="" style="margin-top: 1vw;">
-                        <div ng-if="producto.cerrado===1">
+                        <div id="divCerrado{{sesion.id}}{{producto.id}}" class="hidden">
                             <div>
                                 <label>Vencimiento:{{producto.fechaCaducidad}}</label>
                                 <div>Descripcion: {{producto.descripcion}}</div>
@@ -26,7 +26,7 @@
                                 <label>¡SIN ENTREGAS! EL PRODUCTO YA ESTA CERRADO</label>
                             </div>
                         </div>
-                        <div ng-if="producto.cerrado===0" >
+                        <div id="divAbierto{{sesion.id}}{{producto.id}}" class="hidden">
                             <div>
                                 <label>Vencimiento:{{producto.fechaCaducidad}}</label>
                                 <div>Descripcion: {{producto.descripcion}}</div>
@@ -56,4 +56,8 @@
             </div>
         </div>
     </div>
+    <script>
+            mostrarOcultarProducto();
+            console.log("as");
+        </script>>
 </div>

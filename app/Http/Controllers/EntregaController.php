@@ -65,6 +65,11 @@ class EntregaController extends Controller
         return Entrega::find($id);
     }
 
+    public function getAllByProducto($productId){
+        $entregas = Entrega::where('producto_id' ,$productId)->get();
+        return $entregas;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
