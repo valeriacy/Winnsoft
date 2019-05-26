@@ -269,4 +269,3 @@ function cargarMenuDocente(location, scope){
     }
     
 }
-s
