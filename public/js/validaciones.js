@@ -84,7 +84,7 @@ function validarNombreUsuarioYGuardar(httpService, location){
     let username=document.querySelector("#usuario").value;
     let req = {
         method: 'GET',
-        url: "api/verificarnombreusuario/"+username
+        url: "/api/verificarnombreusuario/"+username
     }
 
     httpService(req)
@@ -113,7 +113,7 @@ function guardarUsuario(httpService, location){
     let user = construirObjetoUsuario();
         let req = {
             method: 'POST',
-            url: "api/usuario",
+            url: "/api/usuario",
             headers: {
                 'Content-Type': 'application/json'
             },

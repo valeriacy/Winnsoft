@@ -47,7 +47,7 @@ function estaEnLista(idMateria, array){
 function obtenerOfertaPorId(httpService, scope, idOferta){
     let req={
         method: 'GET',
-        url: "api/Oferta/"+idOferta,
+        url: "/api/Oferta/"+idOferta,
     };
 
     httpService(req)
@@ -63,7 +63,7 @@ function obtenerOfertaPorId(httpService, scope, idOferta){
 function obtenerSesionesDeGrupo(httpService, scope, idOferta, idUsuario){
     let req={
         method: 'GET',
-        url: "api/sesiones/"+idOferta,
+        url: "/api/sesiones/"+idOferta,
     };
 
     httpService(req)
@@ -100,7 +100,7 @@ function filtrarEntregaUsuarioEnSesion(sesion, id){
 function obtenerInscripciones(httpService, scope, idUsuario){
     let req={
         method: 'GET',
-        url: "api/obtenerInscripciones/"+idUsuario,
+        url: "/api/obtenerInscripciones/"+idUsuario,
     };
 
     httpService(req)
