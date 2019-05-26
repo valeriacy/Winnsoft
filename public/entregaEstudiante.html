@@ -11,15 +11,15 @@
 
                 <div>
                    <label align="right">Grupo:</label>
-                    <input type="number" disabled >
+                    <input type="number" disabled value="{{entrega.grupo}}">
                 </div>
                 <div>
                         <label align="right">Sesion:</label>
-                        <input type="number" disabled> 
+                        <input type="number" disabled value="{{entrega.numeroSesion}}"> 
                 </div>
                 <div>
                         <label align="right">Producto:</label>
-                        <input type="number" disabled value="{{entrega.producto_id}}">
+                        <input type="number" disabled value="{{entrega.numeroProducto}}">
                 </div>
                <div>
                     <label align="right">Fecha:</label>
@@ -27,7 +27,7 @@
                </div>
                 <div>
                         <label align="right">Descripcion:</label>
-                        <input type="text" disabled value="{{entrega.descripcion}}">
+                        <textarea disabled>{{entrega.descripcion}}</textarea>
                 </div>
                 <div>
                         <button> Aceptar</button>

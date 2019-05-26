@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entrega;
+use App\Producto;
+use App\Sesion;
+use App\Oferta;
 use App\usuario;
 
 class EntregaController extends Controller
@@ -63,7 +66,20 @@ class EntregaController extends Controller
 
     public function getEntregaById($id)
     {
-        return Entrega::find($id);
+        $entrega = Entrega::find($id);
+
+        $productoId=$entrega->producto_id;
+        $numeroProducto = Producto::where('id',$productoId)->value('numero');
+        $sesionId = Producto::where('id',$productoId)->value('sesion_id');
+        $numeroSesion = Sesion::where('id',$sesionId)->value('numero');
+        $ofertaId = Sesion::where('id', $sesionId)->value('grupo_id');
+        $grupo = Oferta::where('id',$ofertaId)->value('grupo');
+
+        $entrega->numeroProducto = $numeroProducto;
+        $entrega->numeroSesion = $numeroSesion;
+        $entrega->grupo = $grupo;
+
+        return $entrega;
     }
 
     public function getAllByProducto($productId){
