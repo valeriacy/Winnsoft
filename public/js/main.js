@@ -213,6 +213,9 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
             if(respuesta)
                 nuevaSesion($routeParams.id, $http, $scope, usuario.id);
         }
+        $scope.crearProducto=(sesionId) => {
+            alert("gg  "+sesionId);
+        }
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);

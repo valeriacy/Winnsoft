@@ -20,6 +20,25 @@
 	filter: brightness(120%);
 }
 
+.newProducto{
+	border: #2C3E50 0.1em;
+	width: 10vw;
+	text-align: center;
+	margin-bottom: 0.5em;
+	margin-left: 35%;
+}
+
+.newProducto input{
+	width: 2.5vw;
+	height: 2.5vw;
+	transition-duration: .4s;
+	filter: hue-rotate(180deg);
+}
+
+.newProducto input:hover{
+	filter: hue-rotate(160deg);
+}
+
 body{
     background-image: linear-gradient(to bottom right, rgb(203, 227, 243), white);
     background-size: cover;
