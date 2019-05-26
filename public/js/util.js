@@ -304,3 +304,20 @@ function cargarMenuPara(rol, location, scope){
           console.log('Lo lamentamos, por el momento no disponemos de ' + rol + '.');
       }
 }
+
+function cargarEntregasPorProducto(httpService, scope, productoId){
+    let req = {
+        method: 'GET',
+        url: "/api/entregas/"+productoId
+    }
+    consumirApi(httpService,
+                    req, 
+                    (response)=>{
+                        scope.entregas = response.data;
+                        console.log(response.data);
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
+                )
+}

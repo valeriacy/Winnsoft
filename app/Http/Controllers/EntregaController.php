@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entrega;
+use App\usuario;
 
 class EntregaController extends Controller
 {
@@ -67,7 +68,23 @@ class EntregaController extends Controller
 
     public function getAllByProducto($productId){
         $entregas = Entrega::where('producto_id' ,$productId)->get();
-        return $entregas;
+        $response = array();
+
+        foreach ($entregas as $entrega) {
+            $attributes = $entrega->getAttributes();
+
+            $usuario = usuario::find($attributes["usuario_id"]);
+            $attributesUsuario = $usuario->getAttributes();
+
+            $element = new \stdClass();
+            $element->nombre = $attributesUsuario['nombre'];
+            $element->apellido = $attributesUsuario['apellido'];
+            $element->entregaId = $attributes["id"];
+
+            array_push($response, $element);
+        }
+
+        return $response;
     }
 
     /**

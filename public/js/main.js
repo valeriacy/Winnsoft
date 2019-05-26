@@ -38,10 +38,10 @@ app.config(function($routeProvider) {
         templateUrl:"/agregarPortafolio.html",
         controller: "agregarPortafolioCtrl",
     })
-    .when("/inicioD",
+    .when("/verEntregas/:productoId",
     {
-    templateUrl:"/inicioD.html",
-    controller:"inicioDCtrl",
+    templateUrl:"/tablaEntregas.html",
+    controller:"entregasCtrl",
     })
     .when("/materiasD",
     {
@@ -63,6 +63,7 @@ app.controller("inscripcionCtrl",inscripcionCtrl);
 app.controller("misMateriasCtrl",misMateriasCtrl);
 app.controller("agregarPortafolioCtrl",agregarPortafolioCtrl);
 app.controller("sesionesCtrl",sesionesCtrl);
+app.controller("entregasCtrl",entregasCtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
@@ -154,10 +155,12 @@ function misMateriasCtrl($http,$scope,$location){
     else
         $location.path(RAIZ);
 }
-function InicioDCtrl($http,$scope,$location){
+function entregasCtrl($http, $scope, $location, $routeParams){
     if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
+        let productoId = $routeParams.productoId;
         cargarMenuPara(usuario.rol, $location, $scope);
+        cargarEntregasPorProducto($http, $scope, productoId);
     }
     else
         $location.path(RAIZ);
@@ -205,8 +208,7 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
             crearEntrega(entrega, $http);
         };
         $scope.cargarVerEntregas = (productoId) => {
-            console.log(productoId);
-            //$location.path('/verEntregas/'+productoId);
+            $location.path('/verEntregas/'+productoId);
         }
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
