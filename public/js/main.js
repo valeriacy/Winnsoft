@@ -203,8 +203,11 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
                 productoId:productoId
             }
             crearEntrega(entrega, $http);
-
         };
+        $scope.cargarVerEntregas = (productoId) => {
+            console.log(productoId);
+            //$location.path('/verEntregas/'+productoId);
+        }
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);
