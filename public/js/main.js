@@ -43,10 +43,10 @@ app.config(function($routeProvider) {
     templateUrl:"/tablaEntregas.html",
     controller:"entregasCtrl",
     })
-    .when("/materiasD",
+    .when("/verEntrega/:entregaId",
     {
-    templateUrl:"/materiasD.html",
-    controller:"materiasDCtrl",
+    templateUrl:"/entregaEstudiante.html",
+    controller:"entregaCtrl",
     })
     .when ("/tareasD",
 {
@@ -64,6 +64,7 @@ app.controller("misMateriasCtrl",misMateriasCtrl);
 app.controller("agregarPortafolioCtrl",agregarPortafolioCtrl);
 app.controller("sesionesCtrl",sesionesCtrl);
 app.controller("entregasCtrl",entregasCtrl);
+app.controller("entregaCtrl",entregaCtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
@@ -161,15 +162,17 @@ function entregasCtrl($http, $scope, $location, $routeParams){
         let productoId = $routeParams.productoId;
         cargarMenuPara(usuario.rol, $location, $scope);
         cargarEntregasPorProducto($http, $scope, productoId);
+        
     }
     else
         $location.path(RAIZ);
 
 } 
-function materiasDCtrl ($http,$scope,$location){
+function entregaCtrl ($http,$scope,$location, $routeParams){
     if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
         cargarMenuPara(usuario.rol, $location, $scope);
+        cargarEntregaPorId($http, $scope, $routeParams.entregaId)
     }
     else
         $location.path(RAIZ);

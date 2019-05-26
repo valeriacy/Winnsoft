@@ -314,6 +314,22 @@ function cargarEntregasPorProducto(httpService, scope, productoId){
                     req, 
                     (response)=>{
                         scope.entregas = response.data;
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
+                )
+}
+
+function cargarEntregaPorId(httpService, scope, entregaId){
+    let req = {
+        method: 'GET',
+        url: "/api/Entrega/"+entregaId
+    }
+    consumirApi(httpService,
+                    req, 
+                    (response)=>{
+                        scope.entrega = response.data;
                         console.log(response.data);
                     },
                     (error)=>{

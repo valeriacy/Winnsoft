@@ -1,5 +1,5 @@
 <div class="entrega">
-        <fieldset>
+<fieldset>
     <div class="busquedaMateria">
             <form>
                     
@@ -12,30 +12,29 @@
                        </form>
     </div>
     <div class="tablaEntrega">
-            <table border="1">
-                    <thead>
-                        <tr>
-                            <th> Apellidos</th>
-                            <th> Nombres</th>
-                            <th> Portafolio</th>
-                        </tr>
-                    </thead>
-                <tbody>
-                    <tr>
-        
-                        <th>AAAA</th>
-                        <th>maria</th>
-                        <th>
-                        <a href="#">Ver</a>
-                        </th>
-                    </tr>
-                </tbody>
-                    
-                </table>
-                
-                </fieldset>
-             
+        <table border="1">
+            <thead>
+                <tr>
+                    <th> Apellidos</th>
+                    <th> Nombres</th>
+                    <th> Portafolio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entrega in entregas">
+    
+                    <td>{{entrega.apellido}}</td>
+                    <td>{{entrega.nombre}}</td>
+                    <td>
+                        <a href="#!verEntrega/{{entrega.entregaId}}">Ver Entrega</a>
+                    </td>
+                </tr>
+            </tbody>        
+         </table>
     </div>
+ </fieldset>
+             
+</div>
         
 
     
