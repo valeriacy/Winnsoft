@@ -305,6 +305,56 @@ function cargarMenuPara(rol, location, scope){
       }
 }
 
+function cargarEntregasPorProducto(httpService, scope, productoId){
+    let req = {
+        method: 'GET',
+        url: "/api/entregas/"+productoId
+    }
+    consumirApi(httpService,
+                    req, 
+                    (response)=>{
+                        scope.entregas = response.data;
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
+                )
+}
+
+function cargarEntregaPorId(httpService, scope, entregaId){
+    let req = {
+        method: 'GET',
+        url: "/api/Entrega/"+entregaId
+    }
+    consumirApi(httpService,
+                    req, 
+                    (response)=>{
+                        scope.entrega = response.data;
+                        obtenerNombresPorId(httpService, scope, response.data.usuario_id);
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
+                )
+}
+
+function obtenerNombresPorId(httpService, scope, usuarioId){
+    let req = {
+        method: 'GET',
+        url: "/api/usuarioNombres/"+usuarioId
+    }
+    consumirApi(httpService,
+                    req, 
+                    (response)=>{
+                        scope.estudiante = response.data;
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
+                )
+}
+
+
 function nuevaSesion(grupoId, httpService, scope, usuarioId){
     let grupo={
         grupoId:grupoId

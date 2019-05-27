@@ -38,15 +38,15 @@ app.config(function($routeProvider) {
         templateUrl:"/agregarPortafolio.html",
         controller: "agregarPortafolioCtrl",
     })
-    .when("/inicioD",
+    .when("/verEntregas/:productoId",
     {
-    templateUrl:"/inicioD.html",
-    controller:"inicioDCtrl",
+    templateUrl:"/tablaEntregas.html",
+    controller:"entregasCtrl",
     })
-    .when("/materiasD",
+    .when("/verEntrega/:entregaId",
     {
-    templateUrl:"/materiasD.html",
-    controller:"materiasDCtrl",
+    templateUrl:"/entregaEstudiante.html",
+    controller:"entregaCtrl",
     })
     .when ("/tareasD",
 {
@@ -63,6 +63,8 @@ app.controller("inscripcionCtrl",inscripcionCtrl);
 app.controller("misMateriasCtrl",misMateriasCtrl);
 app.controller("agregarPortafolioCtrl",agregarPortafolioCtrl);
 app.controller("sesionesCtrl",sesionesCtrl);
+app.controller("entregasCtrl",entregasCtrl);
+app.controller("entregaCtrl",entregaCtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
@@ -154,19 +156,23 @@ function misMateriasCtrl($http,$scope,$location){
     else
         $location.path(RAIZ);
 }
-function InicioDCtrl($http,$scope,$location){
+function entregasCtrl($http, $scope, $location, $routeParams){
     if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
+        let productoId = $routeParams.productoId;
         cargarMenuPara(usuario.rol, $location, $scope);
+        cargarEntregasPorProducto($http, $scope, productoId);
+        
     }
     else
         $location.path(RAIZ);
 
 } 
-function materiasDCtrl ($http,$scope,$location){
+function entregaCtrl ($http,$scope,$location, $routeParams){
     if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
         cargarMenuPara(usuario.rol, $location, $scope);
+        cargarEntregaPorId($http, $scope, $routeParams.entregaId)
     }
     else
         $location.path(RAIZ);
@@ -205,8 +211,7 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
             crearEntrega(entrega, $http);
         };
         $scope.cargarVerEntregas = (productoId) => {
-            console.log(productoId);
-            //$location.path('/verEntregas/'+productoId);
+            $location.path('/verEntregas/'+productoId);
         }
         $scope.crearSesion=() => {
             let respuesta = confirm("¿Desea crear una nueva sesion?");

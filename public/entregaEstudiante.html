@@ -1,0 +1,36 @@
+<div class="entregaEstudiante" style="margin-bottom: 1vw; padding: 1.2rem 0;">
+        <form>
+                <div>
+                        <label align="right">Nombre(s):</label>
+                        <input type="text" disabled value="{{estudiante.nombre}}">
+                </div>
+               <div>
+                    <label align="right">Apellidos:</label>
+                    <input type="text" disabled value="{{estudiante.apellido}}">
+               </div>
+
+                <div>
+                   <label align="right">Grupo:</label>
+                    <input type="number" disabled value="{{entrega.grupo}}">
+                </div>
+                <div>
+                        <label align="right">Sesion:</label>
+                        <input type="number" disabled value="{{entrega.numeroSesion}}"> 
+                </div>
+                <div>
+                        <label align="right">Producto:</label>
+                        <input type="number" disabled value="{{entrega.numeroProducto}}">
+                </div>
+               <div>
+                    <label align="right">Fecha:</label>
+                    <input type="date" disabled value="{{entrega.fecha}}">
+               </div>
+                <div>
+                        <label align="right">Descripcion:</label>
+                        <textarea disabled>{{entrega.descripcion}}</textarea>
+                </div>
+                <div>
+                        <button> Aceptar</button>
+                </div> 
+        </form>
+</div>

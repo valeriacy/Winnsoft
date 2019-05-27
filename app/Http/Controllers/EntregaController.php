@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entrega;
+use App\Producto;
+use App\Sesion;
+use App\Oferta;
+use App\usuario;
 
 class EntregaController extends Controller
 {
@@ -62,12 +66,41 @@ class EntregaController extends Controller
 
     public function getEntregaById($id)
     {
-        return Entrega::find($id);
+        $entrega = Entrega::find($id);
+
+        $productoId=$entrega->producto_id;
+        $numeroProducto = Producto::where('id',$productoId)->value('numero');
+        $sesionId = Producto::where('id',$productoId)->value('sesion_id');
+        $numeroSesion = Sesion::where('id',$sesionId)->value('numero');
+        $ofertaId = Sesion::where('id', $sesionId)->value('grupo_id');
+        $grupo = Oferta::where('id',$ofertaId)->value('grupo');
+
+        $entrega->numeroProducto = $numeroProducto;
+        $entrega->numeroSesion = $numeroSesion;
+        $entrega->grupo = $grupo;
+
+        return $entrega;
     }
 
     public function getAllByProducto($productId){
         $entregas = Entrega::where('producto_id' ,$productId)->get();
-        return $entregas;
+        $response = array();
+
+        foreach ($entregas as $entrega) {
+            $attributes = $entrega->getAttributes();
+
+            $usuario = usuario::find($attributes["usuario_id"]);
+            $attributesUsuario = $usuario->getAttributes();
+
+            $element = new \stdClass();
+            $element->nombre = $attributesUsuario['nombre'];
+            $element->apellido = $attributesUsuario['apellido'];
+            $element->entregaId = $attributes["id"];
+
+            array_push($response, $element);
+        }
+
+        return $response;
     }
 
     /**
