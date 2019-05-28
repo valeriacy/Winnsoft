@@ -24,7 +24,7 @@ Route::get('/obtenerInscripciones/{idUsuario}','InscripcionController@obtenerIns
 Route::get('/obtenerDictadas/{idUsuario}','InscripcionController@obtenerDictadas');
 Route::get('/sesiones/{idGrupo}','SesionController@showByGrupoId');
 Route::get('/entregas/{productoId}','EntregaController@getAllByProducto');
-Route::get('/usuarioNombres/{id}','usuarioController@getNames');
+Route::get('/usuarioNombres/{id}','usuariocontroller@getNames');
 
 Route::resource('Materia', 'MateriaController');
 Route::resource('Docente', 'DocenteController');
