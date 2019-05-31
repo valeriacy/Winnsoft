@@ -72,7 +72,6 @@ function inscripcionCtrl($scope,$location,$http){
         cargarMenuPara(usuario.rol, $location, $scope)
         obtener_ofertas($http, $scope);
         obtenerInscripciones($http,$scope,usuario);
-        $scope.estaEnLista=estaEnLista;
         $scope.inscribir = (idOferta) => {
             let inscripcion = {
                 ofertaId: idOferta,

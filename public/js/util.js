@@ -36,10 +36,14 @@ function obtener_ofertas(httpService, scope){
 
 function estaEnLista(idMateria, array){
     encontrado=false;
-    for(let i=0; i<array.length;i++){
-        if(idMateria===array[i].id){
-            encontrado=true;
-            break;
+    console.log(idMateria);
+    console.log(array);
+    if(array){
+        for(let i=0; i<array.length; i++){
+            if(idMateria===array[i].id){
+                encontrado=true;
+                break;
+            }
         }
     }
     return encontrado;
@@ -128,6 +132,16 @@ function obtenerMateriasPorInscripcion(httpService, scope, idUsuario){
     httpService(req)
     .then((response)=>{
         scope.inscripciones = response.data;
+        scope.estaEnLista = (idMateria)=>{
+            encontrado=false;
+            for(let i=0; i<scope.inscripciones.length; i++){
+                if(idMateria==scope.inscripciones[i][0].id){
+                    encontrado=true;
+                    break;
+                }
+            }
+            return encontrado;
+        }
     })
     .catch((error)=>{
         console.error(error);
