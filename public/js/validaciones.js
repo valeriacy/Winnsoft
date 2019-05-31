@@ -72,12 +72,12 @@ function construirObjetoUsuario(){
         let pass=document.querySelector("#pass");
     
         return {
-            name:name.value,
-            lastname:lastname.value,
-            rol:"Estudiante",
-            username:username.value,
-            password:pass.value
-        }//este es el objeto JSON
+            name: name.value,
+            lastname: lastname.value,
+            rol: "estudiante",
+            username: username.value,
+            password: pass.value
+        }
 }
 
 function validarNombreUsuarioYGuardar(httpService, location){
@@ -111,30 +111,23 @@ function sleep(ms) {
 function guardarUsuario(httpService, location){
     deshabilitarGuardar();
     let user = construirObjetoUsuario();
-        let req = {
-            method: 'POST',
-            url: "/api/usuario",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data : JSON.stringify(user)
-        }//objeto de configuracion para comunicacion con el servidor
-    
-        httpService(req)
-        .then((response)=>{
-            if (response.status==200){
-                alert("Se ha guardado el usuario exitosamente");
-                location.path('/')
-            }
-        })
-        .catch((error)=>{
-            console.error(error);
-        });
-        
-        console.log(user);
-        //console.log(name.value);
-        //console.log(lastname.value);
-        //console.log(rol.value);
-        //console.log(username.value);
-        //console.log(pass.value);
+    let req = {
+        method: 'POST',
+        url: "/api/usuario",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data : JSON.stringify(user)
+    }
+
+    httpService(req)
+    .then((response)=>{
+        if (response.status==200){
+            alert("Se ha guardado el usuario exitosamente");
+            location.path('/')
+        }
+    })
+    .catch((error)=>{
+        console.error(error);
+    });
 }

@@ -72,7 +72,6 @@ function inscripcionCtrl($scope,$location,$http){
         cargarMenuPara(usuario.rol, $location, $scope)
         obtener_ofertas($http, $scope);
         obtenerInscripciones($http,$scope,usuario);
-        $scope.estaEnLista=estaEnLista;
         $scope.inscribir = (idOferta) => {
             let inscripcion = {
                 ofertaId: idOferta,
@@ -115,9 +114,7 @@ function mainCtrl($scope, $http, $location){
     
 }
 function loginCtrl($scope, $http, $location){
-    comprobarSesion();
-    if(usuario)
-        $location.path("/principal")
+    comprobarSesion($http, $location);
     $scope.entrar = () => {
         let usuario = document.querySelector("#usuario");
         let contra = document.querySelector("#contra");
@@ -126,8 +123,6 @@ function loginCtrl($scope, $http, $location){
             nombre:usuario.value,
             contra:contra.value
         };
-
-        console.log(credenciales);
 
         let req = {
             method: 'POST',

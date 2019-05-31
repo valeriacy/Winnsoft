@@ -36,10 +36,14 @@ function obtener_ofertas(httpService, scope){
 
 function estaEnLista(idMateria, array){
     encontrado=false;
-    for(let i=0; i<array.length;i++){
-        if(idMateria===array[i].id){
-            encontrado=true;
-            break;
+    console.log(idMateria);
+    console.log(array);
+    if(array){
+        for(let i=0; i<array.length; i++){
+            if(idMateria===array[i].id){
+                encontrado=true;
+                break;
+            }
         }
     }
     return encontrado;
@@ -128,6 +132,16 @@ function obtenerMateriasPorInscripcion(httpService, scope, idUsuario){
     httpService(req)
     .then((response)=>{
         scope.inscripciones = response.data;
+        scope.estaEnLista = (idMateria)=>{
+            encontrado=false;
+            for(let i=0; i<scope.inscripciones.length; i++){
+                if(idMateria==scope.inscripciones[i][0].id){
+                    encontrado=true;
+                    break;
+                }
+            }
+            return encontrado;
+        }
     })
     .catch((error)=>{
         console.error(error);
@@ -209,14 +223,28 @@ function borrarDelocalStorage(key){
 }
 function guardarUsuarioEnLS(usuario){
     let key="usuario";
-    let value=JSON.stringify(usuario);
+    let value=JSON.stringify(usuario.id);
     guardarEnlocalStorage(key, value);
 }
-function comprobarSesion(){
+function comprobarSesion(httpService, location){
     let key="usuario";
-    let jsonUsuario = obtenerDelocalStorage(key);
-    if(jsonUsuario)
-        usuario = JSON.parse(jsonUsuario);
+    let usuarioId = obtenerDelocalStorage(key);
+    if(usuarioId){
+        let req = {
+            method: 'GET',
+            url: "/api/basic/"+usuarioId
+        }
+        consumirApi(httpService,
+                        req, 
+                        (response)=>{
+                            usuario = response.data;
+                            location.path("/principal");
+                        },
+                        (error)=>{
+                            console.error(error);
+                        }
+                    )
+    }
 }
 function logOut(location){
     let key = "usuario";

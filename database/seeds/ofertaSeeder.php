@@ -41,7 +41,7 @@ class ofertaSeeder extends Seeder
             'nombre' => "Leticia",
             'Apellido' => "Blanco",
             'rol' => "docente",
-            'nombre_usuario' => "lb123",
+            'nombre_usuario' => "lb",
             'contra' => "lb123",
         	'created_at' => $date,
         	'updated_at' => $date
