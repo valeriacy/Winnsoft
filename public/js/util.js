@@ -209,14 +209,28 @@ function borrarDelocalStorage(key){
 }
 function guardarUsuarioEnLS(usuario){
     let key="usuario";
-    let value=JSON.stringify(usuario);
+    let value=JSON.stringify(usuario.id);
     guardarEnlocalStorage(key, value);
 }
-function comprobarSesion(){
+function comprobarSesion(httpService, location){
     let key="usuario";
-    let jsonUsuario = obtenerDelocalStorage(key);
-    if(jsonUsuario)
-        usuario = JSON.parse(jsonUsuario);
+    let usuarioId = obtenerDelocalStorage(key);
+    if(usuarioId){
+        let req = {
+            method: 'GET',
+            url: "/api/basic/"+usuarioId
+        }
+        consumirApi(httpService,
+                        req, 
+                        (response)=>{
+                            usuario = response.data;
+                            location.path("/principal");
+                        },
+                        (error)=>{
+                            console.error(error);
+                        }
+                    )
+    }
 }
 function logOut(location){
     let key = "usuario";
