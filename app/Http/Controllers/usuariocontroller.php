@@ -68,14 +68,13 @@ class usuariocontroller extends Controller
 
     public function getBasicInfo($id){
         $usuario=usuario::find($id);
-
         return response()->json([
             'id' => $usuario->id,
             'nombre' => $usuario->nombre,
             'apellido' => $usuario->apellido,
             'rol' => $usuario->rol,
             'nombre_usuario' => $usuario->nombre_usuario
-        ]);;
+        ]);
     }
 
     /**
