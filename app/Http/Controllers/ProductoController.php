@@ -37,7 +37,16 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $producto = new Producto();
+        $maxValue = Producto::where("sesion_Id", $request->sesionId)->max('numero');
+
+        $producto->sesion_id = $request->sesionId;
+        $producto->cerrado = false;
+        $producto->numero = $maxValue+1;
+        $producto->fecha_caducidad = $request->fecha;
+        $producto->descripcion = $request->descripcion;
+
+        $producto->save();
     }
 
     /**

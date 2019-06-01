@@ -416,3 +416,38 @@ function hideElementById(elementId){
     let element = document.querySelector("#"+elementId);
     element.classList.add("hidden");
 }
+
+function mostrarFormProducto(sesionId){
+    let formId = "productoForm-"+sesionId;
+    let triggerButtonId = "newProducto-"+sesionId;
+    showElementById(formId);
+    hideElementById(triggerButtonId);
+}
+
+function ocultarFormProducto(sesionId){
+    let formId = "productoForm-"+sesionId;
+    let triggerButtonId = "newProducto-"+sesionId;
+    hideElementById(formId);
+    showElementById(triggerButtonId);
+}
+
+function enviarNuevoProducto(producto, httpService, scope, usuarioId, grupoId){
+    let req = {
+        method: 'POST',
+        url: "/api/Producto",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data : JSON.stringify(producto)
+    }
+    consumirApi(httpService,
+                    req, 
+                    (response)=>{
+                        ocultarFormProducto(producto.sesionId);
+                        obtenerSesionesDeGrupo(httpService, scope, grupoId, usuarioId);
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
+                )
+}

@@ -213,18 +213,21 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
             if(respuesta)
                 nuevaSesion($routeParams.id, $http, $scope, usuario.id);
         }
-        $scope.crearProducto=(sesionId) => {
+        $scope.crearProducto=mostrarFormProducto;
+        $scope.cancelProduct=ocultarFormProducto;
+        $scope.enviarProducto=(sesionId) => {
             let formId = "productoForm-"+sesionId;
-            let triggerButtonId = "newProducto-"+sesionId;
-            showElementById(formId);
-            hideElementById(triggerButtonId);
-        }
-        $scope.cancelProduct=(sesionId) => {
-            let formId = "productoForm-"+sesionId;
-            let triggerButtonId = "newProducto-"+sesionId;
-            hideElementById(formId);
-            showElementById(triggerButtonId);
-        }
+            let fecha = document.querySelector("#"+formId+" input").value;
+            let descripcion = document.querySelector("#"+formId+" textarea").value;
+
+            let producto ={
+                sesionId:sesionId,
+                fecha:fecha,
+                descripcion:descripcion
+            }
+            enviarNuevoProducto(producto, $http, $scope, usuario.id, $routeParams.id)
+        };
+
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);
