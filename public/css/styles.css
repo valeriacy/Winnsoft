@@ -62,11 +62,26 @@ body{
 	
 }
 
-/*.principal{
-	display: flex;
-    justify-content: left;
-	align-items:left;*/
+.main-loading{
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	background-image: linear-gradient(to bottom right, rgb(8, 151, 247), white);
+	z-index: 1;
+}
 
+#mainGif{
+	
+	margin-top: 10vh;
+	width: 30vw;
+	height: 30vw;
+}
+#secondGif{
+	
+	margin-top: 2vh;
+	width: 5vw;
+	height: 5vw;
+}
 
 .tituloPrincipal{
     font-size: 2em;
