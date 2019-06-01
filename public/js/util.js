@@ -6,8 +6,13 @@ function logIn(httpService, req, contra, location){
     .then((response)=>{
         usuario = response.data[0];
         let mensaje;
-        let coinciden = usuario.contra === contra;
-        mensaje = coinciden ? "Datos ingresados correctamente":"Usuario o Contraseña incorrecto";
+        let coinciden = false;
+        if(usuario){
+            coinciden = usuario.contra === contra;
+            mensaje = coinciden ? "Datos ingresados correctamente":"Usuario o Contraseña incorrecto";
+        }else{
+            mensaje = "Usuario o Contraseña incorrecto";
+        }
         alert(mensaje);
         if(coinciden) {
             guardarUsuarioEnLS(usuario);
