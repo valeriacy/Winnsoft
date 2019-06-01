@@ -406,3 +406,13 @@ function nuevaSesion(grupoId, httpService, scope, usuarioId){
                     }
                 )
 }
+
+function showElementById(elementId){
+    let element = document.querySelector("#"+elementId);
+    element.classList.remove("hidden");
+}   
+
+function hideElementById(elementId){
+    let element = document.querySelector("#"+elementId);
+    element.classList.add("hidden");
+}

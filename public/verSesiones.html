@@ -15,8 +15,22 @@
                 <label ng-if="sesion.cerrado===1" style="color:red;">Cerrado</label>
             </button>
             <div style="display:none">
-                <div ng-if="user.rol === 'docente'" class="newProducto">
+                <div ng-if="user.rol === 'docente'" class="newProducto" id="newProducto-{{sesion.id}}">
                     <input type="image" src="./assets/plus.png" title="Crear nuevo producto" ng-click="crearProducto(sesion.id)" />
+                </div>
+                <div id="productoForm-{{sesion.id}}" class="hidden">
+                    <div>
+                        <label for="fecha">Fecha de Caducidad:</label>
+                        <input type="date" name="fecha"/>
+                    </div>
+                    <div>
+                        <label for="descripcion">Descripcion del Producto:</label>
+                        <textarea name="descripcion"></textarea>
+                    </div>        
+                    <div>
+                        <button>Crear</button>
+                        <button ng-click="cancelProduct(sesion.id)">Cancelar</button>
+                    </div>                               
                 </div>
                 <div ng-repeat="producto in sesion.productos" class="productDiv">
                     <button ng-click="colapsable($event)" class="">

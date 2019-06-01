@@ -101,7 +101,7 @@ function principalCtrl($scope, $location, $http){
     if(usuario){
         $scope.user = usuario;
         obtener_ofertas($http, $scope);
-        cargarMenuPara(usuario.rol, $location, $scope)
+        cargarMenuPara(usuario.rol, $location, $scope);
 
     }
     else
@@ -214,7 +214,16 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
                 nuevaSesion($routeParams.id, $http, $scope, usuario.id);
         }
         $scope.crearProducto=(sesionId) => {
-            alert("gg  "+sesionId);
+            let formId = "productoForm-"+sesionId;
+            let triggerButtonId = "newProducto-"+sesionId;
+            showElementById(formId);
+            hideElementById(triggerButtonId);
+        }
+        $scope.cancelProduct=(sesionId) => {
+            let formId = "productoForm-"+sesionId;
+            let triggerButtonId = "newProducto-"+sesionId;
+            hideElementById(formId);
+            showElementById(triggerButtonId);
         }
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
