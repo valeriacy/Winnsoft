@@ -62,7 +62,7 @@ function obtenerOfertaPorId(httpService, scope, idOferta){
     httpService(req)
     .then((response)=>{
         scope.oferta = response.data;
-        console.log(response.data);
+        
     })
     .catch((error)=>{
         console.error(error);
@@ -80,7 +80,7 @@ function obtenerSesionesDeGrupo(httpService, scope, idOferta, idUsuario){
         let data=response.data;
         filtrarEntregaUsuario(data, idUsuario);
         scope.sesiones = data;
-        console.log(data);
+        
     })
     .catch((error)=>{
         console.error(error);
