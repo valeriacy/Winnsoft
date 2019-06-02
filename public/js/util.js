@@ -456,3 +456,16 @@ function enviarNuevoProducto(producto, httpService, scope, usuarioId, grupoId){
                     }
                 )
 }
+
+function hideMainLoad(){
+    let id = "main-load-div";
+    let loadingDiv = document.querySelector("#"+id);
+    if(loadingDiv)
+        loadingDiv.classList.add("hidden")
+}
+
+function watchFunction(oldValue, newValue){
+    if(oldValue===newValue)
+        return;
+    hideMainLoad();
+}

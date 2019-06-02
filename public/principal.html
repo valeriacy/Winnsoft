@@ -1,4 +1,8 @@
-<!--<div ng-include="'/shared/commonLoading.html'"></div>-->
+<div id="main-load-div" class="main-loading">
+    
+    <img id="secondGif" src="../assets/cargando.gif" />
+</div>
+
 <div class="principal"> 
     <div ng-if="user.rol === 'estudiante'" ng-include="'/shared/header_estudiante.html'" style="width: 100vw;"></div>
     <div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>

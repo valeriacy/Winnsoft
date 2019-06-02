@@ -72,6 +72,7 @@ function inscripcionCtrl($scope,$location,$http){
         cargarMenuPara(usuario.rol, $location, $scope)
         obtener_ofertas($http, $scope);
         obtenerInscripciones($http,$scope,usuario);
+        $scope.$watch("inscripciones", watchFunction);
         $scope.inscribir = (idOferta) => {
             let inscripcion = {
                 ofertaId: idOferta,
@@ -100,9 +101,9 @@ function inscripcionCtrl($scope,$location,$http){
 function principalCtrl($scope, $location, $http){
     if(usuario){
         $scope.user = usuario;
+        $scope.$watch("ofertas",watchFunction);
         obtener_ofertas($http, $scope);
         cargarMenuPara(usuario.rol, $location, $scope);
-
     }
     else
         $location.path(RAIZ);
@@ -145,6 +146,8 @@ function registerCtrl($scope, $http, $location){
 function misMateriasCtrl($http,$scope,$location){
     if(usuario){
         $scope.user = usuario;
+        $scope.$watch("inscripciones",watchFunction);
+        $scope.$watch("dictadas",watchFunction);
         obtenerInscripciones($http,$scope,usuario);
         cargarMenuPara(usuario.rol, $location, $scope);//carga el menu de estudiante
     }
@@ -154,6 +157,7 @@ function misMateriasCtrl($http,$scope,$location){
 function entregasCtrl($http, $scope, $location, $routeParams){
     if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
+        $scope.$watch("entregas", watchFunction);
         let productoId = $routeParams.productoId;
         cargarMenuPara(usuario.rol, $location, $scope);
         cargarEntregasPorProducto($http, $scope, productoId);
@@ -167,6 +171,7 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
     if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
         cargarMenuPara(usuario.rol, $location, $scope);
+        $scope.$watch("estudiante", watchFunction);
         cargarEntregaPorId($http, $scope, $routeParams.entregaId)
     }
     else
@@ -227,7 +232,7 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
             }
             enviarNuevoProducto(producto, $http, $scope, usuario.id, $routeParams.id)
         };
-
+        $scope.$watch("oferta", watchFunction)
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);
