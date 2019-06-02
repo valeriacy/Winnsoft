@@ -47,6 +47,28 @@ class ofertaSeeder extends Seeder
         	'updated_at' => $date
         ]);
 
+        \DB::table('usuarios')->insert([
+            'id' => 4,
+            'nombre' => "Camila Anahi",
+            'Apellido' => "Cartagena Yuricevic",
+            'rol' => "estudiante",
+            'nombre_usuario' => "camicy",
+            'contra' => "camicy",
+        	'created_at' => $date,
+        	'updated_at' => $date
+        ]);
+
+        \DB::table('usuarios')->insert([
+            'id' => 5,
+            'nombre' => "Gabriela",
+            'Apellido' => "Gabiosky",
+            'rol' => "auxiliar",
+            'nombre_usuario' => "gabiota",
+            'contra' => "gabiota",
+        	'created_at' => $date,
+        	'updated_at' => $date
+        ]);
+
         \DB::table('materias')->insert([
             'id' => 1,
         	'nombre' => "Introduccion a la Programacion",
@@ -63,20 +85,6 @@ class ofertaSeeder extends Seeder
         	'updated_at' => $date
         ]);
 
-        \DB::table('docentes')->insert([
-            'id' => 1,
-        	'nombre' => "Corina Flores",
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('docentes')->insert([
-            'id' => 2,
-        	'nombre' => "Leticia Blanco",
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
         \DB::table('ofertas')->insert([
             'id' => 1,
             'grupo' => "1",
@@ -85,6 +93,7 @@ class ofertaSeeder extends Seeder
             'docente_id' => 2,
             'hora' => "18:30",
             'dia' => 2,
+            'auxiliar_id' => 5,
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -97,6 +106,7 @@ class ofertaSeeder extends Seeder
             'docente_id' => 3,
             'hora' => "16:30",
             'dia' => 5,
+            'auxiliar_id' => 5,
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -113,6 +123,14 @@ class ofertaSeeder extends Seeder
             'id' => 2,
             'oferta_id' => 2,
             'usuario_id' => 1,
+        	'created_at' => $date,
+        	'updated_at' => $date
+        ]);
+
+        \DB::table('inscripcions')->insert([
+            'id' => 3,
+            'oferta_id' => 2,
+            'usuario_id' => 4,
         	'created_at' => $date,
         	'updated_at' => $date
         ]);

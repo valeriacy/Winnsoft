@@ -34,3 +34,4 @@ Route::resource('Inscripcion', 'InscripcionController');
 Route::resource('Sesion', 'SesionController');
 Route::resource('Producto', 'ProductoController');
 Route::resource('Entrega', 'EntregaController');
+Route::resource('Asistencia', 'AsistenciaController');
