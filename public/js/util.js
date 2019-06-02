@@ -314,7 +314,7 @@ function cargarMenuDocente(location, scope){
     menu=funcionColapsable();
     scope.mostrar_menu=menu;
     scope.inicioD = () => {
-        location.path("/inicioD");
+        location.path("/principal");
     };
     scope.materiasD = () => {
         location.path("/verMaterias");

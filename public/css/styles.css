@@ -66,8 +66,13 @@ body{
 	width: 100vw;
 	height: 100vh;
 	text-align: center;
-	background-image: linear-gradient(to bottom right, rgb(8, 151, 247), white);
+	background-image: url("../assets/mainLoading.gif");
 	z-index: 1;
+	position: absolute;
+	
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 #mainGif{
