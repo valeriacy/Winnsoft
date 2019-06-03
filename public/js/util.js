@@ -326,6 +326,21 @@ function cargarMenuDocente(location, scope){
     
 }
 
+function cargarMenuAuxiliar(location, scope){
+    menu=funcionColapsable();
+    scope.mostrar_menu=menu;
+    scope.inicioD = () => {
+        location.path("/principal");
+    };
+    scope.materiasD = () => {
+        alert("en progreso")
+    }; 
+    scope.logOut = () => {
+        logOut(location);
+    }
+    
+}
+
 function cargarMenuPara(rol, location, scope){
     switch (rol) {
         case 'estudiante':
@@ -333,6 +348,9 @@ function cargarMenuPara(rol, location, scope){
           break;
         case 'docente':
           cargarMenuDocente(location, scope);
+          break;
+        case 'auxiliar':
+          cargarMenuAuxiliar(location, scope);
           break;
         default:
           console.log('Lo lamentamos, por el momento no disponemos de ' + rol + '.');

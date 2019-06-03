@@ -6,9 +6,13 @@
 <div class="principal"> 
     <div ng-if="user.rol === 'estudiante'" ng-include="'/shared/header_estudiante.html'" style="width: 100vw;"></div>
     <div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
+    <div ng-if="user.rol === 'auxiliar'" ng-include="'/shared/header_auxiliar.html'" style="width: 100vw;"></div>
     <div ng-if="user.rol === 'estudiante'" class="titulo1" style="margin-left: 15vw;">
         Sesion Estudiante :{{user.nombre}} {{user.apellido}}              
     </div>
+    <div ng-if="user.rol === 'auxiliar'" class="titulo1" style="margin-left: 15vw;">
+            Sesion Auxiliar :{{user.nombre}} {{user.apellido}}              
+        </div>
     <div ng-if="user.rol === 'docente'" class="titulo1" style="margin-left: 15vw;">
         Sesion Docente :{{user.nombre}} {{user.apellido}}            
     </div>
