@@ -137,6 +137,7 @@ function obtenerMateriasPorInscripcion(httpService, scope, idUsuario){
     httpService(req)
     .then((response)=>{
         scope.inscripciones = response.data;
+        console.log(response.data)
         scope.estaEnLista = (idMateria)=>{
             encontrado=false;
             for(let i=0; i<scope.inscripciones.length; i++){

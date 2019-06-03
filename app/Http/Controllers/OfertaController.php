@@ -75,11 +75,13 @@ class OfertaController extends Controller
         $oferta = Oferta::find($id);
         $attributes = $oferta->getAttributes();
         $docenteId = $attributes['docente_id'];
+        $auxiliarId = $attributes['auxiliar_id'];
         $materiaId = $attributes['materia_id'];
 
         $docente = usuario::find($docenteId);
+        $auxiliar = usuario::find($auxiliarId);
         $materia = Materia::find($materiaId);
-        return [$oferta, $docente, $materia];
+        return [$oferta, $docente, $materia, $auxiliar];
     }
 
     /**

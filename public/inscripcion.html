@@ -15,10 +15,10 @@
                   <th>Materia</th>
                   <th>Grupo</th>
                    <th>Docente</th>
+                   <th>Auxiliar</th>
                     <th>Hora</th>
                     <th>Dia</th>
                     <th></th>
-                <!--    <th>Auxiliar</th>-->
                     
                    </tr>
             
@@ -26,6 +26,7 @@
                     <td>{{oferta[2].nombre}}</td>
                     <td>{{oferta[0].grupo}}</td>
                     <td>{{oferta[1].nombre}} {{oferta[1].apellido}}</td>
+                    <td>{{oferta[3].nombre}} {{oferta[3].apellido}}</td>
                     <td>{{oferta[0].hora}}</td>
                     <td>{{oferta[0].dia}}</td>
                     <td ng-if="estaEnLista(oferta[2].id)">
