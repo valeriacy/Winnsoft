@@ -14,12 +14,12 @@
     <div>
         <ul>
             <li ng-repeat="inscripcion in inscripciones">
-                <a href="#!sesiones/{{inscripcion[0].id}}">{{inscripcion[2].nombre}}</a>
+                <a href="#!sesiones/{{inscripcion[0].id}}">{{inscripcion[2].nombre}} - grupo: {{inscripcion[0].grupo}}</a>
             </li>
         </ul>
         <ul>
             <li ng-repeat="dictada in dictadas">
-                <a href="#!sesiones/{{dictada[0].id}}">{{dictada[2].nombre}}</a>
+                <a href="#!sesiones/{{dictada[0].id}}">{{dictada[2].nombre}} - grupo: {{inscripcion[0].grupo}}</a>
             </li>
         </ul>
     </div>
