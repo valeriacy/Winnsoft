@@ -53,6 +53,7 @@ app.config(function($routeProvider) {
     templateUrl:"tareasD.html",
     controller:"tareasDCtrl",
 })
+
 });
 
 app.controller("mainCtrl", mainCtrl);

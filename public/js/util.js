@@ -334,6 +334,7 @@ function cargarMenuAuxiliar(location, scope){
     };
     scope.materiasD = () => {
         alert("en progreso")
+      //location.path("/sesionesAux");
     }; 
     scope.logOut = () => {
         logOut(location);

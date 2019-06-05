@@ -64,7 +64,7 @@ body{
 
 .main-loading{
 	width: 100vw;
-	height: 100vh;
+	height: 70vw;
 	text-align: center;
 	background-image: url("../assets/mainLoading.gif");
 	z-index: 1;
@@ -76,10 +76,9 @@ body{
 }
 
 #mainGif{
-	
 	margin-top: 10vh;
-	width: 30vw;
-	height: 30vw;
+	width: 20vw;
+	height: 20vw;
 }
 #secondGif{
 	
@@ -446,4 +445,9 @@ border:10px solid rgb(0,128,128);
 .formularioDocente{
 	width: 100%;
 	margin-left: 40%;
+}
+.fielset{
+	max-width: 55%;    
+            margin: 18px auto;
+            color:blue;
 }

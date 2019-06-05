@@ -1,0 +1,46 @@
+
+<div id="main-load-div" class="main-loading">
+    <img id="secondGif" src="../assets/cargando.gif" />
+</div>
+<div ng-if="user.rol === 'auxiliar'" ng-include="'/shared/header_auxiliar.html'" style="width: 100vw;"></div>
+
+<div class="tablaControl">
+    <form>
+        <fieldset class="fielset" style="margin-bottom: 1vw; margin-left: 10vw;">
+      
+      <table style ="width:auto;" border="1" >
+          <tr>
+            <td><strong>ESTUDIANTE</strong></td>
+            <td><strong>ASISTENCIA </strong></td>
+            <td><strong>DESCRIPCION</strong></td>
+            <td><strong>OBSERVACION</strong></td>
+            <td><strong>PORTAFOLIO</strong></td>
+          </tr>
+          
+          <tr>
+            <td>JUAN  ALBARES</td>
+            <td><label><input type="checkbox" id="cbox1" value="first_checkbox"> </label><br></td>
+            <td><textarea id="txtDescripcion" ></textarea></td>
+            <td><textarea id="txtDescripcion" ></textarea></td>
+            <td><label><input type="checkbox" id="cbox2" value="second_checkbox"> </label><br></td>
+          </tr>
+          
+          <tr>
+            <td>MARIO RIOS</td>
+            <td><label><input type="checkbox" id="cbox1" value="first_checkbox"> </label><br></td>
+            <td><textarea id="txtDescripcion" ></textarea></td>
+            <td><textarea id="txtDescripcion" ></textarea></td>
+            <td><label><input type="checkbox" id="cbox2" value="second_checkbox"> </label><br></td>
+          </tr>
+          </table>
+      <input type="submit" value="Guardar">
+<input type="submit" value="Cancelar">
+      </fieldset>
+      </form>
+</div>
+                      
+
+                     
+
+      
+
