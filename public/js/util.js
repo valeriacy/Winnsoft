@@ -332,9 +332,9 @@ function cargarMenuAuxiliar(location, scope){
     scope.inicioD = () => {
         location.path("/principal");
     };
-    scope.materiasD = () => {
-        alert("en progreso")
-      //location.path("/sesionesAux");
+    scope.materiasA = () => {
+        alert("en progreso");
+        location.path("/sesionesAux");
     }; 
     scope.logOut = () => {
         logOut(location);

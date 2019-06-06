@@ -1,8 +1,4 @@
-
-<div id="main-load-div" class="main-loading">
-    <img id="secondGif" src="../assets/cargando.gif" />
-</div>
-<div ng-if="user.rol === 'auxiliar'" ng-include="'/shared/header_auxiliar.html'" style="width: 100vw;"></div>
+<div ng-if="user.rol === 'auxiliar'" ng-include="'/shared/header_auxiliar'" style="width: 100vw;"></div>
 
 <div class="tablaControl">
     <form>
@@ -34,7 +30,7 @@
           </tr>
           </table>
       <input type="submit" value="Guardar">
-<input type="submit" value="Cancelar">
+      <button onclick="window.location.href='/#!principal'">atrás</button>
       </fieldset>
       </form>
 </div>

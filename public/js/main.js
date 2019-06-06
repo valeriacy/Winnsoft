@@ -53,7 +53,10 @@ app.config(function($routeProvider) {
     templateUrl:"tareasD.html",
     controller:"tareasDCtrl",
 })
-
+.when("/sesionesAux",{
+    templateUrl:"/sesionAux.html",
+    controller:"sesionesAuxCtrl"
+})
 });
 
 app.controller("mainCtrl", mainCtrl);
@@ -174,6 +177,16 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
         cargarMenuPara(usuario.rol, $location, $scope);
         $scope.$watch("estudiante", watchFunction);
         cargarEntregaPorId($http, $scope, $routeParams.entregaId)
+    }
+    else
+        $location.path(RAIZ);
+
+}
+function sesionesAuxCtrl ($http,$scope,$location){
+    if(usuario && usuario.rol === "auxiliar"){
+        $scope.user = usuario;
+        cargarMenuAuxiliar( $location, $scope);
+        
     }
     else
         $location.path(RAIZ);
