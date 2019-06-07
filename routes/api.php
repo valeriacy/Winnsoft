@@ -22,6 +22,7 @@ Route::get('/verificarnombreusuario/{nombreUsuario}','usuariocontroller@verifica
 Route::get('/Ofertas','OfertaController@showAll');
 Route::get('/obtenerInscripciones/{idUsuario}','InscripcionController@obtenerInscripciones');
 Route::get('/obtenerDictadas/{idUsuario}','InscripcionController@obtenerDictadas');
+Route::get('/obtenerAuxiliadas/{idUsuario}','InscripcionController@obtenerAuxiliadas');
 Route::get('/sesiones/{idGrupo}','SesionController@showByGrupoId');
 Route::get('/entregas/{productoId}','EntregaController@getAllByProducto');
 Route::get('/usuarioNombres/{id}','usuariocontroller@getNames');

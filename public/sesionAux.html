@@ -1,3 +1,7 @@
+<div id="main-load-div" class="main-loading">
+    
+  <img id="secondGif" src="../assets/cargando.gif" />
+</div>
 <div ng-if="user.rol === 'auxiliar'" ng-include="'/shared/header_auxiliar.html'" style="width: 100vw;"></div>
 
 <div class="tablaControl">
@@ -13,16 +17,8 @@
             <td><strong>PORTAFOLIO</strong></td>
           </tr>
           
-          <tr>
-            <td>JUAN  ALBARES</td>
-            <td><label><input type="checkbox" id="cbox1" value="first_checkbox"> </label><br></td>
-            <td><textarea id="txtDescripcion" ></textarea></td>
-            <td><textarea id="txtDescripcion" ></textarea></td>
-            <td><label><input type="checkbox" id="cbox2" value="second_checkbox"> </label><br></td>
-          </tr>
-          
-          <tr>
-            <td>MARIO RIOS</td>
+          <tr ng-repeat="inscrito in inscritos">
+            <td>{{inscrito.nombre}} {{inscrito.apellido}}</td>
             <td><label><input type="checkbox" id="cbox1" value="first_checkbox"> </label><br></td>
             <td><textarea id="txtDescripcion" ></textarea></td>
             <td><textarea id="txtDescripcion" ></textarea></td>

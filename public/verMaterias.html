@@ -5,6 +5,7 @@
 
 <div ng-if="user.rol === 'estudiante'" ng-include="'/shared/header_estudiante.html'" style="width: 100vw;"></div>
 <div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
+<div ng-if="user.rol === 'auxiliar'" ng-include="'/shared/header_auxiliar.html'" style="width: 100vw;"></div>
 <div class="centered-div">
     <h1>
         Mis Materias
@@ -20,6 +21,11 @@
         <ul>
             <li ng-repeat="dictada in dictadas">
                 <a href="#!sesiones/{{dictada[0].id}}">{{dictada[2].nombre}} - grupo: {{inscripcion[0].grupo}}</a>
+            </li>
+        </ul>
+        <ul>
+            <li ng-repeat="auxiliada in auxiliadas">
+                <a href="#!sesionesAux/{{auxiliada[0].id}}">{{auxiliada[2].nombre}} - grupo: {{auxiliada[0].grupo}}</a>
             </li>
         </ul>
     </div>

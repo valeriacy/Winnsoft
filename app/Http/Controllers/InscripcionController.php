@@ -92,6 +92,22 @@ class InscripcionController extends Controller
         return $response;
     }
 
+    public function obtenerAuxiliadas($idUsuario){
+        return $this->obtenerMateriaInscripcion($idUsuario, "auxiliar_id");
+    }
+
+    public function obtenerMateriaInscripcion($idUsuario, $columna){
+        $idOfertas = Oferta::where($columna ,'=' ,$idUsuario)->pluck('id')->toArray();
+        $ofertaController = new OfertaController();
+
+        $response = array();
+        foreach ($idOfertas as $idOferta) {
+            $oferta = $ofertaController->getOferta($idOferta);
+            array_push($response, $oferta);
+        }
+        return $response;
+    }
+
     /**
      * Display the specified resource.
      *

@@ -53,7 +53,7 @@ app.config(function($routeProvider) {
     templateUrl:"tareasD.html",
     controller:"tareasDCtrl",
 })
-.when("/sesionesAux",{
+.when("/sesionesAux/:grupoId",{
     templateUrl:"/sesionAux.html",
     controller:"sesionesAuxCtrl"
 })
@@ -153,6 +153,7 @@ function misMateriasCtrl($http,$scope,$location){
         $scope.user = usuario;
         $scope.$watch("inscripciones",watchFunction);
         $scope.$watch("dictadas",watchFunction);
+        $scope.$watch("auxiliadas",watchFunction);
         obtenerInscripciones($http,$scope,usuario);
         cargarMenuPara(usuario.rol, $location, $scope);//carga el menu de estudiante
     }
@@ -183,11 +184,12 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
         $location.path(RAIZ);
 
 }
-function sesionesAuxCtrl ($http,$scope,$location){
+function sesionesAuxCtrl ($http,$scope,$location, $routeParams){
     if(usuario && usuario.rol === "auxiliar"){
         $scope.user = usuario;
+        $scope.$watch('inscritos', watchFunction);
         cargarMenuAuxiliar( $location, $scope);
-        
+        obtenerInscritosPorGrupo($http, $scope, $routeParams.grupoId);
     }
     else
         $location.path(RAIZ);
@@ -251,15 +253,6 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);
-    }
-    else
-        $location.path(RAIZ);
-}
-
-function sesionesAuxCtrl($http, $scope, $location, $routeParams){
-    if(usuario){
-        $scope.user = usuario;
-        cargarMenuPara(usuario.rol, $location, $scope);//carga el menu de estudiante
     }
     else
         $location.path(RAIZ);

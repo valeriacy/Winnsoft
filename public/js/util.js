@@ -110,7 +110,23 @@ function obtenerInscripciones(httpService, scope, usuario){
     if(usuario.rol === "estudiante")
         obtenerMateriasPorInscripcion(httpService, scope, usuario.id);
     else if(usuario.rol === "docente")
-        obtenerMateriasDictadas(httpService, scope, usuario.id);    
+        obtenerMateriasDictadas(httpService, scope, usuario.id);
+    else
+        obtenerMateriasAuxiliadas(httpService, scope, usuario.id);
+}
+
+function obtenerMateriasAuxiliadas(httpService, scope, idUsuario){
+    consumirApi(httpService,
+                {
+                    method: 'GET',
+                    url: "/api/obtenerAuxiliadas/"+idUsuario,
+                },
+                (response)=>{
+                    scope.auxiliadas = response.data;  
+                },
+                (error)=>{
+                    console.error(error);
+                })
 }
 
 function obtenerMateriasDictadas(httpService, scope, idUsuario){
@@ -333,8 +349,7 @@ function cargarMenuAuxiliar(location, scope){
         location.path("/principal");
     };
     scope.materiasA = () => {
-        alert("en progreso");
-        location.path("/sesionesAux");
+        location.path("/verMaterias");
     }; 
     scope.logOut = () => {
         logOut(location);
@@ -488,4 +503,18 @@ function watchFunction(oldValue, newValue){
     if(oldValue===newValue)
         return;
     hideMainLoad();
+}
+
+function obtenerInscritosPorGrupo(httpService, scope, grupoId){
+    consumirApi(httpService,
+                {
+                    method: 'GET',
+                    url: "/api/inscritos/"+grupoId
+                },
+                (response)=>{
+                    scope.inscritos = response.data
+                }, 
+                (error)=>{
+                    console.error(error);
+                });
 }
