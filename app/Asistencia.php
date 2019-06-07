@@ -8,6 +8,8 @@ class Asistencia extends Model
 {
     protected $fillable = ['inscripcion_id', 
                             'fecha',
-                            'asistio' 
+                            'asistio',
+                            'descripcion',
+                            'observacion' 
                             ];
 }
