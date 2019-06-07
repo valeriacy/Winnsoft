@@ -7,6 +7,7 @@ use App\Inscripcion;
 use App\Materia;
 use App\Oferta;
 use App\Http\Controllers\OfertaController;
+use App\usuario;
 
 class InscripcionController extends Controller
 {
@@ -42,6 +43,23 @@ class InscripcionController extends Controller
         $inscripcion->oferta_id = $request->ofertaId;
         $inscripcion->usuario_id = $request->usuarioId;
         $inscripcion->save();
+    }
+
+    public function obtenerInscritos($idgrupo){
+        $inscripciones = Inscripcion::where('oferta_id', '=', $idgrupo)->get();
+        $numeroOferta = Oferta::find($idgrupo)->pluck('grupo')->first();
+        $inscritos = array();
+        foreach ($inscripciones as $inscripcion) {
+            $inscrito = usuario::find($inscripcion->usuario_id);
+            unset($inscrito->rol);
+            unset($inscrito->nombre_usuario);
+            unset($inscrito->contra);
+            unset($inscrito->created_at);
+            unset($inscrito->updated_at);
+            $inscrito->inscripcionId = $inscripcion->id;
+            array_push($inscritos, $inscrito);
+        }
+        return $inscritos;
     }
 
     /**

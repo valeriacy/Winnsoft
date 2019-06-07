@@ -26,6 +26,7 @@ Route::get('/sesiones/{idGrupo}','SesionController@showByGrupoId');
 Route::get('/entregas/{productoId}','EntregaController@getAllByProducto');
 Route::get('/usuarioNombres/{id}','usuariocontroller@getNames');
 Route::get('/basic/{id}','usuariocontroller@getBasicInfo');
+Route::get('/inscritos/{idGrupo}','InscripcionController@obtenerInscritos');
 
 Route::resource('Materia', 'MateriaController');
 Route::resource('Docente', 'DocenteController');
