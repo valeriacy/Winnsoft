@@ -69,6 +69,7 @@ app.controller("agregarPortafolioCtrl",agregarPortafolioCtrl);
 app.controller("sesionesCtrl",sesionesCtrl);
 app.controller("entregasCtrl",entregasCtrl);
 app.controller("entregaCtrl",entregaCtrl);
+app.controller("sesionesAuxCtrl",sesionesAuxCtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
@@ -201,7 +202,7 @@ function agregarPortafolioCtrl($http,$scope,$location){
     else
         $location.path(RAIZ);
 }
-function sesionesCtrl($http,$scope,$location, $routeParams){
+function sesionesCtrl($http, $scope, $location, $routeParams){
     if(usuario){
         $scope.user = usuario;
         $scope.colapsable=funcionColapsable();
@@ -250,6 +251,15 @@ function sesionesCtrl($http,$scope,$location, $routeParams){
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);
+    }
+    else
+        $location.path(RAIZ);
+}
+
+function sesionesAuxCtrl($http, $scope, $location, $routeParams){
+    if(usuario){
+        $scope.user = usuario;
+        cargarMenuPara(usuario.rol, $location, $scope);//carga el menu de estudiante
     }
     else
         $location.path(RAIZ);
