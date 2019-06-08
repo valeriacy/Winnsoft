@@ -97,7 +97,22 @@ class usuariocontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $usuario = usuario::find($id);
+        $usuario->nombre = $request->nombre;
+        $usuario->apellido = $request->apellido;
+        $usuario->contra = $request->contra;
+        $usuario->save();
+    }
+
+    public function edicionRol($usuarioId, $rolIndex){
+        $roles = array(
+            1 => "estudiante",
+            2 => "docente",
+            3 => "auxiliar");
+        
+        $usuario = usuario::find($usuarioId);
+        $usuario->rol = $roles[$rolIndex];
+        $usuario->save();
     }
 
     /**
