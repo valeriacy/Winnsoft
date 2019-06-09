@@ -1,0 +1,61 @@
+<div class="tablaEntrega">
+    <table border="1">
+        <thead>
+            <td> </td>
+            <td></td>
+            <td colspan="2">Sesion :2 </td>
+        </thead>
+        <thead>
+            <tr>
+                <th> Apellidos</th>
+                <th> Nombres</th>
+                <th>Producto : 1</th>
+                <th>Producto :2</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="entrega in entregas">
+
+                <td>{{entrega.apellido}}</td>
+                <td>{{entrega.nombre}}</td>
+                <td> No Entrego</td>
+                <td> Si Entrego</td>
+                
+            </tr>
+        </tbody>        
+     </table>
+     <style>
+         table {
+   width: 70%;
+   border: 1px solid #000;
+   margin-left: 15%;
+   
+}
+th, td {
+   width:15%;
+   text-align: left;
+   vertical-align: top;
+   border: 1px solid #000;
+   padding: 0.3em;
+   caption-side: bottom;
+}
+
+th {     font-size: 17px;     font-weight: normal;     padding: 8px;     
+		background: #2C3E50;
+			border-top: 4px solid #959cb3;   
+			 border-bottom: 1px solid #fff;
+              color: #e8edff;
+              border: 1px solid; }
+            td {
+                 padding: 12px;     background: #f0f0f1;     border-bottom: 1px solid #fff;
+    color: rgb(33, 33, 97);   border-top: 1px solid transparent;
+                border: 1px solid;
+			}
+html {
+    font-size: 16px;
+	font-family: 'Lato', sans-serif;
+}
+     </style> 
+     
+</div>
