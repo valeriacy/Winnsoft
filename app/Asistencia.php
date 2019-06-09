@@ -10,6 +10,7 @@ class Asistencia extends Model
                             'fecha',
                             'asistio',
                             'descripcion',
-                            'observacion' 
+                            'observacion',
+                            'sesion_id'
                             ];
 }

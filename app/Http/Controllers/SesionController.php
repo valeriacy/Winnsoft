@@ -38,14 +38,26 @@ class SesionController extends Controller
      */
     public function store(Request $request)
     {
+        $grupoId = $request->grupoId;
+        $this->cerrarSesionAbierta($grupoId);
         $sesion = new Sesion();
         
-        $sesion->grupo_id = $request->grupoId;
+        $sesion->grupo_id = $grupoId;
         $sesion->cerrado = false;
         $maxValue = Sesion::where("grupo_Id", $request->grupoId)->max('numero');
         $sesion->numero = $maxValue+1;
 
         $sesion->save();
+    }
+
+    public function cerrarSesionAbierta($idGrupo){
+        $sesiones = $this->showByGrupoId($idGrupo);
+        foreach ($sesiones as $sesion) {
+            if(!$sesion->cerrado){
+                $sesion->cerrado = true;
+                Sesion::where('id', $sesion->id)->update(['cerrado' => true]);
+            }
+        }
     }
 
     /**

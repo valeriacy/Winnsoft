@@ -20,7 +20,7 @@
                 <label ng-if="sesion.cerrado===1" style="color:red;">Cerrado</label>
             </button>
             <div style="display:none">
-                <div ng-if="user.rol === 'docente'" class="newProducto" id="newProducto-{{sesion.id}}">
+                <div ng-if="user.rol === 'docente' && !sesion.cerrado" class="newProducto" id="newProducto-{{sesion.id}}">
                     <input type="image" src="./assets/plus.png" title="Crear nuevo producto" ng-click="crearProducto(sesion.id)" />
                 </div>
                 <div id="productoForm-{{sesion.id}}" class="hidden">
