@@ -61,6 +61,10 @@ app.config(function($routeProvider) {
         templateUrl:"/sesionAux.html",
         controller:"reporteSesionCtrl"
     })
+    .when("/reporteGrupo/:grupoId",{
+        templateUrl:"/reporteEstudiantes.html",
+        controller:"reporteGeneralCtrl"
+    })
 });
 
 app.controller("mainCtrl", mainCtrl);
@@ -75,6 +79,7 @@ app.controller("entregasCtrl",entregasCtrl);
 app.controller("entregaCtrl",entregaCtrl);
 app.controller("sesionesAuxCtrl",sesionesAuxCtrl);
 app.controller("reporteSesionCtrl",reporteSesionCtrl);
+app.controller("reporteGeneralCtrl",reporteGeneralCtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
@@ -333,6 +338,9 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         $scope.aReporte = (sesionId) => {
            $location.path("/reporteSesion/"+sesionId);
         };
+        $scope.aReporteGeneral = () => {
+            $location.path("/reporteGrupo/"+$routeParams.id);
+         };
         $scope.$watch("oferta", watchFunction)
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
@@ -352,6 +360,15 @@ function reporteSesionCtrl($http, $scope, $location, $routeParams){
         cargarMenuPara(usuario.rol, $location, $scope);
         obtenerSesionPorId($http, $scope, $routeParams.sesionId);
         obtenerAsistenciasPorSesion($http, $scope, $routeParams.sesionId)
+    }else{
+        $location.path(RAIZ);
+    }
+}
+
+function reporteGeneralCtrl($http, $scope, $location, $routeParams){
+    if(usuario){
+        $scope.user = usuario;
+        cargarMenuPara(usuario.rol, $location, $scope);
     }else{
         $location.path(RAIZ);
     }
