@@ -6,29 +6,35 @@
 
 <div class="tablaControl">
     <form>
-        <fieldset class="fielset" style="margin-bottom: 1vw; margin-left: 10vw;">
-      
-      <table style ="width:auto;" border="1" >
-          <tr>
-            <td><strong>ESTUDIANTE</strong></td>
-            <td><strong>ASISTENCIA </strong></td>
-            <td><strong>DESCRIPCION</strong></td>
-            <td><strong>OBSERVACION</strong></td>
-            <td><strong>PORTAFOLIO</strong></td>
-          </tr>
-          
-          <tr ng-repeat="inscrito in inscritos">
-            <td>{{inscrito.nombre}} {{inscrito.apellido}}</td>
-            <td><label><input type="checkbox" id="cbox1" value="first_checkbox"> </label><br></td>
-            <td><textarea id="txtDescripcion" ></textarea></td>
-            <td><textarea id="txtDescripcion" ></textarea></td>
-            <td><label><input type="checkbox" id="cbox2" value="second_checkbox"> </label><br></td>
-          </tr>
-          </table>
-      <input type="submit" value="Guardar">
+      <fieldset class="fielset" style="margin-bottom: 1vw; margin-left: 10vw;">
+      <h4>Nro sesion actual: {{sesion.numero}}</h4>
+      <h4>Fecha : {{fechaActual | date:'dd-MM-yyyy'}}</h4>
+      <!--<div ui-grid="{ data: inscritos }" class="myGrid"></div>-->
+      <table style ="width:auto;" border="1" id="largeTable">
+          <thead>
+              <tr>
+                <td><strong>ESTUDIANTE</strong></td>
+                <td><strong>ASISTENCIA </strong></td>
+                <td><strong>DESCRIPCION</strong></td>
+                <td><strong>OBSERVACION</strong></td>
+              </tr>
+          </thead>
+          <tbody>
+              <tr ng-repeat="asistencia in asistencias">
+                <td>{{inscritos[$index].nombre}} {{inscritos[$index].apellido}}</td>
+                <td><label><input type="checkbox" id="cbox1" value="first_checkbox" ng-model="asistencia.asistio"> </label><br></td>
+                <td><textarea id="txtDescripcion" ng-model="asistencia.descripcion"></textarea></td>
+                <td><textarea id="txtObservacion" ng-model="asistencia.observacion"></textarea></td>
+              </tr>
+          </tbody>
+        </table>
+      <input type="submit" ng-click="enviar()" value="Guardar" id="guardar">
+      <div class="loading-div" id="loading">
+          <img src="./assets/loading.gif" class="loading-image"/>
+      </div>
       <button onclick="window.location.href='/#!principal'">atrás</button>
       </fieldset>
-      </form>
+    </form>
 </div>
                       
 

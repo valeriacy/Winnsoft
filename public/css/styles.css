@@ -10,6 +10,11 @@
 	margin-left: 35%;
 }
 
+.myGrid {
+    width: 50vw;
+    height: 1vw;
+  }
+
 .newSesion input{
 	width: 2.5vw;
 	height: 2.5vw;

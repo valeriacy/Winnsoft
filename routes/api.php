@@ -25,10 +25,12 @@ Route::get('/obtenerInscripciones/{idUsuario}','InscripcionController@obtenerIns
 Route::get('/obtenerDictadas/{idUsuario}','InscripcionController@obtenerDictadas');
 Route::get('/obtenerAuxiliadas/{idUsuario}','InscripcionController@obtenerAuxiliadas');
 Route::get('/sesiones/{idGrupo}','SesionController@showByGrupoId');
+Route::get('/sesionAbierta/{grupoId}','SesionController@obtenerSesionAbiertaPorGrupo');
 Route::get('/entregas/{productoId}','EntregaController@getAllByProducto');
 Route::get('/usuarioNombres/{id}','usuariocontroller@getNames');
 Route::get('/basic/{id}','usuariocontroller@getBasicInfo');
 Route::get('/inscritos/{idGrupo}','InscripcionController@obtenerInscritos');
+Route::post('/guardarAsistencias','AsistenciaController@storeAll');
 
 Route::resource('Materia', 'MateriaController');
 Route::resource('Docente', 'DocenteController');

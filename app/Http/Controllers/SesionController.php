@@ -50,6 +50,10 @@ class SesionController extends Controller
         $sesion->save();
     }
 
+    public function obtenerSesionAbiertaPorGrupo($grupoId){
+        return Sesion::where('grupo_id', $grupoId)->where('cerrado', false)->get()->first();
+    }
+
     public function cerrarSesionAbierta($idGrupo){
         $sesiones = $this->showByGrupoId($idGrupo);
         foreach ($sesiones as $sesion) {

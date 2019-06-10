@@ -1,6 +1,6 @@
 let usuario;
 
-let app = angular.module("myApp", ["ngRoute", "ngAnimate"]);
+let app = angular.module("myApp", ["ngRoute", "ngAnimate", "ui.grid"]);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -187,13 +187,48 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
 function sesionesAuxCtrl ($http,$scope,$location, $routeParams){
     if(usuario && usuario.rol === "auxiliar"){
         $scope.user = usuario;
+        $scope.fechaActual = new Date();
         $scope.$watch('inscritos', watchFunction);
+        $scope.enviar=() => {
+            let contador = 0;
+            let tamanho = $scope.asistencias.length;
+            for(asistencia of $scope.asistencias){
+                mostrarGifLoading();
+                let fecha = $scope.fechaActual.getFullYear()+"-"+$scope.fechaActual.getMonth()+"-"+$scope.fechaActual.getDate();
+                let obj = {
+                    fecha : fecha,
+                    sesionId : $scope.sesion.id,
+                    descripcion : asistencia.descripcion,
+                    observacion : asistencia.observacion,
+                    asistio : asistencia.asistio,
+                    inscripcionId : asistencia.inscripcionId
+                };
+                consumirApi($http,
+                    {
+                        method: 'POST',
+                        url: "/api/Asistencia",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data : JSON.stringify(obj)
+                    },
+                    (response)=>{
+                        contador++; 
+                        if(contador===tamanho){
+                            ocultarGifLoading();
+                            alert("Se guardaron todos los registros exitosamente");
+                            $location.path("/principal");
+                        }
+                    },
+                    (error)=>{console.error(error);}
+                    );
+            }
+        };
         cargarMenuAuxiliar( $location, $scope);
-        obtenerInscritosPorGrupo($http, $scope, $routeParams.grupoId);
+        obtenerSesionAbiertaPorGrupoId($http, $scope, $routeParams.grupoId);
     }
     else
         $location.path(RAIZ);
-
 }
 function agregarPortafolioCtrl($http,$scope,$location){
     if(usuario){

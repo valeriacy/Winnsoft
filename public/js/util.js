@@ -513,8 +513,37 @@ function obtenerInscritosPorGrupo(httpService, scope, grupoId){
                 },
                 (response)=>{
                     scope.inscritos = response.data
+                    scope.asistencias = crearArrayAsistencias(scope.inscritos);
                 }, 
                 (error)=>{
                     console.error(error);
                 });
+}
+
+function crearArrayAsistencias(inscritos){
+    let asistencias = [];
+    for(inscrito of inscritos){
+        asistencias.push({
+            inscripcionId : inscrito.inscripcionId,
+            descripcion : "Ninguna",
+            observacion : "Ninguna",
+            asistio : false
+        });
+    }
+    return asistencias;
+}
+
+function obtenerSesionAbiertaPorGrupoId(httpService, scope, grupoId){
+    consumirApi(httpService,
+        {
+            method: 'GET',
+            url: "/api/sesionAbierta/"+grupoId
+        },
+        (response)=>{
+            scope.sesion = response.data
+            obtenerInscritosPorGrupo(httpService, scope, grupoId, scope.sesion.id, scope.fechaActual);
+        }, 
+        (error)=>{
+            console.error(error);
+        });
 }

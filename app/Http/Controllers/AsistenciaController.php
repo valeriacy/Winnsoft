@@ -35,7 +35,28 @@ class AsistenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $asistencia = new Asistencia();
+        $asistencia->inscripcion_id = $request->inscripcionId;
+        $asistencia->fecha = $request->fecha;
+        $asistencia->asistio = $request->asistio;
+        $asistencia->descripcion = $request->descripcion;
+        $asistencia->observacion = $request->observacion;
+        $asistencia->sesion_Id = $request->sesionId;
+        $asistencia->save();
+    }
+
+    public function storeAll(Request $request){
+        foreach ($request->asistencias as $asistencia) {
+            $model = new Asistencia();
+
+            $model->inscripcion_id = $asistencia->inscripcionId;
+            $model->fecha = $request->fecha;
+            $model->asistio = $asistencia->asistio;
+            $model->descripcion = $asistencia->descripcion;
+            $model->observacion = $asistencia->observacion;
+            $model->sesion_Id = $request->sesionId;
+            $model->save();
+        }
     }
 
     /**
