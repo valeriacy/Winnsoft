@@ -186,14 +186,16 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
 function sesionesAuxCtrl ($http, $scope, $location, $routeParams){
     if(usuario && usuario.rol === "auxiliar"){
         $scope.user = usuario;
+        $scope.nuevo = true;
         $scope.fechaActual = new Date();
         $scope.$watch('inscritos', (oldValue, newValue)=>{
             if(oldValue===newValue)
                 return;
             hideMainLoad();
-            alert("Ya se registro las asistencias de esta sesion, pero puede editarlas");
+            if(!$scope.nuevo)
+                alert("Ya se registro las asistencias de esta sesion, pero puede editarlas");
         });
-        $scope.enviar=() => {
+        $scope.enviar = () => {
             let contador = 0;
             let tamanho = $scope.asistencias.length;
             for(asistencia of $scope.asistencias){
@@ -228,6 +230,41 @@ function sesionesAuxCtrl ($http, $scope, $location, $routeParams){
                     );
             }
         };
+        $scope.actualizar = () => {
+            let contador = 0;
+            let tamanho = $scope.asistencias.length;
+            for(asistencia of $scope.asistencias){
+                mostrarGifLoading();
+                let fecha = $scope.fechaActual.getFullYear()+"-"+($scope.fechaActual.getMonth()+1)+"-"+$scope.fechaActual.getDate();
+                let obj = {
+                    descripcion : asistencia.descripcion,
+                    observacion : asistencia.observacion,
+                    asistio : asistencia.asistio
+                };
+                consumirApi($http,
+                    {
+                        method: 'PUT',
+                        url: "/api/Asistencia/"+asistencia.id,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        data : JSON.stringify(obj)
+                    },
+                    (response)=>{
+                        contador++; 
+                        if(contador===tamanho){
+                            ocultarGifLoading();
+                            alert("Se actualizaron los registros exitosamente");
+                            $location.path("/principal");
+                        }
+                    },
+                    (error)=>{console.error(error);}
+                    );
+            }
+        }
+        $scope.cambiar = (index) => {
+            $scope.asistencias[index].asistio = $scope.asistencias[index].asistio-1 === 0 ? true:false;
+        }
         cargarMenuAuxiliar( $location, $scope);
         obtenerSesionAbiertaPorGrupoId($http, $scope, $routeParams.grupoId);
     }

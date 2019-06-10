@@ -101,7 +101,11 @@ class AsistenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $asistencia = Asistencia::find($id);
+        $asistencia->asistio = $request->asistio;
+        $asistencia->descripcion = $request->descripcion;
+        $asistencia->observacion = $request->observacion;
+        $asistencia->save();
     }
 
     /**

@@ -22,13 +22,14 @@
           <tbody>
               <tr ng-repeat="asistencia in asistencias">
                 <td>{{inscritos[$index].nombre}} {{inscritos[$index].apellido}}</td>
-                <td><label><input type="checkbox" id="cbox1" ng-model="asistencia.asistio" ng-checked="asistencia.asistio==1"> </label><br></td>
+                <td><label><input type="checkbox" id="cbox1" ng-model="asistencia.asistio" ng-click="cambiar($index)" ng-checked="asistencia.asistio==1"> </label><br></td>
                 <td><textarea id="txtDescripcion" ng-model="asistencia.descripcion"></textarea></td>
                 <td><textarea id="txtObservacion" ng-model="asistencia.observacion"></textarea></td>
               </tr>
           </tbody>
         </table>
-      <input type="submit" ng-click="enviar()" value="Guardar" id="guardar">
+      <input ng-if="nuevo" type="submit" ng-click="enviar()" value="Guardar" id="guardar">
+      <input ng-if="!nuevo" type="submit" ng-click="actualizar()" value="Actualizar" id="guardar"> 
       <div class="loading-div" id="loading">
           <img src="./assets/loading.gif" class="loading-image"/>
       </div>

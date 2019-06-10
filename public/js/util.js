@@ -513,7 +513,6 @@ function obtenerInscritosPorGrupo(httpService, scope, grupoId){
                 },
                 (response)=>{
                     scope.inscritos = response.data;
-
                     scope.asistencias = crearArrayAsistencias(scope.inscritos);
                 }, 
                 (error)=>{
@@ -529,6 +528,7 @@ function revisarSiYaSeRegistro(httpService, scope, sesionId, grupoId){
         },
         (response)=>{
             if(response.data > 0){
+                scope.nuevo = false;
                 obtenerAsistenciasPorSesion(httpService, scope, sesionId);
             }else{
                 obtenerInscritosPorGrupo(httpService, scope, grupoId);
