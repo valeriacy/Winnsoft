@@ -50,13 +50,7 @@ class InscripcionController extends Controller
         $numeroOferta = Oferta::find($idgrupo)->pluck('grupo')->first();
         $inscritos = array();
         foreach ($inscripciones as $inscripcion) {
-            $inscrito = usuario::find($inscripcion->usuario_id);
-            unset($inscrito->rol);
-            unset($inscrito->nombre_usuario);
-            unset($inscrito->contra);
-            unset($inscrito->created_at);
-            unset($inscrito->updated_at);
-            $inscrito->inscripcionId = $inscripcion->id;
+            $inscrito = $this->obtenerInscritoPorInscripcionId($inscripcion);
             array_push($inscritos, $inscrito);
         }
         return $inscritos;
@@ -117,6 +111,17 @@ class InscripcionController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function obtenerInscritoPorInscripcionId($inscripcion){
+        $inscrito = usuario::find($inscripcion->usuario_id);
+        unset($inscrito->rol);
+        unset($inscrito->nombre_usuario);
+        unset($inscrito->contra);
+        unset($inscrito->created_at);
+        unset($inscrito->updated_at);
+        $inscrito->inscripcionId = $inscripcion->id;
+        return $inscrito;
     }
 
     /**

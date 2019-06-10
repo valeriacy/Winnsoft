@@ -30,7 +30,8 @@ Route::get('/entregas/{productoId}','EntregaController@getAllByProducto');
 Route::get('/usuarioNombres/{id}','usuariocontroller@getNames');
 Route::get('/basic/{id}','usuariocontroller@getBasicInfo');
 Route::get('/inscritos/{idGrupo}','InscripcionController@obtenerInscritos');
-Route::post('/guardarAsistencias','AsistenciaController@storeAll');
+Route::get('/asistenciasHoy/{sesionId}','AsistenciaController@getTodaysAsistence');
+Route::get('/asistenciasHoyCompleto/{sesionId}','AsistenciaController@getAllAsistenceBySesion');
 
 Route::resource('Materia', 'MateriaController');
 Route::resource('Docente', 'DocenteController');

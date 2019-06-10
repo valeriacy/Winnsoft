@@ -182,26 +182,30 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
     }
     else
         $location.path(RAIZ);
-
 }
-function sesionesAuxCtrl ($http,$scope,$location, $routeParams){
+function sesionesAuxCtrl ($http, $scope, $location, $routeParams){
     if(usuario && usuario.rol === "auxiliar"){
         $scope.user = usuario;
         $scope.fechaActual = new Date();
-        $scope.$watch('inscritos', watchFunction);
+        $scope.$watch('inscritos', (oldValue, newValue)=>{
+            if(oldValue===newValue)
+                return;
+            hideMainLoad();
+            alert("Ya se registro las asistencias de esta sesion, pero puede editarlas");
+        });
         $scope.enviar=() => {
             let contador = 0;
             let tamanho = $scope.asistencias.length;
             for(asistencia of $scope.asistencias){
                 mostrarGifLoading();
-                let fecha = $scope.fechaActual.getFullYear()+"-"+$scope.fechaActual.getMonth()+"-"+$scope.fechaActual.getDate();
+                let fecha = $scope.fechaActual.getFullYear()+"-"+($scope.fechaActual.getMonth()+1)+"-"+$scope.fechaActual.getDate();
                 let obj = {
                     fecha : fecha,
                     sesionId : $scope.sesion.id,
                     descripcion : asistencia.descripcion,
                     observacion : asistencia.observacion,
                     asistio : asistencia.asistio,
-                    inscripcionId : asistencia.inscripcionId
+                    inscripcionId : asistencia.inscripcion_id
                 };
                 consumirApi($http,
                     {

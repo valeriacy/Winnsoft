@@ -22,7 +22,7 @@
           <tbody>
               <tr ng-repeat="asistencia in asistencias">
                 <td>{{inscritos[$index].nombre}} {{inscritos[$index].apellido}}</td>
-                <td><label><input type="checkbox" id="cbox1" value="first_checkbox" ng-model="asistencia.asistio"> </label><br></td>
+                <td><label><input type="checkbox" id="cbox1" ng-model="asistencia.asistio" ng-checked="asistencia.asistio==1"> </label><br></td>
                 <td><textarea id="txtDescripcion" ng-model="asistencia.descripcion"></textarea></td>
                 <td><textarea id="txtObservacion" ng-model="asistencia.observacion"></textarea></td>
               </tr>

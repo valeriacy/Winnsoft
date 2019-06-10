@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Asistencia;
+use App\Inscripcion;
+use App\usuario;
+use App\Http\Controllers\InscripcionController;
 
 class AsistenciaController extends Controller
 {
@@ -37,26 +40,12 @@ class AsistenciaController extends Controller
     {
         $asistencia = new Asistencia();
         $asistencia->inscripcion_id = $request->inscripcionId;
-        $asistencia->fecha = $request->fecha;
+        $asistencia->fecha = date('Y-m-d');
         $asistencia->asistio = $request->asistio;
         $asistencia->descripcion = $request->descripcion;
         $asistencia->observacion = $request->observacion;
         $asistencia->sesion_Id = $request->sesionId;
         $asistencia->save();
-    }
-
-    public function storeAll(Request $request){
-        foreach ($request->asistencias as $asistencia) {
-            $model = new Asistencia();
-
-            $model->inscripcion_id = $asistencia->inscripcionId;
-            $model->fecha = $request->fecha;
-            $model->asistio = $asistencia->asistio;
-            $model->descripcion = $asistencia->descripcion;
-            $model->observacion = $asistencia->observacion;
-            $model->sesion_Id = $request->sesionId;
-            $model->save();
-        }
     }
 
     /**
@@ -68,6 +57,28 @@ class AsistenciaController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function getTodaysAsistence($sesionId){
+
+        return sizeof(Asistencia::whereDate('fecha', '=', date('Y-m-d'))->where("sesion_id", $sesionId)->get());
+    }
+
+    public function getAllAsistenceBySesion($sesionId){
+        $asistencias = Asistencia::where("sesion_id", $sesionId)->get();
+        $inscripcionController = new InscripcionController();
+        $inscritos = array();
+        $asistenciasRes = array();
+        foreach($asistencias as $asistencia){
+           $inscripcion = Inscripcion::find($asistencia->inscripcion_id);
+           $inscrito = $inscripcionController->obtenerInscritoPorInscripcionId($inscripcion);
+           array_push($inscritos, $inscrito);
+           array_push($asistenciasRes, $asistencia);
+        }
+        return response()->json([
+            'inscritos' => $inscritos,
+            'asistencias' => $asistencias
+        ]);
     }
 
     /**

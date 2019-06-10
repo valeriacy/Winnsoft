@@ -512,7 +512,8 @@ function obtenerInscritosPorGrupo(httpService, scope, grupoId){
                     url: "/api/inscritos/"+grupoId
                 },
                 (response)=>{
-                    scope.inscritos = response.data
+                    scope.inscritos = response.data;
+
                     scope.asistencias = crearArrayAsistencias(scope.inscritos);
                 }, 
                 (error)=>{
@@ -520,11 +521,44 @@ function obtenerInscritosPorGrupo(httpService, scope, grupoId){
                 });
 }
 
+function revisarSiYaSeRegistro(httpService, scope, sesionId, grupoId){
+    consumirApi(httpService,
+        {
+            method: 'GET',
+            url: "/api/asistenciasHoy/"+sesionId
+        },
+        (response)=>{
+            if(response.data > 0){
+                obtenerAsistenciasPorSesion(httpService, scope, sesionId);
+            }else{
+                obtenerInscritosPorGrupo(httpService, scope, grupoId);
+            }
+        }, 
+        (error)=>{
+            console.error(error);
+        });
+}
+
+function obtenerAsistenciasPorSesion(httpService, scope, sesionId){
+    consumirApi(httpService,
+        {
+            method: 'GET',
+            url: "/api/asistenciasHoyCompleto/"+sesionId
+        },
+        (response)=>{
+            scope.inscritos = response.data.inscritos;
+            scope.asistencias = response.data.asistencias;
+        }, 
+        (error)=>{
+            console.error(error);
+        });
+}
+
 function crearArrayAsistencias(inscritos){
     let asistencias = [];
     for(inscrito of inscritos){
         asistencias.push({
-            inscripcionId : inscrito.inscripcionId,
+            inscripcion_id : inscrito.inscripcionId,
             descripcion : "Ninguna",
             observacion : "Ninguna",
             asistio : false
@@ -541,7 +575,7 @@ function obtenerSesionAbiertaPorGrupoId(httpService, scope, grupoId){
         },
         (response)=>{
             scope.sesion = response.data
-            obtenerInscritosPorGrupo(httpService, scope, grupoId, scope.sesion.id, scope.fechaActual);
+            revisarSiYaSeRegistro(httpService, scope, scope.sesion.id, grupoId);
         }, 
         (error)=>{
             console.error(error);
