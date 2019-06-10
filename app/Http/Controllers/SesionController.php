@@ -72,7 +72,7 @@ class SesionController extends Controller
      */
     public function show($id)
     {
-        return $this->getSesionById($id);
+        return Sesion::find($id);
     }
 
     public function showByGrupoId($idGrupo)
@@ -99,9 +99,10 @@ class SesionController extends Controller
         }
 
         $response = new \stdClass();
-        $response->id=$attributes['id'];
-        $response->numero=$attributes['numero'];
-        $response->cerrado=$attributes['cerrado'];
+        $response->id = $attributes['id'];
+        $response->numero = $attributes['numero'];
+        $response->cerrado = $attributes['cerrado'];
+        $response->grupoId = $attributes['grupo_id'];
         $response->productos = $productos;
 
         return $response;

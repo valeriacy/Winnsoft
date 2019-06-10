@@ -40,23 +40,27 @@ app.config(function($routeProvider) {
     })
     .when("/verEntregas/:productoId",
     {
-    templateUrl:"/tablaEntregas.html",
-    controller:"entregasCtrl",
+        templateUrl:"/tablaEntregas.html",
+        controller:"entregasCtrl",
     })
     .when("/verEntrega/:entregaId",
     {
-    templateUrl:"/entregaEstudiante.html",
-    controller:"entregaCtrl",
+        templateUrl:"/entregaEstudiante.html",
+        controller:"entregaCtrl",
     })
     .when ("/tareasD",
-{
-    templateUrl:"tareasD.html",
-    controller:"tareasDCtrl",
-})
-.when("/sesionesAux/:grupoId",{
-    templateUrl:"/sesionAux.html",
-    controller:"sesionesAuxCtrl"
-})
+    {
+        templateUrl:"tareasD.html",
+        controller:"tareasDCtrl",
+    })
+    .when("/sesionesAux/:grupoId",{
+        templateUrl:"/sesionAux.html",
+        controller:"sesionesAuxCtrl"
+    })
+    .when("/reporteSesion/:sesionId",{
+        templateUrl:"/sesionAux.html",
+        controller:"reporteSesionCtrl"
+    })
 });
 
 app.controller("mainCtrl", mainCtrl);
@@ -70,6 +74,7 @@ app.controller("sesionesCtrl",sesionesCtrl);
 app.controller("entregasCtrl",entregasCtrl);
 app.controller("entregaCtrl",entregaCtrl);
 app.controller("sesionesAuxCtrl",sesionesAuxCtrl);
+app.controller("reporteSesionCtrl",reporteSesionCtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
@@ -325,6 +330,9 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
             }
             enviarNuevoProducto(producto, $http, $scope, usuario.id, $routeParams.id)
         };
+        $scope.aReporte = (sesionId) => {
+           $location.path("/reporteSesion/"+sesionId);
+        };
         $scope.$watch("oferta", watchFunction)
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
@@ -332,4 +340,19 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
     }
     else
         $location.path(RAIZ);
+}
+
+function reporteSesionCtrl($http, $scope, $location, $routeParams){
+    if(usuario){
+        $scope.user = usuario;
+        $scope.$watch("inscritos", watchFunction);
+        $scope.atras = () => {
+            $location.path("/sesiones/"+$scope.sesion.grupo_id)
+        };
+        cargarMenuPara(usuario.rol, $location, $scope);
+        obtenerSesionPorId($http, $scope, $routeParams.sesionId);
+        obtenerAsistenciasPorSesion($http, $scope, $routeParams.sesionId)
+    }else{
+        $location.path(RAIZ);
+    }
 }

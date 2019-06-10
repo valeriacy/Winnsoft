@@ -1,3 +1,5 @@
+<div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
+
 <div class="tablaEntrega">
     <table border="1">
         <thead>
@@ -9,7 +11,8 @@
             <tr>
                 <th> Apellidos</th>
                 <th> Nombres</th>
-                <th>Producto : 1</th>
+                <th> Asistio</th>
+                <th>Producto :1</th>
                 <th>Producto :2</th>
                 
             </tr>
@@ -19,6 +22,7 @@
 
                 <td>{{entrega.apellido}}</td>
                 <td>{{entrega.nombre}}</td>
+                <td>SI</td>
                 <td> No Entrego</td>
                 <td> Si Entrego</td>
                 

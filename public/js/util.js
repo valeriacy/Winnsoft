@@ -581,3 +581,17 @@ function obtenerSesionAbiertaPorGrupoId(httpService, scope, grupoId){
             console.error(error);
         });
 }
+
+function obtenerSesionPorId(httpService, scope, sesionId){
+    consumirApi(httpService,
+        {
+            method: 'GET',
+            url: "/api/Sesion/"+sesionId
+        },
+        (response)=>{
+            scope.sesion = response.data
+        }, 
+        (error)=>{
+            console.error(error);
+        });
+}

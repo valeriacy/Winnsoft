@@ -1,14 +1,15 @@
 <div id="main-load-div" class="main-loading">
-    
   <img id="secondGif" src="../assets/cargando.gif" />
 </div>
 <div ng-if="user.rol === 'auxiliar'" ng-include="'/shared/header_auxiliar.html'" style="width: 100vw;"></div>
+<div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
 
 <div class="tablaControl">
     <form>
       <fieldset class="fielset" style="margin-bottom: 1vw; margin-left: 10vw;">
       <h4>Nro sesion actual: {{sesion.numero}}</h4>
-      <h4>Fecha : {{fechaActual | date:'dd-MM-yyyy'}}</h4>
+      <h4 ng-if="user.rol === 'auxiliar'">Fecha : {{fechaActual | date:'dd-MM-yyyy'}}</h4>
+      <h4 ng-if="user.rol === 'docente'">Fecha : {{asistencias[0].fecha}}</h4>
       <!--<div ui-grid="{ data: inscritos }" class="myGrid"></div>-->
       <table style ="width:auto;" border="1" id="largeTable">
           <thead>
@@ -20,20 +21,27 @@
               </tr>
           </thead>
           <tbody>
-              <tr ng-repeat="asistencia in asistencias">
+              <tr ng-if="!nuevo && user.rol === 'auxiliar'" ng-repeat="asistencia in asistencias">
                 <td>{{inscritos[$index].nombre}} {{inscritos[$index].apellido}}</td>
                 <td><label><input type="checkbox" id="cbox1" ng-model="asistencia.asistio" ng-click="cambiar($index)" ng-checked="asistencia.asistio==1"> </label><br></td>
                 <td><textarea id="txtDescripcion" ng-model="asistencia.descripcion"></textarea></td>
                 <td><textarea id="txtObservacion" ng-model="asistencia.observacion"></textarea></td>
               </tr>
+              <tr ng-if="!nuevo && user.rol === 'docente'" ng-repeat="asistencia in asistencias">
+                  <td>{{inscritos[$index].nombre}} {{inscritos[$index].apellido}}</td>
+                  <td><label><input type="checkbox" id="cbox1" ng-model="asistencia.asistio" ng-checked="asistencia.asistio==1" disabled> </label><br></td>
+                  <td><textarea id="txtDescripcion" ng-model="asistencia.descripcion" disabled></textarea></td>
+                  <td><textarea id="txtObservacion" ng-model="asistencia.observacion" disabled></textarea></td>
+                </tr>
           </tbody>
         </table>
-      <input ng-if="nuevo" type="submit" ng-click="enviar()" value="Guardar" id="guardar">
-      <input ng-if="!nuevo" type="submit" ng-click="actualizar()" value="Actualizar" id="guardar"> 
+      <input ng-if="nuevo && user.rol === 'auxiliar'" type="submit" ng-click="enviar()" value="Guardar" id="guardar">
+      <input ng-if="!nuevo && user.rol === 'auxiliar'" type="submit" ng-click="actualizar()" value="Actualizar" id="guardar"> 
       <div class="loading-div" id="loading">
           <img src="./assets/loading.gif" class="loading-image"/>
       </div>
-      <button onclick="window.location.href='/#!principal'">atrás</button>
+      <button ng-if="!nuevo && user.rol === 'auxiliar'" onclick="window.location.href='/#!principal'">atrás</button>
+      <button ng-if="!nuevo && user.rol === 'docente'" ng-click="atras()">Atrás</button>
       </fieldset>
     </form>
 </div>
