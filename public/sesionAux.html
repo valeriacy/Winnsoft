@@ -21,7 +21,7 @@
               </tr>
           </thead>
           <tbody>
-              <tr ng-if="!nuevo && user.rol === 'auxiliar'" ng-repeat="asistencia in asistencias">
+              <tr ng-if="user.rol === 'auxiliar'" ng-repeat="asistencia in asistencias">
                 <td>{{inscritos[$index].nombre}} {{inscritos[$index].apellido}}</td>
                 <td><label><input type="checkbox" id="cbox1" ng-model="asistencia.asistio" ng-click="cambiar($index)" ng-checked="asistencia.asistio==1"> </label><br></td>
                 <td><textarea id="txtDescripcion" ng-model="asistencia.descripcion"></textarea></td>
@@ -40,8 +40,8 @@
       <div class="loading-div" id="loading">
           <img src="./assets/loading.gif" class="loading-image"/>
       </div>
-      <button ng-if="!nuevo && user.rol === 'auxiliar'" onclick="window.location.href='/#!principal'">atrás</button>
-      <button ng-if="!nuevo && user.rol === 'docente'" ng-click="atras()">Atrás</button>
+      <button ng-if="user.rol === 'auxiliar'" onclick="window.location.href='/#!principal'">atrás</button>
+      <button ng-if="user.rol === 'docente'" ng-click="atras()">Atrás</button>
       </fieldset>
     </form>
 </div>
