@@ -305,9 +305,6 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
 
             let entrega = {
                 descripcion:text,
-                nombreArchivo:file,
-                tamanho:size,
-                tipo:tipo,
                 usuarioId:usuario.id,
                 productoId:productoId
             }
