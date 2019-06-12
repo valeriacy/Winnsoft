@@ -9,9 +9,14 @@
   "devDependencies": {
     "axios": "^0.15.2",
     "bootstrap-sass": "^3.3.7",
-    "jquery": "^3.1.0",
+    "jquery": "^3.4.1",
     "laravel-mix": "^0.5.0",
     "lodash": "^4.16.2",
     "vue": "^2.0.1"
+  },
+  "dependencies": {
+    "angular-ui-grid": "^4.8.0",
+    "datatables.net": "^1.10.19",
+    "datatables.net-dt": "^1.10.19"
   }
 }
