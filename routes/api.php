@@ -41,3 +41,4 @@ Route::resource('Sesion', 'SesionController');
 Route::resource('Producto', 'ProductoController');
 Route::resource('Entrega', 'EntregaController');
 Route::resource('Asistencia', 'AsistenciaController');
+Route::resource('Archivo', 'ArchivoController');
