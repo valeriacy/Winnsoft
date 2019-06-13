@@ -42,8 +42,6 @@ function obtener_ofertas(httpService, scope){
 
 function estaEnLista(idMateria, array){
     encontrado=false;
-    console.log(idMateria);
-    console.log(array);
     if(array){
         for(let i=0; i<array.length; i++){
             if(idMateria===array[i].id){
@@ -275,7 +273,7 @@ function logOut(location){
     location.path(PUBLICA)
 }
 
-function crearEntrega(entrega, httpService){
+function crearEntrega(entrega, withFile, httpService, scope){
     let req = {
         method: 'POST',
         url: "/api/Entrega",
@@ -288,8 +286,9 @@ function crearEntrega(entrega, httpService){
                     req, 
                     (response)=>{
                         let entregaId = response.data;
-                        uploadFile(httpService, entregaId);
-                        reemplazarDivEntrega(entrega);
+                        if(withFile)
+                            uploadFile(httpService, entregaId, scope);
+                        reemplazarDivEntrega(entregaId, httpService, scope);
                     },
                     (error)=>{
                         console.error(error);
@@ -297,7 +296,7 @@ function crearEntrega(entrega, httpService){
                 )
 }
 
-function uploadFile (httpService, entregaId){
+function uploadFile (httpService, entregaId, scope){
     let request = {
         method: 'POST',
         url: '/api/subirArchivo/'+entregaId,
@@ -308,15 +307,37 @@ function uploadFile (httpService, entregaId){
     };
     consumirApi(httpService,
                 request,
-                (response)=>{alert("ok");},
+                (response)=>{
+                    reemplazarDivEntrega(entregaId, httpService, scope);
+                    alert("Entrega exitosa");
+                },
                 (error)=>{console.error(error)})
 }
 
-function reemplazarDivEntrega(entrega){
-    let productoId = entrega.productoId;
-    let entregaDiv = document.querySelector("#div-crear-entrega-"+productoId);
-    let newEntregaDiv = crearElementoHTMLEntrega(entrega);
-    entregaDiv.innerHTML = newEntregaDiv.innerHTML;
+function reemplazarDivEntrega(entregaId, httpService, scope){
+    consumirApi(httpService,
+        {
+            method: 'GET',
+            url: '/api/entrega/'+entregaId,
+        }, 
+        (response)=>{
+            let entrega = response.data;
+            agregarAProducto(scope, entrega);
+        },
+        (error)=>{
+            console.error(error);
+        })
+    alert("Entrega exitosa");
+}
+
+function agregarAProducto(scope, entrega){
+    let productoPadre = entrega.producto_id;
+    for(sesion of scope.sesiones){
+        for(producto of sesion.productos){
+            if(producto.id === productoPadre)
+                producto.entregas.push(entrega);
+        }
+    }
 }
 
 function crearElementoHTMLEntrega(entrega){

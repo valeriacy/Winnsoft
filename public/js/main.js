@@ -315,16 +315,14 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
             let fileInput=document.querySelector("#file-"+productoId);
             
             let text=textArea.value;
-            let file=fileInput.value;
-            let size=0;
-            let tipo="nan";
+            let withFile=fileInput.value !== "";
 
             let entrega = {
                 descripcion:text,
                 usuarioId:usuario.id,
                 productoId:productoId
             }
-            crearEntrega(entrega, $http);
+            crearEntrega(entrega, withFile, $http, $scope);
         };
         $scope.cargarVerEntregas = (productoId) => {
             $location.path('/verEntregas/'+productoId);

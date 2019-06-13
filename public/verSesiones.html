@@ -76,10 +76,17 @@
                             <div>Descripcion: {{producto.descripcion}}</div>
                         </div>
                         <div ng-if="user.rol === 'estudiante'">
-                            <label>Archivo:</label>
-                            <a href="/api/descargar/{{producto.entregas[0].archivos[0].id}}">{{producto.entregas[0].archivos[0].nombre_archivo}}</a>
-                            <label>Descripción:</label> 
-                            <p>{{producto.entregas[0].descripcion}}</p>
+                            <div>
+                                <label>Descripción:</label> 
+                                <p>{{producto.entregas[0].descripcion}}</p>
+                            </div>
+                            <div ng-if="producto.entregas[0].archivos.length > 0">
+                                <label>Archivo:</label>
+                                <a href="/api/descargar/{{producto.entregas[0].archivos[0].id}}">{{producto.entregas[0].archivos[0].nombre_archivo}}</a>
+                            </div>
+                            <div ng-if="producto.entregas[0].archivos.length == 0">
+                                    <label>Archivo: Ninguno</label>
+                                </div>
                         </div>                        
                         <button ng-if="user.rol === 'docente'" ng-click="cargarVerEntregas(producto.id)" class="entregasButton">Ver Entregas</button>
                     </div>

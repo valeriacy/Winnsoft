@@ -80,6 +80,8 @@ class EntregaController extends Controller
         $entrega->numeroSesion = $numeroSesion;
         $entrega->grupo = $grupo;
         $entrega->archivos = $archivoController->show($id);
+        unset($entrega->created_at);
+        unset($entrega->updated_at);
 
         return $entrega;
     }
