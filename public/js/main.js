@@ -190,6 +190,9 @@ function entregasCtrl($http, $scope, $location, $routeParams){
     if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
         $scope.$watch("entregas", watchFunction);
+        $scope.atras = () =>{
+            $location.path('/sesiones/'+$scope.producto.grupoId);
+        }
         let productoId = $routeParams.productoId;
         cargarMenuPara(usuario.rol, $location, $scope);
         cargarEntregasPorProducto($http, $scope, productoId);
@@ -204,6 +207,9 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
         $scope.user = usuario;
         cargarMenuPara(usuario.rol, $location, $scope);
         $scope.$watch("estudiante", watchFunction);
+        $scope.atras = () => {
+            $location.path('/verEntregas/'+$scope.entrega.producto_id);
+        }
         cargarEntregaPorId($http, $scope, $routeParams.entregaId)
     }
     else

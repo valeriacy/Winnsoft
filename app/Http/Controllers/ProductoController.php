@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Producto;
+use App\Sesion;
 use App\Entrega;
 use App\Http\Controllers\EntregaController;
 
@@ -57,27 +58,35 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        return $this->getProductoById($id);
+        $producto = $this->getProductoById($id);
+        return response()->json([
+            'id' => $producto->id,
+            'numero' => $producto->numero,
+            'cerrado' => $producto->cerrado,
+            'fechaCaducidad' => $producto->fechaCaducidad,
+            'descripcion' => $producto->descripcion,
+            'grupoId' => $producto->grupoId,
+            'entregas' => $producto->entregas
+        ]);
     }
 
     public function getProductoById($id)
     {
         $producto = Producto::find($id); 
         $attributes = $producto->getAttributes();
+        $sesion = Sesion::find($producto->sesion_id);
         $productoId = $attributes['id'];
         $entregaIds = Entrega::where('producto_id' ,'=' ,$productoId)->pluck('id')->toArray();
         $entregaController = new EntregaController();
-        $entregas = array();
-        foreach ($entregaIds as $id) {
-            array_push($entregas, $entregaController->getEntregaById($id));
-        }
+        $entregas = $entregaController->getAllByProducto($productoId);
 
         $response = new \stdClass();
-        $response->id=$attributes['id'];
-        $response->numero=$attributes['numero'];
-        $response->cerrado=$attributes['cerrado'];
-        $response->fechaCaducidad=$attributes['fecha_caducidad'];
-        $response->descripcion=$attributes['descripcion'];
+        $response->id = $attributes['id'];
+        $response->numero = $attributes['numero'];
+        $response->cerrado = $attributes['cerrado'];
+        $response->fechaCaducidad = $attributes['fecha_caducidad'];
+        $response->descripcion = $attributes['descripcion'];
+        $response->grupoId = $sesion->grupo_id;
         $response->entregas=$entregas;
 
         return $response;

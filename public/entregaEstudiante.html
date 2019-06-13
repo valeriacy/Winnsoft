@@ -3,7 +3,7 @@
 </div>
 <div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
 <div class="entregaEstudiante" style="margin-bottom: 1vw; padding: 1.2rem 0;">
-        <form>
+        <div>
                 <div>
                         <label align="right">Nombre(s):</label>
                         <input type="text" disabled value="{{estudiante.nombre}}">
@@ -33,8 +33,15 @@
                         <label align="right">Descripcion:</label>
                         <textarea disabled>{{entrega.descripcion}}</textarea>
                 </div>
+                <div ng-if="entrega.archivos.length > 0">
+                        <label>Archivo adjunto:</label>
+                        <a href="/api/descargar/{{entrega.archivos[0].id}}">{{entrega.archivos[0].nombre_archivo}}</a>
+                </div>
+                <div ng-if="entrega.archivos.length == 0">
+                        <label>Archivo adjunto: Ninguno</label>
+                </div>
                 <div>
-                        <button> Aceptar</button>
+                        <button ng-click="atras()"> Aceptar</button>
                 </div> 
-        </form>
+        </div>
 </div>

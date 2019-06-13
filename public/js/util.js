@@ -441,12 +441,13 @@ function cargarMenuPara(rol, location, scope){
 function cargarEntregasPorProducto(httpService, scope, productoId){
     let req = {
         method: 'GET',
-        url: "/api/entregas/"+productoId
+        url: "/api/Producto/"+productoId
     }
     consumirApi(httpService,
                     req, 
                     (response)=>{
-                        scope.entregas = response.data;
+                        scope.producto = response.data;
+                        scope.entregas = response.data.entregas;
                     },
                     (error)=>{
                         console.error(error);
