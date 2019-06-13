@@ -77,7 +77,7 @@
                         </div>
                         <div ng-if="user.rol === 'estudiante'">
                             <label>Archivo:</label>
-                            <label>{{producto.entregas[0].nombre_archivo}}.{{producto.entregas[0].tipo}}</label>
+                            <a href="/api/descargar/{{producto.entregas[0].archivos[0].id}}">{{producto.entregas[0].archivos[0].nombre_archivo}}</a>
                             <label>Descripción:</label> 
                             <p>{{producto.entregas[0].descripcion}}</p>
                         </div>                        

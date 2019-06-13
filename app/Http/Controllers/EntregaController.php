@@ -8,6 +8,7 @@ use App\Producto;
 use App\Sesion;
 use App\Oferta;
 use App\usuario;
+use App\Http\Controllers\ArchivoController;
 
 class EntregaController extends Controller
 {
@@ -73,10 +74,12 @@ class EntregaController extends Controller
         $numeroSesion = Sesion::where('id',$sesionId)->value('numero');
         $ofertaId = Sesion::where('id', $sesionId)->value('grupo_id');
         $grupo = Oferta::where('id',$ofertaId)->value('grupo');
+        $archivoController = new ArchivoController();
 
         $entrega->numeroProducto = $numeroProducto;
         $entrega->numeroSesion = $numeroSesion;
         $entrega->grupo = $grupo;
+        $entrega->archivos = $archivoController->show($id);
 
         return $entrega;
     }
