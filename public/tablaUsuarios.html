@@ -1,0 +1,29 @@
+<div ng-if="user.rol === 'administrador'" ng-include="'/shared/header_administrador.html'" style="width: 100vw;"></div>
+
+
+<div class="titulo1" style="margin-left: 20vw;">
+    Lista de Usuarios  
+</div> 
+<div class="" style="margin-left: 20vw;">
+        <table >
+            <thead>
+                    <tr>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                             <th>Rol</th>
+                             <th>Nombre usuario</th>
+                    </tr>
+                      
+            </thead>
+                <tbody>
+                    <tr ng-repeat="oferta in ofertas">
+                                <td>{{user.nombre}}</td>
+                                <td>{{user.apellido}}</td>
+                                <td>{{user.rol}}</td>
+                                <td>{{user.nombre_usuario}}</td>
+                     </tr>
+                </tbody>
+                
+            </table>
+                         
+</div>

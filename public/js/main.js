@@ -1,6 +1,6 @@
 let usuario;
 
-let app = angular.module("myApp", ["ngRoute", "ngAnimate", "ui.grid"]);
+let app = angular.module("myApp", ["ngRoute", "ngAnimate"]);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
@@ -65,6 +65,12 @@ app.config(function($routeProvider) {
         templateUrl:"/reporteEstudiantes.html",
         controller:"reporteGeneralCtrl"
     })
+    .when("/usuariosA",
+    {
+    templateUrl:"/tablaUsuarios.html",
+    controller:"usuariosACtrl"
+    })
+    
 });
 
 app.controller("mainCtrl", mainCtrl);
@@ -80,6 +86,7 @@ app.controller("entregaCtrl",entregaCtrl);
 app.controller("sesionesAuxCtrl",sesionesAuxCtrl);
 app.controller("reporteSesionCtrl",reporteSesionCtrl);
 app.controller("reporteGeneralCtrl",reporteGeneralCtrl);
+app.controller("usuariosACtrl",usuariosACtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
@@ -158,6 +165,15 @@ function registerCtrl($scope, $http, $location){
         validarNombreUsuarioYGuardar($http, $location);
     };
 }
+function usuariosACtrl($scope,$http,$location){
+    if(usuario && usuario.rol === "administrador"){
+        $scope.user = usuario;
+        cargarMenuAdministrador($location, $scope);
+    }else{
+        $location.path(RAIZ);
+    }
+}
+
 function misMateriasCtrl($http,$scope,$location){
     if(usuario){
         $scope.user = usuario;
