@@ -42,7 +42,7 @@ class ArchivoController extends Controller
 
     public function guardar(Request $request, $id){
         $validator = Validator::make($request->file(), [
-            'file' => 'required|image|max:500000',
+            'file' => 'required|mimes:zip,rar|max:5000000',
         ]);
         if ($validator->fails()) {
             $errors = [];
@@ -57,7 +57,7 @@ class ArchivoController extends Controller
             'tamanho' => $request->file('file')->getClientSize(),
             'entrega_id' => $id
         ]);
-        $request->file('file')->move(__DIR__ . '/../../../uploads/', $file->id . '.' . $file->tipo);
+        $request->file('file')->move(__DIR__ . '/../../../uploads/', $file->id . '-'. $id .'.' . $file->tipo);
     }
 
     /**
@@ -68,7 +68,15 @@ class ArchivoController extends Controller
      */
     public function show($id)
     {
-        //
+        return Archivo::where("entrega_id", $id)->get();
+    }
+
+    public function descargar($id){
+        $archivo = Archivo::find($id);
+        $entregaId = $archivo->entrega_id;
+        $tipo = $archivo->tipo;
+        $nombreUpload = $id ."-". $entregaId . "." .$tipo;
+        return response()->download(base_path('/uploads/'.$nombreUpload), $archivo->nombre_archivo);
     }
 
     /**
