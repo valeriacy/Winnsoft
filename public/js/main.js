@@ -70,6 +70,11 @@ app.config(function($routeProvider) {
     templateUrl:"/tablaUsuarios.html",
     controller:"usuariosACtrl"
     })
+    .when("/gruposA",
+    {
+   templateUrl:"/crearGrupo.html",
+   controller: "crearGrupoCtrl"
+    })
     
 });
 
@@ -87,6 +92,7 @@ app.controller("sesionesAuxCtrl",sesionesAuxCtrl);
 app.controller("reporteSesionCtrl",reporteSesionCtrl);
 app.controller("reporteGeneralCtrl",reporteGeneralCtrl);
 app.controller("usuariosACtrl",usuariosACtrl);
+app.controller("crearGrupoCtrl",crearGrupoCtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
@@ -166,6 +172,14 @@ function registerCtrl($scope, $http, $location){
     };
 }
 function usuariosACtrl($scope,$http,$location){
+    if(usuario && usuario.rol === "administrador"){
+        $scope.user = usuario;
+        cargarMenuAdministrador($location, $scope);
+    }else{
+        $location.path(RAIZ);
+    }
+}
+function crearGrupoCtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
         $scope.user = usuario;
         cargarMenuAdministrador($location, $scope);

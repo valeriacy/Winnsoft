@@ -366,7 +366,7 @@ function cargarMenuAdministrador(location, scope){
         location.path("/usuariosA");
     };
     scope.gruposA = () => {
-        location.path("/usuariosA");
+        location.path("/gruposA");
     }; 
     scope.sesionesA = () => {
         location.path("/usuariosA");
