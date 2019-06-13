@@ -356,6 +356,30 @@ function cargarMenuAuxiliar(location, scope){
     }
     
 }
+function cargarMenuAdministrador(location, scope){
+    menu=funcionColapsable();
+    scope.mostrar_menu=menu;
+    scope.inicioD = () => {
+        location.path("/principal");
+    };
+    scope.usuariosA= () => {
+        location.path("/usuariosA");
+    };
+    scope.gruposA = () => {
+        location.path("/usuariosA");
+    }; 
+    scope.sesionesA = () => {
+        location.path("/usuariosA");
+    }; 
+    scope.gestionarA = () => {
+        location.path("/usuariosA");
+    }; 
+    
+    scope.logOut = () => {
+        logOut(location);
+    }
+
+}
 
 function cargarMenuPara(rol, location, scope){
     switch (rol) {
@@ -367,6 +391,9 @@ function cargarMenuPara(rol, location, scope){
           break;
         case 'auxiliar':
           cargarMenuAuxiliar(location, scope);
+          break;
+          case 'administrador':
+          cargarMenuAdministrador(location,scope);
           break;
         default:
           console.log('Lo lamentamos, por el momento no disponemos de ' + rol + '.');
