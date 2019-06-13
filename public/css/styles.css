@@ -298,10 +298,10 @@ border:10px solid rgb(0,128,128);
 }
 .contenedor_oficial{
     background-color: rgb(255, 255, 255);
-	width:70%;
+	width:auto;
     height: auto;
-	margin-left: 10vw;
-	margin-right: 10vw;
+	margin-left: 15vw;
+	margin-right: 15vw;
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 		font-size: 16px; 
 		align-items: center;
