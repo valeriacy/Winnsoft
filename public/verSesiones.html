@@ -62,7 +62,7 @@
                             </div>
                             <div ng-if="user.rol === 'estudiante'" id="div-crear-entrega-{{producto.id}}">
                                 <label>Cargar Archivo:</label>
-                                <input id="file-{{producto.id}}" type="file">
+                                <input type="file" ng-files="setTheFiles($files)" id="file-{{producto.id}}">
                                 <label>Descripción:</label> 
                                 <textarea id="descripcion-{{producto.id}}">   </textarea>
                                 <button id="enviar" ng-click="enviar(producto.id)">Enviar</button>

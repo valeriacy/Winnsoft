@@ -32,6 +32,7 @@ Route::get('/basic/{id}','usuariocontroller@getBasicInfo');
 Route::get('/inscritos/{idGrupo}','InscripcionController@obtenerInscritos');
 Route::get('/asistenciasHoy/{sesionId}','AsistenciaController@getTodaysAsistence');
 Route::get('/asistenciasHoyCompleto/{sesionId}','AsistenciaController@getAllAsistenceBySesion');
+Route::post('/subirArchivo/{id}','ArchivoController@guardar');
 
 Route::resource('Materia', 'MateriaController');
 Route::resource('Docente', 'DocenteController');

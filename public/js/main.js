@@ -337,7 +337,13 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         };
         $scope.aReporteGeneral = () => {
             $location.path("/reporteGrupo/"+$routeParams.id);
-         };
+        };
+        $scope.setTheFiles = function ($files) {
+            angular.forEach($files, function (value, key) {
+                console.log(value);
+                formData.append('file', value);
+            });
+        };
         $scope.$watch("oferta", watchFunction)
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
@@ -370,3 +376,17 @@ function reporteGeneralCtrl($http, $scope, $location, $routeParams){
         $location.path(RAIZ);
     }
 }
+
+app.directive('ngFiles', ['$parse', function ($parse) {
+
+    function file_links(scope, element, attrs) {
+        var onChange = $parse(attrs.ngFiles);
+        element.on('change', function (event) {
+            onChange(scope, {$files: event.target.files});
+        });
+    }
+
+    return {
+        link: file_links
+    }
+}]);

@@ -1,5 +1,6 @@
 const RAIZ="/login";
 const PUBLICA="/";
+let formData = new FormData();
 
 function logIn(httpService, req, contra, location){
     httpService(req)
@@ -286,13 +287,29 @@ function crearEntrega(entrega, httpService){
     consumirApi(httpService,
                     req, 
                     (response)=>{
-                        console.log(response.data);
+                        let entregaId = response.data;
+                        uploadFile(httpService, entregaId);
                         reemplazarDivEntrega(entrega);
                     },
                     (error)=>{
                         console.error(error);
                     }
                 )
+}
+
+function uploadFile (httpService, entregaId){
+    let request = {
+        method: 'POST',
+        url: '/api/subirArchivo/'+entregaId,
+        data: formData,
+        headers: {
+            'Content-Type': undefined
+        }
+    };
+    consumirApi(httpService,
+                request,
+                (response)=>{alert("ok");},
+                (error)=>{console.error(error)})
 }
 
 function reemplazarDivEntrega(entrega){
