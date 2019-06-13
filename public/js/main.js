@@ -204,6 +204,9 @@ function entregasCtrl($http, $scope, $location, $routeParams){
     if(usuario && usuario.rol === "docente"){
         $scope.user = usuario;
         $scope.$watch("entregas", watchFunction);
+        $scope.atras = () =>{
+            $location.path('/sesiones/'+$scope.producto.grupoId);
+        }
         let productoId = $routeParams.productoId;
         cargarMenuPara(usuario.rol, $location, $scope);
         cargarEntregasPorProducto($http, $scope, productoId);
@@ -218,6 +221,9 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
         $scope.user = usuario;
         cargarMenuPara(usuario.rol, $location, $scope);
         $scope.$watch("estudiante", watchFunction);
+        $scope.atras = () => {
+            $location.path('/verEntregas/'+$scope.entrega.producto_id);
+        }
         cargarEntregaPorId($http, $scope, $routeParams.entregaId)
     }
     else
@@ -329,19 +335,14 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
             let fileInput=document.querySelector("#file-"+productoId);
             
             let text=textArea.value;
-            let file=fileInput.value;
-            let size=0;
-            let tipo="nan";
+            let withFile=fileInput.value !== "";
 
             let entrega = {
                 descripcion:text,
-                nombreArchivo:file,
-                tamanho:size,
-                tipo:tipo,
                 usuarioId:usuario.id,
                 productoId:productoId
             }
-            crearEntrega(entrega, $http);
+            crearEntrega(entrega, withFile, $http, $scope);
         };
         $scope.cargarVerEntregas = (productoId) => {
             $location.path('/verEntregas/'+productoId);
@@ -370,7 +371,13 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         };
         $scope.aReporteGeneral = () => {
             $location.path("/reporteGrupo/"+$routeParams.id);
-         };
+        };
+        $scope.setTheFiles = function ($files) {
+            angular.forEach($files, function (value, key) {
+                console.log(value);
+                formData.append('file', value);
+            });
+        };
         $scope.$watch("oferta", watchFunction)
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
@@ -403,3 +410,17 @@ function reporteGeneralCtrl($http, $scope, $location, $routeParams){
         $location.path(RAIZ);
     }
 }
+
+app.directive('ngFiles', ['$parse', function ($parse) {
+
+    function file_links(scope, element, attrs) {
+        var onChange = $parse(attrs.ngFiles);
+        element.on('change', function (event) {
+            onChange(scope, {$files: event.target.files});
+        });
+    }
+
+    return {
+        link: file_links
+    }
+}]);

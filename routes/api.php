@@ -27,11 +27,14 @@ Route::get('/obtenerAuxiliadas/{idUsuario}','InscripcionController@obtenerAuxili
 Route::get('/sesiones/{idGrupo}','SesionController@showByGrupoId');
 Route::get('/sesionAbierta/{grupoId}','SesionController@obtenerSesionAbiertaPorGrupo');
 Route::get('/entregas/{productoId}','EntregaController@getAllByProducto');
+Route::get('/entrega/{Id}','EntregaController@getEntregaById');
 Route::get('/usuarioNombres/{id}','usuariocontroller@getNames');
 Route::get('/basic/{id}','usuariocontroller@getBasicInfo');
 Route::get('/inscritos/{idGrupo}','InscripcionController@obtenerInscritos');
 Route::get('/asistenciasHoy/{sesionId}','AsistenciaController@getTodaysAsistence');
 Route::get('/asistenciasHoyCompleto/{sesionId}','AsistenciaController@getAllAsistenceBySesion');
+Route::post('/subirArchivo/{id}','ArchivoController@guardar');
+Route::get('/descargar/{id}','ArchivoController@descargar');
 
 Route::resource('Materia', 'MateriaController');
 Route::resource('Docente', 'DocenteController');
@@ -41,3 +44,4 @@ Route::resource('Sesion', 'SesionController');
 Route::resource('Producto', 'ProductoController');
 Route::resource('Entrega', 'EntregaController');
 Route::resource('Asistencia', 'AsistenciaController');
+Route::resource('Archivo', 'ArchivoController');

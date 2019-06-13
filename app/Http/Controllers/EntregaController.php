@@ -8,6 +8,7 @@ use App\Producto;
 use App\Sesion;
 use App\Oferta;
 use App\usuario;
+use App\Http\Controllers\ArchivoController;
 
 class EntregaController extends Controller
 {
@@ -45,12 +46,11 @@ class EntregaController extends Controller
         $entrega = new Entrega;
         $entrega->fecha = $date;
         $entrega->descripcion = $request->descripcion;
-        $entrega->nombre_archivo = $request->nombreArchivo;
-        $entrega->tamanho = $request->tamanho;
-        $entrega->tipo = $request->tipo;
         $entrega->usuario_id = $request->usuarioId;
         $entrega->producto_id = $request->productoId;
         $entrega ->save();
+
+        return $entrega->id;
     }
 
     /**
@@ -74,10 +74,14 @@ class EntregaController extends Controller
         $numeroSesion = Sesion::where('id',$sesionId)->value('numero');
         $ofertaId = Sesion::where('id', $sesionId)->value('grupo_id');
         $grupo = Oferta::where('id',$ofertaId)->value('grupo');
+        $archivoController = new ArchivoController();
 
         $entrega->numeroProducto = $numeroProducto;
         $entrega->numeroSesion = $numeroSesion;
         $entrega->grupo = $grupo;
+        $entrega->archivos = $archivoController->show($id);
+        unset($entrega->created_at);
+        unset($entrega->updated_at);
 
         return $entrega;
     }

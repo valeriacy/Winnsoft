@@ -205,19 +205,5 @@ class ofertaSeeder extends Seeder
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
-
-        \DB::table('entregas')->insert([
-            'id' => 1,
-            'fecha' => $date,
-            'descripcion' => "Entrega de la tarea de elementos",
-            'nombre_archivo' => "tarea",
-            'tamanho' => 5,
-            'tipo' => "txt",
-            'usuario_id' => 1,
-            'producto_id' => 4,
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
     }
 }

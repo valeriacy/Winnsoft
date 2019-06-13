@@ -21,6 +21,12 @@
 	transition-duration: .4s;
 }
 
+.entrega-div{
+	margin-top: 0.5em;
+	background-color: rgb(245, 246, 248);
+	border:solid 2px rgb(104, 104, 103);
+}
+
 .newSesion input:hover{
 	filter: brightness(120%);
 }
