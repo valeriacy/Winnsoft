@@ -86,6 +86,7 @@ app.controller("entregaCtrl",entregaCtrl);
 app.controller("sesionesAuxCtrl",sesionesAuxCtrl);
 app.controller("reporteSesionCtrl",reporteSesionCtrl);
 app.controller("reporteGeneralCtrl",reporteGeneralCtrl);
+app.controller("usuariosACtrl",usuariosACtrl);
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){

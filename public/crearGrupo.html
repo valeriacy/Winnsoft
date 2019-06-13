@@ -1,0 +1,60 @@
+<div ng-if="user.rol === 'administrador'" ng-include="'/shared/header_administrador.html'" style="width: 100vw;"></div>
+<div class="titulo1" style="margin-left: 20vw;">
+        Crear Grupo :
+    </div> 
+<div class="contenedor_oficial">
+    <form autocomplete="off">
+         <div> 
+             <label > Materia:</label>
+             <select>
+                    <option value="">Introduccion a la Programacion</option>
+                    <option value="">Elementos de Programacion y Estruc.datos</option>
+                    <option value="">Base de datos I</option>
+                  </select>       
+         </div>
+         <div> 
+                <label > Grupo:</label>
+                <select disabled>
+                       <option value="">1</option>
+                       <option value="">2</option>
+                       <option value="">3</option>
+                       <option value="">4</option>
+                       <option value="">5</option>
+                       <option value="">6</option>
+                     </select>       
+            </div>
+            <div>
+                 <label>Hora inicio:</label>
+                 <input type="time" name="usr_time">
+                </div>
+             <div>
+                 <label>Hora Fin:</label>
+                 <input type="time" name="usr_time">
+             </div>
+             <div> 
+                    <label > Docente:</label>
+                    <select>
+                           <option value="">Flores Villarroel Corina</option>
+                           <option value="">Salazar Serrudo Carla</option>
+                           <option value="">Costas Jauregui Vladimir</option>
+                           <option value="">Blanco Coca Leticia</option>
+                           <option value="">Ustariz Vargas Hernan</option>
+                           <option value="">Montaño Quiroga Victor H.</option>
+                         </select>       
+                </div>
+                <div> 
+                        <label > Auxiliar:</label>
+                        <select>
+                               <option value="">Balderrama Gabriela</option>
+                               <option value="">Perez Alexandra</option>
+                               <option value="">Lopez Juan</option>
+                               <option value="">Jimenez Danilo</option>
+                             </select>       
+                    </div>
+                <div>    
+                    <button class="btn__submit">GUARDAR</button>
+                     <div class="loading-div" id="loading">
+                     <img src="./assets/loading.gif" class="loading-image"/>
+                 </div>
+    </form>
+</div>
