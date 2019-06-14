@@ -406,8 +406,8 @@ function cargarMenuAdministrador(location, scope){
     scope.gruposA = () => {
         location.path("/gruposA");
     }; 
-    scope.sesionesA = () => {
-        location.path("/usuariosA");
+    scope.materiasA = () => {
+        location.path("/materiasA");
     }; 
     scope.gestionarA = () => {
         location.path("/usuariosA");

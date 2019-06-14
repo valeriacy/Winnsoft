@@ -467,3 +467,16 @@ border:10px solid rgb(0,128,128);
             margin: 18px auto;
             color:blue;
 }
+.crearMateria{
+	width: 50%;
+	margin-left: 20vw;
+	margin-left: 20vw;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 16px;
+	border:solid 2px black;
+		padding: 1vw;
+		background-color: white;
+		color:black;
+		margin-bottom: 3vw;
+
+}
