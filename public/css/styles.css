@@ -228,7 +228,7 @@ input[type=text]:focus, [type=password]:focus {
 	margin: 1rem 0 .3rem;
 	background-color: #31B1E5;
     color: white;
-	width: 50%;
+	width: 40%;
 	text-align: center;
 	margin-bottom: 0.35em;
 }
@@ -479,4 +479,25 @@ border:10px solid rgb(0,128,128);
 		color:black;
 		margin-bottom: 3vw;
 
+}
+.divCrearGrupo{
+	align-content: center;
+	width: 35%;
+	background: beige;
+	margin-left: 30%;
+	padding: 0.3vw;
+	margin-bottom: 1vw;
+	color: #2C3E50;
+
+}
+.button{
+	border: none;
+	padding: .5rem 0;
+	margin: 1rem 0 .3rem;
+	background-color: #31B1E5;
+    color: white;
+	width: 10%;
+	text-align: center;
+	margin-bottom: 0.35em;
+	font-size: 16px;
 }

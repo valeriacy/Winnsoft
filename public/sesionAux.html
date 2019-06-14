@@ -6,7 +6,7 @@
 
 <div class="tablaControl">
     <form>
-      <fieldset class="fielset" style="margin-bottom: 1vw; margin-left: 10vw;">
+      <fieldset class="fielset" style="margin-bottom: 1vw; margin-left: 10vw;background:white">
       <h4>Nro sesion actual: {{sesion.numero}}</h4>
       <h4 ng-if="user.rol === 'auxiliar'">Fecha : {{fechaActual | date:'dd-MM-yyyy'}}</h4>
       <h4 ng-if="user.rol === 'docente'">Fecha : {{asistencias[0].fecha}}</h4>
@@ -35,13 +35,19 @@
                 </tr>
           </tbody>
         </table>
-      <input ng-if="nuevo && user.rol === 'auxiliar'" type="submit" ng-click="enviar()" value="Guardar" id="guardar">
-      <input ng-if="!nuevo && user.rol === 'auxiliar'" type="submit" ng-click="actualizar()" value="Actualizar" id="guardar"> 
+        
+            <input class="button" ng-if="nuevo && user.rol === 'auxiliar'" type="submit" ng-click="enviar()" value="Guardar" id="guardar">
+            <input class="button"ng-if="!nuevo && user.rol === 'auxiliar'" type="submit" ng-click="actualizar()" value="Actualizar" id="guardar"> 
+        
+     
       <div class="loading-div" id="loading">
           <img src="./assets/loading.gif" class="loading-image"/>
       </div>
-      <button ng-if="user.rol === 'auxiliar'" onclick="window.location.href='/#!principal'">atrás</button>
-      <button ng-if="user.rol === 'docente'" ng-click="atras()">Atrás</button>
+     
+          <button class="button" ng-if="user.rol === 'auxiliar'" onclick="window.location.href='/#!principal'">atrás</button>
+          <button class="button" ng-if="user.rol === 'docente'" ng-click="atras()">Atrás</button>
+     
+      
       </fieldset>
     </form>
 </div>
