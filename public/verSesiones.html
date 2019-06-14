@@ -12,8 +12,20 @@
     <div class="mainContainer">
         <label style="text-align: center;">{{oferta[2].nombre}}</label>
         <div ng-if="user.rol === 'docente'" class="newSesion">
-            <button ng-click="aReporteGeneral()">Reporte General</button>
-            <input type="image" src="./assets/plus.png" title="Crear nueva sesion" ng-click="crearSesion()" />
+            <div>
+                <button ng-click="aReporteGeneral()">Reporte General</button>
+            </div> 
+            <input type="image" src="./assets/plus.png" title="Crear nueva sesion" ng-click="mostrarFormSesion()" />
+        </div>
+        <div id="sesionForm" class="formSesion hidden">
+            <div>
+                <label for="fecha">Fecha de Caducidad:</label>
+                <input type="date" name="fecha"/>
+            </div>        
+            <div>
+                <button ng-click="crearSesion()">Crear</button>
+                <button ng-click="cancelSesion()">Cancelar</button>
+            </div>                               
         </div>
         <div ng-repeat="sesion in sesiones" class="sesionDiv">
             <button ng-if="user.rol === 'docente'" ng-click="aReporte(sesion.id)" >Reporte</button>
@@ -26,10 +38,6 @@
                     <input type="image" src="./assets/plus.png" title="Crear nuevo producto" ng-click="crearProducto(sesion.id)" />
                 </div>
                 <div id="productoForm-{{sesion.id}}" class="hidden">
-                    <div>
-                        <label for="fecha">Fecha de Caducidad:</label>
-                        <input type="date" name="fecha"/>
-                    </div>
                     <div>
                         <label for="descripcion">Descripcion del Producto:</label>
                         <textarea name="descripcion"></textarea>

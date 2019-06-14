@@ -125,13 +125,12 @@ body{
 }
 
 #mainGif{
-	margin-top: 10vh;
+
 	width: 20vw;
 	height: 20vw;
 }
 #secondGif{
 	
-	margin-top: 2vh;
 	width: 5vw;
 	height: 5vw;
 }
@@ -289,6 +288,15 @@ input[type=text]:focus, [type=password]:focus {
 	color: #F39B53;
 	font-size: 13px;
 	text-decoration: none;
+}
+
+.formSesion{
+	width: 40vw;
+	font-size: 0.5em;
+}
+
+.formSesion div{
+	text-align: center;
 }
 
 .form__recover:hover {
