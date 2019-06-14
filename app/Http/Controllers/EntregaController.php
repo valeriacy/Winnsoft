@@ -89,6 +89,7 @@ class EntregaController extends Controller
     public function getAllByProducto($productId){
         $entregas = Entrega::where('producto_id' ,$productId)->get();
         $response = array();
+        $archivoController = new ArchivoController();
 
         foreach ($entregas as $entrega) {
             $attributes = $entrega->getAttributes();
@@ -97,9 +98,12 @@ class EntregaController extends Controller
             $attributesUsuario = $usuario->getAttributes();
 
             $element = new \stdClass();
+            $element->usuario_id = $attributesUsuario['id'];
             $element->nombre = $attributesUsuario['nombre'];
             $element->apellido = $attributesUsuario['apellido'];
             $element->entregaId = $attributes["id"];
+            $element->descripcion = $attributes["descripcion"];
+            $element->archivos = $archivoController->show($entrega->id);
 
             array_push($response, $element);
         }

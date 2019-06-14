@@ -309,7 +309,6 @@ function uploadFile (httpService, entregaId, scope){
                 request,
                 (response)=>{
                     reemplazarDivEntrega(entregaId, httpService, scope);
-                    alert("Entrega exitosa");
                 },
                 (error)=>{console.error(error)})
 }
