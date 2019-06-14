@@ -8,7 +8,12 @@
         <thead>
             <td class="tableHeader" colspan="2">Estudiante</td>
             <td class="tableHeader" colspan="3">Reporte Auxiliar</td>
-            <td class="tableHeader" colspan="{{sesionElegida.productos.length}}">Sesion: <button class="sesionButton" ng-repeat="sesion in sesiones" ng-click="cargarProductos(sesion)" id="sesion{{sesion.numero}}"> {{sesion.numero}} </button></td>
+            <td class="tableHeader" colspan="{{sesionElegida.productos.length}}">
+                Sesion: 
+                <div>
+                    <button class="sesionButton" ng-repeat="sesion in sesiones" ng-click="cargarProductos(sesion)" id="sesion{{sesion.numero}}"> {{sesion.numero}} </button>
+                </div>
+            </td>
         </thead>
         <thead>
             <tr>

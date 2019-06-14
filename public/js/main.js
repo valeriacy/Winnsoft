@@ -388,7 +388,6 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         };
         $scope.setTheFiles = function ($files) {
             angular.forEach($files, function (value, key) {
-                console.log(value);
                 formData.append('file', value);
             });
         };
