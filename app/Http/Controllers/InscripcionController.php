@@ -64,7 +64,7 @@ class InscripcionController extends Controller
         $sesionController = new SesionController();
         foreach ($inscripciones as $inscripcion) {
             $inscrito = $this->obtenerInscritoPorInscripcionId($inscripcion);
-            $inscrito->sesiones = $sesionController->getAllByGroupNUser($idgrupo, $inscrito->id);
+            $inscrito->sesiones = $sesionController->getAllByGroupNUser($idgrupo, $inscrito->id, $inscripcion->id);
             array_push($inscritos, $inscrito);
         }
         return $inscritos;

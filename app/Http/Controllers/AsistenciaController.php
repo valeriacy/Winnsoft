@@ -92,6 +92,10 @@ class AsistenciaController extends Controller
         //
     }
 
+    public function hasAsisted($sesionId, $inscripcionId){
+        return Asistencia::where('sesion_id', $sesionId)->where('inscripcion_id', $inscripcionId)->get()->first();
+    }
+
     /**
      * Update the specified resource in storage.
      *

@@ -419,7 +419,25 @@ function reporteSesionCtrl($http, $scope, $location, $routeParams){
 function reporteGeneralCtrl($http, $scope, $location, $routeParams){
     if(usuario){
         $scope.user = usuario;
-        $scope.$watch("sesiones", watchFunction);
+        $scope.cargarProductos = (sesion)=>{
+            $scope.sesionElegida = sesion;
+            for(inscrito of $scope.inscritos){
+                inscrito.sesion = inscrito.sesiones.find(element => element.id === sesion.id); 
+            }
+            let buttons = document.querySelectorAll(".sesionButton");
+            for(button of buttons){
+                button.classList.remove("isSelected");
+            }
+            let selectedButton = document.querySelector("#sesion"+sesion.numero);
+            selectedButton.classList.add("isSelected");
+        }
+        $scope.$watch("sesiones",  (oldValue, newValue)=>{
+            if(oldValue===newValue)
+                return;
+            hideMainLoad();
+            if($scope.sesiones.length > 0)
+                $scope.cargarProductos($scope.sesiones[0]);
+        });
         cargarMenuPara(usuario.rol, $location, $scope);
         consumirApi($http,
             {
@@ -444,13 +462,9 @@ function reporteGeneralCtrl($http, $scope, $location, $routeParams){
                 console.error(error);
             });
         $scope.sesionElegida = undefined;
-        $scope.cargarProductos= (sesion)=>{
-            $scope.sesionElegida = sesion;
-            for(inscrito of $scope.inscritos){
-                inscrito.sesion = inscrito.sesiones.find(element => element.id === sesion.id); 
-            }
-        }
-            
+        $scope.atras = () => {
+            window.history.back();
+        }   
     }else{
         $location.path(RAIZ);
     }

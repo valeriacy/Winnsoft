@@ -7,6 +7,7 @@ use App\Sesion;
 use App\Producto;
 use App\Entrega;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\AsistenciaController;
 
 class SesionController extends Controller
 {
@@ -108,12 +109,14 @@ class SesionController extends Controller
         return $response;
     }
 
-    public function getAllByGroupNUser($idGrupo, $idUser){
+    public function getAllByGroupNUser($idGrupo, $idUser, $idInscripcion){
         $sesiones = Sesion::where('grupo_id', $idGrupo)->get();
         $productoController = new ProductoController();
+        $asistenciasController = new AsistenciaController();
 
         foreach ($sesiones as $sesion) {
             $sesion->productos = $productoController->getAllBySesionNUserId($sesion->id, $idUser);
+            $sesion->asistencia = $asistenciasController->hasAsisted($sesion->id, $idInscripcion);
         }
         return $sesiones;
     }
