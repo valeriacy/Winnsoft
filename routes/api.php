@@ -31,6 +31,7 @@ Route::get('/entrega/{Id}','EntregaController@getEntregaById');
 Route::get('/usuarioNombres/{id}','usuariocontroller@getNames');
 Route::get('/basic/{id}','usuariocontroller@getBasicInfo');
 Route::get('/inscritos/{idGrupo}','InscripcionController@obtenerInscritos');
+Route::get('/reporteInscritos/{idGrupo}','InscripcionController@obtenerInscritosYEntregas');
 Route::get('/asistenciasHoy/{sesionId}','AsistenciaController@getTodaysAsistence');
 Route::get('/asistenciasHoyCompleto/{sesionId}','AsistenciaController@getAllAsistenceBySesion');
 Route::post('/subirArchivo/{id}','ArchivoController@guardar');

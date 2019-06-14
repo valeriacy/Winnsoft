@@ -92,6 +92,15 @@ class ProductoController extends Controller
         return $response;
     }
 
+    public function getAllBySesionNUserId($sesionId, $userId){
+        $productos = Producto::where("sesion_id", $sesionId)->get();
+        $entregaController = new EntregaController();
+        foreach ($productos as $producto) {
+            $producto->entregas = $entregaController->getAllbyUserNProduct($userId, $producto->id);   
+        }
+        return $productos;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

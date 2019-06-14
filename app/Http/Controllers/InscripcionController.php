@@ -7,6 +7,7 @@ use App\Inscripcion;
 use App\Materia;
 use App\Oferta;
 use App\Http\Controllers\OfertaController;
+use App\Http\Controllers\SesionController;
 use App\usuario;
 
 class InscripcionController extends Controller
@@ -51,6 +52,19 @@ class InscripcionController extends Controller
         $inscritos = array();
         foreach ($inscripciones as $inscripcion) {
             $inscrito = $this->obtenerInscritoPorInscripcionId($inscripcion);
+            array_push($inscritos, $inscrito);
+        }
+        return $inscritos;
+    }
+
+    public function obtenerInscritosYEntregas($idgrupo){
+        $inscripciones = Inscripcion::where('oferta_id', '=', $idgrupo)->get();
+        $numeroOferta = Oferta::find($idgrupo)->pluck('grupo')->first();
+        $inscritos = array();
+        $sesionController = new SesionController();
+        foreach ($inscripciones as $inscripcion) {
+            $inscrito = $this->obtenerInscritoPorInscripcionId($inscripcion);
+            $inscrito->sesiones = $sesionController->getAllByGroupNUser($idgrupo, $inscrito->id);
             array_push($inscritos, $inscrito);
         }
         return $inscritos;

@@ -1,3 +1,6 @@
+<div id="main-load-div" class="main-loading">
+    <img id="secondGif" src="../assets/cargando.gif" />
+</div>
 <div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
 
 <div class="tablaEntrega">
@@ -5,27 +8,37 @@
         <thead>
             <td> </td>
             <td></td>
-            <td colspan="2">Sesion :2 </td>
+            <td colspan="{{sesionElegida.productos.length+1}}">Sesion: <button ng-repeat="sesion in sesiones" ng-click="cargarProductos(sesion)"> {{sesion.numero}} </button></td>
         </thead>
         <thead>
             <tr>
-                <th> Apellidos</th>
-                <th> Nombres</th>
-                <th> Asistio</th>
-                <th>Producto :1</th>
-                <th>Producto :2</th>
-                
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Asistio</th>
+                <th ng-repeat = "producto in sesionElegida.productos">Producto :{{producto.numero}}</th>                
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="entrega in entregas">
+            <tr ng-repeat="inscrito in inscritos">
 
-                <td>{{entrega.apellido}}</td>
-                <td>{{entrega.nombre}}</td>
+                <td>{{inscrito.apellido}}</td>
+                <td>{{inscrito.nombre}}</td>
                 <td>SI</td>
-                <td> No Entrego</td>
-                <td> Si Entrego</td>
-                
+                <td ng-repeat = "producto in inscrito.sesion.productos">
+                    <div ng-if="producto.entregas.length > 0">
+                        <div>
+                            Tiene entrega
+                        </div>
+                        <div>
+                            <a href="#!verEntrega/{{producto.entregas[0].id}}">ver</a>
+                        </div>
+                    </div>
+                    <div ng-if="producto.entregas.length === 0">
+                        <div>
+                            No entrego
+                        </div>
+                    </div>
+                </td>
             </tr>
         </tbody>        
      </table>

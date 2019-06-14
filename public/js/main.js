@@ -236,7 +236,7 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
         cargarMenuPara(usuario.rol, $location, $scope);
         $scope.$watch("estudiante", watchFunction);
         $scope.atras = () => {
-            $location.path('/verEntregas/'+$scope.entrega.producto_id);
+            window.history.back();
         }
         cargarEntregaPorId($http, $scope, $routeParams.entregaId)
     }
@@ -419,7 +419,38 @@ function reporteSesionCtrl($http, $scope, $location, $routeParams){
 function reporteGeneralCtrl($http, $scope, $location, $routeParams){
     if(usuario){
         $scope.user = usuario;
+        $scope.$watch("sesiones", watchFunction);
         cargarMenuPara(usuario.rol, $location, $scope);
+        consumirApi($http,
+            {
+                method: 'GET',
+                url: "/api/reporteInscritos/"+$routeParams.grupoId
+            },
+            (response)=>{
+                $scope.inscritos = response.data;
+            }, 
+            (error)=>{
+                console.error(error);
+            });
+        consumirApi($http,
+            {
+                method: 'GET',
+                url: "/api/sesiones/"+$routeParams.grupoId
+            },
+            (response)=>{
+                $scope.sesiones = response.data;
+            }, 
+            (error)=>{
+                console.error(error);
+            });
+        $scope.sesionElegida = undefined;
+        $scope.cargarProductos= (sesion)=>{
+            $scope.sesionElegida = sesion;
+            for(inscrito of $scope.inscritos){
+                inscrito.sesion = inscrito.sesiones.find(element => element.id === sesion.id); 
+            }
+        }
+            
     }else{
         $location.path(RAIZ);
     }

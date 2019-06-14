@@ -106,7 +106,16 @@ class SesionController extends Controller
         $response->productos = $productos;
 
         return $response;
+    }
 
+    public function getAllByGroupNUser($idGrupo, $idUser){
+        $sesiones = Sesion::where('grupo_id', $idGrupo)->get();
+        $productoController = new ProductoController();
+
+        foreach ($sesiones as $sesion) {
+            $sesion->productos = $productoController->getAllBySesionNUserId($sesion->id, $idUser);
+        }
+        return $sesiones;
     }
 
     /**
