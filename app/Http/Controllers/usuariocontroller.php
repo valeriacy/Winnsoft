@@ -106,7 +106,9 @@ class usuariocontroller extends Controller
         $usuario->nombre = $request->nombre;
         $usuario->apellido = $request->apellido;
         $usuario->contra = $request->contra;
+        $usuario->rol = $request->rol;
         $usuario->save();
+        return usuario::all();
     }
 
     public function edicionRol($usuarioId, $rolIndex){

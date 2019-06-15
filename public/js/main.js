@@ -192,6 +192,23 @@ function usuariosACtrl($scope,$http,$location){
         (error)=>{
             console.error(error);
         });
+        $scope.actualizar = (usuario)=>{
+            consumirApi($http, {
+                method: 'PUT',
+                url: "/api/usuario/"+usuario.id,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data : JSON.stringify(usuario)
+            },
+            (response)=>{
+                $scope.usuarios = response.data;
+                alert("Se actualizo el usuario");
+            },
+            (error)=>{
+                console.error(error);
+            });
+        }
     }else{
         $location.path(RAIZ);
     }
