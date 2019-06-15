@@ -55,6 +55,11 @@ class usuariocontroller extends Controller
         return usuario::find($id);
     }
 
+    public function showAll()
+    {
+        return usuario::all();
+    }
+
     public function getNames($id)
     {
         $usuario=usuario::find($id);

@@ -180,7 +180,18 @@ function registerCtrl($scope, $http, $location){
 function usuariosACtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
         $scope.user = usuario;
+        $scope.$watch("usuarios", watchFunction);
         cargarMenuAdministrador($location, $scope);
+        consumirApi($http, {
+            method: 'GET',
+            url: "/api/todosUsuarios"
+        },
+        (response)=>{
+            $scope.usuarios = response.data;
+        },
+        (error)=>{
+            console.error(error);
+        });
     }else{
         $location.path(RAIZ);
     }
