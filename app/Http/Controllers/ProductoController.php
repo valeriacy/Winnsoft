@@ -44,7 +44,6 @@ class ProductoController extends Controller
         $producto->sesion_id = $request->sesionId;
         $producto->cerrado = false;
         $producto->numero = $maxValue+1;
-        $producto->fecha_caducidad = $request->fecha;
         $producto->descripcion = $request->descripcion;
 
         $producto->save();
@@ -63,7 +62,6 @@ class ProductoController extends Controller
             'id' => $producto->id,
             'numero' => $producto->numero,
             'cerrado' => $producto->cerrado,
-            'fechaCaducidad' => $producto->fechaCaducidad,
             'descripcion' => $producto->descripcion,
             'grupoId' => $producto->grupoId,
             'entregas' => $producto->entregas
@@ -84,7 +82,6 @@ class ProductoController extends Controller
         $response->id = $attributes['id'];
         $response->numero = $attributes['numero'];
         $response->cerrado = $attributes['cerrado'];
-        $response->fechaCaducidad = $attributes['fecha_caducidad'];
         $response->descripcion = $attributes['descripcion'];
         $response->grupoId = $sesion->grupo_id;
         $response->entregas=$entregas;

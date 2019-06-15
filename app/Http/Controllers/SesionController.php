@@ -47,6 +47,7 @@ class SesionController extends Controller
         $sesion->cerrado = false;
         $maxValue = Sesion::where("grupo_Id", $request->grupoId)->max('numero');
         $sesion->numero = $maxValue+1;
+        $sesion->fecha_caducidad = $request->fechaCaducidad;
 
         $sesion->save();
     }
@@ -104,6 +105,7 @@ class SesionController extends Controller
         $response->numero = $attributes['numero'];
         $response->cerrado = $attributes['cerrado'];
         $response->grupoId = $attributes['grupo_id'];
+        $response->fecha_caducidad = $attributes['fecha_caducidad'];
         $response->productos = $productos;
 
         return $response;

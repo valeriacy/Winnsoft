@@ -311,6 +311,17 @@ input[type=text]:focus, [type=password]:focus {
 	margin-right: 10%;
 	background-color: #E67E22
 }
+
+.simplelabel{
+	font-size: 0.8em;
+	float:right;
+}
+
+.colapsableButton{
+	background-color: #83f0f8;
+	padding: 0.2em;
+}
+
 .contenedorCuadrado{
     display: inline-block; 
 width: 30vw;

@@ -29,7 +29,8 @@
         </div>
         <div ng-repeat="sesion in sesiones" class="sesionDiv">
             <button ng-if="user.rol === 'docente'" ng-click="aReporte(sesion.id)" >Reporte</button>
-            <button ng-click="colapsable($event)">
+            <label class="simplelabel">Vencimiento:{{sesion.fecha_caducidad}}</label>
+            <button ng-click="colapsable($event)" class="colapsableButton">
                 <label>Sesion:{{sesion.numero}}</label>
                 <label ng-if="sesion.cerrado===1" style="color:red;">Cerrado</label>
             </button>
@@ -55,7 +56,7 @@
                     <div ng-if="producto.entregas.length == 0" style="display:none" class="" style="margin-top: 1vw;">
                         <div ng-if="producto.cerrado==1">
                             <div>
-                                <label>Vencimiento:{{producto.fechaCaducidad}}</label>
+                                 
                                 <div>Descripcion: {{producto.descripcion}}</div>
                             </div>
                             <div ng-if="user.rol === 'estudiante'" class="entrega-div">
@@ -65,7 +66,7 @@
                         </div>
                         <div ng-if="producto.cerrado==0" >
                             <div>
-                                <label>Vencimiento:{{producto.fechaCaducidad}}</label>
+                                 
                                 <div>Descripcion: {{producto.descripcion}}</div>
                             </div>
                             <div ng-if="user.rol === 'estudiante'" id="div-crear-entrega-{{producto.id}}" class="entrega-div">
@@ -84,7 +85,7 @@
                     </div>
                     <div ng-if="producto.entregas.length > 0" style="display:none" class="" style="margin-top: 1vw;">
                         <div>
-                            <label>Vencimiento:{{producto.fechaCaducidad}}</label>
+                             
                             <div>Descripcion: {{producto.descripcion}}</div>
                         </div>
                         <div ng-if="user.rol === 'estudiante'" class="entrega-div">

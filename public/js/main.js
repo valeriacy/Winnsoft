@@ -362,13 +362,12 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
             $location.path('/verEntregas/'+productoId);
         }
         $scope.mostrarFormSesion=() => {
+            alert("Al crear una nueva sesion\n Tome en cuenta que la sesion actualmente abierta en este grupo se cerrara.");
             let form = document.querySelector("#sesionForm");
             form.classList.remove("hidden");
         }
         $scope.crearSesion=() => {
-            let respuesta = confirm("¿Desea crear una nueva sesion?\n Tome en cuenta que la sesion actualmente abierta en este grupo se cerrara.");
-            if(respuesta)
-                nuevaSesion($routeParams.id, $http, $scope, usuario.id);
+            nuevaSesion($routeParams.id, $http, $scope, usuario.id);
         }
         $scope.cancelSesion=()=>{
             let form = document.querySelector("#sesionForm");
