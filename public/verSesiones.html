@@ -54,7 +54,7 @@
                         <label ng-if="sesion.cerrado==1 || producto.cerrado==1" style="color:red;">Cerrado</label>
                     </button>
                     <div ng-if="producto.entregas.length == 0" style="display:none" class="" style="margin-top: 1vw;">
-                        <div ng-if="producto.cerrado==1">
+                        <div ng-if="sesion.cerrado==1">
                             <div>
                                  
                                 <div>Descripcion: {{producto.descripcion}}</div>
@@ -64,7 +64,7 @@
                             </div>
                             <button ng-if="user.rol === 'docente'" ng-click="cargarVerEntregas(producto.id)" class="entregasButton">Ver Entregas</button>
                         </div>
-                        <div ng-if="producto.cerrado==0" >
+                        <div ng-if="sesion.cerrado==0" >
                             <div>
                                  
                                 <div>Descripcion: {{producto.descripcion}}</div>

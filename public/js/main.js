@@ -377,12 +377,10 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         $scope.cancelProduct=ocultarFormProducto;
         $scope.enviarProducto=(sesionId) => {
             let formId = "productoForm-"+sesionId;
-            let fecha = document.querySelector("#"+formId+" input").value;
             let descripcion = document.querySelector("#"+formId+" textarea").value;
 
             let producto ={
                 sesionId:sesionId,
-                fecha:fecha,
                 descripcion:descripcion
             }
             enviarNuevoProducto(producto, $http, $scope, usuario.id, $routeParams.id)
