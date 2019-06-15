@@ -69,6 +69,17 @@ class ofertaSeeder extends Seeder
         	'updated_at' => $date
         ]);
 
+        \DB::table('usuarios')->insert([
+            'id' => 6,
+            'nombre' => "Admin",
+            'Apellido' => "Admin",
+            'rol' => "administrador",
+            'nombre_usuario' => "admin",
+            'contra' => "admin",
+        	'created_at' => $date,
+        	'updated_at' => $date
+        ]);
+
         \DB::table('materias')->insert([
             'id' => 1,
         	'nombre' => "Introduccion a la Programacion",
@@ -140,6 +151,7 @@ class ofertaSeeder extends Seeder
             'numero' => 1,
             'cerrado' => 1,
             'grupo_id' => 1,
+            'fecha_caducidad' => $date,
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -149,6 +161,7 @@ class ofertaSeeder extends Seeder
             'numero' => 2,
             'cerrado' => 0,
             'grupo_id' => 1,
+            'fecha_caducidad' => $date,
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -158,6 +171,7 @@ class ofertaSeeder extends Seeder
             'numero' => 1,
             'cerrado' => 0,
             'grupo_id' => 2,
+            'fecha_caducidad' => $date,
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
@@ -167,7 +181,6 @@ class ofertaSeeder extends Seeder
             'numero' => 1,
             'cerrado' => 1,
             'sesion_id' => 1,
-            'fecha_caducidad' => $date,
             'descripcion' => "Primera tarea",
         	'created_at' => $date,
         	'updated_at' => $date
@@ -178,7 +191,6 @@ class ofertaSeeder extends Seeder
             'numero' => 1,
             'cerrado' => 1,
             'sesion_id' => 2,
-            'fecha_caducidad' => $date,
             'descripcion' => "Otra tarea",
         	'created_at' => $date,
         	'updated_at' => $date
@@ -189,7 +201,6 @@ class ofertaSeeder extends Seeder
             'numero' => 2,
             'cerrado' => 0,
             'sesion_id' => 2,
-            'fecha_caducidad' => $date,
             'descripcion' => "Primera tarea",
         	'created_at' => $date,
         	'updated_at' => $date
@@ -200,7 +211,6 @@ class ofertaSeeder extends Seeder
             'numero' => 1,
             'cerrado' => 0,
             'sesion_id' => 3,
-            'fecha_caducidad' => $date,
             'descripcion' => "Mas tarea",
         	'created_at' => $date,
         	'updated_at' => $date
