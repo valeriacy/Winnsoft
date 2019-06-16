@@ -318,8 +318,12 @@ input[type=text]:focus, [type=password]:focus {
 }
 
 .colapsableButton{
-	background-color: #83f0f8;
-	padding: 0.2em;
+	background-color: #38d8e4;
+	padding: .5rem ;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+		font-size: 14px; 
+		color: rgb(34, 37, 71);
+		border: solid 1px rgb(34, 37, 71);
 }
 
 .contenedorCuadrado{
@@ -404,7 +408,10 @@ border:10px solid rgb(0,128,128);
 			display:block;}
 	
 	  .active,.content :hover {
-		background-color: rgb(248, 188, 24);
+		background-color: rgb(253, 142, 14);
+		border: solid 1px white;
+		padding: .5rem ;
+		font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 
 	  }
 	  table {     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
@@ -474,7 +481,6 @@ border:10px solid rgb(0,128,128);
 		margin-left: 10vw;
 	}
 	 
-
   
 .tituloP{
 	font-size: 2em;
@@ -549,7 +555,7 @@ border:10px solid rgb(0,128,128);
 }
 .button{
 	border: none;
-	padding: .5rem 0;
+	padding: .5rem ;
 	margin: 1rem 0 .3rem;
 	background-color: #31B1E5;
     color: white;
@@ -557,4 +563,41 @@ border:10px solid rgb(0,128,128);
 	text-align: center;
 	margin-bottom: 0.35em;
 	font-size: 16px;
+	border: solid 1px rgb(9, 4, 75);
+}
+.button1{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	padding: .5rem ;
+	margin: 1rem 0 .3rem;
+	background-color: rgb(9, 4, 75);
+    color: white;
+	text-align: center;
+	margin-bottom: 0.35em;
+	font-size: 13px;
+	border: solid 1px white;
+}
+.buttonSend{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	padding: .5rem ;
+	margin: 1rem 0 .3rem;
+	background-color: #31B1E5;
+    color: white;
+	text-align: center;
+	margin-bottom: 0.35em;
+	font-size: 13px;
+	border: solid 1px white;
+	margin-left: 14vw;
+
+}
+.buttonReporte{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	padding: .5rem ;
+	margin: 1rem 0 .3rem;
+	background-color: #31B1E5;
+    color: white;
+	text-align: center;
+	margin-bottom: 0.35em;
+	font-size: 13px;
+	border: solid 1.5px white;
+	
 }
