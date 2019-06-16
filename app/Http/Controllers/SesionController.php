@@ -7,6 +7,7 @@ use App\Sesion;
 use App\Producto;
 use App\Entrega;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\AsistenciaController;
 
 class SesionController extends Controller
 {
@@ -46,6 +47,7 @@ class SesionController extends Controller
         $sesion->cerrado = false;
         $maxValue = Sesion::where("grupo_Id", $request->grupoId)->max('numero');
         $sesion->numero = $maxValue+1;
+        $sesion->fecha_caducidad = $request->fechaCaducidad;
 
         $sesion->save();
     }
@@ -103,10 +105,22 @@ class SesionController extends Controller
         $response->numero = $attributes['numero'];
         $response->cerrado = $attributes['cerrado'];
         $response->grupoId = $attributes['grupo_id'];
+        $response->fecha_caducidad = $attributes['fecha_caducidad'];
         $response->productos = $productos;
 
         return $response;
+    }
 
+    public function getAllByGroupNUser($idGrupo, $idUser, $idInscripcion){
+        $sesiones = Sesion::where('grupo_id', $idGrupo)->get();
+        $productoController = new ProductoController();
+        $asistenciasController = new AsistenciaController();
+
+        foreach ($sesiones as $sesion) {
+            $sesion->productos = $productoController->getAllBySesionNUserId($sesion->id, $idUser);
+            $sesion->asistencia = $asistenciasController->hasAsisted($sesion->id, $idInscripcion);
+        }
+        return $sesiones;
     }
 
     /**

@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('usuario', 'usuariocontroller');
 Route::post('/login','usuariocontroller@validar');
 Route::get('/verificarnombreusuario/{nombreUsuario}','usuariocontroller@verificarNombreUsuario');
+Route::get('/todosUsuarios','usuariocontroller@showAll');
 Route::put('/cambiarRol/{idUsuario}/{rolIndex}','usuariocontroller@edicionRol');
 Route::get('/Ofertas','OfertaController@showAll');
 Route::get('/obtenerInscripciones/{idUsuario}','InscripcionController@obtenerInscripciones');
@@ -31,6 +32,7 @@ Route::get('/entrega/{Id}','EntregaController@getEntregaById');
 Route::get('/usuarioNombres/{id}','usuariocontroller@getNames');
 Route::get('/basic/{id}','usuariocontroller@getBasicInfo');
 Route::get('/inscritos/{idGrupo}','InscripcionController@obtenerInscritos');
+Route::get('/reporteInscritos/{idGrupo}','InscripcionController@obtenerInscritosYEntregas');
 Route::get('/asistenciasHoy/{sesionId}','AsistenciaController@getTodaysAsistence');
 Route::get('/asistenciasHoyCompleto/{sesionId}','AsistenciaController@getAllAsistenceBySesion');
 Route::post('/subirArchivo/{id}','ArchivoController@guardar');

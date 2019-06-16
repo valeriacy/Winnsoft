@@ -309,7 +309,6 @@ function uploadFile (httpService, entregaId, scope){
                 request,
                 (response)=>{
                     reemplazarDivEntrega(entregaId, httpService, scope);
-                    alert("Entrega exitosa");
                 },
                 (error)=>{console.error(error)})
 }
@@ -490,8 +489,10 @@ function obtenerNombresPorId(httpService, scope, usuarioId){
 
 
 function nuevaSesion(grupoId, httpService, scope, usuarioId){
-    let grupo={
-        grupoId:grupoId
+    let fecha = document.querySelector("#sesionForm input").value;
+    let obj={
+        grupoId:grupoId,
+        fechaCaducidad:fecha
     }
 
     let req = {
@@ -500,7 +501,7 @@ function nuevaSesion(grupoId, httpService, scope, usuarioId){
         headers: {
             'Content-Type': 'application/json'
         },
-        data : JSON.stringify(grupo)
+        data : JSON.stringify(obj)
     }
     consumirApi(httpService,
                     req, 

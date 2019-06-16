@@ -1,34 +1,77 @@
+<div id="main-load-div" class="main-loading">
+    <img id="secondGif" src="../assets/cargando.gif" />
+</div>
 <div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
 
 <div class="tablaEntrega">
     <table border="1">
         <thead>
-            <td> </td>
-            <td></td>
-            <td colspan="2">Sesion :2 </td>
+            <td class="tableHeader" colspan="2">Estudiante</td>
+            <td class="tableHeader" colspan="3">Reporte Auxiliar</td>
+            <td class="tableHeader" colspan="{{sesionElegida.productos.length}}">
+                Sesion: 
+                <div>
+                    <button class="sesionButton" ng-repeat="sesion in sesiones" ng-click="cargarProductos(sesion)" id="sesion{{sesion.numero}}"> {{sesion.numero}} </button>
+                </div>
+            </td>
         </thead>
         <thead>
             <tr>
-                <th> Apellidos</th>
-                <th> Nombres</th>
-                <th> Asistio</th>
-                <th>Producto :1</th>
-                <th>Producto :2</th>
-                
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Asistio</th>
+                <th>Descripcion</th>
+                <th>Observacion</th>
+                <th ng-repeat = "producto in sesionElegida.productos">Producto :{{producto.numero}}</th>                
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="entrega in entregas">
+            <tr ng-repeat="inscrito in inscritos">
 
-                <td>{{entrega.apellido}}</td>
-                <td>{{entrega.nombre}}</td>
-                <td>SI</td>
-                <td> No Entrego</td>
-                <td> Si Entrego</td>
-                
+                <td>{{inscrito.apellido}}</td>
+                <td>{{inscrito.nombre}}</td>
+                <td>
+                    <div ng-if="inscrito.sesion.asistencia.asistio == 1" class="cell green">
+                        SI
+                    </div>
+                    <div ng-if="inscrito.sesion.asistencia.asistio == 0 && inscrito.sesion.asistencia" class="cell red">
+                        NO
+                    </div>
+                    <div ng-if="!inscrito.sesion.asistencia" class="cell">
+                        Sin Registros
+                    </div>
+                </td>
+                <td>
+                    <p ng-if="inscrito.sesion.asistencia">{{inscrito.sesion.asistencia.descripcion}}</p>
+                    <div ng-if="!inscrito.sesion.asistencia" class="cell">
+                        Sin Registros
+                    </div>
+                </td>
+                <td>
+                    <p ng-if="inscrito.sesion.asistencia">{{inscrito.sesion.asistencia.observacion}}</p>
+                    <div ng-if="!inscrito.sesion.asistencia" class="cell">
+                        Sin Registros
+                    </div>
+                </td>
+                <td ng-repeat = "producto in inscrito.sesion.productos">
+                    <div ng-if="producto.entregas.length > 0" class="biggerCell">
+                        <div class="cell green">
+                            Tiene entrega
+                        </div>
+                        <div class="cell">
+                            <a href="#!verEntrega/{{producto.entregas[0].id}}">Ver</a>
+                        </div>
+                    </div>
+                    <div ng-if="producto.entregas.length === 0" class="biggerCell">
+                        <div class="cell red">
+                            Sin entrega
+                        </div>
+                    </div>
+                </td>
             </tr>
         </tbody>        
      </table>
+     <button ng-click="atras()">Atras</button>
      <style>
          table {
    width: 70%;

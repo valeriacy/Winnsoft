@@ -180,7 +180,35 @@ function registerCtrl($scope, $http, $location){
 function usuariosACtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
         $scope.user = usuario;
+        $scope.$watch("usuarios", watchFunction);
         cargarMenuAdministrador($location, $scope);
+        consumirApi($http, {
+            method: 'GET',
+            url: "/api/todosUsuarios"
+        },
+        (response)=>{
+            $scope.usuarios = response.data;
+        },
+        (error)=>{
+            console.error(error);
+        });
+        $scope.actualizar = (usuario)=>{
+            consumirApi($http, {
+                method: 'PUT',
+                url: "/api/usuario/"+usuario.id,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data : JSON.stringify(usuario)
+            },
+            (response)=>{
+                $scope.usuarios = response.data;
+                alert("Se actualizo el usuario");
+            },
+            (error)=>{
+                console.error(error);
+            });
+        }
     }else{
         $location.path(RAIZ);
     }
@@ -236,7 +264,7 @@ function entregaCtrl ($http,$scope,$location, $routeParams){
         cargarMenuPara(usuario.rol, $location, $scope);
         $scope.$watch("estudiante", watchFunction);
         $scope.atras = () => {
-            $location.path('/verEntregas/'+$scope.entrega.producto_id);
+            window.history.back();
         }
         cargarEntregaPorId($http, $scope, $routeParams.entregaId)
     }
@@ -361,21 +389,26 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         $scope.cargarVerEntregas = (productoId) => {
             $location.path('/verEntregas/'+productoId);
         }
-        $scope.crearSesion=() => {
-            let respuesta = confirm("¿Desea crear una nueva sesion?\n Tome en cuenta que la sesion actualmente abierta en este grupo se cerrara.");
-            if(respuesta)
-                nuevaSesion($routeParams.id, $http, $scope, usuario.id);
+        $scope.mostrarFormSesion=() => {
+            alert("Al crear una nueva sesion\n Tome en cuenta que la sesion actualmente abierta en este grupo se cerrara.");
+            let form = document.querySelector("#sesionForm");
+            form.classList.remove("hidden");
         }
+        $scope.crearSesion=() => {
+            nuevaSesion($routeParams.id, $http, $scope, usuario.id);
+        }
+        $scope.cancelSesion=()=>{
+            let form = document.querySelector("#sesionForm");
+            form.classList.add("hidden");
+        };
         $scope.crearProducto=mostrarFormProducto;
         $scope.cancelProduct=ocultarFormProducto;
         $scope.enviarProducto=(sesionId) => {
             let formId = "productoForm-"+sesionId;
-            let fecha = document.querySelector("#"+formId+" input").value;
             let descripcion = document.querySelector("#"+formId+" textarea").value;
 
             let producto ={
                 sesionId:sesionId,
-                fecha:fecha,
                 descripcion:descripcion
             }
             enviarNuevoProducto(producto, $http, $scope, usuario.id, $routeParams.id)
@@ -388,7 +421,6 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         };
         $scope.setTheFiles = function ($files) {
             angular.forEach($files, function (value, key) {
-                console.log(value);
                 formData.append('file', value);
             });
         };
@@ -419,7 +451,52 @@ function reporteSesionCtrl($http, $scope, $location, $routeParams){
 function reporteGeneralCtrl($http, $scope, $location, $routeParams){
     if(usuario){
         $scope.user = usuario;
+        $scope.cargarProductos = (sesion)=>{
+            $scope.sesionElegida = sesion;
+            for(inscrito of $scope.inscritos){
+                inscrito.sesion = inscrito.sesiones.find(element => element.id === sesion.id); 
+            }
+            let buttons = document.querySelectorAll(".sesionButton");
+            for(button of buttons){
+                button.classList.remove("isSelected");
+            }
+            let selectedButton = document.querySelector("#sesion"+sesion.numero);
+            selectedButton.classList.add("isSelected");
+        }
+        $scope.$watch("sesiones",  (oldValue, newValue)=>{
+            if(oldValue===newValue)
+                return;
+            hideMainLoad();
+            if($scope.sesiones.length > 0)
+                $scope.cargarProductos($scope.sesiones[0]);
+        });
         cargarMenuPara(usuario.rol, $location, $scope);
+        consumirApi($http,
+            {
+                method: 'GET',
+                url: "/api/reporteInscritos/"+$routeParams.grupoId
+            },
+            (response)=>{
+                $scope.inscritos = response.data;
+            }, 
+            (error)=>{
+                console.error(error);
+            });
+        consumirApi($http,
+            {
+                method: 'GET',
+                url: "/api/sesiones/"+$routeParams.grupoId
+            },
+            (response)=>{
+                $scope.sesiones = response.data;
+            }, 
+            (error)=>{
+                console.error(error);
+            });
+        $scope.sesionElegida = undefined;
+        $scope.atras = () => {
+            window.history.back();
+        }   
     }else{
         $location.path(RAIZ);
     }

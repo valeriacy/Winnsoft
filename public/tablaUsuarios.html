@@ -1,57 +1,38 @@
+<div id="main-load-div" class="main-loading">
+    <img id="secondGif" src="../assets/cargando.gif" />
+</div>
 <div ng-if="user.rol === 'administrador'" ng-include="'/shared/header_administrador.html'" style="width: 100vw;"></div>
-
-
 <div class="titulo1" style="margin-left: 20vw;">
     Lista de Usuarios  
 </div> 
 <div class="" style="margin-left: 20vw;">
-        <table >
-            <thead>
-                    <tr>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                             <th> Rol:
-                                 </th>
-                             <th>Nombre usuario</th>
-                    </tr>
-                      
-            </thead>
-                <tbody>
-                    <tr>
-                                <td>Gabriela</td>
-                                <td>Balderrama Arnez</td>
-                                <td><select>
-                                    <option value="">Estudiante</option>
-                                    <option value="">Auxiliar</option>
-                                    <option value="">Docente</option>
-                                    <option value="">Administrador</option>
-                                  </select> </td>
-                                <td>gabriela01</td>
-                     </tr>
-                     <tr>
-                        <td>Jose</td>
-                        <td>Perez</td>
-                        <td><select>
-                            <option value="">Estudiante</option>
-                            <option value="">Auxiliar</option>
-                            <option value="">Docente</option>
-                            <option value="">Administrador</option>
-                          </select> </td>
-                        <td>joseperez</td>
-             </tr>
-             <tr>
-                        <td>Corina</td>
-                        <td>Flores</td>
-                        <td><select>
-                            <option value="">Estudiante</option>
-                            <option value="">Auxiliar</option>
-                            <option value="">Docente</option>
-                            <option value="">Administrador</option>
-                          </select> </td>
-                        <td>cf</td>
-             </tr>
-                </tbody>
-                
-            </table>
-                         
+  <table >
+      <thead>
+        <tr>
+          <th><input ng-model="searchtxt.nombre" type="text" placeholder="Buscar"></th>
+          <th><input ng-model="searchtxt.apellido" type="text" placeholder="Buscar"></th>
+          <th><input ng-model="searchtxt.rol" type="text" placeholder="Buscar"></th>
+          <th><input ng-model="searchtxt.nombre_usuario" type="text" placeholder="Buscar"></th>
+        </tr>
+        <tr>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th> Rol:</th>
+          <th>Nombre usuario</th>
+        </tr>         
+      </thead>
+      <tbody>
+          <tr ng-repeat="usuario in usuarios | filter : searchtxt">
+            <td>{{usuario.nombre}}</td>
+            <td>{{usuario.apellido}}</td>
+            <td><select ng-model="usuario.rol" ng-change="actualizar(usuario)">
+                <option ng-selected="usuario.rol ==='estudiante'" value="estudiante">Estudiante</option>
+                <option ng-selected="usuario.rol ==='auxiliar'" value="auxiliar">Auxiliar</option>
+                <option ng-selected="usuario.rol ==='docente'" value="docente">Docente</option>
+                <option ng-selected="usuario.rol ==='administrador'" value="administrador">Administrador</option>
+              </select> </td>
+            <td>{{usuario.nombre_usuario}}</td>
+          </tr>
+      </tbody>
+    </table>               
 </div>
