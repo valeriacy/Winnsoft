@@ -42,7 +42,8 @@ class OfertaController extends Controller
         $oferta->grupo = $request->grupo;
         $oferta->materia_id = $request->materiaId;
         $oferta->docente_id = $request->docenteId;
-        $oferta->hora = $request->hora;
+        $oferta->auxiliar_id = $request->auxiliarId;
+        $oferta->hora = $request->horaInicio;
         $oferta->dia = $request->dia;
         $oferta->codigo = $this->generarCodigo();
         $oferta->save();
@@ -82,6 +83,10 @@ class OfertaController extends Controller
         $auxiliar = usuario::find($auxiliarId);
         $materia = Materia::find($materiaId);
         return [$oferta, $docente, $materia, $auxiliar];
+    }
+
+    public function getMaxGrupoFromMateria($idMateria){
+        return Oferta::where("materia_id", $idMateria)->max('grupo');
     }
 
     /**

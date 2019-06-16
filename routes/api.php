@@ -20,6 +20,8 @@ Route::resource('usuario', 'usuariocontroller');
 Route::post('/login','usuariocontroller@validar');
 Route::get('/verificarnombreusuario/{nombreUsuario}','usuariocontroller@verificarNombreUsuario');
 Route::get('/todosUsuarios','usuariocontroller@showAll');
+Route::get('/todosDocente','usuariocontroller@getAllDocentes');
+Route::get('/todosAuxi','usuariocontroller@getAllAuxiliar');
 Route::put('/cambiarRol/{idUsuario}/{rolIndex}','usuariocontroller@edicionRol');
 Route::get('/Ofertas','OfertaController@showAll');
 Route::get('/obtenerInscripciones/{idUsuario}','InscripcionController@obtenerInscripciones');
@@ -37,6 +39,8 @@ Route::get('/asistenciasHoy/{sesionId}','AsistenciaController@getTodaysAsistence
 Route::get('/asistenciasHoyCompleto/{sesionId}','AsistenciaController@getAllAsistenceBySesion');
 Route::post('/subirArchivo/{id}','ArchivoController@guardar');
 Route::get('/descargar/{id}','ArchivoController@descargar');
+Route::get('/materias','MateriaController@showAll');
+Route::get('/maxGrupo/{idMateria}','OfertaController@getMaxGrupoFromMateria');
 
 Route::resource('Materia', 'MateriaController');
 Route::resource('Docente', 'DocenteController');

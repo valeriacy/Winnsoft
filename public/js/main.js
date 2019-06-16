@@ -216,6 +216,58 @@ function usuariosACtrl($scope,$http,$location){
 function crearGrupoCtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
         $scope.user = usuario;
+        $scope.$watch("materias", watchFunction);
+        $scope.nueva = {
+            materiaId : 0,
+            grupo : 0,
+            dia : 1,
+            horaInicio : undefined,
+            horaFin : undefined,
+            docenteId : 0,
+            auxiliarId : 0
+        }
+        $scope.getTime = (inicio)=>{
+            if(inicio){
+                $scope.nueva.horaInicio = document.querySelector("#horaInicio").value;
+            }else{
+                $scope.nueva.horaFin = document.querySelector("#horaFin").value;
+            }
+        }
+        $scope.grupo = () => {
+            consumirApi($http,
+                        {
+                            method: 'GET',
+                            url: "/api/maxGrupo/"+$scope.nueva.materiaId
+                        },
+                        (response)=>{
+                            let grupo = parseInt(response.data) + 1;
+                            $scope.nueva.grupo = grupo;
+                            document.querySelector("#grupo").value = grupo;
+                        },
+                        (error)=>{
+                            console.error(error);
+                        })
+        };
+        $scope.guardar= () => {
+            consumirApi($http,
+                {
+                    method: 'POST',
+                    url: "/api/Oferta",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data : JSON.stringify($scope.nueva)
+                },
+                (response)=>{
+                    alert("Nuevo grupo creado")
+                },
+                (error)=>{
+                    console.error(error);
+                })
+        };
+        cargarDocentes($http, $scope);
+        cargarAuxiliares($http, $scope);
+        cargarMaterias($http, $scope);
         cargarMenuAdministrador($location, $scope);
     }else{
         $location.path(RAIZ);
