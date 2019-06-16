@@ -1,3 +1,6 @@
+<div id="main-load-div" class="main-loading">
+    <img id="secondGif" src="../assets/cargando.gif" />
+</div>
 <div ng-if="user.rol === 'administrador'" ng-include="'/shared/header_administrador.html'" style="width: 100vw;"></div>
 <div class="titulo1" style="margin-left: 20vw;">
         Crear Grupo :
@@ -5,59 +8,68 @@
 <div class="divCrearGrupo">
     <form autocomplete="off">
          <div> 
-             <label > Materia:</label>
-             <select>
-                    <option value="">Introduccion a la Programacion</option>
-                    <option value="">Elementos de Programacion y Estruc.datos</option>
-                    <option value="">Base de datos I</option>
-                  </select>       
+            <label > Materia:</label>
+            <select ng-model="nueva.materiaId" ng-change="grupo()">
+                <option ng-repeat="materia in materias" value="{{materia.id}}">{{materia.nombre}}</option>
+            </select>       
          </div><br>
          <div> 
-                Numero de Grupo: <input type="number" name="numero de grupo">       
+                Numero de Grupo: <input ng-model="nueva.grupo" type="number" name="numero de grupo" id="grupo" disabled>       
             </div><br>
             <div> 
                 <label > Dia:</label>
-                <select >
-                       <option value="">Lunes</option>
-                       <option value="">Martes</option>
-                       <option value="">Jueves</option>
-                       <option value="">Viernes</option>
-                       <option value="">Miercoles</option>
-                       <option value="">Sabado</option>
+                <select ng-model="nueva.dia">
+                       <option value="1">Lunes</option>
+                       <option value="2">Martes</option>
+                       <option value="3">Miercoles</option>
+                       <option value="4">Jueves</option>
+                       <option value="5">Viernes</option>
+                       <option value="6">Sabado</option>
                      </select>       
             </div><br>
             <div>
                  <label>Hora inicio:</label>
-                 <input type="time" name="usr_time">
+                 <input ng-model="nueva.horaInicio" ng-change="getTime(true)" type="time" name="usr_time" id="horaInicio">
                 </div><br>
              <div>
                  <label>Hora Fin:</label>
-                 <input type="time" name="usr_time">
+                 <input ng-model="nueva.horaFin" ng-change="getTime(false)" type="time" name="usr_time" id="horaFin">
              </div><br>
              <div> 
-                    <label > Docente:</label>
-                    <select>
-                           <option value="">Flores Villarroel Corina</option>
-                           <option value="">Salazar Serrudo Carla</option>
-                           <option value="">Costas Jauregui Vladimir</option>
-                           <option value="">Blanco Coca Leticia</option>
-                           <option value="">Ustariz Vargas Hernan</option>
-                           <option value="">Montaño Quiroga Victor H.</option>
-                         </select>       
-                </div><br>
+                <label > Docente:</label>
+                <select ng-model="nueva.docenteId">
+                    <option ng-repeat="docente in docentes" value="{{docente.id}}">{{docente.apellido}} {{docente.nombre}}</option>
+                </select>       
+            </div>
                 <div> 
                         <label > Auxiliar:</label>
-                        <select>
-                               <option value="">Balderrama Gabriela</option>
-                               <option value="">Perez Alexandra</option>
-                               <option value="">Lopez Juan</option>
-                               <option value="">Jimenez Danilo</option>
+                        <select ng-model="nueva.auxiliarId">
+                               <option ng-repeat="auxiliar in auxiliares" value="{{auxiliar.id}}">{{auxiliar.apellido}} {{auxiliar.nombre}}</option>
                              </select>       
                     </div><br>
                 <div>    
-                    <button class="btn__submit">GUARDAR</button>
+                    <button class="btn__submit" ng-click="guardar()">GUARDAR</button>
                      <div class="loading-div" id="loading">
                      <img src="./assets/loading.gif" class="loading-image"/>
                  </div><br>
     </form>
+    <table >
+            <tr>
+                <th>Materia</th>
+                <th>Grupo</th>
+                <th>Docente</th>
+                <th>Auxiliar</th>
+                <th>Hora</th>
+                <th>Dia</th>
+            </tr>
+        
+            <tr ng-repeat="oferta in ofertas">
+                <td>{{oferta[2].nombre}}</td>
+                <td>{{oferta[0].grupo}}</td>
+                <td>{{oferta[1].nombre}} {{oferta[1].apellido}}</td>
+                <td>{{oferta[3].nombre}} {{oferta[3].apellido}}</td>
+                <td>{{oferta[0].hora}}</td>
+                <td>{{oferta[0].dia}}</td> 
+            </tr>
+        </table>
 </div>

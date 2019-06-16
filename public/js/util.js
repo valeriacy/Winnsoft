@@ -662,3 +662,40 @@ function obtenerSesionPorId(httpService, scope, sesionId){
             console.error(error);
         });
 }
+
+function cargarDocentes(httpService, scope){
+    cargaGenerica(httpService, 
+                (response) => {
+                    scope.docentes = response.data;
+                }, 
+                  "/api/todosDocente");
+}
+
+function cargarAuxiliares(httpService, scope){
+    cargaGenerica(httpService,
+                 (response) => {
+                     scope.auxiliares = response.data;
+                 }, 
+                  "/api/todosAuxi");
+}
+
+function cargarMaterias(httpService, scope){
+    cargaGenerica(httpService, 
+        (response) => {
+        scope.materias = response.data;
+        }, 
+        "/api/materias");
+}
+
+function cargaGenerica(httpService, responseFunction, url){
+
+    consumirApi(httpService,
+        {
+            method: 'GET',
+            url: url
+        },responseFunction
+        , 
+        (error)=>{
+            console.error(error);
+        });
+}
