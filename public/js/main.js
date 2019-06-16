@@ -216,8 +216,8 @@ function usuariosACtrl($scope,$http,$location){
 function crearGrupoCtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
         $scope.user = usuario;
-        $scope.$watch("materias", watchFunction);
-        $scope.nueva = {
+        $scope.$watch("ofertas", watchFunction);
+        let ofertaVacia = {
             materiaId : 0,
             grupo : 0,
             dia : 1,
@@ -226,6 +226,7 @@ function crearGrupoCtrl($scope,$http,$location){
             docenteId : 0,
             auxiliarId : 0
         }
+        $scope.nueva = ofertaVacia;
         $scope.getTime = (inicio)=>{
             if(inicio){
                 $scope.nueva.horaInicio = document.querySelector("#horaInicio").value;
@@ -259,12 +260,15 @@ function crearGrupoCtrl($scope,$http,$location){
                     data : JSON.stringify($scope.nueva)
                 },
                 (response)=>{
-                    alert("Nuevo grupo creado")
+                    obtener_ofertas($http, $scope);
+                    alert("Nuevo grupo creado");
+                    $scope.nueva = ofertaVacia;
                 },
                 (error)=>{
                     console.error(error);
                 })
         };
+        obtener_ofertas($http, $scope);
         cargarDocentes($http, $scope);
         cargarAuxiliares($http, $scope);
         cargarMaterias($http, $scope);

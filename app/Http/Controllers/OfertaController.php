@@ -78,11 +78,29 @@ class OfertaController extends Controller
         $docenteId = $attributes['docente_id'];
         $auxiliarId = $attributes['auxiliar_id'];
         $materiaId = $attributes['materia_id'];
+        $oferta->dia = $this->aDia($oferta->dia);
 
         $docente = usuario::find($docenteId);
         $auxiliar = usuario::find($auxiliarId);
         $materia = Materia::find($materiaId);
         return [$oferta, $docente, $materia, $auxiliar];
+    }
+
+    public function aDia($numero){
+        switch ($numero) {
+            case 1:
+                return "Lunes";
+            case 2:
+                return "Martes";
+            case 3:
+                return "Miercoles";
+            case 4:
+                return "Jueves";
+            case 5:
+                return "Viernes";
+            case 6:
+                return "Sabado";
+        }
     }
 
     public function getMaxGrupoFromMateria($idMateria){
