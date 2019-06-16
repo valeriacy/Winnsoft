@@ -41,6 +41,7 @@ Route::post('/subirArchivo/{id}','ArchivoController@guardar');
 Route::get('/descargar/{id}','ArchivoController@descargar');
 Route::get('/materias','MateriaController@showAll');
 Route::get('/maxGrupo/{idMateria}','OfertaController@getMaxGrupoFromMateria');
+Route::get('/info/{idGrupo}','OfertaController@obtenerInfoComplementaria');
 
 Route::resource('Materia', 'MateriaController');
 Route::resource('Docente', 'DocenteController');

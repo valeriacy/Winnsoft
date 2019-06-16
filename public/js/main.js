@@ -250,6 +250,7 @@ function crearGrupoCtrl($scope,$http,$location){
                         })
         };
         $scope.guardar= () => {
+            mostrarGifLoading();
             consumirApi($http,
                 {
                     method: 'POST',
@@ -263,11 +264,21 @@ function crearGrupoCtrl($scope,$http,$location){
                     obtener_ofertas($http, $scope);
                     alert("Nuevo grupo creado");
                     $scope.nueva = ofertaVacia;
+                    ocultarGifLoading();
+                    $scope.ocultarForm();
                 },
                 (error)=>{
                     console.error(error);
                 })
         };
+        $scope.mostrarForm = () => {
+            document.querySelector("#crear-grupo").classList.add("hidden");
+            document.querySelector("#form").classList.remove("hidden");
+        }
+        $scope.ocultarForm = () => {
+            document.querySelector("#crear-grupo").classList.remove("hidden");
+            document.querySelector("#form").classList.add("hidden");
+        }
         obtener_ofertas($http, $scope);
         cargarDocentes($http, $scope);
         cargarAuxiliares($http, $scope);
@@ -527,6 +538,19 @@ function reporteGeneralCtrl($http, $scope, $location, $routeParams){
                 $scope.cargarProductos($scope.sesiones[0]);
         });
         cargarMenuPara(usuario.rol, $location, $scope);
+        
+        consumirApi($http,
+            {
+                method: 'GET',
+                url: "/api/info/"+$routeParams.grupoId
+            },
+            (response)=>{
+                $scope.complementario = response.data;
+            }, 
+            (error)=>{
+                console.error(error);
+            });
+
         consumirApi($http,
             {
                 method: 'GET',
@@ -538,6 +562,7 @@ function reporteGeneralCtrl($http, $scope, $location, $routeParams){
             (error)=>{
                 console.error(error);
             });
+
         consumirApi($http,
             {
                 method: 'GET',

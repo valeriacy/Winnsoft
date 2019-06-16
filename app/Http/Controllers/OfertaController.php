@@ -7,6 +7,7 @@ use App\Oferta;
 use App\Docente;
 use App\Materia;
 use App\usuario;
+use App\Http\Controllers\usuariocontroller;
 
 class OfertaController extends Controller
 {
@@ -105,6 +106,18 @@ class OfertaController extends Controller
 
     public function getMaxGrupoFromMateria($idMateria){
         return Oferta::where("materia_id", $idMateria)->max('grupo');
+    }
+
+    public function obtenerInfoComplementaria($idGrupo){
+        $oferta = Oferta::find($idGrupo);
+        $Materia = Materia::find($oferta->materia_id);
+        $auxiliar = usuario::find($oferta->auxiliar_id);
+
+        return response()->json([
+            "numeroGrupo" => $oferta->grupo,
+            "auxiliar" => $auxiliar->apellido ." ". $auxiliar->nombre,
+            "nombreMateria" => $Materia->nombre
+        ]);
     }
 
     /**

@@ -2,12 +2,11 @@
     <img id="secondGif" src="../assets/cargando.gif" />
 </div>
 <div ng-if="user.rol === 'administrador'" ng-include="'/shared/header_administrador.html'" style="width: 100vw;"></div>
-<div class="titulo1" style="margin-left: 20vw;">
-        Crear Grupo :
-    </div> 
+<input id="crear-grupo" type="image" src="./assets/plus.png" title="Crear nuevo grupo" ng-click="mostrarForm()" />
 <div class="divCrearGrupo">
-    <form autocomplete="off">
-         <div> 
+    <form autocomplete="off" class="hidden" id="form">
+        <h3>Crear nuevo grupo</h3>
+        <div> 
             <label > Materia:</label>
             <select ng-model="nueva.materiaId" ng-change="grupo()">
                 <option ng-repeat="materia in materias" value="{{materia.id}}">{{materia.nombre}}</option>
@@ -47,29 +46,32 @@
                                <option ng-repeat="auxiliar in auxiliares" value="{{auxiliar.id}}">{{auxiliar.apellido}} {{auxiliar.nombre}}</option>
                              </select>       
                     </div><br>
-                <div>    
-                    <button class="btn__submit" ng-click="guardar()">GUARDAR</button>
-                     <div class="loading-div" id="loading">
-                     <img src="./assets/loading.gif" class="loading-image"/>
-                 </div><br>
+                <div> 
+                    <div id="guardar">
+                        <button class="btn__submit" ng-click="guardar()">GUARDAR</button>
+                        <button class="btn__submit" ng-click="ocultarForm()">CANCELAR</button>
+                    </div>   
+                    <div class="loading-div" id="loading">
+                        <img src="./assets/loading.gif" class="loading-image"/>
+                    </div><br>
     </form>
-    <table >
-            <tr>
-                <th>Materia</th>
-                <th>Grupo</th>
-                <th>Docente</th>
-                <th>Auxiliar</th>
-                <th>Hora</th>
-                <th>Dia</th>
-            </tr>
-        
-            <tr ng-repeat="oferta in ofertas">
-                <td>{{oferta[2].nombre}}</td>
-                <td>{{oferta[0].grupo}}</td>
-                <td>{{oferta[1].nombre}} {{oferta[1].apellido}}</td>
-                <td>{{oferta[3].nombre}} {{oferta[3].apellido}}</td>
-                <td>{{oferta[0].hora}}</td>
-                <td>{{oferta[0].dia}}</td> 
-            </tr>
-        </table>
 </div>
+<table>
+    <tr>
+        <th>Materia</th>
+        <th>Grupo</th>
+        <th>Docente</th>
+        <th>Auxiliar</th>
+        <th>Hora</th>
+        <th>Dia</th>
+    </tr>
+
+    <tr ng-repeat="oferta in ofertas">
+        <td>{{oferta[2].nombre}}</td>
+        <td>{{oferta[0].grupo}}</td>
+        <td>{{oferta[1].nombre}} {{oferta[1].apellido}}</td>
+        <td>{{oferta[3].nombre}} {{oferta[3].apellido}}</td>
+        <td>{{oferta[0].hora}}</td>
+        <td>{{oferta[0].dia}}</td> 
+    </tr>
+</table>
