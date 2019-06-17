@@ -155,7 +155,7 @@ function obtenerMateriasPorInscripcion(httpService, scope, idUsuario){
         scope.estaEnLista = (idMateria)=>{
             encontrado=false;
             for(let i=0; i<scope.inscripciones.length; i++){
-                if(idMateria==scope.inscripciones[i][0].id){
+                if(idMateria==scope.inscripciones[i][2].id){
                     encontrado=true;
                     break;
                 }
@@ -506,6 +506,7 @@ function nuevaSesion(grupoId, httpService, scope, usuarioId){
     consumirApi(httpService,
                     req, 
                     (response)=>{
+                        alert("Creado nueva sesion")
                         obtenerSesionesDeGrupo(httpService,scope,grupoId, usuarioId);
                     },
                     (error)=>{
@@ -550,6 +551,7 @@ function enviarNuevoProducto(producto, httpService, scope, usuarioId, grupoId){
     consumirApi(httpService,
                     req, 
                     (response)=>{
+                        alert("Creado nuevo producto");
                         ocultarFormProducto(producto.sesionId);
                         obtenerSesionesDeGrupo(httpService, scope, grupoId, usuarioId);
                     },

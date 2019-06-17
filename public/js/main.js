@@ -241,7 +241,13 @@ function crearGrupoCtrl($scope,$http,$location){
                             url: "/api/maxGrupo/"+$scope.nueva.materiaId
                         },
                         (response)=>{
-                            let grupo = parseInt(response.data) + 1;
+                            let grupo;
+                            if(response.data){
+                                grupo = parseInt(response.data) + 1;
+                            }
+                            else{
+                                grupo = 1;
+                            }
                             $scope.nueva.grupo = grupo;
                             document.querySelector("#grupo").value = grupo;
                         },
@@ -291,6 +297,41 @@ function crearGrupoCtrl($scope,$http,$location){
 function crearMateriasCtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
         $scope.user = usuario;
+        $scope.$watch("materias", watchFunction);
+        $scope.mostrarForm = () => {
+            document.querySelector("#crear-materia").classList.add("hidden");
+            document.querySelector("#form-materia").classList.remove("hidden");
+        }
+        $scope.ocultarForm = () => {
+            document.querySelector("#crear-materia").classList.remove("hidden");
+            document.querySelector("#form-materia").classList.add("hidden");
+        }
+        $scope.guardar= () => {
+            mostrarGifLoading();
+            let obj={
+                nombre:document.querySelector("#nombre").value,
+                siglas:document.querySelector("#siglas").value
+            }
+            consumirApi($http,
+                {
+                    method: 'POST',
+                    url: "/api/Materia",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data : JSON.stringify(obj)
+                },
+                (response)=>{
+                    cargarMaterias($http, $scope);
+                    alert("Nueva materia creada");
+                    ocultarGifLoading();
+                    $scope.ocultarForm();
+                },
+                (error)=>{
+                    console.error(error);
+                })
+        };
+        cargarMaterias($http, $scope);
         cargarMenuAdministrador($location, $scope);
     }else{
         $location.path(RAIZ);
@@ -463,7 +504,8 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         }
         $scope.crearSesion=() => {
             nuevaSesion($routeParams.id, $http, $scope, usuario.id);
-        }
+            $scope.cancelSesion=()=>{    
+        }}
         $scope.cancelSesion=()=>{
             let form = document.querySelector("#sesionForm");
             form.classList.add("hidden");
@@ -491,7 +533,7 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
                 formData.append('file', value);
             });
         };
-        $scope.$watch("oferta", watchFunction)
+        $scope.$watch("oferta", watchFunction);
         obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);
