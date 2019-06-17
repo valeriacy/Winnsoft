@@ -29,7 +29,7 @@ class ofertaSeeder extends Seeder
             'id' => 2,
             'nombre' => "Corina",
             'Apellido' => "Flores",
-            'rol' => "docente",
+            'rol' => "estudiante",
             'nombre_usuario' => "cf",
             'contra' => "cf123",
         	'created_at' => $date,
@@ -40,7 +40,7 @@ class ofertaSeeder extends Seeder
             'id' => 3,
             'nombre' => "Leticia",
             'Apellido' => "Blanco",
-            'rol' => "docente",
+            'rol' => "estudiante",
             'nombre_usuario' => "lb",
             'contra' => "lb123",
         	'created_at' => $date,
@@ -61,16 +61,27 @@ class ofertaSeeder extends Seeder
         \DB::table('usuarios')->insert([
             'id' => 5,
             'nombre' => "Gabriela",
-            'Apellido' => "Gabiosky",
-            'rol' => "auxiliar",
-            'nombre_usuario' => "gabiota",
-            'contra' => "gabiota",
+            'Apellido' => "Balderrama",
+            'rol' => "estudiante",
+            'nombre_usuario' => "gabi",
+            'contra' => "gabi123",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
 
         \DB::table('usuarios')->insert([
             'id' => 6,
+            'nombre' => "Oscar",
+            'Apellido' => "Zurita",
+            'rol' => "estudiante",
+            'nombre_usuario' => "os",
+            'contra' => "os123",
+        	'created_at' => $date,
+        	'updated_at' => $date
+        ]);
+
+        \DB::table('usuarios')->insert([
+            'id' => 7,
             'nombre' => "Admin",
             'Apellido' => "Admin",
             'rol' => "administrador",
@@ -80,140 +91,38 @@ class ofertaSeeder extends Seeder
         	'updated_at' => $date
         ]);
 
-        \DB::table('materias')->insert([
-            'id' => 1,
-        	'nombre' => "Introduccion a la Programacion",
-        	'siglas' => "IP1",
+        \DB::table('usuarios')->insert([
+            'id' => 8,
+            'nombre' => "Luis",
+            'Apellido' => "Oviedo",
+            'rol' => "estudiante",
+            'nombre_usuario' => "lucho",
+            'contra' => "lucho123",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
 
-        \DB::table('materias')->insert([
-            'id' => 2,
-        	'nombre' => "Elementos de Programacion",
-        	'siglas' => "IP1",
+        \DB::table('usuarios')->insert([
+            'id' => 9,
+            'nombre' => "Lindsay",
+            'Apellido' => "Montaño",
+            'rol' => "estudiante",
+            'nombre_usuario' => "lind",
+            'contra' => "lind123",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
 
-        \DB::table('ofertas')->insert([
-            'id' => 1,
-            'grupo' => "1",
-            'codigo' => "abc123",
-            'materia_id' => 1,
-            'docente_id' => 2,
-            'hora' => "18:30",
-            'dia' => 2,
-            'auxiliar_id' => 5,
+        \DB::table('usuarios')->insert([
+            'id' => 10,
+            'nombre' => "Jose",
+            'Apellido' => "Gutierrez",
+            'rol' => "estudiante",
+            'nombre_usuario' => "pepe",
+            'contra' => "pepe123",
         	'created_at' => $date,
         	'updated_at' => $date
         ]);
 
-        \DB::table('ofertas')->insert([
-            'id' => 2,
-            'grupo' => "1",
-            'codigo' => "abc123",
-            'materia_id' => 2,
-            'docente_id' => 3,
-            'hora' => "16:30",
-            'dia' => 5,
-            'auxiliar_id' => 5,
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-        
-        \DB::table('inscripcions')->insert([
-            'id' => 1,
-            'oferta_id' => 1,
-            'usuario_id' => 1,
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('inscripcions')->insert([
-            'id' => 2,
-            'oferta_id' => 2,
-            'usuario_id' => 1,
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('inscripcions')->insert([
-            'id' => 3,
-            'oferta_id' => 2,
-            'usuario_id' => 4,
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('sesions')->insert([
-            'id' => 1,
-            'numero' => 1,
-            'cerrado' => 1,
-            'grupo_id' => 1,
-            'fecha_caducidad' => $date,
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('sesions')->insert([
-            'id' => 2,
-            'numero' => 2,
-            'cerrado' => 0,
-            'grupo_id' => 1,
-            'fecha_caducidad' => $date,
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('sesions')->insert([
-            'id' => 3,
-            'numero' => 1,
-            'cerrado' => 0,
-            'grupo_id' => 2,
-            'fecha_caducidad' => $date,
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('productos')->insert([
-            'id' => 1,
-            'numero' => 1,
-            'cerrado' => 1,
-            'sesion_id' => 1,
-            'descripcion' => "Primera tarea",
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('productos')->insert([
-            'id' => 2,
-            'numero' => 1,
-            'cerrado' => 1,
-            'sesion_id' => 2,
-            'descripcion' => "Otra tarea",
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('productos')->insert([
-            'id' => 3,
-            'numero' => 2,
-            'cerrado' => 0,
-            'sesion_id' => 2,
-            'descripcion' => "Primera tarea",
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
-
-        \DB::table('productos')->insert([
-            'id' => 4,
-            'numero' => 1,
-            'cerrado' => 0,
-            'sesion_id' => 3,
-            'descripcion' => "Mas tarea",
-        	'created_at' => $date,
-        	'updated_at' => $date
-        ]);
     }
 }
