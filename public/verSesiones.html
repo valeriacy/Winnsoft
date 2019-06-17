@@ -71,12 +71,13 @@
                             </div>
                             <div ng-if="user.rol === 'estudiante'" id="div-crear-entrega-{{producto.id}}" class="entrega-div">
                                 <div>
-                                    <label>Cargar Archivo:</label>
+                                    <label>Cargar Archivo:</label> <br>
+                                    <strong style="font-size: 14px">Nota: El archivo debe tener el formato : "producto.zip"</strong> <br>
                                     <input type="file" ng-files="setTheFiles($files)" id="file-{{producto.id}}">
                                 </div>
                                 <div>
                                     <label>Descripción:</label> 
-                                    <textarea id="descripcion-{{producto.id}}">   </textarea>
+                                    <textarea id="descripcion-{{producto.id}}">   </textarea> 
                                 </div>
                                 <button  class="buttonSend" id="enviar" ng-click="enviar(producto.id)">Enviar</button>
                             </div>
