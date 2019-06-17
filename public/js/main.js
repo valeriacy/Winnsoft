@@ -272,6 +272,7 @@ function crearGrupoCtrl($scope,$http,$location){
                     $scope.nueva = ofertaVacia;
                     ocultarGifLoading();
                     $scope.ocultarForm();
+                    limpiarForm();
                 },
                 (error)=>{
                     console.error(error);
@@ -326,6 +327,7 @@ function crearMateriasCtrl($scope,$http,$location){
                     alert("Nueva materia creada");
                     ocultarGifLoading();
                     $scope.ocultarForm();
+                    limpiarForm();
                 },
                 (error)=>{
                     console.error(error);

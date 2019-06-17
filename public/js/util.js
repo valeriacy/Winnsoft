@@ -701,3 +701,17 @@ function cargaGenerica(httpService, responseFunction, url){
             console.error(error);
         });
 }
+
+function limpiarForm(){
+    let inputs = document.querySelectorAll("input");
+    let selects = document.querySelectorAll("select");
+    let arrays = [];
+    arrays.push(inputs);
+    arrays.push(selects);
+
+    for(array of arrays){
+        for(element of array){
+            element.value="";
+        }
+    }
+}
