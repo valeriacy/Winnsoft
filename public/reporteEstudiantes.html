@@ -3,30 +3,30 @@
 </div>
 <div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
 
-<h1>
+<h1 style="margin-left: 20vw;">
     {{complementario.nombreMateria}} grupo: {{complementario.numeroGrupo}}
 </h1>
 <div class="tablaEntrega">
     <table border="1">
         <thead>
-            <td class="tableHeader" colspan="2">Estudiantes</td>
-            <td class="tableHeader" colspan="3">
+            <td class="tableHeader" colspan="2" style="font-size: 20px;">Estudiantes</td>
+            <td class="tableHeader" colspan="3" style="font-size: 20px;">
                 Reporte Auxiliar
-                <div>{{complementario.auxiliar}}</div>
+                <div class="nameAux" style="font-size: 16px;">{{complementario.auxiliar}}</div>
             </td>
             <td class="tableHeader" colspan="{{sesionElegida.productos.length}}">
                 Sesion: 
                 <div>
                     <button class="sesionButton" ng-repeat="sesion in sesiones" ng-click="cargarProductos(sesion)" id="sesion{{sesion.numero}}"> {{sesion.numero}} </button>
                 </div>
-                <div>
+                <div class="vencimiento" style="font-size: 12px;">
                     Vencimiento: {{sesionElegida.fecha_caducidad}}
                 </div>
-                <div ng-if="sesionElegida.cerrado == 1">
-                    Cerrado
+                <div ng-if="sesionElegida.cerrado == 1" style="font-size: 20px;">
+                  Estado :  Cerrado
                 </div>
-                <div ng-if="sesionElegida.cerrado == 0">
-                    En curso
+                <div ng-if="sesionElegida.cerrado == 0" style="font-size: 20px;">
+                  Estado :  En curso
                 </div>
             </td>
         </thead>
