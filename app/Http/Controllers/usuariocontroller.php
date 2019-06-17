@@ -44,6 +44,14 @@ class usuariocontroller extends Controller
         $usuario->save();
     }
 
+    public function getAllDocentes(){
+        return usuario::where("rol", "docente")->get();
+    }
+
+    public function getAllAuxiliar(){
+        return usuario::where("rol", "auxiliar")->get();
+    }
+
     /**
      * Display the specified resource.
      *

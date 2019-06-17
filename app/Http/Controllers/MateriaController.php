@@ -52,6 +52,10 @@ class MateriaController extends Controller
         //
     }
 
+    public function showAll(){
+        return Materia::all();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

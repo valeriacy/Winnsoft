@@ -546,13 +546,19 @@ border:10px solid rgb(0,128,128);
 .divCrearGrupo{
 	align-content: center;
 	width: 35%;
-	background: beige;
 	margin-left: 30%;
 	padding: 0.3vw;
 	margin-bottom: 1vw;
 	color: #2C3E50;
-
 }
+
+#crear-grupo{
+	width: 5vh;
+	height: 5vh;
+	margin-left: 52vw;
+	margin-top: 2vw;
+}
+
 .button{
 	border: none;
 	padding: .5rem ;

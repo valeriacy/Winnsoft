@@ -216,6 +216,73 @@ function usuariosACtrl($scope,$http,$location){
 function crearGrupoCtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
         $scope.user = usuario;
+        $scope.$watch("ofertas", watchFunction);
+        let ofertaVacia = {
+            materiaId : 0,
+            grupo : 0,
+            dia : 1,
+            horaInicio : undefined,
+            horaFin : undefined,
+            docenteId : 0,
+            auxiliarId : 0
+        }
+        $scope.nueva = ofertaVacia;
+        $scope.getTime = (inicio)=>{
+            if(inicio){
+                $scope.nueva.horaInicio = document.querySelector("#horaInicio").value;
+            }else{
+                $scope.nueva.horaFin = document.querySelector("#horaFin").value;
+            }
+        }
+        $scope.grupo = () => {
+            consumirApi($http,
+                        {
+                            method: 'GET',
+                            url: "/api/maxGrupo/"+$scope.nueva.materiaId
+                        },
+                        (response)=>{
+                            let grupo = parseInt(response.data) + 1;
+                            $scope.nueva.grupo = grupo;
+                            document.querySelector("#grupo").value = grupo;
+                        },
+                        (error)=>{
+                            console.error(error);
+                        })
+        };
+        $scope.guardar= () => {
+            mostrarGifLoading();
+            consumirApi($http,
+                {
+                    method: 'POST',
+                    url: "/api/Oferta",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data : JSON.stringify($scope.nueva)
+                },
+                (response)=>{
+                    obtener_ofertas($http, $scope);
+                    alert("Nuevo grupo creado");
+                    $scope.nueva = ofertaVacia;
+                    ocultarGifLoading();
+                    $scope.ocultarForm();
+                },
+                (error)=>{
+                    console.error(error);
+                })
+        };
+        $scope.mostrarForm = () => {
+            document.querySelector("#crear-grupo").classList.add("hidden");
+            document.querySelector("#form").classList.remove("hidden");
+        }
+        $scope.ocultarForm = () => {
+            document.querySelector("#crear-grupo").classList.remove("hidden");
+            document.querySelector("#form").classList.add("hidden");
+        }
+        obtener_ofertas($http, $scope);
+        cargarDocentes($http, $scope);
+        cargarAuxiliares($http, $scope);
+        cargarMaterias($http, $scope);
         cargarMenuAdministrador($location, $scope);
     }else{
         $location.path(RAIZ);
@@ -471,6 +538,19 @@ function reporteGeneralCtrl($http, $scope, $location, $routeParams){
                 $scope.cargarProductos($scope.sesiones[0]);
         });
         cargarMenuPara(usuario.rol, $location, $scope);
+        
+        consumirApi($http,
+            {
+                method: 'GET',
+                url: "/api/info/"+$routeParams.grupoId
+            },
+            (response)=>{
+                $scope.complementario = response.data;
+            }, 
+            (error)=>{
+                console.error(error);
+            });
+
         consumirApi($http,
             {
                 method: 'GET',
@@ -482,6 +562,7 @@ function reporteGeneralCtrl($http, $scope, $location, $routeParams){
             (error)=>{
                 console.error(error);
             });
+
         consumirApi($http,
             {
                 method: 'GET',

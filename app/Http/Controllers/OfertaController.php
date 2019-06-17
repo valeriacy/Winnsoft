@@ -7,6 +7,7 @@ use App\Oferta;
 use App\Docente;
 use App\Materia;
 use App\usuario;
+use App\Http\Controllers\usuariocontroller;
 
 class OfertaController extends Controller
 {
@@ -42,7 +43,8 @@ class OfertaController extends Controller
         $oferta->grupo = $request->grupo;
         $oferta->materia_id = $request->materiaId;
         $oferta->docente_id = $request->docenteId;
-        $oferta->hora = $request->hora;
+        $oferta->auxiliar_id = $request->auxiliarId;
+        $oferta->hora = $request->horaInicio;
         $oferta->dia = $request->dia;
         $oferta->codigo = $this->generarCodigo();
         $oferta->save();
@@ -77,11 +79,45 @@ class OfertaController extends Controller
         $docenteId = $attributes['docente_id'];
         $auxiliarId = $attributes['auxiliar_id'];
         $materiaId = $attributes['materia_id'];
+        $oferta->dia = $this->aDia($oferta->dia);
 
         $docente = usuario::find($docenteId);
         $auxiliar = usuario::find($auxiliarId);
         $materia = Materia::find($materiaId);
         return [$oferta, $docente, $materia, $auxiliar];
+    }
+
+    public function aDia($numero){
+        switch ($numero) {
+            case 1:
+                return "Lunes";
+            case 2:
+                return "Martes";
+            case 3:
+                return "Miercoles";
+            case 4:
+                return "Jueves";
+            case 5:
+                return "Viernes";
+            case 6:
+                return "Sabado";
+        }
+    }
+
+    public function getMaxGrupoFromMateria($idMateria){
+        return Oferta::where("materia_id", $idMateria)->max('grupo');
+    }
+
+    public function obtenerInfoComplementaria($idGrupo){
+        $oferta = Oferta::find($idGrupo);
+        $Materia = Materia::find($oferta->materia_id);
+        $auxiliar = usuario::find($oferta->auxiliar_id);
+
+        return response()->json([
+            "numeroGrupo" => $oferta->grupo,
+            "auxiliar" => $auxiliar->apellido ." ". $auxiliar->nombre,
+            "nombreMateria" => $Materia->nombre
+        ]);
     }
 
     /**
