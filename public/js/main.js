@@ -125,7 +125,7 @@ function inscripcionCtrl($scope,$location,$http){
             $http(req)
             .then((response)=>{
                 alert("Inscripcion correcta")
-                $location.path("/principal");    
+                obtenerInscripciones($http,$scope,usuario);  
             });
         }
     }
