@@ -79,8 +79,8 @@
                                     <label>Descripción:</label> 
                                     <textarea id="descripcion-{{producto.id}}">   </textarea> 
                                 </div>
-                                <button  class="buttonSend" id="enviar" ng-click="enviar(producto.id)">Enviar</button>
-                                <div class="loading-div" id="loading">
+                                <button  class="buttonSend" id="enviar-{{producto.id}}" ng-click="enviar(producto.id)">Enviar</button>
+                                <div class="loading-div" id="loading-{{producto.id}}">
                                     <img src="./assets/loading.gif" class="loading-image"/>
                                 </div>
                             </div>

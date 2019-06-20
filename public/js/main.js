@@ -483,6 +483,11 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         $scope.user = usuario;
         $scope.colapsable=funcionColapsable();
         $scope.enviar=(productoId)=>{
+            let boton = document.querySelector("#enviar-"+productoId);
+            let gif = document.querySelector("#loading-"+productoId);
+
+            boton.style.display="none";
+            gif.style.display="block";
 
             let textArea=document.querySelector("#descripcion-"+productoId);
             let fileInput=document.querySelector("#file-"+productoId);
@@ -495,7 +500,7 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
                 usuarioId:usuario.id,
                 productoId:productoId
             }
-            crearEntrega(entrega, withFile, $http, $scope);
+            crearEntrega(entrega, withFile, $http, $scope, productoId);
         };
         $scope.cargarVerEntregas = (productoId) => {
             $location.path('/verEntregas/'+productoId);

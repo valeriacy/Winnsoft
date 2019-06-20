@@ -273,7 +273,7 @@ function logOut(location){
     location.path(PUBLICA)
 }
 
-function crearEntrega(entrega, withFile, httpService, scope){
+function crearEntrega(entrega, withFile, httpService, scope, productoId){
     let req = {
         method: 'POST',
         url: "/api/Entrega",
@@ -287,8 +287,9 @@ function crearEntrega(entrega, withFile, httpService, scope){
                     (response)=>{
                         let entregaId = response.data;
                         if(withFile)
-                            uploadFile(httpService, entregaId, scope);
-                        reemplazarDivEntrega(entregaId, httpService, scope);
+                            uploadFile(httpService, entregaId, scope, productoId);
+                        else
+                            reemplazarDivEntrega(entregaId, httpService, scope, productoId);
                     },
                     (error)=>{
                         console.error(error);
@@ -296,7 +297,7 @@ function crearEntrega(entrega, withFile, httpService, scope){
                 )
 }
 
-function uploadFile (httpService, entregaId, scope){
+function uploadFile (httpService, entregaId, scope, productoId){
     let request = {
         method: 'POST',
         url: '/api/subirArchivo/'+entregaId,
@@ -308,18 +309,12 @@ function uploadFile (httpService, entregaId, scope){
     consumirApi(httpService,
                 request,
                 (response)=>{
-                    console.log(response.data);
-                    let boton = document.querySelector("#enviar");
-                    let gif = document.querySelector("#loading");
-
-                    boton.style.display="block";
-                    gif.style.display="none";
-                    reemplazarDivEntrega(entregaId, httpService, scope);
+                    reemplazarDivEntrega(entregaId, httpService, scope, productoId);
                 },
                 (error)=>{console.error(error)})
 }
 
-function reemplazarDivEntrega(entregaId, httpService, scope){
+function reemplazarDivEntrega(entregaId, httpService, scope, productoId){
     consumirApi(httpService,
         {
             method: 'GET',
@@ -327,7 +322,7 @@ function reemplazarDivEntrega(entregaId, httpService, scope){
         }, 
         (response)=>{
             let entrega = response.data;
-            agregarAProducto(scope, entrega);
+            agregarAProducto(scope, entrega, productoId);
         },
         (error)=>{
             console.error(error);
@@ -335,12 +330,17 @@ function reemplazarDivEntrega(entregaId, httpService, scope){
     alert("Entrega exitosa");
 }
 
-function agregarAProducto(scope, entrega){
+function agregarAProducto(scope, entrega, productoId){
     let productoPadre = entrega.producto_id;
     for(sesion of scope.sesiones){
         for(producto of sesion.productos){
             if(producto.id === productoPadre)
                 producto.entregas.push(entrega);
+                let boton = document.querySelector("#enviar-"+productoId);
+                let gif = document.querySelector("#loading-"+productoId);
+    
+                boton.style.display="block";
+                gif.style.display="none";
         }
     }
 }
