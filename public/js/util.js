@@ -100,7 +100,7 @@ function filtrarEntregaUsuarioEnSesion(sesion, id){
         productos.reverse()
     for(let producto of productos){
         let entregasGlobales=producto.entregas;
-        let entregasUsuario = entregasGlobales.filter(entrega => entrega.usuario_id===id);
+        let entregasUsuario = entregasGlobales.filter(entrega => entrega.usuario_id==id);
         producto.entregas=entregasUsuario;
     }
 }
@@ -308,6 +308,11 @@ function uploadFile (httpService, entregaId, scope){
     consumirApi(httpService,
                 request,
                 (response)=>{
+                    let boton = document.querySelector("#enviar");
+                    let gif = document.querySelector("#loading");
+
+                    boton.style.display="block";
+                    gif.style.display="none";
                     reemplazarDivEntrega(entregaId, httpService, scope);
                 },
                 (error)=>{console.error(error)})

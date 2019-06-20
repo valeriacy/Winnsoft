@@ -483,6 +483,7 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         $scope.user = usuario;
         $scope.colapsable=funcionColapsable();
         $scope.enviar=(productoId)=>{
+
             let textArea=document.querySelector("#descripcion-"+productoId);
             let fileInput=document.querySelector("#file-"+productoId);
             
@@ -565,7 +566,7 @@ function reporteGeneralCtrl($http, $scope, $location, $routeParams){
         $scope.cargarProductos = (sesion)=>{
             $scope.sesionElegida = sesion;
             for(inscrito of $scope.inscritos){
-                inscrito.sesion = inscrito.sesiones.find(element => element.id === sesion.id); 
+                inscrito.sesion = inscrito.sesiones.find(element => element.id == sesion.id); 
             }
             let buttons = document.querySelectorAll(".sesionButton");
             for(button of buttons){

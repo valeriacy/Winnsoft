@@ -46,13 +46,13 @@
                 <td>{{inscrito.apellido}}</td>
                 <td>{{inscrito.nombre}}</td>
                 <td>
-                    <div ng-if="inscrito.sesion.asistencia.asistio == 1" class="cell green">
+                    <div ng-if="inscrito.sesion.asistencia.asistio == '1'" class="cell green">
                         SI
                     </div>
-                    <div ng-if="inscrito.sesion.asistencia.asistio == 0 && inscrito.sesion.asistencia" class="cell red">
+                    <div ng-if="inscrito.sesion.asistencia.asistio == '0' && inscrito.sesion.asistencia!=undefined " class="cell red">
                         NO
                     </div>
-                    <div ng-if="!inscrito.sesion.asistencia" class="cell">
+                    <div ng-if="inscrito.sesion.asistencia == undefined" class="cell">
                         Sin Registros
                     </div>
                 </td>
