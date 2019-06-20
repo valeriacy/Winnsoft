@@ -308,6 +308,7 @@ function uploadFile (httpService, entregaId, scope){
     consumirApi(httpService,
                 request,
                 (response)=>{
+                    console.log(response.data);
                     let boton = document.querySelector("#enviar");
                     let gif = document.querySelector("#loading");
 

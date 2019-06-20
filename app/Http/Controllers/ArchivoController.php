@@ -57,7 +57,13 @@ class ArchivoController extends Controller
             'tamanho' => $request->file('file')->getClientSize(),
             'entrega_id' => $id
         ]);
-        $request->file('file')->move(__DIR__ . '/../../../uploads/', $file->id . '-'. $id .'.' . $file->tipo);
+        //$path = $request->file('file')->store('uploads');
+        $path = $request->file('file')->storeAs(
+            'uploads', $file->id . '-'. $id .'.' . $file->tipo
+        );
+
+        return $path;
+        //$request->file('file')->move(__DIR__ . '/../../../uploads/', $file->id . '-'. $id .'.' . $file->tipo);
     }
 
     /**
@@ -76,7 +82,8 @@ class ArchivoController extends Controller
         $entregaId = $archivo->entrega_id;
         $tipo = $archivo->tipo;
         $nombreUpload = $id ."-". $entregaId . "." .$tipo;
-        return response()->download(base_path('/uploads/'.$nombreUpload), $archivo->nombre_archivo);
+        //return Storage::download($nombreUpload);
+        return response()->download(base_path('storage/app/uploads/'.$nombreUpload), $archivo->nombre_archivo);
     }
 
     /**
