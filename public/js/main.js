@@ -527,9 +527,8 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
             form.classList.remove("hidden");
         }
         $scope.crearSesion=() => {
-            nuevaSesion($routeParams.id, $http, $scope, usuario.id);
-            $scope.cancelSesion=()=>{    
-        }}
+            nuevaSesion($routeParams.id, $http, $scope, usuario.id);    
+        }
         $scope.cancelSesion=()=>{
             let form = document.querySelector("#sesionForm");
             form.classList.add("hidden");

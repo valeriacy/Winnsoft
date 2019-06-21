@@ -287,7 +287,7 @@ function crearEntrega(entrega, withFile, httpService, scope, productoId){
                     (response)=>{
                         let entregaId = response.data;
                         if(withFile)
-                            uploadFile(httpService, entregaId, scope, productoId);
+                            uploadFile(httpService, entregaId, scope, productoId, false);
                         else
                             reemplazarDivEntrega(entregaId, httpService, scope, productoId);
                     },
@@ -297,10 +297,11 @@ function crearEntrega(entrega, withFile, httpService, scope, productoId){
                 )
 }
 
-function uploadFile (httpService, entregaId, scope, productoId){
+function uploadFile (httpService, entregaId, scope, productoId, deDocente){
+    let url = deDocente ? '/api/subirArchivoDocente/'+entregaId : '/api/subirArchivo/'+entregaId
     let request = {
         method: 'POST',
-        url: '/api/subirArchivo/'+entregaId,
+        url: url,
         data: formData,
         headers: {
             'Content-Type': undefined
@@ -309,7 +310,8 @@ function uploadFile (httpService, entregaId, scope, productoId){
     consumirApi(httpService,
                 request,
                 (response)=>{
-                    reemplazarDivEntrega(entregaId, httpService, scope, productoId);
+                    if(!deDocente)
+                        reemplazarDivEntrega(entregaId, httpService, scope, productoId);
                 },
                 (error)=>{console.error(error)})
 }
@@ -512,7 +514,9 @@ function nuevaSesion(grupoId, httpService, scope, usuarioId){
     consumirApi(httpService,
                     req, 
                     (response)=>{
-                        alert("Creado nueva sesion")
+                        let sesionId = response.data;
+                        uploadFile(httpService, sesionId, scope, undefined, true);
+                        alert("Creada nueva sesion")
                         obtenerSesionesDeGrupo(httpService,scope,grupoId, usuarioId);
                     },
                     (error)=>{

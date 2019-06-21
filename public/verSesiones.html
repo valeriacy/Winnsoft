@@ -21,6 +21,10 @@
             <div>
                 <label for="fecha">Fecha de Caducidad:</label>
                 <input type="date" name="fecha"/>
+                <div>
+                    <label>Cargar Archivo:</label> <br>
+                    <input type="file" ng-files="setTheFiles($files)" id="file-sesion">
+                </div>
             </div>        
             <div>
                 <button ng-click="crearSesion()">Crear</button>
@@ -29,7 +33,13 @@
         </div>
         <div ng-repeat="sesion in sesiones" class="sesionDiv">
             <button class="buttonReporte" ng-if="user.rol === 'docente'" ng-click="aReporte(sesion.id)" >Reporte</button>
-            <label class="simplelabel">Vencimiento:{{sesion.fecha_caducidad}}</label>
+            <div class="info-sesion">
+                <label class="simplelabel">Vencimiento:{{sesion.fecha_caducidad}}</label>
+                <div ng-if = "sesion.archivoAdjunto != undefined" class="file-docente">
+                    <label>Archivo Adjunto:</label>
+                    <a href="/api/descargar/{{sesion.archivoAdjunto.id}}">{{sesion.archivoAdjunto.nombre_archivo}}</a>
+                </div>
+            </div>
             <button  ng-click="colapsable($event)" class="colapsableButton">
                 <label>Sesion:{{sesion.numero}}</label>
                 <label ng-if="sesion.cerrado===1" style="color:red;">Cerrado</label>

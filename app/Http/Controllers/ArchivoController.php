@@ -41,13 +41,15 @@ class ArchivoController extends Controller
     }
 
     public function guardar(Request $request, $id){
-        $file = Archivo::create([
-            'nombre_archivo' => $request->file('file')->getClientOriginalName(),
-            'tipo' => $request->file('file')->extension(),
-            'tamanho' => $request->file('file')->getClientSize(),
-            'entrega_id' => $id,
-            'docente_upload' => false
-        ]);
+        $file = new Archivo();
+        $file->nombre_archivo = $request->file('file')->getClientOriginalName();
+        $file->tipo = $request->file('file')->extension();
+        $file->tamanho = $request->file('file')->getClientSize();
+        $file->entrega_id = $id;
+        $file->docente_upload = false;
+
+        $file->save();
+
         $path = $request->file('file')->storeAs(
             'uploads', $file->id . '-'. $id .'.' . $file->tipo
         );
@@ -56,13 +58,15 @@ class ArchivoController extends Controller
     }
 
     public function guardarDocente(Request $request, $id){
-        $file = Archivo::create([
-            'nombre_archivo' => $request->file('file')->getClientOriginalName(),
-            'tipo' => $request->file('file')->extension(),
-            'tamanho' => $request->file('file')->getClientSize(),
-            'entrega_id' => $id,
-            'docente_upload' => true
-        ]);
+        $file = new Archivo();
+        $file->nombre_archivo = $request->file('file')->getClientOriginalName();
+        $file->tipo = $request->file('file')->extension();
+        $file->tamanho = $request->file('file')->getClientSize();
+        $file->entrega_id = $id;
+        $file->docente_upload = true;
+
+        $file->save();
+
         $path = $request->file('file')->storeAs(
             'uploads', $file->id . '-'. $id .'.' . $file->tipo
         );

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Sesion;
 use App\Producto;
 use App\Entrega;
+use App\Archivo;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\AsistenciaController;
 
@@ -50,6 +51,8 @@ class SesionController extends Controller
         $sesion->fecha_caducidad = $request->fechaCaducidad;
 
         $sesion->save();
+
+        return $sesion->id;
     }
 
     public function obtenerSesionAbiertaPorGrupo($grupoId){
@@ -93,6 +96,7 @@ class SesionController extends Controller
         $attributes = $sesion->getAttributes();
         $sesionId = $attributes['id'];
         $productosIds = Producto::where('sesion_id' ,'=' ,$sesionId)->pluck('id')->toArray();
+        $archivo = Archivo::where('entrega_id', $sesion->id)->where('docente_upload', true)->get()->first();
 
         $productoController = new ProductoController();
         $productos = array();
@@ -107,6 +111,7 @@ class SesionController extends Controller
         $response->grupoId = $attributes['grupo_id'];
         $response->fecha_caducidad = $attributes['fecha_caducidad'];
         $response->productos = $productos;
+        $response->archivoAdjunto = $archivo;
 
         return $response;
     }
