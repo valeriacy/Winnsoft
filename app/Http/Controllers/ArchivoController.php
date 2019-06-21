@@ -41,21 +41,27 @@ class ArchivoController extends Controller
     }
 
     public function guardar(Request $request, $id){
-        $validator = Validator::make($request->file(), [
-            'file' => 'required|mimes:zip,rar|max:5000000',
-        ]);
-        if ($validator->fails()) {
-            $errors = [];
-            foreach ($validator->messages()->all() as $error) {
-                array_push($errors, $error);
-            }
-            return response()->json(['errors' => $errors, 'status' => 400], 400);
-        }
         $file = Archivo::create([
             'nombre_archivo' => $request->file('file')->getClientOriginalName(),
             'tipo' => $request->file('file')->extension(),
             'tamanho' => $request->file('file')->getClientSize(),
-            'entrega_id' => $id
+            'entrega_id' => $id,
+            'docente_upload' => false
+        ]);
+        $path = $request->file('file')->storeAs(
+            'uploads', $file->id . '-'. $id .'.' . $file->tipo
+        );
+
+        return $path;
+    }
+
+    public function guardarDocente(Request $request, $id){
+        $file = Archivo::create([
+            'nombre_archivo' => $request->file('file')->getClientOriginalName(),
+            'tipo' => $request->file('file')->extension(),
+            'tamanho' => $request->file('file')->getClientSize(),
+            'entrega_id' => $id,
+            'docente_upload' => true
         ]);
         $path = $request->file('file')->storeAs(
             'uploads', $file->id . '-'. $id .'.' . $file->tipo

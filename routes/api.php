@@ -38,6 +38,7 @@ Route::get('/reporteInscritos/{idGrupo}','InscripcionController@obtenerInscritos
 Route::get('/asistenciasHoy/{sesionId}','AsistenciaController@getTodaysAsistence');
 Route::get('/asistenciasHoyCompleto/{sesionId}','AsistenciaController@getAllAsistenceBySesion');
 Route::post('/subirArchivo/{id}','ArchivoController@guardar');
+Route::post('/subirArchivoDocente/{id}','ArchivoController@guardarDocente');
 Route::get('/descargar/{id}','ArchivoController@descargar');
 Route::get('/materias','MateriaController@showAll');
 Route::get('/maxGrupo/{idMateria}','OfertaController@getMaxGrupoFromMateria');
