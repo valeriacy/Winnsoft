@@ -491,16 +491,32 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
 
             let textArea=document.querySelector("#descripcion-"+productoId);
             let fileInput=document.querySelector("#file-"+productoId);
-            
-            let text=textArea.value;
-            let withFile=fileInput.value !== "";
-
-            let entrega = {
-                descripcion:text,
-                usuarioId:usuario.id,
-                productoId:productoId
+            if(validarCamposEntrega(productoId)){
+                if(validarArchivoEstudiante(fileInput)){
+                    let text=textArea.value;
+                    let withFile=fileInput.value !== "";
+    
+                    let entrega = {
+                        descripcion:text,
+                        usuarioId:usuario.id,
+                        productoId:productoId
+                    }
+                    crearEntrega(entrega, withFile, $http, $scope, productoId);
+                }else{
+                    let boton = document.querySelector("#enviar-"+productoId);
+                    let gif = document.querySelector("#loading-"+productoId);
+        
+                    boton.style.display="block";
+                    gif.style.display="none";
+                }
+            }else{
+                alert("Al menos uno de los campos debe ser llenado");
+                let boton = document.querySelector("#enviar-"+productoId);
+                let gif = document.querySelector("#loading-"+productoId);
+    
+                boton.style.display="block";
+                gif.style.display="none";
             }
-            crearEntrega(entrega, withFile, $http, $scope, productoId);
         };
         $scope.cargarVerEntregas = (productoId) => {
             $location.path('/verEntregas/'+productoId);

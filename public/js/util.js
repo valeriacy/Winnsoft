@@ -721,3 +721,28 @@ function limpiarForm(){
         }
     }
 }
+
+function validarCamposEntrega(productoId){
+    let textArea=document.querySelector("#descripcion-"+productoId);
+    let fileInput=document.querySelector("#file-"+productoId);
+
+    return textArea.value !== "" || fileInput.value !== "";
+}
+
+function validarArchivoEstudiante(file){
+    let tokens = file.value.split('.');
+    let tamanhoTokens = tokens.length;
+    switch(tokens[tamanhoTokens - 1]){
+        case 'zip':
+            return true;
+        case 'rar':
+            return true;
+        case '7z':
+            return true;
+        case 'gz':
+            return true;
+        default:
+            alert('Tipo de archivo no admitido, debe ser [zip, rar, 7z]')
+            return false;
+    }
+}
