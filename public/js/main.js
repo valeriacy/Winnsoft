@@ -482,6 +482,15 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
     if(usuario){
         $scope.user = usuario;
         $scope.colapsable=funcionColapsable();
+        $scope.restablecer = () => {
+            alert("Creada nueva sesion")
+            obtenerSesionesDeGrupo($http, $scope, $routeParams.id, usuario.id);
+            let divSelector = "#crearSesion";
+            let gifSelector = "#loading-sesion";
+            interCambioBlock(divSelector, gifSelector);
+            let form = document.querySelector("#sesionForm");
+            form.classList.add("hidden");
+        }
         $scope.enviar=(productoId)=>{
             let boton = document.querySelector("#enviar-"+productoId);
             let gif = document.querySelector("#loading-"+productoId);
@@ -527,6 +536,10 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
             form.classList.remove("hidden");
         }
         $scope.crearSesion=() => {
+            let divSelector = "#crearSesion";
+            let gifSelector = "#loading-sesion";
+            interCambioBlock(gifSelector, divSelector);
+
             nuevaSesion($routeParams.id, $http, $scope, usuario.id);    
         }
         $scope.cancelSesion=()=>{

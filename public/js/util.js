@@ -312,6 +312,8 @@ function uploadFile (httpService, entregaId, scope, productoId, deDocente){
                 (response)=>{
                     if(!deDocente)
                         reemplazarDivEntrega(entregaId, httpService, scope, productoId);
+                    else
+                        scope.restablecer();
                 },
                 (error)=>{console.error(error)})
 }
@@ -497,6 +499,7 @@ function obtenerNombresPorId(httpService, scope, usuarioId){
 
 
 function nuevaSesion(grupoId, httpService, scope, usuarioId){
+    let fileAttached=document.querySelector("#file-sesion").value!="";
     let fecha = document.querySelector("#sesionForm input").value;
     let obj={
         grupoId:grupoId,
@@ -515,9 +518,10 @@ function nuevaSesion(grupoId, httpService, scope, usuarioId){
                     req, 
                     (response)=>{
                         let sesionId = response.data;
-                        uploadFile(httpService, sesionId, scope, undefined, true);
-                        alert("Creada nueva sesion")
-                        obtenerSesionesDeGrupo(httpService,scope,grupoId, usuarioId);
+                        if(fileAttached)
+                            uploadFile(httpService, sesionId, scope, undefined, true);
+                        else
+                            scope.restablecer();
                     },
                     (error)=>{
                         console.error(error);
@@ -749,4 +753,12 @@ function validarArchivoEstudiante(file){
             alert('Tipo de archivo no admitido, debe ser [zip, rar, 7z]')
             return false;
     }
+}
+
+function interCambioBlock(aMostrar, aOcultar){
+    let ocultar = document.querySelector(aOcultar);
+    let mostrar = document.querySelector(aMostrar);
+
+    ocultar.style.display="none";
+    mostrar.style.display="block";
 }

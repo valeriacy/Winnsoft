@@ -26,10 +26,13 @@
                     <input type="file" ng-files="setTheFiles($files)" id="file-sesion">
                 </div>
             </div>        
-            <div>
+            <div id="crearSesion">
                 <button ng-click="crearSesion()">Crear</button>
                 <button ng-click="cancelSesion()">Cancelar</button>
-            </div>                               
+            </div> 
+            <div class="loading-div" id="loading-sesion">
+                <img src="./assets/loading.gif" class="loading-image"/>
+            </div>                              
         </div>
         <div ng-repeat="sesion in sesiones" class="sesionDiv">
             <button class="buttonReporte" ng-if="user.rol === 'docente'" ng-click="aReporte(sesion.id)" >Reporte</button>
