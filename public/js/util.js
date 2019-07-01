@@ -10,14 +10,16 @@ function logIn(httpService, req, contra, location){
         let coinciden = false;
         if(usuario){
             coinciden = usuario.contra === contra;
-            mensaje = coinciden ? "Datos ingresados correctamente":"Usuario o Contraseña incorrecto";
+            mensaje = coinciden ? "":"Usuario o contraseña incorrectos";
         }else{
-            mensaje = "Usuario o Contraseña incorrecto";
+            interCambioBlock("#entrar","#loading");
         }
-        alert(mensaje);
         if(coinciden) {
             guardarUsuarioEnLS(usuario);
             location.path("/principal")
+        }else{
+            alert("Usuario o contraseña incorrectos");
+            interCambioBlock("#entrar","#loading");
         }
     })
     .catch((error)=>{

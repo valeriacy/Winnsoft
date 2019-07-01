@@ -151,6 +151,8 @@ function mainCtrl($scope, $http, $location){
 function loginCtrl($scope, $http, $location){
     comprobarSesion($http, $location);
     $scope.entrar = () => {
+        interCambioBlock("#loading", "#entrar");
+
         let usuario = document.querySelector("#usuario");
         let contra = document.querySelector("#contra");
 

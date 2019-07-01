@@ -1,49 +1,32 @@
 <div class="contenedor">
-       
     <div class="contenedorGris">
-            
-        <div class="tituloPrincipal">
-    
-           
-        </div>
-        
+        <div class="tituloPrincipal"></div>
     </div>
 </div>
 
-        <div class="divSeguido">
-           <!-- <select>
-                <option ng-repeat="materia in lista">
-                    {{materia}}
-                </option>
-            </select> -->
-        </div>
+<div class="divSeguido"></div>
         
-        <div class="login__container">
-            <div class="login__top">
-                <img  class="login__img" src="./assets/images.png" alt="">
-                
-                <h2 class="login__title"> form<span>LOGIN</span></h2>
-                <img class="titulo_img" src="./assets/inf_sis.png" alt="" style="float: right;">
-            </div>           
-                <div class="login__form">
-                    <form autocomplete="off" class="login__form" ng-submit="entrar()">
-                        <input type="text" id="usuario" placeholder="&#128100; username" required autofocus>
-                        <input type="password" id="contra" placeholder="&#x1F512; password" required>
-                        <div class="button_form" >
-                            <input class="btn__submit" type="submit" value="ENTRAR">
-                        </div>
-                    </form>
-                    <form class="button_form" action="#!registrar">
-                        <input class="btn__submit" type="submit" value="REGISTRARSE">    
-                    </form>
-                    <a class="form__recover" href="">Olvidaste la contraseña?</a>
-                </div>
+<div class="login__container">
+    <div class="login__top">
+        <img  class="login__img" src="./assets/images.png" alt="">
+        
+        <h2 class="login__title"> form<span>LOGIN</span></h2>
+        <img class="titulo_img" src="./assets/inf_sis.png" alt="" style="float: right;">
+    </div>           
+    <div class="login__form">
+        <form autocomplete="off" class="login__form" ng-submit="entrar()">
+            <input type="text" id="usuario" placeholder="&#128100; username" required autofocus>
+            <input type="password" id="contra" placeholder="&#x1F512; password" required>
+            <div class="button_form" id="entrar">
+                <input class="btn__submit" type="submit" value="ENTRAR">
             </div>
-        </div>
-            <div class="contenedor_grilla">
-                <li><a href="#">Ver Grilla de Horarios</a></li>
+            <div class="loading-div" id="loading">
+                <img src="./assets/loading.gif" class="loading-image"/>
             </div>
-            
-        </div>
+        </form>
+        <form class="button_form" action="#!registrar">
+            <input class="btn__submit" type="submit" value="REGISTRARSE">    
+        </form>
+        <a class="form__recover" href="">Olvidaste la contraseña?</a>
     </div>
-        <div >
+</div> 
