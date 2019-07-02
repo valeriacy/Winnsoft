@@ -9,9 +9,9 @@
     <div class="listaMaterias" style="background: beige;">
         <h2>Materias Registradas :</h2>
         <ul>
-            <li ng-repeat="materia in materias">{{materia.nombre}}<a href=""> Editar</a></li>
+            <li ng-repeat="materia in materias">{{materia.nombre}}</li>
         </ul>
-        <div nf-if="materias.length == 0" style="text-align: center">
+        <div ng-if="materias.length == 0" style="text-align: center">
             AUN NO EXISTEN MATERIAS REGISTRADAS, USE EL SIGUIENTE BOTON PARA REGISTRAR UNA.
         </div>
     </div>
@@ -20,18 +20,20 @@
         <button ng-click="mostrarForm()">Crear nueva materia</button>
     </div>
     <div class="sesionDiv hidden" id="form-materia">
-        <form autocomplete="off">
+        <form autocomplete="off" ng-submit="guardar()">
             Nombre de la materia:<br>
-            <input type="text" name="nombreMateria" id="nombre">
+            <input type="text" name="nombreMateria" id="nombre" required>
             <br>
             Codigo Materia:<br>
-            <input type="text" name="codigoMateria" id="siglas">
+            <input type="text" name="codigoMateria" id="siglas" required maxlength="5">
             <br><br>
             <div class="loading-div" id="loading">
                 <img src="./assets/loading.gif" class="loading-image"/>
             </div><br>
-            <button ng-click="guardar()" type="submit" id="guardar">Guardar</button>
-            <button ng-click="ocultarForm()">Cancelar</button>
+            <div id="guardar">
+                <button type="submit">Guardar</button>
+                <button ng-click="ocultarForm()">Cancelar</button>
+            </div>
         </form>
     </div>
 </div>

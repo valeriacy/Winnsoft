@@ -309,32 +309,8 @@ function crearMateriasCtrl($scope,$http,$location){
             document.querySelector("#crear-materia").classList.remove("hidden");
             document.querySelector("#form-materia").classList.add("hidden");
         }
-        $scope.guardar= () => {
-            mostrarGifLoading();
-            let obj={
-                nombre:document.querySelector("#nombre").value,
-                siglas:document.querySelector("#siglas").value
-            }
-            consumirApi($http,
-                {
-                    method: 'POST',
-                    url: "/api/Materia",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data : JSON.stringify(obj)
-                },
-                (response)=>{
-                    cargarMaterias($http, $scope);
-                    alert("Nueva materia creada");
-                    ocultarGifLoading();
-                    $scope.ocultarForm();
-                    limpiarForm();
-                },
-                (error)=>{
-                    console.error(error);
-                })
-        };
+        let materiaCtrl = new MateriaCtrl($http, $scope);
+        $scope.guardar = materiaCtrl.guardarMateria
         cargarMaterias($http, $scope);
         cargarMenuAdministrador($location, $scope);
     }else{

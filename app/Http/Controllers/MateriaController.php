@@ -41,6 +41,11 @@ class MateriaController extends Controller
         $materia->save();
     }
 
+    public function existeNombreOCodigo($nombreMateria, $siglas){
+        return response()->json((Materia::where("nombre", $nombreMateria)->get()->first() != NULL) || 
+                                (Materia::where("siglas", $siglas)->get()->first() != NULL));
+    }
+
     /**
      * Display the specified resource.
      *
