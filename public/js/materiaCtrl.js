@@ -10,8 +10,8 @@ class MateriaCtrl {
     guardarMateria(){
         mostrarGifLoading();
         let obj={
-            nombre:document.querySelector("#nombre").value,
-            siglas:document.querySelector("#siglas").value
+            nombre:document.querySelector("#nombre").value.toUpperCase(),
+            siglas:document.querySelector("#siglas").value.toUpperCase()
         }
         this.verificarYGuardar(obj);
     }
