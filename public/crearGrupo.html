@@ -28,11 +28,11 @@
             </div><br>
             <div>
                  <label>Hora inicio:</label>
-                 <input ng-model="nueva.horaInicio" ng-change="getTime(true)" type="time" name="usr_time" id="horaInicio">
+                 <input ng-model="nueva.horaInicio" ng-change="getTime(true)" type="time" min="06:45" max="20:45" value="06:45" id="horaInicio">
                 </div><br>
              <div>
                  <label>Hora Fin:</label>
-                 <input ng-model="nueva.horaFin" ng-change="getTime(false)" type="time" name="usr_time" id="horaFin">
+                 <input ng-model="nueva.horaFin" ng-change="getTime(false)" type="time" min="06:45" max="22:45" value="08:15" id="horaFin" disabled>
              </div><br>
              <div> 
                 <label > Docente:</label>
@@ -62,7 +62,8 @@
         <th>Grupo</th>
         <th>Docente</th>
         <th>Auxiliar</th>
-        <th>Hora</th>
+        <th>Hora Inicio</th>
+        <th>Hora Fin</th>
         <th>Dia</th>
     </tr>
 
@@ -71,6 +72,7 @@
         <td>{{oferta[0].grupo}}</td>
         <td>{{oferta[1].nombre}} {{oferta[1].apellido}}</td>
         <td>{{oferta[3].nombre}} {{oferta[3].apellido}}</td>
+        <td>{{oferta[0].hora}}</td>
         <td>{{oferta[0].hora}}</td>
         <td>{{oferta[0].dia}}</td> 
     </tr>

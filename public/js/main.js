@@ -217,69 +217,22 @@ function usuariosACtrl($scope,$http,$location){
 }
 function crearGrupoCtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
+        let grupoCtrl = new GrupoCtrl($http, $scope)
         $scope.user = usuario;
         $scope.$watch("ofertas", watchFunction);
         let ofertaVacia = {
             materiaId : 0,
             grupo : 0,
             dia : 1,
-            horaInicio : undefined,
-            horaFin : undefined,
+            horaInicio : "06:45",
+            horaFin : "08:15",
             docenteId : 0,
             auxiliarId : 0
         }
         $scope.nueva = ofertaVacia;
-        $scope.getTime = (inicio)=>{
-            if(inicio){
-                $scope.nueva.horaInicio = document.querySelector("#horaInicio").value;
-            }else{
-                $scope.nueva.horaFin = document.querySelector("#horaFin").value;
-            }
-        }
-        $scope.grupo = () => {
-            consumirApi($http,
-                        {
-                            method: 'GET',
-                            url: "/api/maxGrupo/"+$scope.nueva.materiaId
-                        },
-                        (response)=>{
-                            let grupo;
-                            if(response.data){
-                                grupo = parseInt(response.data) + 1;
-                            }
-                            else{
-                                grupo = 1;
-                            }
-                            $scope.nueva.grupo = grupo;
-                            document.querySelector("#grupo").value = grupo;
-                        },
-                        (error)=>{
-                            console.error(error);
-                        })
-        };
-        $scope.guardar= () => {
-            mostrarGifLoading();
-            consumirApi($http,
-                {
-                    method: 'POST',
-                    url: "/api/Oferta",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data : JSON.stringify($scope.nueva)
-                },
-                (response)=>{
-                    obtener_ofertas($http, $scope);
-                    alert("Nuevo grupo creado");
-                    $scope.nueva = ofertaVacia;
-                    ocultarGifLoading();
-                    $scope.ocultarForm();
-                    limpiarForm();
-                },
-                (error)=>{
-                    console.error(error);
-                })
-        };
+        $scope.getTime = grupoCtrl.configurarHoras;
+        $scope.grupo = grupoCtrl.siguienteNumeroPorGrupo;
+        $scope.guardar= grupoCtrl.guardarNuevoGrupo;
         $scope.mostrarForm = () => {
             document.querySelector("#crear-grupo").classList.add("hidden");
             document.querySelector("#form").classList.remove("hidden");
