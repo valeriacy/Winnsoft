@@ -6,8 +6,18 @@
     Crear Materia :
 </div> 
 <div class="crearMateria" style="background: beige">
+    <div class="listaMaterias" style="background: beige;">
+        <h2>Materias Registradas :</h2>
+        <ul>
+            <li ng-repeat="materia in materias">{{materia.nombre}}<a href=""> Editar</a></li>
+        </ul>
+        <div nf-if="materias.length == 0" style="text-align: center">
+            AUN NO EXISTEN MATERIAS REGISTRADAS, USE EL SIGUIENTE BOTON PARA REGISTRAR UNA.
+        </div>
+    </div>
     <div class="nuevaMateria" id="crear-materia">
-            <input type="image" src="./assets/plus.png" title="Crear nueva materia" ng-click="mostrarForm()" style="width: 3vw;height:3vw;align-items: center"/>
+        <input type="image" src="./assets/plus.png" title="Crear nueva materia" ng-click="mostrarForm()" class="createButton"/>
+        <button ng-click="mostrarForm()">Crear nueva materia</button>
     </div>
     <div class="sesionDiv hidden" id="form-materia">
         <form autocomplete="off">
@@ -23,11 +33,5 @@
             <button ng-click="guardar()" type="submit" id="guardar">Guardar</button>
             <button ng-click="ocultarForm()">Cancelar</button>
         </form>
-    </div>
-    <div class="listaMaterias" style="background: beige;">
-        <h2>Materias Registradas :</h2>
-        <ul>
-            <li ng-repeat="materia in materias">{{materia.nombre}}<a href=""> Editar</a></li>
-        </ul>  
     </div>
 </div>

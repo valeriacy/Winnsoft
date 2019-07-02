@@ -522,6 +522,44 @@ border:10px solid rgb(0,128,128);
 	
 }
 
+.createButton{
+	width: 3vw;
+	height:3vw;
+	align-items: center;
+	transition-duration: 2s;
+}
+
+.nuevaMateria{
+	margin-top: 1em;
+	height: 3vw;
+	width: 3vw;
+	transition-duration: 2s;
+	margin-left: 47%;
+}
+
+.nuevaMateria button{
+	display: none;
+	width: 7vw;
+	background: #093ce6;
+	color: rgb(244, 248, 252);
+	padding: 0.5em;
+	font-weight: bold;
+	border: none;
+	border-radius: 0.5em;
+	transition-duration: 2s;
+	margin-left: -1.5vw;
+}
+
+.nuevaMateria:hover .createButton{
+	display: none;
+	transition-duration: 2s;
+}
+
+.nuevaMateria:hover button{
+	display: block;
+	transition-duration: 2s;
+}
+
 .formularioDocente{
 	width: 100%;
 	margin-left: 40%;
