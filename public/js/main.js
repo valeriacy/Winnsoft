@@ -137,7 +137,8 @@ function principalCtrl($scope, $location, $http){
     if(usuario){
         $scope.user = usuario;
         cargarMenuPara(usuario.rol, $location, $scope);
-        hideMainLoad();
+        
+        setTimeout(hideMainLoad, 1000);
     }
     else
         $location.path(RAIZ);
