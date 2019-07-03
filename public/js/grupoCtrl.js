@@ -18,6 +18,8 @@ class GrupoCtrl {
       this.siguienteNumeroPorGrupo=this.siguienteNumeroPorGrupo.bind(this);
       this.obtenerGrupos=this.obtenerGrupos.bind(this);
       this.tratarGrupos=this.tratarGrupos.bind(this);
+      this.grupoValido=this.grupoValido.bind(this);
+      this.enviarGrupo=this.enviarGrupo.bind(this);
     }
 
     obtenerGrupos(){
@@ -74,6 +76,15 @@ class GrupoCtrl {
 
     guardarNuevoGrupo(){
         mostrarGifLoading();
+        if(this.grupoValido())
+            this.enviarGrupo();
+        else{
+            alert("Complete el formulario, por favor");
+            ocultarGifLoading();
+        }
+    }
+
+    enviarGrupo(){
         consumirApi(this.httpService,
             {
                 method: 'POST',
@@ -119,4 +130,12 @@ class GrupoCtrl {
                         console.error(error);
                     })
     };
+
+    grupoValido(){
+        let grupo = this.scope.nueva;
+        return grupo.materiaId > 0 &&
+               grupo.grupo > 0 &&
+               grupo.docenteId > 0 &&
+               grupo.auxiliarId > 0;
+    }
 }

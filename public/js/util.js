@@ -719,7 +719,17 @@ function limpiarForm(){
 
     for(array of arrays){
         for(element of array){
-            element.value="";
+            switch (element.type) {
+                case "time":
+                    element.value="07:15";
+                  break;
+                case "number":
+                    element.value = 0;
+                  break;
+                default:
+                    element.value="";
+                  break;
+              }
         }
     }
 }
