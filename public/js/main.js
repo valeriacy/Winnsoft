@@ -181,40 +181,17 @@ function registerCtrl($scope, $http, $location){
 }
 function usuariosACtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
+        let usuarioCtrl = new UsuarioCtrl($http, $scope);
         $scope.user = usuario;
         $scope.$watch("usuarios", watchFunction);
         cargarMenuAdministrador($location, $scope);
-        consumirApi($http, {
-            method: 'GET',
-            url: "/api/todosUsuarios"
-        },
-        (response)=>{
-            $scope.usuarios = response.data;
-        },
-        (error)=>{
-            console.error(error);
-        });
-        $scope.actualizar = (usuario)=>{
-            consumirApi($http, {
-                method: 'PUT',
-                url: "/api/usuario/"+usuario.id,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data : JSON.stringify(usuario)
-            },
-            (response)=>{
-                $scope.usuarios = response.data;
-                alert("Se actualizo el usuario");
-            },
-            (error)=>{
-                console.error(error);
-            });
-        }
+        usuarioCtrl.obtenerTodos();
+        $scope.actualizar = usuarioCtrl.actualizar;
     }else{
         $location.path(RAIZ);
     }
 }
+
 function crearGrupoCtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
         let grupoCtrl = new GrupoCtrl($http, $scope)

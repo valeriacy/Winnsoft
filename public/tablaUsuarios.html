@@ -25,12 +25,19 @@
           <tr ng-repeat="usuario in usuarios | filter : searchtxt">
             <td>{{usuario.nombre}}</td>
             <td>{{usuario.apellido}}</td>
-            <td><select ng-model="usuario.rol" ng-change="actualizar(usuario)">
+            <td>
+              <select ng-if="usuario.rol == 'estudiante' || usuario.rol == 'auxiliar'" ng-model="usuario.rol" ng-change="actualizar(usuario)">
                 <option ng-selected="usuario.rol ==='estudiante'" value="estudiante">Estudiante</option>
                 <option ng-selected="usuario.rol ==='auxiliar'" value="auxiliar">Auxiliar</option>
                 <option ng-selected="usuario.rol ==='docente'" value="docente">Docente</option>
                 <option ng-selected="usuario.rol ==='administrador'" value="administrador">Administrador</option>
-              </select> </td>
+              </select> 
+
+              <select ng-if="usuario.rol == 'docente' || usuario.rol == 'administrador'" ng-model="usuario.rol" ng-change="actualizar(usuario)">
+                  <option ng-selected="usuario.rol ==='docente'" value="docente">Docente</option>
+                  <option ng-selected="usuario.rol ==='administrador'" value="administrador">Administrador</option>
+                </select> 
+            </td>
             <td>{{usuario.nombre_usuario}}</td>
           </tr>
       </tbody>
