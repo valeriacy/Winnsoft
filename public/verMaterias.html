@@ -8,24 +8,33 @@
 <div ng-if="user.rol === 'auxiliar'" ng-include="'/shared/header_auxiliar.html'" style="width: 100vw;"></div>
 <div class="centered-div">
     <h1>
-        Mis Materias
+        Materias
     </h1>
 </div>
 <div class="materiasDiv">
     <div>
         <ul>
+            <div ng-if="inscripciones.length == 0">
+                Aun no se inscribio en un grupo. Vaya a la opcion de INSCRIBIRSE.
+            </div>
             <li ng-repeat="inscripcion in inscripciones">
-                <a href="#!sesiones/{{inscripcion[0].id}}">{{inscripcion[2].nombre}} - grupo: {{inscripcion[0].grupo}}</a>
+                <a href="#!sesiones/{{inscripcion[0].id}}">{{inscripcion[2].nombre}} - GRUPO: {{inscripcion[0].grupo}}</a>
             </li>
         </ul>
         <ul>
+            <div ng-if="dictadas.length == 0">
+                El administrador aun no lo registro como docente en algun grupo.
+            </div>
             <li ng-repeat="dictada in dictadas">
-                <a href="#!sesiones/{{dictada[0].id}}">{{dictada[2].nombre}} - grupo: {{dictada[0].grupo}}</a>
+                <a href="#!sesiones/{{dictada[0].id}}">{{dictada[2].nombre}} - GRUPO: {{dictada[0].grupo}}</a>
             </li>
         </ul>
         <ul>
+            <div ng-if="auxiliadas.length == 0">
+                El administrador aun no lo registro como auxiliar en algun grupo.
+            </div>
             <li ng-repeat="auxiliada in auxiliadas">
-                <a href="#!sesionesAux/{{auxiliada[0].id}}">{{auxiliada[2].nombre}} - grupo: {{auxiliada[0].grupo}}</a>
+                <a href="#!sesionesAux/{{auxiliada[0].id}}">{{auxiliada[2].nombre}} - GRUPO: {{auxiliada[0].grupo}}</a>
             </li>
         </ul>
     </div>
