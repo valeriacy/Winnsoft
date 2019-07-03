@@ -233,13 +233,12 @@ function crearGrupoCtrl($scope,$http,$location){
         $scope.getTime = grupoCtrl.configurarHoras;
         $scope.grupo = grupoCtrl.siguienteNumeroPorGrupo;
         $scope.guardar= grupoCtrl.guardarNuevoGrupo;
+        $scope.paraHoraFin = grupoCtrl.agregarMinutosAHora;
         $scope.mostrarForm = () => {
-            document.querySelector("#crear-grupo").classList.add("hidden");
-            document.querySelector("#form").classList.remove("hidden");
+            interCambioBlock("#form", "#crearGrupo")
         }
         $scope.ocultarForm = () => {
-            document.querySelector("#crear-grupo").classList.remove("hidden");
-            document.querySelector("#form").classList.add("hidden");
+            interCambioBlock("#crearGrupo", "#form")
         }
         obtener_ofertas($http, $scope);
         cargarDocentes($http, $scope);
@@ -252,17 +251,15 @@ function crearGrupoCtrl($scope,$http,$location){
 }
 function crearMateriasCtrl($scope,$http,$location){
     if(usuario && usuario.rol === "administrador"){
+        let materiaCtrl = new MateriaCtrl($http, $scope);
         $scope.user = usuario;
         $scope.$watch("materias", watchFunction);
         $scope.mostrarForm = () => {
-            document.querySelector("#crear-materia").classList.add("hidden");
-            document.querySelector("#form-materia").classList.remove("hidden");
+            interCambioBlock("#form-materia", "#crear-materia");
         }
         $scope.ocultarForm = () => {
-            document.querySelector("#crear-materia").classList.remove("hidden");
-            document.querySelector("#form-materia").classList.add("hidden");
+            interCambioBlock("#crear-materia", "#form-materia");
         }
-        let materiaCtrl = new MateriaCtrl($http, $scope);
         $scope.guardar = materiaCtrl.guardarMateria
         cargarMaterias($http, $scope);
         cargarMenuAdministrador($location, $scope);

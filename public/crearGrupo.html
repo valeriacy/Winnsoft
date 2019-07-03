@@ -2,61 +2,7 @@
     <img id="secondGif" src="../assets/cargando.gif" />
 </div>
 <div ng-if="user.rol === 'administrador'" ng-include="'/shared/header_administrador.html'" style="width: 100vw;"></div>
-<input id="crear-grupo" type="image" src="./assets/plus.png" title="Crear nuevo grupo" ng-click="mostrarForm()" />
-<div class="divCrearGrupo">
-    <form autocomplete="off" class="hidden" id="form">
-        <h3>Crear nuevo grupo</h3>
-        <div> 
-            <label > Materia:</label>
-            <select ng-model="nueva.materiaId" ng-change="grupo()">
-                <option ng-repeat="materia in materias" value="{{materia.id}}">{{materia.nombre}}</option>
-            </select>       
-         </div><br>
-         <div> 
-                Numero de Grupo: <input ng-model="nueva.grupo" type="number" name="numero de grupo" id="grupo" disabled>       
-            </div><br>
-            <div> 
-                <label > Dia:</label>
-                <select ng-model="nueva.dia">
-                       <option value="1">Lunes</option>
-                       <option value="2">Martes</option>
-                       <option value="3">Miercoles</option>
-                       <option value="4">Jueves</option>
-                       <option value="5">Viernes</option>
-                       <option value="6">Sabado</option>
-                     </select>       
-            </div><br>
-            <div>
-                 <label>Hora inicio:</label>
-                 <input ng-model="nueva.horaInicio" ng-change="getTime(true)" type="time" min="06:45" max="20:45" value="06:45" id="horaInicio">
-                </div><br>
-             <div>
-                 <label>Hora Fin:</label>
-                 <input ng-model="nueva.horaFin" ng-change="getTime(false)" type="time" min="06:45" max="22:45" value="08:15" id="horaFin" disabled>
-             </div><br>
-             <div> 
-                <label > Docente:</label>
-                <select ng-model="nueva.docenteId">
-                    <option ng-repeat="docente in docentes" value="{{docente.id}}">{{docente.apellido}} {{docente.nombre}}</option>
-                </select>       
-            </div>
-                <div> 
-                        <label > Auxiliar:</label>
-                        <select ng-model="nueva.auxiliarId">
-                               <option ng-repeat="auxiliar in auxiliares" value="{{auxiliar.id}}">{{auxiliar.apellido}} {{auxiliar.nombre}}</option>
-                             </select>       
-                    </div><br>
-                <div> 
-                    <div id="guardar">
-                        <button class="btn__submit" ng-click="guardar()">GUARDAR</button>
-                        <button class="btn__submit" ng-click="ocultarForm()">CANCELAR</button>
-                    </div>   
-                    <div class="loading-div" id="loading">
-                        <img src="./assets/loading.gif" class="loading-image"/>
-                    </div><br>
-    </form>
-</div>
-<table>
+<table style="margin-left:33vw;">
     <tr>
         <th>Materia</th>
         <th>Grupo</th>
@@ -73,7 +19,67 @@
         <td>{{oferta[1].nombre}} {{oferta[1].apellido}}</td>
         <td>{{oferta[3].nombre}} {{oferta[3].apellido}}</td>
         <td>{{oferta[0].hora}}</td>
-        <td>{{oferta[0].hora}}</td>
+        <td><label value="paraHoraFin(oferta[0].hora, 90}"></label></td>
         <td>{{oferta[0].dia}}</td> 
     </tr>
 </table>
+<div ng-if="ofertas.length == 0" style="text-align:center; margin-left:3vw;">
+        AUN NO EXISTEN GRUPOS REGISTRADOS, USE EL SIGUIENTE BOTON PARA REGISTRAR UNO.
+</div>
+<div class="nuevaEntidad" id="crearGrupo">
+    <input class="createButton" type="image" src="./assets/plus.png" title="Crear nuevo grupo" ng-click="mostrarForm()" />
+    <button ng-click="mostrarForm()">Crear nuevo grupo</button>
+</div>
+<div class="divCrearGrupo">
+    <form autocomplete="off" class="hidden" id="form">
+        <h3>Crear nuevo grupo</h3>
+        <div> 
+            <label > Materia:</label>
+            <select ng-model="nueva.materiaId" ng-change="grupo()" required>
+                <option ng-repeat="materia in materias" value="{{materia.id}}">{{materia.nombre}}</option>
+            </select>       
+         </div><br>
+         <div> 
+            Numero de Grupo: <input ng-model="nueva.grupo" type="number" name="numero de grupo" id="grupo" disabled>       
+        </div><br>
+            <div> 
+                <label > Dia:</label>
+                <select ng-model="nueva.dia" required>
+                       <option value="1">Lunes</option>
+                       <option value="2">Martes</option>
+                       <option value="3">Miercoles</option>
+                       <option value="4">Jueves</option>
+                       <option value="5">Viernes</option>
+                       <option value="6">Sabado</option>
+                     </select>       
+            </div><br>
+            <div>
+                 <label>Hora inicio:</label>
+                 <input ng-model="nueva.horaInicio" ng-change="getTime(true)" type="time" min="06:45" max="20:45" value="06:45" id="horaInicio" required>
+                </div><br>
+             <div>
+                 <label>Hora Fin:</label>
+                 <input ng-model="nueva.horaFin" ng-change="getTime(false)" type="time" min="06:45" max="22:45" value="08:15" id="horaFin" disabled>
+             </div><br>
+             <div> 
+                <label > Docente:</label>
+                <select ng-model="nueva.docenteId" required>
+                    <option ng-repeat="docente in docentes" value="{{docente.id}}">{{docente.apellido}} {{docente.nombre}}</option>
+                </select>       
+            </div>
+            <div> 
+                <label > Auxiliar:</label>
+                <select ng-model="nueva.auxiliarId" required>
+                    <option ng-repeat="auxiliar in auxiliares" value="{{auxiliar.id}}">{{auxiliar.apellido}} {{auxiliar.nombre}}</option>
+                </select>       
+            </div><br>
+            <div> 
+            <div id="guardar">
+                <button class="btn__submit" ng-click="guardar()">GUARDAR</button>
+                <button class="btn__submit" ng-click="ocultarForm()">CANCELAR</button>
+            </div>   
+            <div class="loading-div" id="loading">
+                <img src="./assets/loading.gif" class="loading-image"/>
+            </div><br>
+    </form>
+</div>

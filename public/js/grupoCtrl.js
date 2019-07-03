@@ -14,6 +14,7 @@ class GrupoCtrl {
     }
       this.guardarNuevoGrupo=this.guardarNuevoGrupo.bind(this);
       this.configurarHoras=this.configurarHoras.bind(this);
+      this.agregarMinutosAHora=this.agregarMinutosAHora.bind(this);
     }
 
     configurarHoras(inicio){
@@ -22,12 +23,17 @@ class GrupoCtrl {
             this.scope.nueva.horaInicio = hora;
 
             let horaFin = this.agregarMinutos(hora.split(":")[0], hora.split(":")[1], 90);
-            console.log(horaFin);
             this.scope.nueva.horaFin = horaFin;
             document.querySelector("#horaFin").value = horaFin;
         }else{
             this.scope.nueva.horaFin = document.querySelector("#horaFin").value;
         }
+    }
+
+    agregarMinutosAHora(hora, minutosAAgregar){
+        let horaInicio = hora.split(":")[0];
+        let minutosInicio = hora.split(":")[1];
+        return this.agregarMinutos(horaInicio, minutosInicio, minutosAAgregar)
     }
 
     agregarMinutos(hora, minutos, minutosAAgregar){
@@ -36,8 +42,8 @@ class GrupoCtrl {
         date.setMinutes(minutos);
 
         let newDateObj = new Date(date.getTime() + minutosAAgregar*60000);
-        let horaFin = newDateObj.getHours()>10 ? newDateObj.getHours() : "0"+newDateObj.getHours();
-        let minutosFin = newDateObj.getMinutes()>10 ? newDateObj.getMinutes() : "0"+newDateObj.getMinutes();
+        let horaFin = newDateObj.getHours()>=10 ? newDateObj.getHours() : "0"+newDateObj.getHours();
+        let minutosFin = newDateObj.getMinutes()>=10 ? newDateObj.getMinutes() : "0"+newDateObj.getMinutes();
         return horaFin + ":" + minutosFin;
     }
 

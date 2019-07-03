@@ -529,7 +529,7 @@ border:10px solid rgb(0,128,128);
 	transition-duration: 2s;
 }
 
-.nuevaMateria{
+.nuevaEntidad{
 	margin-top: 1em;
 	height: 3vw;
 	width: 3vw;
@@ -537,7 +537,7 @@ border:10px solid rgb(0,128,128);
 	margin-left: 47%;
 }
 
-.nuevaMateria button{
+.nuevaEntidad button{
 	display: none;
 	width: 7vw;
 	background: #093ce6;
@@ -550,12 +550,12 @@ border:10px solid rgb(0,128,128);
 	margin-left: -1.5vw;
 }
 
-.nuevaMateria:hover .createButton{
+.nuevaEntidad:hover .createButton{
 	display: none;
 	transition-duration: 2s;
 }
 
-.nuevaMateria:hover button{
+.nuevaEntidad:hover button{
 	display: block;
 	transition-duration: 2s;
 }
@@ -594,7 +594,7 @@ border:10px solid rgb(0,128,128);
 #crear-grupo{
 	width: 5vh;
 	height: 5vh;
-	margin-left: 52vw;
+	margin-left: 49vw;
 	margin-top: 2vw;
 }
 
