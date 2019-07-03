@@ -381,68 +381,34 @@ function agregarPortafolioCtrl($http,$scope,$location){
 }
 function sesionesCtrl($http, $scope, $location, $routeParams){
     if(usuario){
+        let portafolioCtrl = new PortafolioCtrl($http, $scope);
         $scope.user = usuario;
         $scope.colapsable=funcionColapsable();
         $scope.restablecer = () => {
             alert("Creada nueva sesion")
-            obtenerSesionesDeGrupo($http, $scope, $routeParams.id, usuario.id);
+            portafolioCtrl.obtenerSesionesPorGrupo($routeParams.id, usuario.id);
             let divSelector = "#crearSesion";
             let gifSelector = "#loading-sesion";
             interCambioBlock(divSelector, gifSelector);
             let form = document.querySelector("#sesionForm");
             form.classList.add("hidden");
         }
-        $scope.enviar=(productoId)=>{
-            let boton = document.querySelector("#enviar-"+productoId);
-            let gif = document.querySelector("#loading-"+productoId);
-
-            boton.style.display="none";
-            gif.style.display="block";
-
-            let textArea=document.querySelector("#descripcion-"+productoId);
-            let fileInput=document.querySelector("#file-"+productoId);
-            if(validarCamposEntrega(productoId)){
-                if(validarArchivoEstudiante(fileInput)){
-                    let text=textArea.value;
-                    let withFile=fileInput.value !== "";
-    
-                    let entrega = {
-                        descripcion:text,
-                        usuarioId:usuario.id,
-                        productoId:productoId
-                    }
-                    crearEntrega(entrega, withFile, $http, $scope, productoId);
-                }else{
-                    let boton = document.querySelector("#enviar-"+productoId);
-                    let gif = document.querySelector("#loading-"+productoId);
-        
-                    boton.style.display="block";
-                    gif.style.display="none";
-                }
-            }else{
-                alert("Al menos uno de los campos debe ser llenado");
-                let boton = document.querySelector("#enviar-"+productoId);
-                let gif = document.querySelector("#loading-"+productoId);
-    
-                boton.style.display="block";
-                gif.style.display="none";
-            }
-        };
+        $scope.enviar=portafolioCtrl.guardarEntrega;
         $scope.cargarVerEntregas = (productoId) => {
             $location.path('/verEntregas/'+productoId);
         }
         $scope.mostrarFormSesion=() => {
-            alert("Al crear una nueva sesion\n Tome en cuenta que la sesion actualmente abierta en este grupo se cerrara.");
+            alert("Al crear una nueva sesion\nTome en cuenta que la sesion actualmente abierta en este grupo se cerrara.");
             let form = document.querySelector("#sesionForm");
             form.classList.remove("hidden");
         }
-        $scope.crearSesion=() => {
+        $scope.crearSesion=()=>{
             let divSelector = "#crearSesion";
             let gifSelector = "#loading-sesion";
             interCambioBlock(gifSelector, divSelector);
-
-            nuevaSesion($routeParams.id, $http, $scope, usuario.id);    
-        }
+        
+            portafolioCtrl.nuevaSesion($routeParams.id); 
+          }
         $scope.cancelSesion=()=>{
             let form = document.querySelector("#sesionForm");
             form.classList.add("hidden");
@@ -457,7 +423,7 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
                 sesionId:sesionId,
                 descripcion:descripcion
             }
-            enviarNuevoProducto(producto, $http, $scope, usuario.id, $routeParams.id)
+            portafolioCtrl.guardarProducto(producto, usuario.id, $routeParams.id)
         };
         $scope.aReporte = (sesionId) => {
            $location.path("/reporteSesion/"+sesionId);
@@ -471,7 +437,7 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
             });
         };
         $scope.$watch("oferta", watchFunction);
-        obtenerSesionesDeGrupo($http,$scope,$routeParams.id, usuario.id);
+        portafolioCtrl.obtenerSesionesPorGrupo($routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);
     }

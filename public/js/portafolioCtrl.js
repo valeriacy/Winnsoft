@@ -132,55 +132,86 @@ class PortafolioCtrl{
   }
 
   uploadFile (entregaId, productoId, deDocente){
-    let url = deDocente ? '/api/subirArchivoDocente/'+entregaId : '/api/subirArchivo/'+entregaId
-    let request = {
-        method: 'POST',
-        url: url,
-        data: formData,
-        headers: {
-            'Content-Type': undefined
-        }
-    };
-    consumirApi(this.httpService,
-                request,
-                (response)=>{
-                    if(!deDocente)
-                        this.reemplazarDivEntrega(entregaId, this.httpService, this.scope, productoId);
-                    else
-                        this.scope.restablecer();
-                },
-                (error)=>{console.error(error)})
-}
+      let url = deDocente ? '/api/subirArchivoDocente/'+entregaId : '/api/subirArchivo/'+entregaId
+      let request = {
+          method: 'POST',
+          url: url,
+          data: formData,
+          headers: {
+              'Content-Type': undefined
+          }
+      };
+      consumirApi(this.httpService,
+                  request,
+                  (response)=>{
+                      if(!deDocente)
+                          this.reemplazarDivEntrega(entregaId, this.httpService, this.scope, productoId);
+                      else
+                          this.scope.restablecer();
+                  },
+                  (error)=>{console.error(error)})
+  }
 
-reemplazarDivEntrega(entregaId, productoId){
-    consumirApi(this.httpService,
-        {
-            method: 'GET',
-            url: '/api/entrega/'+entregaId,
-        }, 
-        (response)=>{
-            let entrega = response.data;
-            this.agregarAProducto(entrega, productoId);
-        },
-        (error)=>{
-            console.error(error);
-        })
-    alert("Entrega exitosa");
-}
+  reemplazarDivEntrega(entregaId, productoId){
+      consumirApi(this.httpService,
+          {
+              method: 'GET',
+              url: '/api/entrega/'+entregaId,
+          }, 
+          (response)=>{
+              let entrega = response.data;
+              this.agregarAProducto(entrega, productoId);
+          },
+          (error)=>{
+              console.error(error);
+          })
+      alert("Entrega exitosa");
+  }
 
-agregarAProducto(entrega, productoId){
-    let productoPadre = entrega.producto_id;
-    for(let sesion of this.scope.sesiones){
-        for(let producto of sesion.productos){
-            if(producto.id === productoPadre)
-                producto.entregas.push(entrega);
-                let boton = document.querySelector("#enviar-"+productoId);
-                let gif = document.querySelector("#loading-"+productoId);
-    
-                boton.style.display="block";
-                gif.style.display="none";
-        }
+  agregarAProducto(entrega, productoId){
+      let productoPadre = entrega.producto_id;
+      for(let sesion of this.scope.sesiones){
+          for(let producto of sesion.productos){
+              if(producto.id === productoPadre)
+                  producto.entregas.push(entrega);
+                  let boton = document.querySelector("#enviar-"+productoId);
+                  let gif = document.querySelector("#loading-"+productoId);
+      
+                  boton.style.display="block";
+                  gif.style.display="none";
+          }
+      }
+  }
+
+  nuevaSesion(grupoId){
+    let fileAttached = document.querySelector("#file-sesion").value!="";
+    let fecha = document.querySelector("#sesionForm input").value;
+    let obj={
+        grupoId:grupoId,
+        fechaCaducidad:fecha
     }
-}
+
+    let req = {
+        method: 'POST',
+        url: "/api/Sesion",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data : JSON.stringify(obj)
+    }
+    consumirApi(this.httpService,
+                    req, 
+                    (response)=>{
+                        let sesionId = response.data;
+                        if(fileAttached)
+                            this.uploadFile(sesionId, undefined, true);
+                        else
+                            this.scope.restablecer();
+                    },
+                    (error)=>{
+                        console.error(error);
+                    }
+                )
+  }
 
 }

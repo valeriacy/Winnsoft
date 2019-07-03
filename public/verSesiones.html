@@ -11,6 +11,8 @@
    
     <div class="mainContainer">
         <label style="text-align: center;">{{oferta[2].nombre}}</label>
+        <label style="text-align: center;">Docente: {{oferta[1].nombre}} {{oferta[1].apellido}} |</label>
+        <label style="text-align: center;">Grupo: {{oferta[0].grupo}}</label>
         <div ng-if="user.rol === 'docente'" class="newSesion">
             <div>
                 <button class="buttonReporte"ng-click="aReporteGeneral()">Reporte General</button>

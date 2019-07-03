@@ -62,43 +62,6 @@ function obtenerOfertaPorId(httpService, scope, idOferta){
     });
 }
 
-function obtenerSesionesDeGrupo(httpService, scope, idOferta, idUsuario){
-    let req={
-        method: 'GET',
-        url: "/api/sesiones/"+idOferta,
-    };
-
-    httpService(req)
-    .then((response)=>{
-        let data=response.data;
-        filtrarEntregaUsuario(data, idUsuario);
-        scope.sesiones = data;
-        
-    })
-    .catch((error)=>{
-        console.error(error);
-    });
-}
-
-function filtrarEntregaUsuario(sesiones, id){
-    if(sesiones)
-        sesiones.reverse();
-    for(let sesion of sesiones){
-        filtrarEntregaUsuarioEnSesion(sesion, id);
-    }
-}
-
-function filtrarEntregaUsuarioEnSesion(sesion, id){
-    let productos = sesion.productos;
-    if(productos)
-        productos.reverse()
-    for(let producto of productos){
-        let entregasGlobales=producto.entregas;
-        let entregasUsuario = entregasGlobales.filter(entrega => entrega.usuario_id==id);
-        producto.entregas=entregasUsuario;
-    }
-}
-
 function obtenerInscripciones(httpService, scope, usuario){
     if(usuario.rol === "estudiante")
         obtenerMateriasPorInscripcion(httpService, scope, usuario.id);
@@ -267,102 +230,6 @@ function logOut(location){
     location.path(PUBLICA)
 }
 
-function crearEntrega(entrega, withFile, httpService, scope, productoId){
-    let req = {
-        method: 'POST',
-        url: "/api/Entrega",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data : JSON.stringify(entrega)
-    }
-    consumirApi(httpService,
-                    req, 
-                    (response)=>{
-                        let entregaId = response.data;
-                        if(withFile)
-                            uploadFile(httpService, entregaId, scope, productoId, false);
-                        else
-                            reemplazarDivEntrega(entregaId, httpService, scope, productoId);
-                    },
-                    (error)=>{
-                        console.error(error);
-                    }
-                )
-}
-
-function uploadFile (httpService, entregaId, scope, productoId, deDocente){
-    let url = deDocente ? '/api/subirArchivoDocente/'+entregaId : '/api/subirArchivo/'+entregaId
-    let request = {
-        method: 'POST',
-        url: url,
-        data: formData,
-        headers: {
-            'Content-Type': undefined
-        }
-    };
-    consumirApi(httpService,
-                request,
-                (response)=>{
-                    if(!deDocente)
-                        reemplazarDivEntrega(entregaId, httpService, scope, productoId);
-                    else
-                        scope.restablecer();
-                },
-                (error)=>{console.error(error)})
-}
-
-function reemplazarDivEntrega(entregaId, httpService, scope, productoId){
-    consumirApi(httpService,
-        {
-            method: 'GET',
-            url: '/api/entrega/'+entregaId,
-        }, 
-        (response)=>{
-            let entrega = response.data;
-            agregarAProducto(scope, entrega, productoId);
-        },
-        (error)=>{
-            console.error(error);
-        })
-    alert("Entrega exitosa");
-}
-
-function agregarAProducto(scope, entrega, productoId){
-    let productoPadre = entrega.producto_id;
-    for(sesion of scope.sesiones){
-        for(producto of sesion.productos){
-            if(producto.id === productoPadre)
-                producto.entregas.push(entrega);
-                let boton = document.querySelector("#enviar-"+productoId);
-                let gif = document.querySelector("#loading-"+productoId);
-    
-                boton.style.display="block";
-                gif.style.display="none";
-        }
-    }
-}
-
-function crearElementoHTMLEntrega(entrega){
-    let containerDiv = document.createElement("div");
-    let lbArchivo = document.createElement("label");
-    let lbDescripcion = document.createElement("label");
-    let lbContenidoArchivo = document.createElement("label");
-    let pContenidoDescripcion = document.createElement("p");
-
-    lbArchivo.innerText="Cargar Archivo:";
-    lbContenidoArchivo.innerText=entrega.nombreArchivo;
-    lbDescripcion.innerText="Descripción:";
-    pContenidoDescripcion.innerText=entrega.descripcion;
-
-    containerDiv.appendChild(lbArchivo);
-    containerDiv.appendChild(lbContenidoArchivo);
-    containerDiv.appendChild(lbDescripcion);
-    containerDiv.appendChild(pContenidoDescripcion);
-
-    return containerDiv;
-}
-
 function consumirApi(httpService, req, successCallBack, errorCallBack){
     httpService(req)
     .then(successCallBack)
@@ -380,7 +247,6 @@ function cargarMenuDocente(location, scope){
     scope.logOut = () => {
         logOut(location);
     }
-    
 }
 
 function cargarMenuAuxiliar(location, scope){
@@ -419,7 +285,6 @@ function cargarMenuAdministrador(location, scope){
     scope.logOut = () => {
         logOut(location);
     }
-
 }
 
 function cargarMenuPara(rol, location, scope){
@@ -491,38 +356,6 @@ function obtenerNombresPorId(httpService, scope, usuarioId){
                 )
 }
 
-
-function nuevaSesion(grupoId, httpService, scope, usuarioId){
-    let fileAttached=document.querySelector("#file-sesion").value!="";
-    let fecha = document.querySelector("#sesionForm input").value;
-    let obj={
-        grupoId:grupoId,
-        fechaCaducidad:fecha
-    }
-
-    let req = {
-        method: 'POST',
-        url: "/api/Sesion",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data : JSON.stringify(obj)
-    }
-    consumirApi(httpService,
-                    req, 
-                    (response)=>{
-                        let sesionId = response.data;
-                        if(fileAttached)
-                            uploadFile(httpService, sesionId, scope, undefined, true);
-                        else
-                            scope.restablecer();
-                    },
-                    (error)=>{
-                        console.error(error);
-                    }
-                )
-}
-
 function showElementById(elementId){
     let element = document.querySelector("#"+elementId);
     element.classList.remove("hidden");
@@ -545,28 +378,6 @@ function ocultarFormProducto(sesionId){
     let triggerButtonId = "newProducto-"+sesionId;
     hideElementById(formId);
     showElementById(triggerButtonId);
-}
-
-function enviarNuevoProducto(producto, httpService, scope, usuarioId, grupoId){
-    let req = {
-        method: 'POST',
-        url: "/api/Producto",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data : JSON.stringify(producto)
-    }
-    consumirApi(httpService,
-                    req, 
-                    (response)=>{
-                        alert("Creado nuevo producto");
-                        ocultarFormProducto(producto.sesionId);
-                        obtenerSesionesDeGrupo(httpService, scope, grupoId, usuarioId);
-                    },
-                    (error)=>{
-                        console.error(error);
-                    }
-                )
 }
 
 function hideMainLoad(){
