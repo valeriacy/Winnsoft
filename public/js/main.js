@@ -102,9 +102,10 @@ app.controller("crearMateriasCtrl",crearMateriasCtrl)
 
 function inscripcionCtrl($scope,$location,$http){
     if(usuario){
+        let grupoCtrl = new GrupoCtrl($http, $scope);
         $scope.user = usuario;
         cargarMenuPara(usuario.rol, $location, $scope)
-        obtener_ofertas($http, $scope);
+        grupoCtrl.obtenerGrupos();
         obtenerInscripciones($http,$scope,usuario);
         $scope.$watch("inscripciones", watchFunction);
         $scope.inscribir = (idOferta) => {
@@ -135,9 +136,8 @@ function inscripcionCtrl($scope,$location,$http){
 function principalCtrl($scope, $location, $http){
     if(usuario){
         $scope.user = usuario;
-        $scope.$watch("ofertas",watchFunction);
-        obtener_ofertas($http, $scope);
         cargarMenuPara(usuario.rol, $location, $scope);
+        hideMainLoad();
     }
     else
         $location.path(RAIZ);
@@ -233,14 +233,9 @@ function crearGrupoCtrl($scope,$http,$location){
         $scope.getTime = grupoCtrl.configurarHoras;
         $scope.grupo = grupoCtrl.siguienteNumeroPorGrupo;
         $scope.guardar= grupoCtrl.guardarNuevoGrupo;
-        $scope.paraHoraFin = grupoCtrl.agregarMinutosAHora;
-        $scope.mostrarForm = () => {
-            interCambioBlock("#form", "#crearGrupo")
-        }
-        $scope.ocultarForm = () => {
-            interCambioBlock("#crearGrupo", "#form")
-        }
-        obtener_ofertas($http, $scope);
+        $scope.mostrarForm = () => {interCambioBlock("#form", "#crearGrupo")};
+        $scope.ocultarForm = () => {interCambioBlock("#crearGrupo", "#form")};
+        grupoCtrl.obtenerGrupos();
         cargarDocentes($http, $scope);
         cargarAuxiliares($http, $scope);
         cargarMaterias($http, $scope);

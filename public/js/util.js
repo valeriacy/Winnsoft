@@ -2,6 +2,13 @@ const RAIZ="/login";
 const PUBLICA="/";
 let formData = new FormData();
 
+function modificarBotonesEnDiv(selector, disabled){
+    let buttons = document.querySelectorAll(selector + " button");
+    for(button of buttons){
+        button.disabled = disabled;
+    }
+}
+
 function logIn(httpService, req, contra, location){
     httpService(req)
     .then((response)=>{
@@ -21,21 +28,6 @@ function logIn(httpService, req, contra, location){
             alert("Usuario o contraseña incorrectos");
             interCambioBlock("#entrar","#loading");
         }
-    })
-    .catch((error)=>{
-        console.error(error);
-    });
-}
-
-function obtener_ofertas(httpService, scope){
-    let req={
-        method: 'GET',
-        url: "/api/Ofertas",
-    };
-
-    httpService(req)
-    .then((response)=>{
-        scope.ofertas = response.data;
     })
     .catch((error)=>{
         console.error(error);

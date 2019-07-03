@@ -15,6 +15,31 @@ class GrupoCtrl {
       this.guardarNuevoGrupo=this.guardarNuevoGrupo.bind(this);
       this.configurarHoras=this.configurarHoras.bind(this);
       this.agregarMinutosAHora=this.agregarMinutosAHora.bind(this);
+      this.siguienteNumeroPorGrupo=this.siguienteNumeroPorGrupo.bind(this);
+      this.obtenerGrupos=this.obtenerGrupos.bind(this);
+      this.tratarGrupos=this.tratarGrupos.bind(this);
+    }
+
+    obtenerGrupos(){
+        let req={
+            method: 'GET',
+            url: "/api/Ofertas",
+        };
+    
+        this.httpService(req)
+        .then((response)=>{
+            this.tratarGrupos(response.data);
+            this.scope.ofertas = response.data;
+        })
+        .catch((error)=>{
+            console.error(error);
+        });
+    }
+
+    tratarGrupos(grupos){
+        for(let grupo of grupos){
+            grupo[0].horaFin = this.agregarMinutosAHora(grupo[0].hora, 90);
+        }
     }
 
     configurarHoras(inicio){
@@ -48,32 +73,31 @@ class GrupoCtrl {
     }
 
     guardarNuevoGrupo(){
-        {
-            mostrarGifLoading();
-            consumirApi(this.httpService,
-                {
-                    method: 'POST',
-                    url: "/api/Oferta",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    data : JSON.stringify(this.scope.nueva)
+        mostrarGifLoading();
+        consumirApi(this.httpService,
+            {
+                method: 'POST',
+                url: "/api/Oferta",
+                headers: {
+                    'Content-Type': 'application/json'
                 },
-                (response)=>{
-                    obtener_ofertas(this.httpService, this.scope);
-                    alert("Nuevo grupo creado");
-                    this.scope.nueva = this.ofertaVacia;
-                    ocultarGifLoading();
-                    this.scope.ocultarForm();
-                    limpiarForm();
-                },
-                (error)=>{
-                    console.error(error);
-                })
-        };
+                data : JSON.stringify(this.scope.nueva)
+            },
+            (response)=>{
+                this.obtenerGrupos();
+                alert("Nuevo grupo creado");
+                this.scope.nueva = this.ofertaVacia;
+                ocultarGifLoading();
+                this.scope.ocultarForm();
+                limpiarForm();
+            },
+            (error)=>{
+                console.error(error);
+            })
     }
 
     siguienteNumeroPorGrupo(){
+        modificarBotonesEnDiv("#guardar", true);
         consumirApi(this.httpService,
                     {
                         method: 'GET',
@@ -89,6 +113,7 @@ class GrupoCtrl {
                         }
                         this.scope.nueva.grupo = grupo;
                         document.querySelector("#grupo").value = grupo;
+                        modificarBotonesEnDiv("#guardar", false);
                     },
                     (error)=>{
                         console.error(error);
