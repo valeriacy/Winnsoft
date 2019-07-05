@@ -41,7 +41,7 @@ class SesionController extends Controller
     public function store(Request $request)
     {
         $grupoId = $request->grupoId;
-        $this->cerrarSesionAbierta($grupoId);
+        //$this->cerrarSesionAbierta($grupoId);
         $sesion = new Sesion();
         
         $sesion->grupo_id = $grupoId;
@@ -57,6 +57,12 @@ class SesionController extends Controller
 
     public function obtenerSesionAbiertaPorGrupo($grupoId){
         return Sesion::where('grupo_id', $grupoId)->where('cerrado', false)->get()->first();
+    }
+
+    public function cerrarSesion($id){
+        $sesion = Sesion::find($id);
+        $sesion->cerrado = true;
+        $sesion->save();
     }
 
     public function cerrarSesionAbierta($idGrupo){

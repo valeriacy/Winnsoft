@@ -1,7 +1,8 @@
 class PortafolioCtrl{
-    constructor(httpService, scope) {
+    constructor(httpService, scope, grupoId) {
         this.httpService = httpService;
         this.scope = scope;
+        this.grupoId = grupoId;
         this.obtenerSesionesPorGrupo=this.obtenerSesionesPorGrupo.bind(this);
         this.filtrarEntregaUsuario=this.filtrarEntregaUsuario.bind(this);
         this.filtrarEntregaUsuarioEnSesion=this.filtrarEntregaUsuarioEnSesion.bind(this);
@@ -10,7 +11,24 @@ class PortafolioCtrl{
         this.crearEntrega=this.crearEntrega.bind(this);
         this.configurarContadorSesiones=this.configurarContadorSesiones.bind(this);
         this.cambioEnSesiones=this.cambioEnSesiones.bind(this);
+        this.cerrarSesion=this.cerrarSesion.bind(this);
       }
+
+    cerrarSesion(sesion){
+      consumirApi(this.httpService,
+          {
+            method: 'PUT',
+            url: "/api/cerrarSesion/"+sesion.id,
+          }, 
+          (response)=>{
+              alert("Se cerro la sesion");
+              this.obtenerSesionesPorGrupo(this.grupoId, undefined);
+          },
+          (error)=>{
+              console.error(error);
+          }
+      )
+    }
     
     obtenerSesionesPorGrupo(idOferta, idUsuario){
       let req={

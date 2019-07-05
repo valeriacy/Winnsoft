@@ -351,6 +351,10 @@ input[type=text]:focus, [type=password]:focus {
 	padding: 0.15em
 }
 
+.hover-dropdown button:hover{
+	background-color:rgb(207, 7, 7);
+}
+
 .bg-celeste{
 	background-color: #38d8e4;
 }

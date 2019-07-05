@@ -381,7 +381,7 @@ function agregarPortafolioCtrl($http,$scope,$location){
 }
 function sesionesCtrl($http, $scope, $location, $routeParams){
     if(usuario){
-        let portafolioCtrl = new PortafolioCtrl($http, $scope);
+        let portafolioCtrl = new PortafolioCtrl($http, $scope, $routeParams.id);
         $scope.user = usuario;
         $scope.colapsable=funcionColapsable();
         $scope.restablecer = () => {
@@ -398,7 +398,6 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
             $location.path('/verEntregas/'+productoId);
         }
         $scope.mostrarFormSesion=() => {
-            alert("Al crear una nueva sesion\nTome en cuenta que la sesion actualmente abierta en este grupo se cerrara.");
             let form = document.querySelector("#sesionForm");
             form.classList.remove("hidden");
         }
@@ -436,7 +435,10 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
                 formData.append('file', value);
             });
         };
-        $scope.fechaMinima = obtenerStringFecha(new Date());
+        $scope.cerrarSesion = portafolioCtrl.cerrarSesion;
+        let fechaHoy = new Date();
+        let fechaManhana = new Date(fechaHoy.setDate(fechaHoy.getDate() + 1));
+        $scope.fechaMinima = obtenerStringFecha(fechaManhana);
         $scope.$watch("oferta", watchFunction);
         $scope.$watch("sesiones", portafolioCtrl.cambioEnSesiones);
         portafolioCtrl.obtenerSesionesPorGrupo($routeParams.id, usuario.id);

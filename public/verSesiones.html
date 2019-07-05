@@ -52,10 +52,10 @@
                                 countdown
                             </div>
                         </div>
-                        <button ng-if="user.rol === 'docente'" style="background-color: aqua; color:black;">  
+                        <!--<button ng-if="user.rol === 'docente'" style="background-color: aqua; color:black;">  
                             Editar
-                        </button>
-                        <button ng-if="user.rol === 'docente'">  
+                        </button>-->
+                        <button ng-if="user.rol === 'docente' && sesion.cerrado != 1" ng-click="cerrarSesion(sesion)">  
                             Cerra Ahora
                         </button>
                     </div>
