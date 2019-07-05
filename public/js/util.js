@@ -621,3 +621,11 @@ function timer(year, month, date, selector){
     }
     }, 1000);
 }
+
+function obtenerStringFecha(date){
+    let anho = date.getFullYear();
+    let mes = (date.getMonth() + 1) >=10 ? (date.getMonth() + 1) : "0" + (date.getMonth() + 1);
+    let dia = date.getDate()>=10 ? date.getDate() : "0" + date.getDate();
+    let fecha = anho +"-"+ mes +"-"+ dia;
+    return fecha;
+}

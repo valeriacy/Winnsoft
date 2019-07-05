@@ -22,7 +22,7 @@
         <div id="sesionForm" class="formSesion hidden">
             <div>
                 <label for="fecha">Fecha de Caducidad:</label>
-                <input type="date" name="fecha"/>
+                <input type="date" name="fecha" min="{{fechaMinima}}"/>
                 <div>
                     <label>Cargar Archivo:</label> <br>
                     <input type="file" ng-files="setTheFiles($files)" id="file-sesion">
@@ -44,14 +44,19 @@
                         Vencimiento:{{sesion.fecha_caducidad}}
                     </div>
                     <div class="hover-dropdown">
-                        <div id="contador-{{sesion.id}}">
-                            countdown
+                        <div>
+                            <div>
+                                Tiempo Restante:
+                            </div>
+                            <div id="contador-{{sesion.id}}">
+                                countdown
+                            </div>
                         </div>
-                        <button ng-if="user.rol === 'docente'">  
-                            Cerra Ahora
+                        <button ng-if="user.rol === 'docente'" style="background-color: aqua; color:black;">  
+                            Editar
                         </button>
                         <button ng-if="user.rol === 'docente'">  
-                            Editar
+                            Cerra Ahora
                         </button>
                     </div>
                 </div>

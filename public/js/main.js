@@ -436,6 +436,7 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
                 formData.append('file', value);
             });
         };
+        $scope.fechaMinima = obtenerStringFecha(new Date());
         $scope.$watch("oferta", watchFunction);
         $scope.$watch("sesiones", portafolioCtrl.cambioEnSesiones);
         portafolioCtrl.obtenerSesionesPorGrupo($routeParams.id, usuario.id);
