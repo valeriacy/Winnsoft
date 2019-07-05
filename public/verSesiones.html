@@ -39,7 +39,22 @@
         <div ng-repeat="sesion in sesiones" class="sesionDiv">
             <button class="buttonReporte" ng-if="user.rol === 'docente'" ng-click="aReporte(sesion.id)" >Reporte</button>
             <div class="info-sesion">
-                <label class="simplelabel">Vencimiento:{{sesion.fecha_caducidad}}</label>
+                <div class="float-right-div">
+                    <div class="text-div">
+                        Vencimiento:{{sesion.fecha_caducidad}}
+                    </div>
+                    <div class="hover-dropdown">
+                        <div id="contador-{{sesion.id}}">
+                            countdown
+                        </div>
+                        <button ng-if="user.rol === 'docente'">  
+                            Cerra Ahora
+                        </button>
+                        <button ng-if="user.rol === 'docente'">  
+                            Editar
+                        </button>
+                    </div>
+                </div>
                 <div ng-if = "sesion.archivoAdjunto != undefined" class="file-docente">
                     <label>Archivo Adjunto:</label>
                     <a href="/api/descargar/{{sesion.archivoAdjunto.id}}">{{sesion.archivoAdjunto.nombre_archivo}}</a>

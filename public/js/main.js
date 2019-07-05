@@ -437,6 +437,7 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
             });
         };
         $scope.$watch("oferta", watchFunction);
+        $scope.$watch("sesiones", portafolioCtrl.cambioEnSesiones);
         portafolioCtrl.obtenerSesionesPorGrupo($routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);

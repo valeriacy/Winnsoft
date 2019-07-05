@@ -312,9 +312,42 @@ input[type=text]:focus, [type=password]:focus {
 	background-color: #E67E22
 }
 
-.simplelabel{
+.float-right-div{
 	font-size: 0.8em;
 	float:right;
+	padding: 0.2em;
+}
+
+.float-right-div:hover .hover-dropdown {
+	display: block;
+}
+
+.float-right-div:hover .text-div{
+	background-color: #C8C8C8;
+}
+
+.text-div{
+	padding: 0.2em;
+	border: black solid 0.1em;
+}
+
+.hover-dropdown{
+	display: none;
+	width: 10.7vw;
+	text-align: center;
+	padding: 0.2em;
+	position: absolute;
+}
+
+.hover-dropdown div{
+	border: black solid 0.1em;
+}
+
+.hover-dropdown button{
+	width: 10.35vw;
+	border: rgb(243, 5, 5) solid 0.1em;
+	color:white;
+	background-color:rgb(255, 0, 0);
 }
 
 .colapsableButton{

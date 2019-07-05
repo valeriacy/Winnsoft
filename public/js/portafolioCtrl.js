@@ -8,6 +8,8 @@ class PortafolioCtrl{
         this.guardarEntrega=this.guardarEntrega.bind(this);
         this.guardarProducto=this.guardarProducto.bind(this);
         this.crearEntrega=this.crearEntrega.bind(this);
+        this.configurarContadorSesiones=this.configurarContadorSesiones.bind(this);
+        this.cambioEnSesiones=this.cambioEnSesiones.bind(this);
       }
     
     obtenerSesionesPorGrupo(idOferta, idUsuario){
@@ -26,6 +28,20 @@ class PortafolioCtrl{
       .catch((error)=>{
           console.error(error);
       });
+    }
+
+    configurarContadorSesiones(sesiones){
+      for(let sesion of sesiones){
+        let selector = "contador-" + sesion.id;
+        let fecha = sesion.fecha_caducidad;
+        setCounter(fecha, selector);
+      }
+    }
+
+    cambioEnSesiones(oldValue, newValue){
+        if(oldValue === newValue)
+            return;
+        this.configurarContadorSesiones(oldValue);
     }
 
   filtrarEntregaUsuario(sesiones, id){

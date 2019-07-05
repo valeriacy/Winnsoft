@@ -577,3 +577,47 @@ function interCambioBlock(aMostrar, aOcultar){
     ocultar.style.display="none";
     mostrar.style.display="block";
 }
+
+function setCounter(fecha, selector){
+    fecha = stringDateToVector(fecha);
+    timer(fecha['year'], fecha['month'], fecha['date'], selector);
+}
+
+function stringDateToVector(fecha){
+    let divido = fecha.split('-');
+    return {
+        'year':divido[0],
+        'month':divido[1] - 1,
+        'date':divido[2]
+    };
+}
+
+function timer(year, month, date, selector){
+    // Set the date we're counting down to
+    let countDownDate = new Date(year, month, date).getTime();
+    // Update the count down every 1 second
+    let counter = setInterval(function() {
+
+    // Get today's date and time
+    let now = new Date().getTime();
+        
+    // Find the distance between now and the count down date
+    let distance = countDownDate - now;
+        
+    // Time calculations for days, hours, minutes and seconds
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+    // Output the result in an element with id="demo"
+    document.getElementById(selector).innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+        
+    // If the count down is over, write some text 
+    if (distance < 0) {
+        clearInterval(counter);
+        document.getElementById(selector).innerHTML = "EXPIRADO";
+    }
+    }, 1000);
+}
