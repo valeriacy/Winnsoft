@@ -385,6 +385,7 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         $scope.user = usuario;
         $scope.colapsable=funcionColapsable();
         $scope.restablecer = () => {
+            pararContadores();
             alert("Creada nueva sesion")
             portafolioCtrl.obtenerSesionesPorGrupo($routeParams.id, usuario.id);
             let divSelector = "#crearSesion";
@@ -441,6 +442,9 @@ function sesionesCtrl($http, $scope, $location, $routeParams){
         $scope.fechaMinima = obtenerStringFecha(fechaManhana);
         $scope.$watch("oferta", watchFunction);
         $scope.$watch("sesiones", portafolioCtrl.cambioEnSesiones);
+        $scope.$on("$destroy", () => {
+            pararContadores();
+        });
         portafolioCtrl.obtenerSesionesPorGrupo($routeParams.id, usuario.id);
         obtenerOfertaPorId($http,$scope,$routeParams.id);
         cargarMenuPara(usuario.rol, $location, $scope);

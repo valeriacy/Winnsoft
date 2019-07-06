@@ -15,6 +15,7 @@ class PortafolioCtrl{
       }
 
     cerrarSesion(sesion){
+      pararContadores();
       consumirApi(this.httpService,
           {
             method: 'PUT',
@@ -52,7 +53,7 @@ class PortafolioCtrl{
       for(let sesion of sesiones){
         let selector = "contador-" + sesion.id;
         let fecha = sesion.fecha_caducidad;
-        setCounter(fecha, selector);
+        setCounter(fecha, selector)
       }
     }
 

@@ -60,8 +60,12 @@ class SesionController extends Controller
     }
 
     public function cerrarSesion($id){
+        date_default_timezone_set('America/Caracas');
+        $date = date('Y-m-d', time());
+
         $sesion = Sesion::find($id);
         $sesion->cerrado = true;
+        $sesion->fecha_caducidad = $date;
         $sesion->save();
     }
 

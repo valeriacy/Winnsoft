@@ -578,6 +578,11 @@ function interCambioBlock(aMostrar, aOcultar){
     mostrar.style.display="block";
 }
 
+function pararContadores(){
+    for (let i = 1; i < 9999; i++)
+            window.clearInterval(i);
+}
+
 function setCounter(fecha, selector){
     fecha = stringDateToVector(fecha);
     timer(fecha['year'], fecha['month'], fecha['date'], selector);
@@ -596,7 +601,7 @@ function timer(year, month, date, selector){
     // Set the date we're counting down to
     let countDownDate = new Date(year, month, date).getTime();
     // Update the count down every 1 second
-    let counter = setInterval(function() {
+    let counter = setInterval(() => {
 
     // Get today's date and time
     let now = new Date().getTime();
