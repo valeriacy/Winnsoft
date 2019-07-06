@@ -45,7 +45,18 @@ function todoLleno(){
     let apellido = document.querySelector("#apellido");
     let usuario = document.querySelector("#usuario");
 
-    return nombre.value!=="" && apellido.value!=="" && usuario.value!=="";
+    return campoValido(nombre.value) && campoValido(apellido.value) && usuario.value!=="";
+}
+
+function campoValido(cadena){
+    if(cadena!==""){
+        for(let caracter of cadena){
+            if(!(caracter >= 'A' && caracter <= 'Z') && !(caracter >= 'a' && caracter <= 'z') && caracter != ' ')
+                return false;
+        }
+        return true;
+    }
+    return false;
 }
 
 function mostrarGifLoading(){
