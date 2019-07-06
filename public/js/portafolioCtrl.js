@@ -13,6 +13,21 @@ class PortafolioCtrl{
         this.cambioEnSesiones=this.cambioEnSesiones.bind(this);
         this.cerrarSesion=this.cerrarSesion.bind(this);
       }
+    
+      cerrarExpirados(){
+        consumirApi(this.httpService,
+          {
+            method: 'PUT',
+            url: "/api/cerrarExpirados",
+          }, 
+          (response)=>{
+              
+          },
+          (error)=>{
+              console.error(error);
+          }
+        )
+      }
 
     cerrarSesion(sesion){
       pararContadores();

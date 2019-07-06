@@ -79,6 +79,12 @@ class SesionController extends Controller
         }
     }
 
+    public function cerrarExpirados(){
+        date_default_timezone_set('America/Caracas');
+        $date = date('Y-m-d', time());
+        Sesion::where('fecha_caducidad', $date)->update(['cerrado' => true]);
+    }
+
     /**
      * Display the specified resource.
      *

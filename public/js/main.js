@@ -243,6 +243,8 @@ function crearMateriasCtrl($scope,$http,$location){
 
 function misMateriasCtrl($http,$scope,$location){
     if(usuario){
+        let portafolioCtrl = new PortafolioCtrl($http, $scope);
+        portafolioCtrl.cerrarExpirados();
         $scope.user = usuario;
         $scope.$watch("inscripciones",watchFunction);
         $scope.$watch("dictadas",watchFunction);

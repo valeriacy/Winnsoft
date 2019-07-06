@@ -29,6 +29,7 @@ Route::get('/obtenerDictadas/{idUsuario}','InscripcionController@obtenerDictadas
 Route::get('/obtenerAuxiliadas/{idUsuario}','InscripcionController@obtenerAuxiliadas');
 Route::get('/sesiones/{idGrupo}','SesionController@showByGrupoId');
 Route::put('/cerrarSesion/{id}','SesionController@cerrarSesion');
+Route::put('/cerrarExpirados','SesionController@cerrarExpirados');
 Route::get('/sesionAbierta/{grupoId}','SesionController@obtenerSesionAbiertaPorGrupo');
 Route::get('/entregas/{productoId}','EntregaController@getAllByProducto');
 Route::get('/entrega/{Id}','EntregaController@getEntregaById');
