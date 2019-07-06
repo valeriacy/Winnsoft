@@ -579,6 +579,30 @@ border:10px solid rgb(0,128,128);
 	margin-left: 47%;
 }
 
+.presentacion{
+	margin-left: 3em;
+	border-radius: 3em;
+	display: inline-block;
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	width: 20vw;
+	height: 4vw;
+	background-color: rgb(24, 5, 92);
+	color: rgb(255, 254, 254);
+}
+
+.presentacion label{
+	margin-top: 0.2em;
+	text-align: center;
+	display: block;
+	width: 100%;
+}
+
+.admin{
+	width: 15vw;
+}
+
 .nuevaEntidad button{
 	display: none;
 	width: 7vw;
