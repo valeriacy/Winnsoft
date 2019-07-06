@@ -583,9 +583,9 @@ function pararContadores(){
             window.clearInterval(i);
 }
 
-function setCounter(fecha, selector){
+function setCounter(fecha, selector, sesion){
     fecha = stringDateToVector(fecha);
-    timer(fecha['year'], fecha['month'], fecha['date'], selector);
+    timer(fecha['year'], fecha['month'], fecha['date'], selector, sesion);
 }
 
 function stringDateToVector(fecha){
@@ -597,7 +597,7 @@ function stringDateToVector(fecha){
     };
 }
 
-function timer(year, month, date, selector){
+function timer(year, month, date, selector, sesion){
     // Set the date we're counting down to
     let countDownDate = new Date(year, month, date).getTime();
     // Update the count down every 1 second
@@ -621,6 +621,7 @@ function timer(year, month, date, selector){
         
     // If the count down is over, write some text 
     if (distance < 0) {
+        sesion.cerrado = 1;
         clearInterval(counter);
         document.getElementById(selector).innerHTML = "EXPIRADO";
     }

@@ -21,7 +21,7 @@ class PortafolioCtrl{
             url: "/api/cerrarExpirados",
           }, 
           (response)=>{
-              
+
           },
           (error)=>{
               console.error(error);
@@ -47,7 +47,8 @@ class PortafolioCtrl{
     }
     
     obtenerSesionesPorGrupo(idOferta, idUsuario){
-      let req={
+      if(idOferta){
+        let req={
           method: 'GET',
           url: "/api/sesiones/"+idOferta,
       };
@@ -62,13 +63,14 @@ class PortafolioCtrl{
       .catch((error)=>{
           console.error(error);
       });
+      }
     }
 
     configurarContadorSesiones(sesiones){
       for(let sesion of sesiones){
         let selector = "contador-" + sesion.id;
         let fecha = sesion.fecha_caducidad;
-        setCounter(fecha, selector)
+        setCounter(fecha, selector, sesion)
       }
     }
 
