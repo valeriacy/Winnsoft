@@ -45,15 +45,19 @@ function todoLleno(){
     let apellido = document.querySelector("#apellido");
     let usuario = document.querySelector("#usuario");
 
-    return campoValido(nombre.value) && campoValido(apellido.value) && usuario.value!=="";
+    return campoValido(nombre.value, "#advertencia-nombre") && campoValido(apellido.value, "#advertencia-apellido") && usuario.value!=="";
 }
 
-function campoValido(cadena){
+function campoValido(cadena, selector){
+    let elemento = document.querySelector(selector);
     if(cadena!==""){
         for(let caracter of cadena){
-            if(!(caracter >= 'A' && caracter <= 'Z') && !(caracter >= 'a' && caracter <= 'z') && caracter != ' ')
+            if(!(caracter >= 'A' && caracter <= 'Z') && !(caracter >= 'a' && caracter <= 'z') && caracter != ' '){
+                elemento.style.display = 'block';
                 return false;
+            }
         }
+        elemento.style.display = 'none';
         return true;
     }
     return false;
