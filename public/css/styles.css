@@ -726,5 +726,8 @@ border:10px solid rgb(0,128,128);
 	margin-bottom: 0.35em;
 	font-size: 1vw;
 	border: solid 1.5px white;
-	
+}
+
+.tablaEntrega table{
+	margin-left: 33vw;
 }

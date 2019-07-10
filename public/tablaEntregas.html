@@ -9,9 +9,9 @@
             <h2>LISTA DE ESTUDIANTES</h2>
             <br />
             
-            <input type="search" id="mySearch" name="q" required size="30" >
+            <!--<input type="search" id="mySearch" name="q" required size="30" >
             <button>Buscar</button>
-            <span class="validity"></span>
+            <span class="validity"></span>-->
         </div>
     </div>
     <div class="tablaEntrega">
@@ -34,6 +34,9 @@
                 </tr>
             </tbody>        
          </table>
+    </div>
+    <div ng-if="entregas.length === 0" style="text-align: center">
+        AUN NO HAY ENTREGAS
     </div>
  </fieldset>
 <button ng-click="atras()">Atras</button>    

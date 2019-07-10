@@ -22,7 +22,7 @@
             </div> 
             <div class="nuevaEntidad" id="crear-materia">
                 <input type="image" src="./assets/plus.png" title="Crear nueva sesion" ng-click="mostrarFormSesion()" class="createButton"/>
-                <button ng-click="mostrarFormSesion()">Crear nueva sesion</button>
+                <button ng-click="mostrarFormSesion()">Crear sesion</button>
             </div>
         </div>
         <div id="sesionForm" class="formSesion hidden">
@@ -85,7 +85,7 @@
                 <div ng-if="user.rol === 'docente' && sesion.cerrado != 1" class="newProducto" id="newProducto-{{sesion.id}}">
                     <div class="nuevaEntidad" id="crear-materia">
                         <input type="image" src="./assets/plus.png" title="Crear nuevo producto" ng-click="crearProducto(sesion.id)" class="createButton"/>
-                        <button ng-click="crearProducto(sesion.id)">Crear nuevo producto</button>
+                        <button ng-click="crearProducto(sesion.id)">Crear producto</button>
                     </div>
                 </div>
                 <div id="productoForm-{{sesion.id}}" class="hidden">
