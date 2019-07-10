@@ -5,13 +5,17 @@
 <div ng-if="user.rol === 'docente'" ng-include="'/shared/header_docente.html'" style="width: 100vw;"></div>
 
 <div class="tablaControl">
-    <form>
-      <fieldset class="fielset" style="margin-bottom: 1vw; margin-left: 10vw;background:white">
-      <h4>Nro sesion actual: {{sesion.numero}}</h4>
-      <h4 ng-if="user.rol === 'auxiliar'">Fecha : {{fechaActual | date:'dd-MM-yyyy'}}</h4>
-      <h4 ng-if="user.rol === 'docente'">Fecha : {{asistencias[0].fecha}}</h4>
+  <form>
+    <fieldset class="fielset" style="margin-bottom: 1vw; margin-left: 20vw; background:white">
+      <h4>Materia: {{complementario.nombreMateria}}</h4>
+      <h4>Grupo: {{complementario.numeroGrupo}}</h4>
+      <h4 ng-if="sesion">Nro sesion: {{sesion.numero}}</h4>
+      <h4 ng-if="!sesion">Nro sesion: AUN NO HAY UNA SESION EN CURSO</h4>
+      <h4>Fecha de vencimiento: {{sesion.fecha_caducidad}}</h4>
+      <h4 ng-if="user.rol === 'auxiliar'">Fecha actual: {{fechaActual | date:'dd-MM-yyyy'}}</h4>
+      <h4 ng-if="user.rol === 'docente'">Fecha de registro: {{asistencias[0].fecha}}</h4>
       <!--<div ui-grid="{ data: inscritos }" class="myGrid"></div>-->
-      <table style ="width:auto;" border="1" id="largeTable">
+      <table style ="width:auto; margin-left: 5vw;" border="1" id="largeTable">
           <thead>
               <tr>
                 <td><strong>ESTUDIANTE</strong></td>
@@ -35,21 +39,18 @@
                 </tr>
           </tbody>
         </table>
-        
-            <input class="button" ng-if="nuevo && user.rol === 'auxiliar'" type="submit" ng-click="enviar()" value="Guardar" id="guardar">
-            <input class="button"ng-if="!nuevo && user.rol === 'auxiliar'" type="submit" ng-click="actualizar()" value="Actualizar" id="guardar"> 
-        
-     
+        <div ng-if="inscritos.length === 0" style="text-align: center">
+          AUN NO HAY INSCRITOS EN ESTE GRUPO.
+        </div>
+        <input class="button" ng-if="nuevo && user.rol === 'auxiliar' && sesion && inscritos.length > 0" type="submit" ng-click="enviar()" value="Guardar" id="guardar">
+        <input class="button" ng-if="!nuevo && user.rol === 'auxiliar' && sesion && inscritos.length > 0 " type="submit" ng-click="actualizar()" value="Actualizar" id="guardar"> 
       <div class="loading-div" id="loading">
           <img src="./assets/loading.gif" class="loading-image"/>
       </div>
-     
-          <button class="button" ng-if="user.rol === 'auxiliar'" onclick="window.location.href='/#!principal'">atrás</button>
-          <button class="button" ng-if="user.rol === 'docente'" ng-click="atras()">Atrás</button>
-     
-      
-      </fieldset>
-    </form>
+      <button class="button" ng-if="user.rol === 'auxiliar'" onclick="window.location.href='/#!verMaterias'">Atrás</button>
+      <button class="button" ng-if="user.rol === 'docente'" ng-click="atras()">Atrás</button>
+    </fieldset>
+  </form>
 </div>
                       
 

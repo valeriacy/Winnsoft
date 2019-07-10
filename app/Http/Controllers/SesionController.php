@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DateTime;
 use App\Sesion;
 use App\Producto;
 use App\Entrega;
@@ -81,8 +82,17 @@ class SesionController extends Controller
 
     public function cerrarExpirados(){
         date_default_timezone_set('America/Caracas');
-        $date = date('Y-m-d', time());
-        Sesion::where('fecha_caducidad', $date)->update(['cerrado' => true]);
+        $fechaActual = new DateTime();
+        
+        $sesionesAbiertas = Sesion::where('cerrado',false)->get();
+
+        foreach ($sesionesAbiertas as $sesion) {
+            $fechaCaducidad = new DateTime($sesion->fecha_caducidad);
+            if($fechaActual > $fechaCaducidad){
+                $sesion->cerrado = true;
+                $sesion->save();
+            }
+        }
     }
 
     /**

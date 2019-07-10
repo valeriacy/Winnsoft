@@ -61,7 +61,7 @@ class AsistenciaController extends Controller
 
     public function getTodaysAsistence($sesionId){
 
-        return sizeof(Asistencia::whereDate('fecha', '=', date('Y-m-d'))->where("sesion_id", $sesionId)->get());
+        return sizeof(Asistencia::where("sesion_id", $sesionId)->get());
     }
 
     public function getAllAsistenceBySesion($sesionId){

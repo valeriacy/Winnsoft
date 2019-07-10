@@ -336,7 +336,6 @@ function sesionesAuxCtrl ($http, $scope, $location, $routeParams){
             let tamanho = $scope.asistencias.length;
             for(asistencia of $scope.asistencias){
                 mostrarGifLoading();
-                let fecha = $scope.fechaActual.getFullYear()+"-"+($scope.fechaActual.getMonth()+1)+"-"+$scope.fechaActual.getDate();
                 let obj = {
                     descripcion : asistencia.descripcion,
                     observacion : asistencia.observacion,
@@ -363,9 +362,24 @@ function sesionesAuxCtrl ($http, $scope, $location, $routeParams){
                     );
             }
         }
+        
+        consumirApi($http,
+            {
+                method: 'GET',
+                url: "/api/info/"+$routeParams.grupoId
+            },
+            (response)=>{
+                $scope.complementario = response.data;
+            }, 
+            (error)=>{
+                console.error(error);
+            });
+
         $scope.cambiar = (index) => {
             $scope.asistencias[index].asistio = $scope.asistencias[index].asistio-1 === 0 ? true:false;
         }
+
+
         cargarMenuAuxiliar( $location, $scope);
         obtenerSesionAbiertaPorGrupoId($http, $scope, $routeParams.grupoId);
     }

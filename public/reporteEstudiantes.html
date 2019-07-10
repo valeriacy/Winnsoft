@@ -6,13 +6,14 @@
 <h1 style="margin-left: 20vw;">
     {{complementario.nombreMateria}} grupo: {{complementario.numeroGrupo}}
 </h1>
-<div class="tablaEntrega">
+<div class="">
     <table border="1">
         <thead>
             <td class="tableHeader" colspan="2" style="font-size: 20px;">Estudiantes</td>
             <td class="tableHeader" colspan="3" style="font-size: 20px;">
                 Reporte Auxiliar
                 <div class="nameAux" style="font-size: 16px;">{{complementario.auxiliar}}</div>
+                <div class="nameAux" style="font-size: 16px;">Fecha registro: {{inscritos[0].sesion.asistencia.fecha}}</div>
             </td>
             <td class="tableHeader" colspan="{{sesionElegida.productos.length}}">
                 Sesion: 
