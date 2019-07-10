@@ -23,9 +23,10 @@
         <form autocomplete="off" ng-submit="guardar()">
             Nombre de la materia:<br>
             <input type="text" style="text-transform: uppercase;" name="nombreMateria" id="nombre" required>
+            <label class="advertencia" id="advertencia-nombre">El nombre de materia no puede tener caracteres especiales.</label>
             <br>
             Codigo Materia:<br>
-            <input type="text" style="text-transform: uppercase;" name="codigoMateria" id="siglas" required maxlength="5">
+            <input type="number" style="text-transform: uppercase;" name="codigoMateria" id="siglas" min="1000000" max="9999999" value="2012000" required>
             <br><br>
             <div class="loading-div" id="loading">
                 <img src="./assets/loading.gif" class="loading-image"/>

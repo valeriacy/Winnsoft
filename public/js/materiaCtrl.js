@@ -39,22 +39,26 @@ class MateriaCtrl {
     }
 
     verificarYGuardar(materia){
-        consumirApi(this.httpService,
-            {
-                method: 'GET',
-                url: "/api/verificarMateria/" + materia.nombre + "/" + materia.siglas,
-            },
-            (response)=>{
-                let existe = response.data;
-                if(existe){
-                    alert("El nombre de la materia o el codigo de materia ya existen");
-                    ocultarGifLoading();
-                }else{
-                    this.mandarMateria(materia);
-                }
-            },
-            (error)=>{
-                console.error(error);
-            })
+        if(campoSinEspeciales(materia.nombre, "#advertencia-nombre")){   
+            consumirApi(this.httpService,
+                {
+                    method: 'GET',
+                    url: "/api/verificarMateria/" + materia.nombre + "/" + materia.siglas,
+                },
+                (response)=>{
+                    let existe = response.data;
+                    if(existe){
+                        alert("El nombre de la materia o el codigo de materia ya existen");
+                        ocultarGifLoading();
+                    }else{
+                        this.mandarMateria(materia);
+                    }
+                },
+                (error)=>{
+                    console.error(error);
+                })
+        }else{
+            ocultarGifLoading();
+        }
     }
 }

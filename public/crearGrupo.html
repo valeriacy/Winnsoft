@@ -55,11 +55,12 @@
             </div><br>
             <div>
                  <label>Hora inicio:</label>
-                 <input ng-model="nueva.horaInicio" ng-change="getTime(true)" type="time" min="06:45" max="20:45" value="06:45" id="horaInicio" required>
+                 <input ng-model="nueva.horaInicio" ng-change="getTime(true)" type="time" min="06:45" max="20:15" value="06:45" id="horaInicio" required>
+                 <label class="advertencia" id="advertencia-hora">La hora de inicio debe estar en el rango 06:45 am a 08:15 pm.</label>
                 </div><br>
              <div>
                  <label>Hora Fin:</label>
-                 <input ng-model="nueva.horaFin" ng-change="getTime(false)" type="time" min="06:45" max="22:45" value="08:15" id="horaFin" disabled>
+                 <input ng-model="nueva.horaFin" ng-change="getTime(false)" type="time" min="06:45" max="21:45" value="08:15" id="horaFin" disabled>
              </div><br>
              <div> 
                 <label > Docente:</label>

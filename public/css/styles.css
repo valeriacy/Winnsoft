@@ -583,7 +583,7 @@ border:10px solid rgb(0,128,128);
 	margin-left: 3em;
 	border-radius: 3em;
 	display: inline-block;
-	font-size: 1em;
+	font-size: 1vw;
 	font-weight: bold;
 	text-align: center;
 	width: 20vw;
@@ -600,7 +600,7 @@ border:10px solid rgb(0,128,128);
 }
 
 .admin{
-	width: 15vw;
+	width: 10vw;
 }
 
 .nuevaEntidad button{

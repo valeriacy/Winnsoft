@@ -45,14 +45,14 @@ function todoLleno(){
     let apellido = document.querySelector("#apellido");
     let usuario = document.querySelector("#usuario");
 
-    return campoValido(nombre.value, "#advertencia-nombre") && campoValido(apellido.value, "#advertencia-apellido") && usuario.value!=="";
+    return campoSinNumerosNiEspeciales(nombre.value, "#advertencia-nombre") && campoSinNumerosNiEspeciales(apellido.value, "#advertencia-apellido") && usuario.value!=="";
 }
 
-function campoValido(cadena, selector){
+function campoSinNumerosNiEspeciales(cadena, selector){
     let elemento = document.querySelector(selector);
     if(cadena!==""){
         for(let caracter of cadena){
-            if(!(caracter >= 'A' && caracter <= 'Z') && !(caracter >= 'a' && caracter <= 'z') && caracter != ' '){
+            if(!esLetraMayuscula(caracter) && !esLetraMinuscula(caracter) && caracter != ' '){
                 elemento.style.display = 'block';
                 return false;
             }
@@ -61,6 +61,33 @@ function campoValido(cadena, selector){
         return true;
     }
     return false;
+}
+
+function campoSinEspeciales(cadena, selector){
+    let elemento = document.querySelector(selector);
+    if(cadena!==""){
+        for(let caracter of cadena){
+            if(!esLetraMayuscula(caracter) && !esLetraMinuscula(caracter) && !esCaracterNumerico(caracter) && caracter != ' '){
+                elemento.style.display = 'block';
+                return false;
+            }
+        }
+        elemento.style.display = 'none';
+        return true;
+    }
+    return false;
+}
+
+function esLetraMayuscula(caracter){
+    return (caracter >= 'A' && caracter <= 'Z');
+}
+
+function esLetraMinuscula(caracter){
+    return (caracter >= 'a' && caracter <= 'z');
+}
+
+function esCaracterNumerico(caracter){
+    return (caracter >= '0' && caracter <= '9');
 }
 
 function mostrarGifLoading(){

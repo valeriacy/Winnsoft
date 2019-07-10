@@ -79,7 +79,7 @@ class GrupoCtrl {
         if(this.grupoValido())
             this.enviarGrupo();
         else{
-            alert("Complete el formulario, por favor");
+            alert("Complete el formulario correctamente, por favor");
             ocultarGifLoading();
         }
     }
@@ -136,6 +136,29 @@ class GrupoCtrl {
         return grupo.materiaId > 0 &&
                grupo.grupo > 0 &&
                grupo.docenteId > 0 &&
-               grupo.auxiliarId > 0;
+               grupo.auxiliarId > 0 &&
+               this.verificarHora(grupo.horaInicio);
+    }
+
+    verificarHora(hora){
+        let horas = hora.split(":")[0];
+        let minutos = hora.split(":")[1];
+
+        let horaMinima = new Date();
+        horaMinima.setHours(6);
+        horaMinima.setMinutes(45);
+        horaMinima.setSeconds(0);
+
+        let horaMaxima = new Date();
+        horaMaxima.setHours(20);
+        horaMaxima.setMinutes(15);
+        horaMaxima.setSeconds(0);
+
+        let horaEnCuestion = new Date();
+        horaEnCuestion.setHours(horas);
+        horaEnCuestion.setMinutes(minutos);
+        horaEnCuestion.setSeconds(0);
+
+        return horaEnCuestion >= horaMinima && horaEnCuestion <= horaMaxima;
     }
 }
