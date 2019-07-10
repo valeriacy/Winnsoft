@@ -235,9 +235,32 @@ class PortafolioCtrl{
       }
   }
 
+  fechaValida(fecha){
+    let fechaHoy = new Date();
+    if(fecha !== ''){
+        let partes = {
+            year : fecha.split('-')[0],
+            month : (fecha.split('-')[1] - 1),
+            date : fecha.split('-')[2]
+        }
+        let inputDate = new Date(partes.year, partes.month, partes.date);
+        return (inputDate > fechaHoy);
+    }
+    return false;
+  }
+
   nuevaSesion(grupoId){
     let fileAttached = document.querySelector("#file-sesion").value!="";
     let fecha = document.querySelector("#sesionForm input").value;
+    if(!this.fechaValida(fecha)){
+        alert('Tiene que definir una fecha limite valida para la sesion');
+        let boton = document.querySelector("#crearSesion");
+        let gif = document.querySelector("#loading-sesion");
+
+        boton.style.display="block";
+        gif.style.display="none";
+        return;
+    }
     let obj={
         grupoId:grupoId,
         fechaCaducidad:fecha
