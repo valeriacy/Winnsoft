@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "angular-ui-grid": "^4.8.0",
-    "datatables.net": "^1.10.19",
+    "datatables.net": "^1.11.3",
     "datatables.net-dt": "^1.10.19"
   }
 }
